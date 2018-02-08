@@ -1,16 +1,13 @@
 <?php
-namespace admin\home\controller;
 
-class IndexController extends BaseController
-{
-	public function index()
-	{
-		echo Container::get ( 'app' );
+namespace app\home\controller;
+
+class IndexController extends BaseController {
+	public function index() {
+		// echo Container::get ( 'app' );
 		return "123232";
 	}
-
-	public function test()
-	{
+	public function test() {
 		echo 'hello,ThinkPHP5';
 	}
 }
