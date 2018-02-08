@@ -1,6 +1,6 @@
 <?php
 
-namespace app\home\controller;
+namespace admin\home\controller;
 
 class IndexController extends BaseController {
 	public function index() {

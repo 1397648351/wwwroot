@@ -7,4 +7,4 @@ define ( 'APP_PATH', __DIR__ . '/../admin/' );
 require __DIR__ . '/../thinkphp/base.php';
 // 支持事先使用静态方法设置Request对象和Config对象
 // 执行应用并响应
-Container::get ( 'app' )->path ( APP_PATH )->bind ( 'home' )->run ()->send ();
+Container::get ( 'app' )->path ( APP_PATH )->setNamespace ( 'admin' )->bind ( 'home' )->run ()->send ();
