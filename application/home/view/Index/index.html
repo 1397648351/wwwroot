@@ -1,45 +1,60 @@
-{extend name="Template:base" /} {block name="title"}123{/block} {block name="other"}
-<!-- other -->
-<style>
-.test {
-	width: 100%;
-	height: 50px;
-	text-align: center;
-	line-height: 20px;
-	position: relative;
-	padding: 15px 20px;
-}
-
-.test:hover:before {
-	left: 0;
-	right: 0;
-}
-
-.test:before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 50%;
-	right: 50%;
-	transition: .3s ease-out;
-	background: #a9334c;
-	height: 4px;
-}
-
-.test.active {
-	border-top: 4px solid #a9334c;
-	padding-top: 11px;
-}
-
-.test.active:before {
-	display: none;
-}
-</style>
-{/block} {block name="body"}
-<div class="test">test</div>
-<script>
-	$('.test').click(function() {
-		$(this).addClass('active')
-	})
-</script>
+{extend name="Template:base" /}
+{block name="title"}基因检测-首页{/block} 
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__STATIC__/dist/css/home.css' type="text/css" />
+{/block} 
+{block name="other_js"}
+<!-- other js -->
+{/block} 
+{block name="body"}
+<div class="wrapper">
+	<div class="topbar">
+		<a class="logo" href="/#">
+			<img src="static/dist/images/logo.png" />
+		</a>
+		<span class="navbar">
+				<a class="nav" href="/#">首页</a>
+				<a class="nav" href="/#">检测流程</a>
+				<a class="nav" href="/#">检测结果</a>
+				<a class="nav" href="/#">购买</a>
+				<a class="nav nav-blue" href="/#">注册</a>
+				<a class="nav" href="/#">登录</a>
+		</span>
+	</div>
+	<div class="top">
+		<a class="top-link" href="/#">个人检测服务</a>
+	</div>
+	<div class="content">
+		<div class="content-1">
+			<div class="content-title" style="text-align: center;">
+				<img src="static/dist/images/home/title1.png" />
+			</div>
+			<div class="card-group">
+				<a class="card card-1" href="/#">
+					<span class="card-icon"></span>
+					<span class="card-title">高精准度</span>
+					<span class="card-box">与科研机构联手开展基因研究，技术保障检测结果的精准度，邀您一起探索基因的奥秘，破解基因的密码。</span>
+				</a>
+				<a class="card card-2" href="/#">
+					<span class="card-icon"></span>
+					<span class="card-title">高安全性</span>
+					<span class="card-box">采用一切合理的技术来保护我们所控制的数据不被意外或故意地操纵、丢失或被盗取。</span>
+				</a>
+				<a class="card card-3" href="/#">
+					<span class="card-icon"></span>
+					<span class="card-title">高效服务</span>
+					<span class="card-box">优化检测流程，检测效率高，最大限度的为您节省时间，专业客服全程服务，为您解答疑惑，跟进报告。</span>
+				</a>
+			</div>
+		</div>
+		<div class="content-2">
+			<div class="content-title">
+				<img src="static/dist/images/home/title2.png" />
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+	</footer>
+</div>
 {/block}

@@ -12,17 +12,20 @@
 <title>{block name="title"}网站标题{/block}</title>
 <!-- Set render engine for 360 browser -->
 <meta name="renderer" content="webkit">
-<link rel="shortcuticon" type="image/x-icon" href="/favicon.ico">
+<link rel="shortcuticon" type="image/x-icon" href="__STATIC__/dist/images/logo.png">
 <link rel='stylesheet' href='__STATIC__/dist/css/clear.css' type="text/css" />
 <link rel='stylesheet' href='__STATIC__/dist/css/my.css' type="text/css" />
+{block name="other_css"}
+<!-- other css -->
+{/block}
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="__STATIC__/vendor/jQuery/jquery-3.2.1.min.js" type="text/javascript" type="text/javascript"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="__STATIC__/vendor/jquery/jquery-1.11.3.min.js" type="text/javascript" type="text/javascript"></script>
 <![endif]-->
-{block name="other"}
-<!-- other -->
+{block name="other_js"}
+<!-- other js -->
 {/block}
 </head>
 <body>{block name="body"}content{/block}
