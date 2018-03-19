@@ -1,9 +1,7 @@
 @CHARSET "UTF-8";
+
 :root {
 	font-size: 10px;
-	--topbar-height: 60px;
-	--zoom: .6198;
-	--wrapper-width: 1190px;
 }
 
 * {
@@ -12,39 +10,38 @@
 
 body {
 	background-color: #f4f4f4;
-	background-image: url(../images/bg.jpg);
 	background-repeat: repeat;
 	font-size: 1.2rem;
 	font-family: "microsoft yahei";
+	min-width: 1180px;
 }
 
+/*底部面板*/
 .wrapper {
-	width: 1190px;
+	width: 100%;
 	margin: 0 auto;
 	box-shadow: 0 0 10px #000;
 }
 
+/*顶部功能条*/
 .topbar {
-	position: relative;
-	width: 1190px;
-	height: 60px;
+	position: fixed;
+	width: 100%;
 	z-index: 1;
-	/*text-align: center;*/
-	/*margin-bottom: 1.6rem;*/
 	background-color: #fff;
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #666;
-	padding-left: 240px;
-	padding-top: 10px;
-	border-bottom: 1px solid #ddd;
 }
 
+/*顶部功能条上logo链接*/
 .logo {
-	line-height: 50px;
-	display: inline-block;
+	position: absolute;
+	top: 5px;
+	left: 40px;
 }
 
+/*顶部功能条上logo图片*/
 .logo>img {
 	height: 40px;
 	display: inline-block;
@@ -58,24 +55,38 @@ body {
 	vertical-align: middle;
 }
 
+/*顶部功能条上链接组*/
 .topbar .navbar {
-	display: inline-block;
-	margin-left: 100px;
+	position: relative;
+	text-align: center;
+	height: 50px;
+	min-width: 1180px;
+	border-bottom: 1px solid #ddd;
 }
 
+/*顶部功能条上链接li*/
 .navbar .nav {
+	display: inline-block;
+	line-height: 50px;
 	color: rgb(94, 94, 95);
-	margin: 0 5px;
-	padding: 5px 15px;
+	margin: 0 15px;
 	font-size: 1.6rem;
+}
+
+/*顶部功能条上链接*/
+.navbar .nav a {
+	color: #333;
+	padding: 5px 15px;
 	border-radius: 5px;
 }
 
-.nav.nav-blue {
+/*顶部功能条上注册链接*/
+.navbar .nav a.link-blue {
 	background-color: #2374d8;
 	color: #ebecf8;
 }
 
+/*底部*/
 .footer {
 	font-style: normal;
 	font-weight: 400;
@@ -86,29 +97,6 @@ body {
 }
 
 .footer-wrapper {
-    display: grid;
-    grid-template-areas: "logo amo-links firefox-links" "legal-links legal-links legal-links" "copyright copyright language";
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 0 auto;
-    max-width: 1366px;
-    width: 100%;
-}
-
-@media screen and (max-width:1190px) {
-	:root {
-		--wrapper-width: 990px;
-		--zoom: .5156;
-		font-size: 9.5px;
-	}
-	.wrapper {
-		width: 990px;
-	}
-	.topbar {
-		padding-left: 205px;
-		width: 990px;
-	}
-	.topbar .navbar {
-		display: inline-block;
-		margin-left: 70px;
-	}
+	margin: 0 auto;
+	width: 1180px;
 }
