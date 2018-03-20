@@ -16,6 +16,10 @@ body {
 	min-width: 1180px;
 }
 
+a {
+	color: inherit;
+}
+
 /*底部面板*/
 .wrapper {
 	width: 100%;

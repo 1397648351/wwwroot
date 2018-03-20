@@ -18,6 +18,10 @@
 
 .contents {
 	background-color: #fff;
+	color: #666;
+	font-size: 1.4rem;
+	letter-spacing: 0.1rem;
+	line-height: 2.4rem;
 }
 
 .contents>[class^=content-] {
@@ -44,7 +48,7 @@
 }
 
 .contents>.content-1 {
-	height: 470px;
+	height: 490px;
 }
 
 .content-1 .content-title {
@@ -64,9 +68,9 @@
 .card-group .card {
 	display: inline-block;
 	vertical-align: top;
-	width: 230px;
-	height: 250px;
-	margin: 0 70px;
+	width: 250px;
+	height: 270px;
+	margin: 0 60px;
 	padding: 25px;
 	text-align: left;
 	-moz-user-select: none;
@@ -93,17 +97,12 @@
 .card-group .card .card-title {
 	font-size: 2rem;
 	font-weight: 600;
-	color: #666;
-	padding: 12px 0;
+	padding: 16px 0;
 	letter-spacing: 0.2rem;
 }
 
 .card-group .card .card-box {
-	font-size: 1.4rem;
-	color: #666;
-	line-height: 1.5rem;
 	word-wrap: break-word;
-	letter-spacing: 0.15rem;
 }
 
 .card-group .card.card-1 .card-icon {
@@ -132,6 +131,7 @@
 	position: relative;
 	width: 50%;
 	height: 100%;
+	padding: 10px;
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
@@ -157,7 +157,7 @@
 }
 
 .content-box>.content-right {
-	margin-left: -4px;
+	margin-left: -0.52rem;
 }
 
 .panel {
@@ -166,7 +166,6 @@
 	text-align: center;
 	box-shadow: 0px 0px 10px #ddd;
 	border-radius: 8px;
-	letter-spacing: 0.15rem;
 }
 
 .panel .panel-title {
@@ -180,8 +179,6 @@
 	background-position: 0 0;
 	line-height: 38px;
 	color: #fff;
-	font-size: 1.5rem;
-	letter-spacing: 0.15rem;
 }
 
 .panel .panel-body {
@@ -201,7 +198,6 @@
 
 .infos {
 	margin-top: 20px;
-	font-size: 1.4rem;
 }
 
 .info-line:last-child {
@@ -253,4 +249,63 @@
 
 .info-detail.icon-sky:before {
 	background-position: -165px -183px;
+}
+
+.panel-describe {
+	text-align: left;
+}
+
+.panel-describe>img.describe-title {
+	
+}
+
+.panel-describe>.describe-words {
+	display: block;
+	width: 472px;
+	margin-top: 20px;
+}
+
+.panel-describe>.describe-kinds {
+	display: block;
+	margin-top: 20px;
+}
+
+.panel-describe>.describe-kinds>.describe-kinds-piece {
+	display: block;
+	letter-spacing: 0.2rem;
+}
+
+.panel-describe>.describe-kinds>.describe-kinds-piece:before {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -2px;
+	width: 17px;
+	height: 17px;
+	content: '';
+	background-image: url(../images/home/duihao.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	margin-right: 5px;
+}
+
+.btn {
+	display: block;
+	background-color: #fff;
+	background-size: 100%;
+	border: none;
+	width: 130px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	border-radius: 3px;
+	margin-top: 40px;
+	cursor: hand;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+.btn.btn-blue {
+	background-image: url(../images/home/Selected.png);
 }
