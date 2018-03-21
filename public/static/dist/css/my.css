@@ -13,7 +13,7 @@ body {
 	background-repeat: repeat;
 	font-size: 1.2rem;
 	font-family: "microsoft yahei";
-	min-width: 1180px;
+	min-width: 1250px;
 }
 
 a {
@@ -31,18 +31,27 @@ a {
 .topbar {
 	position: fixed;
 	width: 100%;
+	height: 50px;
 	z-index: 1;
 	background-color: #fff;
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #666;
+	border-bottom: 1px solid #ddd;
+}
+
+.content-box {
+	position: relative;
+	width: 1196px;
+	margin: 0 auto;
+	height: 100%;
 }
 
 /*顶部功能条上logo链接*/
 .logo {
 	position: absolute;
 	top: 5px;
-	left: 40px;
+	left: 20px;
 }
 
 /*顶部功能条上logo图片*/
@@ -61,11 +70,10 @@ a {
 
 /*顶部功能条上链接组*/
 .topbar .navbar {
-	position: relative;
+	position: absolute;
 	text-align: center;
-	height: 50px;
-	min-width: 1180px;
-	border-bottom: 1px solid #ddd;
+	height: 100%;
+	right: 0;
 }
 
 /*顶部功能条上链接li*/
@@ -102,5 +110,5 @@ a {
 
 .footer-wrapper {
 	margin: 0 auto;
-	width: 1180px;
+	width: 1196px;
 }
