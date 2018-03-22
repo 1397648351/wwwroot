@@ -40,6 +40,23 @@ a {
 	border-bottom: 1px solid #ddd;
 }
 
+/*下方区域*/
+.contents {
+	background-color: #fff;
+	color: #666;
+	font-size: 1.4rem;
+	letter-spacing: 0.1rem;
+	line-height: 2.4rem;
+}
+
+/*下方区域的各个块*/
+.contents>[class^=content-] {
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: center 0px;
+	height: 600px;
+}
+
 .content-box {
 	position: relative;
 	width: 1196px;
@@ -96,6 +113,113 @@ a {
 .navbar .nav a.link-blue {
 	background-color: #2374d8;
 	color: #ebecf8;
+}
+
+/*块中分两列各50%宽*/
+.content-box>.content-left, .content-box>.content-right {
+	position: relative;
+	width: 50%;
+	height: 100%;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/*两列下所有上下居中*/
+.content-box>.content-left>*, .content-box>.content-right>* {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.content-box>.content-left:after, .content-box>.content-right:after {
+	display: inline-block;
+	vertical-align: middle;
+	content: '';
+	height: 100%;
+}
+
+/*左边*/
+.content-box>.content-left {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+/*右边*/
+.content-box>.content-right {
+	margin-left: -0.52rem;
+	text-align: left;
+}
+
+/*各块中的内容描述*/
+.panel-describe {
+	text-align: left;
+	font-size: 1.4rem;
+}
+
+/*内容描述中的文字和下方有对号的*/
+.panel-describe>.describe-words, .panel-describe>.describe-kinds {
+	padding: 0 10px;
+}
+
+/*内容描述中的文字*/
+.panel-describe>.describe-words {
+	display: block;
+	width: 472px;
+	margin-top: 20px;
+}
+
+/*内容描述中的有对号的块*/
+.panel-describe>.describe-kinds {
+	display: block;
+	margin-top: 20px;
+	font-size: 1.2rem;
+}
+
+/*对号对应的行*/
+.panel-describe>.describe-kinds>.describe-kinds-piece {
+	display: block;
+	letter-spacing: 0.2rem;
+}
+
+/*对号*/
+.panel-describe>.describe-kinds>.describe-kinds-piece:before {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -2px;
+	width: 17px;
+	height: 17px;
+	content: '';
+	background-image: url(../images/home/duihao.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	margin-right: 5px;
+}
+
+/*了解更多按钮*/
+.btn {
+	display: block;
+	background-color: #fff;
+	background-size: 100%;
+	border: none;
+	width: 138px;
+	height: 42px;
+	color: #5a94ea;
+	line-height: 42px;
+	text-align: center;
+	border-radius: 3px;
+	margin-top: 40px;
+	margin-left: 10px;
+	cursor: hand;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+/*了解更多蓝色按钮*/
+.btn.btn-blue {
+	background-image: url(../images/home/Selected.png);
+	color: #fff;
 }
 
 /*底部*/
