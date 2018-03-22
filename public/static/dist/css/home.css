@@ -15,21 +15,6 @@
 	height: 637px;
 }
 
-.contents {
-	background-color: #fff;
-	color: #666;
-	font-size: 1.4rem;
-	letter-spacing: 0.1rem;
-	line-height: 2.4rem;
-}
-
-.contents>[class^=content-] {
-	background-repeat: no-repeat;
-	background-size: auto;
-	background-position: center 0px;
-	height: 600px;
-}
-
 .describe-title {
 	height: 63px;
 }
@@ -116,40 +101,8 @@
 	height: 830px;
 }
 
-.content-box>.content-left, .content-box>.content-right {
-	position: relative;
-	width: 50%;
-	height: 100%;
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.content-box>.content-left>*, .content-box>.content-right>* {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.content-box>.content-left:after, .content-box>.content-right:after {
-	display: inline-block;
-	vertical-align: middle;
-	content: '';
-	height: 100%;
-}
-
-.content-box>.content-left {
-	background-position: center;
-	background-repeat: no-repeat;
-	background-color: transparent;
-}
-
 .content-2 .content-left {
 	background-image: url(../images/home/Figure_03_03.png);
-}
-
-.content-box>.content-right {
-	margin-left: -0.52rem;
-	text-align: left;
 }
 
 .panel {
@@ -245,69 +198,6 @@
 	background-position: -102px 0;
 }
 
-.panel-describe {
-	text-align: left;
-	font-size: 1.4rem;
-}
-
-.panel-describe>.describe-words, .panel-describe>.describe-kinds {
-	padding: 0 10px;
-}
-
-.panel-describe>.describe-words {
-	display: block;
-	width: 472px;
-	margin-top: 20px;
-}
-
-.panel-describe>.describe-kinds {
-	display: block;
-	margin-top: 20px;
-	font-size: 1.2rem;
-}
-
-.panel-describe>.describe-kinds>.describe-kinds-piece {
-	display: block;
-	letter-spacing: 0.2rem;
-}
-
-.panel-describe>.describe-kinds>.describe-kinds-piece:before {
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -2px;
-	width: 17px;
-	height: 17px;
-	content: '';
-	background-image: url(../images/home/duihao.png);
-	background-repeat: no-repeat;
-	background-size: auto;
-	margin-right: 5px;
-}
-
-.btn {
-	display: block;
-	background-color: #fff;
-	background-size: 100%;
-	border: none;
-	width: 138px;
-	height: 42px;
-	color: #5a94ea;
-	line-height: 42px;
-	text-align: center;
-	border-radius: 3px;
-	margin-top: 40px;
-	margin-left: 10px;
-	cursor: hand;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
-}
-
-.btn.btn-blue {
-	background-image: url(../images/home/Selected.png);
-	color: #fff;
-}
-
 .contents>.content-3 {
 	background-color: #f9f9f9;
 	background-image: url(../images/home/Background2.png);
@@ -354,7 +244,8 @@
 	height: 1053px;
 }
 
-.content-box.double-line .content-left, .content-box.double-line .content-right {
+.content-box.double-line .content-left, .content-box.double-line .content-right
+	{
 	height: 50%;
 }
 
@@ -427,7 +318,8 @@
 	display: inline-block;
 }
 
-.selects-content-box>.selectes-words, .selects-content-box>.selectes-title {
+.selects-content-box>.selectes-words, .selects-content-box>.selectes-title
+	{
 	width: 250px;
 	display: block;
 }
