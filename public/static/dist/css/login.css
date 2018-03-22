@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+body {
+    background-color: #fff;
+}
+
+.wrapper {
+    box-shadow: none;
+}
+
+.contents {
+    display: block;
+    background-image: url(../images/register/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 760px;
+}
+
+.contents>.content-box {
+    position: relative;
+    top: 130px;
+    width: 720px;
+    height: 416px;
+    background-image: url(../images/register/background2.jpg);
+    background-size: 100%;
+}
+
+.content-from {
+    width: 400px;
+    height: 100%;
+    float: right;
+    padding-top: 70px;
+}
+
+.form-title {
+    font-size: 2rem;
+}
+
+.form-title img {
+    width: 100px;
+}
