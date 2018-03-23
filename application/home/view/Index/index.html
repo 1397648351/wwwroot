@@ -4,9 +4,6 @@
 <!-- other css -->
 <link rel='stylesheet' href='__STATIC__/dist/css/home.css' type="text/css" />
 {/block} 
-{block name="other_js"}
-<!-- other js -->
-{/block} 
 {block name="body"}
 <div class="wrapper">
 	<div class="topbar">
@@ -36,8 +33,8 @@
 			</ul>
 		</div>
 	</div>
-	<a class="top-link" href="/#"></a>
 	<div class="contents">
+		<a class="top-link" href="/#"></a>
 		<div class="content-1">
 			<div class="content-box">
 				<div class="content-title" style="text-align: center;">
@@ -101,7 +98,7 @@
 					</div>
 				</div>
 				<div class="content-right">
-					<div class="panel-describe">
+					<div class="panel-describe transparent animated-end">
 						<img class="describe-title" src="__STATIC__/dist/images/home/title2.png" />
 						<div class="describe-words">不同的民族血统，祖源成分和家族基因都影响着我们的长相，也潜移默化了我们的成长方式与语言文化。通过基因分析祖源成分能够进一步分析您是谁，您来自哪里。</div>
 						<div class="describe-kinds">
@@ -117,7 +114,7 @@
 		<div class="content-3">
 			<div class="content-box">
 				<div class="content-left">
-					<div class="panel-describe">
+					<div class="panel-describe transparent animated-end">
 						<img class="describe-title" src="__STATIC__/dist/images/home/title3.png" />
 						<div class="describe-words">同样的化妆品我为什么有人使用安然无恙，有人使用却损伤皮肤引起过敏？ 基因检测可以从本质上找到适合自己的保养方法，避免盲目使用保养产品带来的各类风险。</div>
 						<div class="describe-kinds">
@@ -138,7 +135,7 @@
 		<div class="content-4">
 			<div class="content-box">
 				<div class="content-left">
-					<div class="panel-describe">
+					<div class="panel-describe transparent animated-end">
 						<img class="describe-title" src="__STATIC__/dist/images/home/title4_03.png" />
 						<div class="describe-words">人在不同的年龄阶段，对营养的需求各不相同。 而一些特殊时期的营养摄入，对自身的意义尤为重大，甚至会影响下一代的健康。 我们的基因决定了我们吃什么药管用，吃什么药不管用。</div>
 						<a class="btn btn-blue" href="/#">了解更多</a>
@@ -149,21 +146,49 @@
 		<div class="content-5">
 			<div class="content-box double-line">
 				<div class="content-left">
-					<div class="panel-describe">
+					<div class="panel-describe transparent animated-end">
 						<img class="describe-title" src="__STATIC__/dist/images/home/title5_03.png" />
 						<div class="describe-words"> 基因检测和传统体检相比较，安全性和准确性更高， 随着人们生活水平的提高，未病先防和健康生活已经成为一种趋势， 通过基因检测，可以早发现，早干预，早预防。</div>
 						<a class="btn btn-blue" href="/#">了解更多</a>
 					</div>
 				</div>
 				<div class="content-bottom">
-					<a class="selects selects-1" href="/#">
-						<span class="selects-content">
+					<div class="selects-group">
+						<a class="selects selects-1" href="/#">
+							<span class="selects-content">
 							<span class="selects-content-box">
 							<span class="selectes-title">肥胖风险基因检测</span>
-						<span class="selectes-words">肥胖基因检测有效分析个人先天遗传肥胖体质， 进而依照不同体质与需求， 规划“个人专属”健康又有效的瘦身计划，</span>
-						</span>
-						</span>
-					</a>
+							<span class="selectes-words">肥胖基因检测有效分析个人先天遗传肥胖体质， 进而依照不同体质与需求， 规划“个人专属”健康又有效的瘦身计划，</span>
+							</span>
+							</span>
+						</a>
+						<a class="selects selects-2" href="/#">
+							<span class="selects-content">
+							<span class="selects-content-box">
+							<span class="selectes-title">高血压基因检测</span>
+							<span class="selectes-words">从基因角度研究高血压的发病机理， 有助于进一步指导高血压的预防、诊断和治疗。</span>
+							</span>
+							</span>
+						</a>
+					</div>
+					<div class="selects-group">
+						<a class="selects selects-3" href="/#">
+							<span class="selects-content">
+							<span class="selects-content-box">
+							<span class="selectes-title">类风湿关节炎基因检测</span>
+							<span class="selectes-words">通过对风湿病患者子女进行易感基因的检测， 可以预测患病的可能性， 从而进行生活、饮食和环境等方面的干预。</span>
+							</span>
+							</span>
+						</a>
+						<a class="selects selects-4" href="/#">
+							<span class="selects-content">
+							<span class="selects-content-box">
+							<span class="selectes-title">胆结石基因检测</span>
+							<span class="selectes-words">生活中的很多胆结石患者家庭， 其成员也都不同程度地存在胆结石症状， 胆结石是一种具有遗传倾向的多基因疾病。</span>
+							</span>
+							</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -172,3 +197,10 @@
 	</footer>
 </div>
 {/block}
+{block name="other_js"}
+<!-- other js -->
+<script src="__STATIC__/dist/js/my.js" type="text/javascript"></script>
+<script>
+	$.my_init();
+</script>
+{/block} 
