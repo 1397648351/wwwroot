@@ -13,6 +13,7 @@ body {
     font-size: 1.2rem;
     font-family: "microsoft yahei";
     min-width: 1250px;
+    /*padding-bottom: 150px;*/
 }
 
 a {
@@ -230,17 +231,49 @@ a {
 
 /*底部*/
 .footer {
-    font-style: normal;
-    font-weight: 400;
-    background: #051818;
-    color: #fff;
+    background-color: #28384c;
+    /*background: -webkit-linear-gradient(left, #5e6382, #434f6e); !* Safari 5.1 - 6.0 *!*/
+    /*background: -o-linear-gradient(left, #5e6382, #434f6e); !* Opera 11.1 - 12.0 *!*/
+    /*background: -moz-linear-gradient(left, #5e6382, #434f6e); !* Firefox 3.6 - 15 *!*/
+    /*background: linear-gradient(left, #5e6382, #434f6e); !* 标准的语法 *!*/
+    color: #6d7b90;
+    font-size: 1.2rem;
     font-weight: lighter;
     width: 100%;
+    height:370px;
+    text-align: center;
 }
 
-.footer-wrapper {
-    margin: 0 auto;
-    width: 1196px;
+.footer .content-left,
+.footer .content-right{
+    height: auto;
+    padding-top: 56px;
+    vertical-align:top;
+}
+
+.footer .content-left > *,
+.footer .content-right > *{
+    vertical-align: top;
+}
+
+.footer .footer-column{
+    min-width: 70px;
+    height: auto;
+    margin: 0 63px;
+}
+
+.footer .footer-column>.footer-column-title{
+    color: #fef9f4;
+    font-size:1.6rem;
+    margin-bottom: 16px;
+}
+.footer .footer-column>.footer-column-content > li{
+    margin-top: 12px;
+}
+.footer .footer-copyright{
+    text-align: left;
+    margin-top: 50px;
+    margin-left: 63px;
 }
 
 .animated {
