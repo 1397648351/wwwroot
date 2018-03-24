@@ -163,6 +163,10 @@ a {
     font-size: 1.4rem;
 }
 
+.describe-title {
+    height: 63px;
+}
+
 /*内容描述中的文字和下方有对号的*/
 .panel-describe > .describe-words,
 .panel-describe > .describe-kinds {
