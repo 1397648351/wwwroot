@@ -21,6 +21,11 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         array (
             'app\\' => 4,
         ),
+        'Y' => 
+        array (
+            'Yurun\\Until\\' => 12,
+            'Yurun\\OAuthLogin\\' => 17,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -42,6 +47,15 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         'app\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application',
+        ),
+        'Yurun\\Until\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yurunsoft/yurun-event/Src',
+            1 => __DIR__ . '/..' . '/yurunsoft/yurun-http',
+        ),
+        'Yurun\\OAuthLogin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yurunsoft/yurun-oauth-login/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
