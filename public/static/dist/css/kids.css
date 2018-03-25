@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+/*顶部功能条*/
+.topbar {
+    background-image: url(../images/home/head_01.png);
+    background-position: center 0;
+}
+
+/*第一块区域*/
+.content .content-1 {
+    background-image: url(../images/talent/first_06.png);
+    background-repeat: no-repeat;
+    height: 690px;
+    background-position: center -60px;
+}
+
+.content-1 .content-left-title {
+    font-size: 30px;
+    font-weight: 700;
+    padding-top: 185px;
+    padding-left: 185px;
+    text-align: left;
+}
+
+.content-1 .content-left-title{
+
+}
+
+
+    /*第二块区域*/
+.content .content-2 {
+    background-image: url(../images/talent/Second_02.png);
+    background-repeat: no-repeat;
+    height: 690px;
+    background-position: center -60px;
+}
+
+/*第三块区域*/
+.content .content-3 {
+    background-image: url(../images/talent/Third_02.png);
+    background-repeat: no-repeat;
+    height: 690px;
+    background-position: center -60px;
+}
+
+/*第四块区域*/
+.content .content-4 {
+    background-image: url(../images/talent/Fourth_02.png);
+    background-repeat: no-repeat;
+    height: 1440px;
+    background-position: center -60px;
+}
