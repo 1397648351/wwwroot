@@ -13,6 +13,14 @@ namespace app\home\model;
 
 class User extends Base
 {
+    /**
+     * 注册新用户
+     * @param $username
+     * @param $password
+     * @param $mobile
+     * @return bool|mixed
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function addInfo($username, $password, $mobile)
     {
         $data = array();
@@ -28,6 +36,16 @@ class User extends Base
         }
     }
 
+    public function addInfoByThreeParty()
+    {
+
+    }
+
+    /**
+     * @param $mobile
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function findByMobile($mobile)
     {
         $map = array();
@@ -35,11 +53,34 @@ class User extends Base
         return $this->findByWhere($map);
     }
 
+    /**
+     * @param $key
+     * @param $pwd
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function findByKeyAndPwd($key, $pwd)
     {
         $map = array();
         $map['name|mail'] = $key;
         $map['password'] = $pwd;
         return $this->findByWhere($map);
+    }
+
+    /**
+     * 重置密码
+     * @param $mobile
+     * @param $password
+     * @return false|int
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function resetPwd($mobile, $password)
+    {
+        $map = array();
+        $map['mobile'] = $mobile;
+        $data = array();
+        $data['password'] = $password;
+        $data['update_time'] = time();
+        return $this->updateDataByMap($data, $map);
     }
 }

@@ -18,7 +18,8 @@
     "require": {
         "php": ">=5.6.0",
         "topthink/framework": "5.1.*",
-        "riverslei/payment": "^4.1"
+        "riverslei/payment": "^4.1",
+        "yurunsoft/yurun-oauth-login": "^1.2"
     },
     "autoload": {
         "psr-4": {

@@ -16,7 +16,6 @@ use org\Sms;
 class UserController extends BaseController
 {
     //loginType 1:三方登录   2：账号(或邮箱)密码登录 3、手机登录
-
     public function login()
     {
         $req = $this->request;
@@ -68,13 +67,35 @@ class UserController extends BaseController
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
-        $userId = $userModel->addInfo($username, $password, $mobile);
+        $userId = $userModel->addInfo($username, md5($password), $mobile);
         if($res){
             $user = $userModel->find($userId);
             $this->resJson($user, '200', '注册成功');
         } else {
             $this->resJson(array(), '5001', '注册失败');
         }
+    }
+
+    public function resetPwd()
+    {
+        $req = $this->request;
+        if(!$req->isPost()){
+            return $this->fetch('reset');
+        }
+        $mobile = $this->checkMobile($req->param('mobile'));
+        $password = $this->checkEmpty($req->param('password'), 'password不能为空');
+        $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
+        $sms = new Sms();
+        $res = $sms->verify($mobile, $verification_code);
+        if(empty($res)) {
+            $this->resJson(array(), 1003, '验证码错误');
+        }
+        $userModel = model('user');
+        $result = $userModel->resetPwd($mobile, md5($password));
+        if($result) {
+            $this->resJson($result, 200, '重置成功');
+        }
+        $this->resJson(array(), 5001, '重置密码失败');
     }
 
     /*-----------------/私有方法/----------------------*/

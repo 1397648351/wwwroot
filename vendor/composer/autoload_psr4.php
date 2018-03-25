@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'think\\composer\\' => array($vendorDir . '/topthink/think-installer/src'),
     'app\\' => array($baseDir . '/application'),
+    'Yurun\\Until\\' => array($vendorDir . '/yurunsoft/yurun-event/Src', $vendorDir . '/yurunsoft/yurun-http'),
+    'Yurun\\OAuthLogin\\' => array($vendorDir . '/yurunsoft/yurun-oauth-login/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Payment\\' => array($vendorDir . '/riverslei/payment/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
