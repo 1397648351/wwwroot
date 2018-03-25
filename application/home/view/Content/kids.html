@@ -1,0 +1,44 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__STATIC__/dist/css/home.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    <div class="topbar">
+        <div class="content-box">
+            <a class="logo" href="/#">
+                <img src="__STATIC__/dist/images/logo.png"/>
+            </a>
+            <ul class="navbar">
+                <li class="nav">
+                    <a href="/#">首页</a>
+                </li>
+                <li class="nav">
+                    <a href="/#">检测流程</a>
+                </li>
+                <li class="nav">
+                    <a href="/#">检测结果</a>
+                </li>
+                <li class="nav">
+                    <a href="/#">购买</a>
+                </li>
+                <li class="nav">
+                    <a class="link-blue" href="/#">注册</a>
+                </li>
+                <li class="nav">
+                    <a href="/#">登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script src="__STATIC__/dist/js/my.js" type="text/javascript"></script>
+<script>
+    $.my_init();
+</script>
+{/block}

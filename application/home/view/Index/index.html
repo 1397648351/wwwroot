@@ -1,174 +1,336 @@
 {extend name="Template:base" /}
-{block name="title"}基因检测-首页{/block} 
+{block name="title"}基因检测-首页{/block}
 {block name="other_css"}
 <!-- other css -->
-<link rel='stylesheet' href='__STATIC__/dist/css/home.css' type="text/css" />
-{/block} 
-{block name="other_js"}
-<!-- other js -->
-{/block} 
+<link rel='stylesheet' href='__STATIC__/dist/css/home.css' type="text/css"/>
+{/block}
 {block name="body"}
 <div class="wrapper">
-	<div class="topbar">
-		<div class="content-box">
-			<a class="logo" href="/#">
-				<img src="__STATIC__/dist/images/logo.png" />
-			</a>
-			<ul class="navbar">
-				<li class="nav">
-					<a href="/#">首页</a>
-				</li>
-				<li class="nav">
-					<a href="/#">检测流程</a>
-				</li>
-				<li class="nav">
-					<a href="/#">检测结果</a>
-				</li>
-				<li class="nav">
-					<a href="/#">购买</a>
-				</li>
-				<li class="nav">
-					<a class="link-blue" href="/#">注册</a>
-				</li>
-				<li class="nav">
-					<a href="/#">登录</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<a class="top-link" href="/#"></a>
-	<div class="contents">
-		<div class="content-1">
-			<div class="content-box">
-				<div class="content-title" style="text-align: center;">
-					<div class="describe-title">
-						<img src="__STATIC__/dist/images/home/title1.png" />
-					</div>
-				</div>
-				<div class="card-group">
-					<a class="card card-1" href="/#">
-						<span class="card-icon"></span>
-						<span class="card-title">高精准度</span>
-						<span class="card-box">
-							与科研机构联手开展基因研究，技术保障检测结果的精准度，邀您一起探索基因的奥秘，破解基因的密码。
-						</span>
-					</a>
-					<a class="card card-2" href="/#">
-						<span class="card-icon"></span>
-						<span class="card-title">高安全性</span>
-						<span class="card-box">
-							采用一切合理的技术来保护我们所控制的数据不被意外或故意地操纵、丢失或被盗取。
-						</span>
-					</a>
-					<a class="card card-3" href="/#">
-						<span class="card-icon"></span>
-						<span class="card-title">高效服务</span>
-						<span class="card-box">
-							优化检测流程，检测效率高，最大限度的为您节省时间，专业客服全程服务，为您解答疑惑，跟进报告。
-						</span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="content-2">
-			<div class="content-box">
-				<div class="content-left">
-					<div class="panel">
-						<div class="panel-title">你的祖源分析</div>
-						<div class="panel-body">
-							<div class="persion-icon">
-								<img />
-							</div>
-							<div class="infos">
-								<div class="info-line">
-									<div class="info-detail icon-blue">
-										58.9%英国
-									</div>
-									<div class="info-detail icon-red">
-										14.2%法国
-									</div>
-								</div>
-								<div class="info-line">
-									<div class="info-detail icon-green">
-										14.6%希腊
-									</div>
-									<div class="info-detail icon-sky">
-										12.3%中国
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="content-right">
-					<div class="panel-describe">
-						<img class="describe-title" src="__STATIC__/dist/images/home/title2.png" />
-						<div class="describe-words">不同的民族血统，祖源成分和家族基因都影响着我们的长相，也潜移默化了我们的成长方式与语言文化。通过基因分析祖源成分能够进一步分析您是谁，您来自哪里。</div>
-						<div class="describe-kinds">
-							<div class="describe-kinds-piece">祖源分析</div>
-							<div class="describe-kinds-piece">血统成分</div>
-							<div class="describe-kinds-piece">基因关系</div>
-						</div>
-						<a class="btn btn-blue" href="/#">了解更多</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="content-3">
-			<div class="content-box">
-				<div class="content-left">
-					<div class="panel-describe">
-						<img class="describe-title" src="__STATIC__/dist/images/home/title3.png" />
-						<div class="describe-words">同样的化妆品我为什么有人使用安然无恙，有人使用却损伤皮肤引起过敏？ 基因检测可以从本质上找到适合自己的保养方法，避免盲目使用保养产品带来的各类风险。</div>
-						<div class="describe-kinds">
-							<div class="describe-kinds-piece">抗衰老能力检测</div>
-							<div class="describe-kinds-piece">脂肪代谢能力检测</div>
-							<div class="describe-kinds-piece">抗过敏能力检测</div>
-							<div class="describe-kinds-piece">防晒能力检测</div>
-							<div class="describe-kinds-piece">防辐射能力检测</div>
-						</div>
-						<a class="btn" href="/#">了解更多</a>
-					</div>
-				</div>
-				<div class="content-right">
-					<img class="content-img" src="__STATIC__/dist/images/home/Figure_04.png" />
-				</div>
-			</div>
-		</div>
-		<div class="content-4">
-			<div class="content-box">
-				<div class="content-left">
-					<div class="panel-describe">
-						<img class="describe-title" src="__STATIC__/dist/images/home/title4_03.png" />
-						<div class="describe-words">人在不同的年龄阶段，对营养的需求各不相同。 而一些特殊时期的营养摄入，对自身的意义尤为重大，甚至会影响下一代的健康。 我们的基因决定了我们吃什么药管用，吃什么药不管用。</div>
-						<a class="btn btn-blue" href="/#">了解更多</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="content-5">
-			<div class="content-box double-line">
-				<div class="content-left">
-					<div class="panel-describe">
-						<img class="describe-title" src="__STATIC__/dist/images/home/title5_03.png" />
-						<div class="describe-words"> 基因检测和传统体检相比较，安全性和准确性更高， 随着人们生活水平的提高，未病先防和健康生活已经成为一种趋势， 通过基因检测，可以早发现，早干预，早预防。</div>
-						<a class="btn btn-blue" href="/#">了解更多</a>
-					</div>
-				</div>
-				<div class="content-bottom">
-					<a class="selects selects-1" href="/#">
-						<span class="selects-content">
-							<span class="selects-content-box">
-							<span class="selectes-title">肥胖风险基因检测</span>
-						<span class="selectes-words">肥胖基因检测有效分析个人先天遗传肥胖体质， 进而依照不同体质与需求， 规划“个人专属”健康又有效的瘦身计划，</span>
-						</span>
-						</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer class="footer">
-	</footer>
+    <div class="topbar">
+        <div class="content-box">
+            <a class="logo" href="javascript:;">
+                <img src="__STATIC__/dist/images/logo.png"/>
+            </a>
+            <ul class="navbar">
+                <li class="nav">
+                    <a href="javascript:;">首页</a>
+                </li>
+                <li class="nav">
+                    <a href="javascript:;">检测流程</a>
+                </li>
+                <li class="nav">
+                    <a href="javascript:;">检测结果</a>
+                </li>
+                <li class="nav">
+                    <a href="javascript:;">购买</a>
+                </li>
+                <li class="nav">
+                    <a class="link-blue" href="javascript:;">注册</a>
+                </li>
+                <li class="nav">
+                    <a href="javascript:;">登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="contents">
+        <a class="top-link" href="javascript:;"></a>
+        <div class="content-1">
+            <div class="content-box">
+                <div class="content-title" style="text-align: center;">
+                    <div class="describe-title">
+                        <img src="__STATIC__/dist/images/home/title1.png"/>
+                    </div>
+                </div>
+                <div class="card-group">
+                    <a class="card card-1" href="javascript:;">
+                        <span class="card-icon"></span>
+                        <span class="card-title">高精准度</span>
+                        <span class="card-box">
+									与科研机构联手开展基因研究，技术保障检测结果的精准度，邀您一起探索基因的奥秘，破解基因的密码。
+								</span>
+                    </a>
+                    <a class="card card-2" href="javascript:;">
+                        <span class="card-icon"></span>
+                        <span class="card-title">高安全性</span>
+                        <span class="card-box">
+									采用一切合理的技术来保护我们所控制的数据不被意外或故意地操纵、丢失或被盗取。
+								</span>
+                    </a>
+                    <a class="card card-3" href="javascript:;">
+                        <span class="card-icon"></span>
+                        <span class="card-title">高效服务</span>
+                        <span class="card-box">
+									优化检测流程，检测效率高，最大限度的为您节省时间，专业客服全程服务，为您解答疑惑，跟进报告。
+								</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="content-2">
+            <div class="content-box">
+                <div class="content-left">
+                    <div class="panel">
+                        <div class="panel-title">你的祖源分析</div>
+                        <div class="panel-body">
+                            <div class="persion-icon">
+                                <img/>
+                            </div>
+                            <div class="infos">
+                                <div class="info-line">
+                                    <div class="info-detail icon-blue">
+                                        58.9%英国
+                                    </div>
+                                    <div class="info-detail icon-red">
+                                        14.2%法国
+                                    </div>
+                                </div>
+                                <div class="info-line">
+                                    <div class="info-detail icon-green">
+                                        14.6%希腊
+                                    </div>
+                                    <div class="info-detail icon-sky">
+                                        12.3%中国
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="panel-describe transparent animated-end">
+                        <img class="describe-title" src="__STATIC__/dist/images/home/title2.png"/>
+                        <div class="describe-words">
+                            不同的民族血统，祖源成分和家族基因都影响着我们的长相，也潜移默化了我们的成长方式与语言文化。通过基因分析祖源成分能够进一步分析您是谁，您来自哪里。
+                        </div>
+                        <div class="describe-kinds">
+                            <div class="describe-kinds-piece">祖源分析</div>
+                            <div class="describe-kinds-piece">血统成分</div>
+                            <div class="describe-kinds-piece">基因关系</div>
+                        </div>
+                        <a class="btn btn-blue" href="javascript:;">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-3">
+            <div class="content-box">
+                <div class="content-left">
+                    <div class="panel-describe transparent animated-end">
+                        <img class="describe-title" src="__STATIC__/dist/images/home/title3.png"/>
+                        <div class="describe-words">同样的化妆品我为什么有人使用安然无恙，有人使用却损伤皮肤引起过敏？
+                            基因检测可以从本质上找到适合自己的保养方法，避免盲目使用保养产品带来的各类风险。
+                        </div>
+                        <div class="describe-kinds">
+                            <div class="describe-kinds-piece">抗衰老能力检测</div>
+                            <div class="describe-kinds-piece">脂肪代谢能力检测</div>
+                            <div class="describe-kinds-piece">抗过敏能力检测</div>
+                            <div class="describe-kinds-piece">防晒能力检测</div>
+                            <div class="describe-kinds-piece">防辐射能力检测</div>
+                        </div>
+                        <a class="btn" href="javascript:;">了解更多</a>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <img class="content-img" src="__STATIC__/dist/images/home/Figure_04.png"/>
+                </div>
+            </div>
+        </div>
+        <div class="content-4">
+            <div class="content-box">
+                <div class="content-left">
+                    <div class="panel-describe transparent animated-end">
+                        <img class="describe-title" src="__STATIC__/dist/images/home/title4_03.png"/>
+                        <div class="describe-words">人在不同的年龄阶段，对营养的需求各不相同。 而一些特殊时期的营养摄入，对自身的意义尤为重大，甚至会影响下一代的健康。
+                            我们的基因决定了我们吃什么药管用，吃什么药不管用。
+                        </div>
+                        <a class="btn btn-blue" href="javascript:;">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-5">
+            <div class="content-box double-line">
+                <div class="content-left">
+                    <div class="panel-describe transparent animated-end">
+                        <img class="describe-title" src="__STATIC__/dist/images/home/title5_03.png"/>
+                        <div class="describe-words"> 基因检测和传统体检相比较，安全性和准确性更高， 随着人们生活水平的提高，未病先防和健康生活已经成为一种趋势，
+                            通过基因检测，可以早发现，早干预，早预防。
+                        </div>
+                        <a class="btn btn-blue" href="javascript:;">了解更多</a>
+                    </div>
+                </div>
+                <div class="content-bottom">
+                    <div class="selects-group">
+                        <a class="selects selects-1" href="javascript:;">
+									<span class="selects-content">
+									<span class="selects-content-box">
+									<span class="selectes-title">肥胖风险基因检测</span>
+									<span class="selectes-words">肥胖基因检测有效分析个人先天遗传肥胖体质， 进而依照不同体质与需求， 规划“个人专属”健康又有效的瘦身计划，</span>
+									</span>
+									</span>
+                        </a>
+                        <a class="selects selects-2" href="javascript:;">
+									<span class="selects-content">
+									<span class="selects-content-box">
+									<span class="selectes-title">高血压基因检测</span>
+									<span class="selectes-words">从基因角度研究高血压的发病机理， 有助于进一步指导高血压的预防、诊断和治疗。</span>
+									</span>
+									</span>
+                        </a>
+                    </div>
+                    <div class="selects-group">
+                        <a class="selects selects-3" href="javascript:;">
+									<span class="selects-content">
+									<span class="selects-content-box">
+									<span class="selectes-title">类风湿关节炎基因检测</span>
+									<span class="selectes-words">通过对风湿病患者子女进行易感基因的检测， 可以预测患病的可能性， 从而进行生活、饮食和环境等方面的干预。</span>
+									</span>
+									</span>
+                        </a>
+                        <a class="selects selects-4" href="javascript:;">
+									<span class="selects-content">
+									<span class="selects-content-box">
+									<span class="selectes-title">胆结石基因检测</span>
+									<span class="selectes-words">生活中的很多胆结石患者家庭， 其成员也都不同程度地存在胆结石症状， 胆结石是一种具有遗传倾向的多基因疾病。</span>
+									</span>
+									</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-6">
+            <div class="content-box">
+                <div class="content-left">
+                    <div class="two-img-wrapper">
+                        <div class="img-wrapper img-wrapper-1">
+                            <div class="img-content">
+                                <div class="img-content-name">宝宝：张## 9个月</div>
+                                <div class="img-content-gift">天赋结果：数学，音乐，美术</div>
+                                <div class="img-content-describe">
+                                    经测试，宝宝热衷于数数，而且对声音敏感，爱好色彩斑斓的事物，喜欢听音乐且会跟随音乐节奏舞蹈，未来可能是个出色的舞蹈家。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img-wrapper img-wrapper-2">
+                            <div class="img-content">
+                                <div class="img-content-name">宝宝：刘## 9个月</div>
+                                <div class="img-content-gift">天赋结果：音乐，美术</div>
+                                <div class="img-content-describe">经测试，宝宝对声音敏感，爱好色彩斑斓的事物，未来可能是个出色的音乐家和绘画师。</div>
+                            </div>
+                        </div>
+                        <img src="__STATIC__/dist/images/home/chart2_02.png"/>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="panel-describe transparent animated-end">
+                        <img class="describe-title" src="__STATIC__/dist/images/home/title6.png"/>
+                        <div class="describe-words"> 天赋不仅受到营养、教育、生长环境、生活习惯等的影响， 同样与遗传因素或自身的天赋基因也有着不同程度的关联性。
+                            儿童基因检测有助于发掘孩子的天赋优势，为家长培养孩子提供科学依据，进行个性化教育培养，提高教育成功率。使孩子成为社会的有用之才，有效的成为当今家长解决育儿难的大问题。
+                        </div>
+                        <a class="btn btn-blue" href="javascript:;">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-7">
+            <div class="content-box">
+                <div class="content-title" style="text-align: center;">
+                    <div class="describe-title">
+                        <img src="__STATIC__/dist/images/home/title7.png"/>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <div class="options-group-line">
+                        <a class="options">
+                            <span class="options-icon options-icon-1"></span>
+                            <span class="options-name">1.购买</span>
+                            <span class="options-text">打开包装盒</span>
+                            <span class="options-text">打开说明卡片</span>
+                        </a>
+                        <a class="options">
+                            <span class="options-icon options-icon-2"></span>
+                            <span class="options-name">2.绑定样本</span>
+                            <span class="options-text">在菜单中选择 “样本绑定” ，打开基因样本采集管包装，</span>
+                            <span class="options-text">扫描采集管上的条形码进行绑定并输入必须的个人信息。</span>
+                        </a>
+                    </div>
+                    <div class="options-group-line">
+                        <a class="options">
+                            <span class="options-icon options-icon-3"></span>
+                            <span class="options-name">3.采集样本</span>
+                            <span class="options-text">根据采集管所附说明书</span>
+                            <span class="options-text">进行唾液样本采集</span>
+                        </a>
+                        <a class="options">
+                            <span class="options-icon options-icon-4"></span>
+                            <span class="options-name">4.查看结果</span>
+                            <span class="options-text">将在4－6周内生成检测报告，。</span>
+                            <span class="options-text">您可以登录pica官网查询检测结果以及报告生成进度。</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="content-box">
+            <div class="content-left">
+                <ul class="footer-column">
+                    <li class="footer-column-title">首页</li>
+                    <ul class="footer-column-content">
+                        <li><a href="javascript:;">购买</a></li>
+                        <li><a href="javascript:;">追踪祖源</a></li>
+                        <li><a href="javascript:;">预防疾病</a></li>
+                        <li><a href="javascript:;">肤质检测</a></li>
+                        <li><a href="javascript:;">天赋检测</a></li>
+                        <li><a href="javascript:;">安全用药</a></li>
+                    </ul>
+                </ul>
+                <ul class="footer-column">
+                    <li class="footer-column-title">关于湃咖</li>
+                    <ul class="footer-column-content">
+                        <li><a href="javascript:;">关于我们</a></li>
+                        <li><a href="javascript:;">隐私保护</a></li>
+                        <li><a href="javascript:;">安全协议</a></li>
+                        <li><a href="javascript:;">加入我们</a></li>
+                    </ul>
+                </ul>
+                <ul class="footer-column">
+                    <li class="footer-column-title">用户中心</li>
+                    <ul class="footer-column-content">
+                        <li><a href="javascript:;">登录</a></li>
+                        <li><a href="javascript:;">注册</a></li>
+                        <li><a href="javascript:;">个人中心</a></li>
+                        <li><a href="javascript:;">加入我们</a></li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="content-right">
+                <ul class="footer-column">
+                    <li class="footer-column-title">关注我们</li>
+                    <ul class="footer-column-content">
+                        <li><img src="__STATIC__/dist/images/home/QR_code.png"/></li>
+                    </ul>
+                </ul>
+                <ul class="footer-column">
+                    <li class="footer-column-title">联系我们</li>
+                    <ul class="footer-column-content">
+                        <li>客服电话   400-006-2323</li>
+                        <li>合作电话   400-006-2323</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="footer-copyright">&copy; 2018 WeGene. All Rights Reserved   粤ICP备15012185号</div>
+        </div>
+    </footer>
 </div>
 {/block}
+{block name="other_js"}
+<!-- other js -->
+<script src="__STATIC__/dist/js/my.js" type="text/javascript"></script>
+<script>
+    $.my_init();
+</script>
+{/block} 
