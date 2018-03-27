@@ -5,3 +5,34 @@
     background-image: url(../images/home/head_01.png);
     background-position: center 0;
 }
+
+.content{
+    background-color: #fff;
+    color: #666;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.4rem;
+    padding-top: 50px;
+}
+
+.describe-content{
+    line-height: 2;
+    font-size: 16px;
+}
+.icon-title{
+    margin-left: 10px;
+}
+/*第一块区域*/
+.content .content-1 {
+    background-color: #f9f9f9;
+    background-image: url(../images/skin/background_03.png);
+    height: 737px;
+}
+
+.content-1  .content-img{
+    margin-top: 75px;
+}
+
+.content-1  .content-left{
+    margin-top: -15px;
+}
