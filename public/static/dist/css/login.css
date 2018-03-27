@@ -92,11 +92,11 @@ body {
     transition: left .3s ease;
 }
 
-.form-input{
+.form-input {
     margin-top: 34px;
 }
 
-.def-input{
+.def-input {
     display: block;
     width: 100%;
     height: 40px;
@@ -105,10 +105,49 @@ body {
     font-size: 1.6rem;
     letter-spacing: .2rem;
     margin-top: 20px;
-    padding: 12px 25px;
+    padding: 0px 25px;
     outline: medium;
 }
 
-.def-input:focus{
+.def-input:focus {
     border-color: #13a3ff;
+}
+
+.def-input[type='button']{
+    background-color: #2293f9;
+    color: #fff;
+}
+
+.bar{
+    margin-top: 20px;
+    padding: 0 0 0 20px;
+    height: 28px;
+}
+
+input[type='checkbox'] {
+    display: inline-block;
+    background-color: #fff;
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    border: 1px solid #666;
+    margin-top: 5px;
+    float: left;
+}
+
+.remember {
+    float: left;
+}
+
+.register {
+    float: right;
+    color: #679fe4;
+}
+
+.form-footer{
+    margin-top: 27px;
+}
+
+.action-qq{
+    margin: 28px;
 }
