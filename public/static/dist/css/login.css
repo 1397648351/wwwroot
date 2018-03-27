@@ -78,7 +78,7 @@ body {
 
 .form-type-tab.tab-active {
     color: #13a3ff;
-    border-bottom-width: 0;
+    /*border-bottom-width: 0;*/
     /*border-bottom: 3px solid #13a3ff;*/
 }
 
@@ -113,12 +113,12 @@ body {
     border-color: #13a3ff;
 }
 
-.def-input[type='button']{
+.def-input[type='button'] {
     background-color: #2293f9;
     color: #fff;
 }
 
-.bar{
+.bar {
     margin-top: 20px;
     padding: 0 0 0 20px;
     height: 28px;
@@ -144,10 +144,41 @@ input[type='checkbox'] {
     color: #679fe4;
 }
 
-.form-footer{
+.form-footer {
     margin-top: 27px;
 }
 
-.action-qq{
+.action-qq {
     margin: 28px;
+}
+
+.def-input-btn.def-input > * {
+    display: inline-block;
+    vertical-align: middle;
+    outline: medium;
+}
+
+.def-input-btn.def-input:after {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.def-input-btn.def-input {
+    padding: 0 0 0 25px;
+}
+
+.def-input-btn.def-input > input {
+    width: 70%;
+    border: none;
+}
+
+.def-input-btn.def-input > .def-input-btn {
+    width: 30%;
+    height: 100%;
+    margin-right: -1px;
+    border-radius: 0 20px 20px 0;
+    background-color: #2293f9;
+    color: #fff;
 }
