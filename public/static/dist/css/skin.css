@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+/*顶部功能条*/
+.topbar {
+    background-image: url(../images/home/head_01.png);
+    background-position: center 0;
+}

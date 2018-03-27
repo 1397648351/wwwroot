@@ -14,4 +14,9 @@ class ContentController extends BaseController
     {
         return $this->fetch();
     }
+
+    public  function  skin()
+    {
+        return $this->fetch();
+    }
 }
