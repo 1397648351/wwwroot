@@ -6,6 +6,15 @@
     background-position: center 0;
 }
 
+.content{
+    background-color: #fff;
+    color: #666;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.4rem;
+    padding-top: 50px;
+}
+
 /*第一块区域*/
 .content .content-1 {
     background-image: url(../images/talent/first_06.png);
