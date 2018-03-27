@@ -17,109 +17,67 @@
 
 /*第一块区域*/
 .content .content-1 {
-    background-image: url(../images/talent/first_06.png);
-    background-repeat: no-repeat;
+    background-color: #f9f9f9;
+    background-image: url(../images/talent/background_02.png);
     height: 690px;
-    background-position: center -60px;
+}
+.content-1  .content-box{
+    width: 1196px;
+    margin: 0 auto;
+    height: 100%;
 }
 
-.content-1 .content-left-title {
-    font-size: 30px;
-    font-weight: 700;
-    padding-top: 185px;
-    padding-left: 185px;
+.content-1  .content-left{
     text-align: left;
 }
 
-.content-1 .content-left-paragraph{
-    text-align: left;
-    padding-top: 20px;
-    font-size: 15px;
-    padding-left: 185px;
-    width: 41%;
+.content-img {
+    margin-left: -20px;
+    margin-top: -20px;
+}
+
+.describe-content{
     line-height: 2;
-    font-weight: 400;
+    font-size: 16px;
 }
-
+.icon-title{
+    margin-left: 10px;
+}
 
     /*第二块区域*/
 .content .content-2 {
-    background-image: url(../images/talent/Second_02.png);
-    background-repeat: no-repeat;
+    background-image: url(../images/talent/background_03.png);
+    background-color: #f9f9f9;
     height: 690px;
-    background-position: center -60px;
 }
 
-.content-2 .content-right-title {
-    font-size: 30px;
-    font-weight: 700;
+.content-2 .content-img {
+    margin-left: -85px;
+    margin-top: 40px;
+
+}
+
+.content-2 .content-right{
     text-align: right;
-    padding-right: 620px;
-    padding-top: 150px;
 }
 
-.content-2 .content-right-paragraph{
-    padding-top: 20px;
-    font-size: 15px;
-    font-weight: 400;
-    float: right;
-    margin-right: 315px;
-    line-height: 2;
-    width: 28%;
+.content-right-icon{
+    padding-top:20px;
+    margin-left: 10px;
 }
-
-.content-2 .content-right-paragraph .content-right-icon{
-    padding-top: 20px;
-    padding-right: 50px;
-}
-.content-2 .content-right-case{
-    padding-top: 170px;
-    font-size: 17px;
-    font-weight: 400;
-    float: right;
-    color: white;
-    padding-left: 260px;
-    margin-right: -195px;
-    width: 28%;
-}
-
-.content-2 .content-right-describe{
-    padding-top: 225px;
-    font-size: 15px;
-    font-weight: 400;
-    float: right;
-    margin-right: -658px;
-    line-height: 2;
-    width: 28%;
-}
-
-
-
 /*第三块区域*/
 .content .content-3 {
-    background-image: url(../images/talent/Third_02.png);
-    background-repeat: no-repeat;
+    background-image: url(../images/talent/background_04.png);
     height: 690px;
-    background-position: center -60px;
+    background-color: #f9f9f9;
 }
 
-.content-3 .content-left-title-3 {
-    font-size: 30px;
-    color: white;
-    font-weight: 700;
-    text-align: left;
-    padding-left: 186px;
-    padding-top: 190px;
+.content-3 .content-img {
+    margin-left: 120px;
+    margin-top: 5px;
 }
-.content-3 .content-left-paragraph-3{
-    text-align: left;
-    padding-top: 20px;
-    font-size: 15px;
-    padding-left: 185px;
-    width: 41%;
-    line-height: 2;
-    font-weight: 400;
-    color:white;
+.content-3 .content-left{
+margin-top: -50px;
 }
 
 /*第四块区域*/
