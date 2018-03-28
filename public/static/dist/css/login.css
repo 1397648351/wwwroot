@@ -116,6 +116,7 @@ body {
 .def-input[type='button'] {
     background-color: #2293f9;
     color: #fff;
+    border-color: #2293f9;
 }
 
 .bar {
@@ -172,13 +173,17 @@ input[type='checkbox'] {
 .def-input-btn.def-input > input {
     width: 70%;
     border: none;
+    float: left;
+    height: 38px;
+    line-height: 38px;
 }
 
 .def-input-btn.def-input > .def-input-btn {
     width: 30%;
     height: 100%;
-    margin-right: -1px;
+    /*margin-right: -1px;*/
     border-radius: 0 20px 20px 0;
     background-color: #2293f9;
+    float: right;
     color: #fff;
 }
