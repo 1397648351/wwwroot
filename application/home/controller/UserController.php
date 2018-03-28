@@ -28,11 +28,11 @@ class UserController extends BaseController
         $user = array();
         switch ($loginType){
             case 1:
-                $user = $this->quickLogin(); break;
+                $user = $this->normalLogin(); break;
             case 2:
-                $user = $this->accountLogin(); break;
-            case 3:
                 $user = $this->mobileLogin(); break;
+            case 3:
+                $user = $this->quickLogin(); break;
             default:
                 $this->resJson(array(), 1004, '登录类型错误');
         }
@@ -135,7 +135,7 @@ class UserController extends BaseController
      * 账号(或邮箱)密码登录
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function accountLogin()
+    private function normalLogin()
     {
         $req = $this->request;
         $key = $this->checkEmpty($req->param('key'), 'key不能为空');
