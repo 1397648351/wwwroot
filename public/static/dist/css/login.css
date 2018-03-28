@@ -57,7 +57,7 @@ body {
 
 .form-type {
     margin-top: 23px;
-    width: 100%;
+    width: 392px;
     font-size: 1.8rem;
     position: relative;
     height: 63px;
@@ -95,7 +95,7 @@ body {
 
 .def-input {
     display: block;
-    width: 100%;
+    width: 392px;
     height: 40px;
     border: 1px solid #666;
     border-radius: 20px;
@@ -150,37 +150,106 @@ input[type='checkbox'] {
     margin: 28px;
 }
 
-.def-input-btn.def-input > * {
+.def-inputbtn.def-input > * {
     display: inline-block;
     vertical-align: middle;
     outline: medium;
 }
 
-.def-input-btn.def-input:after {
+.def-inputbtn.def-input:after {
     content: '';
     height: 100%;
     display: inline-block;
     vertical-align: middle;
 }
 
-.def-input-btn.def-input {
+.def-inputbtn.def-input {
     padding: 0 0 0 25px;
 }
 
-.def-input-btn.def-input > input {
-    width: 70%;
+.def-inputbtn.def-input > input[type='text'],
+.def-inputbtn.def-input > input[type='password']{
+    width: calc(100% - 138px);
     border: none;
     float: left;
+    padding: 10px 0;
+    /*height: 38px;*/
+    /*line-height: 38px;*/
+}
+
+.def-inputbtn.def-input > .def-input-btn {
+    width: 30%;
+    height: 36px;
+    margin-top: 1px;
+    margin-right: 1px;
+    border-radius: 0 20px 20px 0;
+    /*background-color: #2293f9;*/
+    background-image: url(../images/register/Verification2.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    float: right;
+    color: #fff;
+    border: none;
+}
+
+.content-from.register-box{
+    padding-top: 67px;
+}
+
+.def-input.def-inputbtn > label{
+    float: left;
+    width: 70px;
     height: 38px;
     line-height: 38px;
 }
 
-.def-input-btn.def-input > .def-input-btn {
-    width: 30%;
-    height: 100%;
-    /*margin-right: -1px;*/
-    border-radius: 0 20px 20px 0;
-    background-color: #2293f9;
-    float: right;
-    color: #fff;
+.def-inputbtn.def-input.def-check > .cut-line{
+    float: left;
+    margin-top: 11px;
+    border-style: solid;
+    border-color: #666;
+    border-width: 0;
+    border-right-width: 1px;
+    height: 17px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.def-inputbtn.def-input.def-check{
+    font-size: 1.4rem;
+    letter-spacing: 0;
+    padding-left: 15px;
+}
+
+.def-inputbtn.def-input.def-check > input[type='text'],
+.def-inputbtn.def-input.def-check > input[type='password']{
+    width: 260px;
+    padding: 11px 10px;
+}
+
+.def-inputbtn.def-input.def-check > .state{
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image: url(../images/register/icon.jpg);
+}
+
+.def-inputbtn.def-input.def-check > .state.state-problem{
+    background-position: 0 0;
+}
+
+.def-inputbtn.def-input.def-check > .state.state-error{
+    background-position: -20px 0;
+}
+
+.def-inputbtn.def-input.def-check > .state.state-success{
+    width: 17px;
+    height: 17px;
+    background-position: -40px 0;
+}
+
+.def-inputbtn.def-input.def-check.def-check-btn > input[type='text']{
+    width: 146px;
 }
