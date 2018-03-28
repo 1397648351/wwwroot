@@ -44,7 +44,7 @@
     margin-left: 10px;
 }
 
-    /*第二块区域*/
+/*第二块区域*/
 .content .content-2 {
     background-image: url(../images/talent/background_03.png);
     background-color: #f9f9f9;
@@ -65,6 +65,14 @@
     padding-top:20px;
     margin-left: 10px;
 }
+
+.content-2 .violet{
+    background-image: url(../images/talent/Button_03.png);
+    color: white;
+    width: 218px;
+    margin-top: 20px;
+}
+
 /*第三块区域*/
 .content .content-3 {
     background-image: url(../images/talent/background_04.png);
@@ -83,7 +91,6 @@ margin-top: -50px;
 /*第四块区域*/
 .content .content-4 {
     background-image: url(../images/talent/Fourth_02.png);
-    background-repeat: no-repeat;
-    height: 1440px;
-    background-position: center -60px;
+    height: 1500px;
+    background-color: #f9f9f9;
 }

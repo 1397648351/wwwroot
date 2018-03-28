@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+
+/*顶部功能条*/
+.topbar {
+    background-image: url(../images/home/head_01.png);
+    background-position: center 0;
+}
+
+.content{
+    background-color: #fff;
+    color: #666;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.4rem;
+    padding-top: 50px;
+}
+.describe-content{
+    line-height: 2;
+    font-size: 16px;
+}
+.icon-title{
+    margin-left: 10px;
+}
+/*第一块区域*/
+.content .content-1 {
+    background-color: #f9f9f9;
+    background-image: url(../images/inheritance/background_02.png);
+    height: 750px;
+}
+
+.content-1 .btn-green{
+    background-image: url(../images/inheritance/yc_18.png);
+    color: white;
+    width: 228px;
+    margin-top: 20px;
+}
+
+.content-1 .content-img{
+    margin-top: 160px;
+}
+
+/*第二块区域*/
+.content .content-2 {
+    background-image: url(../images/inheritance/background_01.png);
+    background-color: #f9f9f9;
+    height: 753px;
+}
+
+.content-2 .btn-green{
+    background-image: url(../images/inheritance/yc_24.png);
+    color: white;
+    width: 250px;
+    margin-top: 20px;
+}
+
+.content-2 .content-img{
+    margin-top: 195px;
+}
+
+/*第三块区域*/
+.content .content-3 {
+    background-image: url(../images/inheritance/background_04.png);
+    height: 750px;
+    background-color: #f9f9f9;
+}
+
+.content-3 .content-img{
+    margin-top: 176px;
+}
+
+.content-3 .describe-title01{
+    color: white;
+    font-weight: 600;
+}
+
+.content-3 .describe-content{
+    margin-top: 10px;
+    color: white;
+    font-weight: 300;
+}
+
+/*第四块区域*/
+.content .content-4 {
+    background-image: url(../images/inheritance/Fourth_02.png);
+    height: 1500px;
+    background-color: #f9f9f9;
+}

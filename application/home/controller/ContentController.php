@@ -19,4 +19,9 @@ class ContentController extends BaseController
     {
         return $this->fetch();
     }
+
+    public  function  inheritance()
+    {
+        return $this->fetch();
+    }
 }
