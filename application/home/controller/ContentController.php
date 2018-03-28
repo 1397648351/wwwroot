@@ -24,4 +24,9 @@ class ContentController extends BaseController
     {
         return $this->fetch();
     }
+
+    public  function  medication()
+    {
+        return $this->fetch();
+    }
 }
