@@ -102,14 +102,14 @@
         var loginUrl = "{:url('User/login')}";
         var successUrl = "{:url('Index/index')}";
 
-        $.my_init(({
+        $.my_init({
             animate: {
                 enable: false
             },
             tabs: {
                 enable: true
             }
-        }));
+        });
 
         login.init(loginUrl,successUrl);
     })
