@@ -12,6 +12,8 @@ namespace app\home\controller;
 
 
 use org\Sms;
+use Yurun\OAuthLogin\QQ;
+use Yurun\OAuthLogin\Weixin;
 
 class UserController extends BaseController
 {
@@ -51,6 +53,11 @@ class UserController extends BaseController
         $this->redirect('Index/index');
     }
 
+    /**
+     * 注册
+     * @return mixed
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function register()
     {
         $req = $this->request;
@@ -76,6 +83,11 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * 重置密码
+     * @return mixed
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function resetPwd()
     {
         $req = $this->request;
@@ -139,7 +151,10 @@ class UserController extends BaseController
      */
     private function quickLogin()
     {
-
+        $qqOAuthConfig = array();
+        $wxOAuthConfig = array();
+        $qqOAuth = new QQ\OAuth2($qqOAuthConfig['appId'], $qqOAuthConfig['appSecret'], $qqOAuthConfig['callbackUrl']);
+        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['appId'], $wxOAuthConfig['appSecret'], $wxOAuthConfig['callbackUrl']);
     }
 
 }
