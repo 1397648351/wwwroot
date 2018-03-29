@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+/*顶部功能条*/
+.topbar {
+    background-image: url(../images/home/head_01.png);
+    background-position: center 0;
+}
+
+.content{
+    background-color: #fff;
+    color: #666;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.4rem;
+    padding-top: 50px;
+}
+.describe-content{
+    line-height: 2;
+    font-size: 16px;
+}
+.icon-title{
+    margin-left: 10px;
+}
+/*第一块区域*/
+.content .content-1 {
+    background-color: #f9f9f9;
+    background-image: url(../images/process/background_05.png);
+    height: 700px;
+}
+
+.content-1 .content-img{
+    margin-top: 140px;
+}
+
+.content-1 .describe-contenta{
+    color:blue;
+}
+
+/*第二块区域*/
+.content .content-2 {
+    background-image: url(../images/process/background_01.png);
+    background-color: #f9f9f9;
+    height: 700px;
+}
+
+.content-2 .content-img{
+    margin-top: 230px;
+}
+
+.content-2 .describe-content1{
+    margin-top: 5px;
+}
+.content-2 .describe-content2{
+    margin-top: 5px;
+}
+
+/*第三块区域*/
+.content .content-3 {
+    background-image: url(../images/process/background_05.png);
+    height: 710px;
+    background-color: #f9f9f9;
+}
+
+.content-3 .content-img{
+    margin-top: 220px;
+}
+
+.content-3 .describe-content1{
+    margin-top: 5px;
+}
+.content-3 .describe-content2{
+    margin-top: 5px;
+}
+.content-3 .describe-content3{
+    margin-top: 5px;
+}
+.content-3 .describe-content4{
+    margin-top: 5px;
+}
+.content-3 .describe-contenta{
+    color:blue;
+}
+
+/*第四块区域*/
+.content .content-4 {
+    background-image: url(../images/process/background_01.png);
+    height: 750px;
+    background-color: #f9f9f9;
+}
+
+.content-4 .content-img{
+    margin-top: 215px;
+}
+
+.content-4 .describe-content1{
+    margin-top: 5px;
+}
+
+.content-4 .describe-contenta{
+    color:blue;
+}

@@ -29,4 +29,9 @@ class ContentController extends BaseController
     {
         return $this->fetch();
     }
+
+    public  function  process()
+    {
+        return $this->fetch();
+    }
 }
