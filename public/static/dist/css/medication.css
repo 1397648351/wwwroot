@@ -57,7 +57,7 @@
 
 /*第四块区域*/
 .content .content-4 {
-    background-image: url(../images/medication/background_04.png);
+    background-image: url(../images/medication/background-12_02.png);
     height: 1455px;
     background-color: #f9f9f9;
 }
@@ -70,6 +70,17 @@
     background-image: url(../images/medication/yy_20.png);
     width: 1170px;
     height:180px;
+    padding-top: 58px;
+    padding-left: 510px;
+    font-weight: 600;
+    font-size: 30px;
+    color: white;
+}
+.panel-title-2{
+    font-size: 20px;
+    color: white;
+    font-weight: 400;
+    margin-top: 15px;
 }
 .content-4 .panel-body{
     height: 610px;

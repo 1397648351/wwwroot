@@ -93,6 +93,17 @@
     background-image: url(../images/inheritance/Title_03.png);
     width: 1170px;
     height:176px;
+    padding-top: 58px;
+    padding-left: 510px;
+    font-weight: 600;
+    font-size: 30px;
+    color: white;
+}
+.panel-title-2{
+    font-size: 20px;
+    color: white;
+    font-weight: 400;
+    margin-top: 15px;
 }
 .content-4 .panel-body{
     height: 655px;
