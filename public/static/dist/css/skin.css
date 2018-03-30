@@ -30,7 +30,7 @@
 }
 
 .content-1  .content-img{
-    margin-top: 75px;
+    margin-top: 208px;
 }
 
 .content-1  .content-left{
@@ -45,9 +45,14 @@
 }
 
 .content-2 .content-img {
-   margin-bottom: -205px;
+   margin-top: 205px;
 
 }
+.content-2 .violet{
+     background-image: url(../images/skin/chart_09.png);
+     color: #f7a297;
+     width: 200px;
+ }
 
 /*第三块区域*/
 .content .content-3 {
@@ -56,9 +61,23 @@
     background-color: #f9f9f9;
 }
 
+.content-3 .content-img {
+    margin-top: 110px;
+
+}
 /*第四块区域*/
 .content .content-4 {
     background-image: url(../images/skin/Fourth_02.png);
     height: 1500px;
     background-color: #f9f9f9;
+}
+
+.content-4 .panel{
+    padding-top: 300px;
+    padding-left: 140px;
+}
+.content-4 .panel-title{
+    background-image: url(../images/skin/Title_03.png);
+    width: 1170px;
+    height:176px;
 }

@@ -19,7 +19,7 @@
 .content .content-1 {
     background-color: #f9f9f9;
     background-image: url(../images/talent/background_02.png);
-    height: 690px;
+    height: 737px;
 }
 .content-1  .content-box{
     width: 1196px;
@@ -31,9 +31,9 @@
     text-align: left;
 }
 
-.content-img {
+.content-1 .content-img {
     margin-left: -20px;
-    margin-top: -20px;
+    margin-top: 160px;
 }
 
 .describe-content{
@@ -48,12 +48,12 @@
 .content .content-2 {
     background-image: url(../images/talent/background_03.png);
     background-color: #f9f9f9;
-    height: 690px;
+    height: 757px;
 }
 
 .content-2 .content-img {
     margin-left: -85px;
-    margin-top: 40px;
+    margin-top: 210px;
 
 }
 
@@ -76,13 +76,13 @@
 /*第三块区域*/
 .content .content-3 {
     background-image: url(../images/talent/background_04.png);
-    height: 690px;
+    height: 750px;
     background-color: #f9f9f9;
 }
 
 .content-3 .content-img {
     margin-left: 120px;
-    margin-top: 5px;
+    margin-top:10px;
 }
 .content-3 .content-left{
 margin-top: -50px;
@@ -93,4 +93,14 @@ margin-top: -50px;
     background-image: url(../images/talent/Fourth_02.png);
     height: 1500px;
     background-color: #f9f9f9;
+}
+
+.content-4 .panel{
+    width: 100%;
+}
+
+.content-4 .panel .panel-title{
+    background-image: url(../images/talent/Title_033.png);
+    background-repeat: no-repeat;
+    height: 180px;
 }
