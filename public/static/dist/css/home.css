@@ -2,21 +2,74 @@
 
 /*顶部功能条*/
 .topbar {
-    background-image: url(../images/home/head_01.png);
-    background-position: center 0;
-}
-
-/*顶部购买链接*/
-.top-link {
-    display: block;
-    background-image: url(../images/home/head_01.png);
-    background-position: center -60px;
-    background-repeat: no-repeat;
-    height: 637px;
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
 }
 
 .content-title {
     height: auto;
+}
+
+.contents > .content-0 {
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    height: 637px;
+}
+
+.contents > .content-0 > .content-box > .content-left {
+    position: relative;
+}
+
+.contents > .content-0 > .content-box > .content-left > img {
+    position: absolute;
+    top: 140px;
+    left: 50px;
+}
+
+.contents > .content-0 > .content-box > .content-right {
+    text-align: center;
+}
+
+.contents > .content-0 > .content-box > .content-right .describe-title {
+    font-size: 5.2rem;
+    line-height: 7.2rem;
+    height: 170px;
+    text-align: left;
+}
+
+.contents > .content-0 > .content-box > .content-right .link_buy {
+    display: block;
+    position: relative;
+    text-align: left;
+    margin-top: 66px;
+    height: 47px;
+    width: 273px;
+    color: #0a69d6;
+    font-weight: bold;
+    border: 1px solid #0a69d6;
+    border-radius: 5px;
+    padding: 9px 20px;
+    background-color: #f6f5f4;
+}
+
+.link_buy > .link_buy_btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: right;
+    height: 45px;
+    width: 187px;
+    /*background-color: #0a69d6;*/
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 5px 0 0 5px;
+    padding: 8px 0;
+    background-image: url(../images/home/btn_buy.png);
+    background-position: center;
+    background-repeat: repeat-y;
 }
 
 .contents > .content-1 {
