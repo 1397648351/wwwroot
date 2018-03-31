@@ -71,6 +71,7 @@ body {
     border-bottom: 1px solid #666;
     float: left;
     cursor: pointer;
+    height: 63px;
 }
 
 .form-type-tab.tab-active {
@@ -173,7 +174,7 @@ input[type='checkbox'] {
     border: none;
     float: left;
     padding: 10px 0;
-    /*height: 38px;*/
+    height: 38px;
     /*line-height: 38px;*/
 }
 
