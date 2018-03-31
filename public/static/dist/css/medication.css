@@ -69,12 +69,18 @@
 .content-4 .panel-title{
     background-image: url(../images/medication/yy_20.png);
     width: 1170px;
-    height:180px;
-    padding-top: 58px;
-    padding-left: 510px;
+    height:160px;
+    padding-left: 420px;
     font-weight: 600;
     font-size: 30px;
     color: white;
+}
+.panel-title-img{
+    margin-top: 40px;
+}
+.panel-title-content{
+    padding-left: 120px;
+    margin-top: -65px;
 }
 .panel-title-2{
     font-size: 20px;
