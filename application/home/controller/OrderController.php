@@ -22,7 +22,7 @@ class OrderController extends BaseController
     public function order()
     {
         $req = $this->request;
-
+        return $this->fetch();
     }
 
     public function pay()

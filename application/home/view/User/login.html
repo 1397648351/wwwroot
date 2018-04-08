@@ -7,34 +7,8 @@
 {/block}
 
 {block name="body"}
-<div class="wrapper">
-    <div class="topbar">
-        <div class="content-box">
-            <a class="logo" href="/#">
-                <img src="__STATIC__/dist/images/logo.png"/>
-            </a>
-            <ul class="navbar">
-                <li class="nav">
-                    <a href="{:url('Index/index')}">首页</a>
-                </li>
-                <li class="nav">
-                    <a href="/#">检测流程</a>
-                </li>
-                <li class="nav">
-                    <a href="/#">检测结果</a>
-                </li>
-                <li class="nav">
-                    <a href="/#">购买</a>
-                </li>
-                <li class="nav">
-                    <a class="link-blue" href="{:url('User/register')}">注册</a>
-                </li>
-                <li class="nav">
-                    <a href="{:url('User/login')}">登录</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="wrapper page-login">
+    {include file="Template:top" /}
     <div class="contents">
         <div class="content-box">
             <div class="content-from">
