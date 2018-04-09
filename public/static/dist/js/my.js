@@ -19,17 +19,14 @@
                 number: {
                     ele: ".item-amount",
                     min: 1,
-                    max: 999
-                },
-                areas: {
-                    ele: '.group-area'
+                    max: 999,
+                    callback: null
                 }
             };
             option = $.extend(true, default_option, option);
             $.setAnimate(option.animate);
             $.setTabs(option.tabs);
             $.setNumberInput(option.number);
-            $.setAreas(option.areas);
             $(window).scroll(function (event) {
                 if (option.animate) {
                     $.setAnimate(option.animate);
@@ -99,6 +96,10 @@
                 if (cur_num - 1 <= options.min) {
                     btn_minus.addClass('disabled');
                 }
+                if(typeof(options.callback) === "function"){
+                    var finalnum = parseInt(input.val(), 10);
+                    options.callback(finalnum);
+                }
             });
             btn_plus.click(function () {
                 var cur_num = parseInt(input.val(), 10);
@@ -112,6 +113,10 @@
                 if (cur_num + 1 >= options.max) {
                     btn_plus.addClass('disabled');
                 }
+                if(typeof(options.callback) === "function"){
+                    var finalnum = parseInt(input.val(), 10);
+                    options.callback(finalnum);
+                }
             });
             input.keyup(function () {
                 var tmptxt = $(this).val();
@@ -121,6 +126,10 @@
                     btn_minus.addClass('disabled');
                     btn_plus.removeClass('disabled');
                 }
+                if(typeof(options.callback) === "function"){
+                    var finalnum = parseInt(input.val(), 10);
+                    options.callback(finalnum);
+                }
             }).bind("paste", function () {
                 var tmptxt = $(this).val();
                 $(this).val(tmptxt.replace(/\D|^0/g, ''));
@@ -129,14 +138,15 @@
                     btn_minus.addClass('disabled');
                     btn_plus.removeClass('disabled');
                 }
+                if(typeof(options.callback) === "function"){
+                    var finalnum = parseInt(input.val(), 10);
+                    options.callback(finalnum);
+                }
             }).css("ime-mode", "disabled");
-        },
-        setAreas:function (option) {
-            var eles = $(option.ele);
-            if(eles.length==0)return;
-            for (var i = 0; i < jq_tabs.length; i++)
-                eles[i].MyType = "Areas";
-            var str = "<select name='province'></select>";
+            if(typeof(options.callback) === "function"){
+                var finalnum = parseInt(input.val(), 10);
+                options.callback(finalnum);
+            }
         }
     });
     $.fn.getNumber = function () {
