@@ -20,12 +20,16 @@
                     ele: ".item-amount",
                     min: 1,
                     max: 999
+                },
+                areas: {
+                    ele: '.group-area'
                 }
             };
             option = $.extend(true, default_option, option);
             $.setAnimate(option.animate);
             $.setTabs(option.tabs);
             $.setNumberInput(option.number);
+            $.setAreas(option.areas);
             $(window).scroll(function (event) {
                 if (option.animate) {
                     $.setAnimate(option.animate);
@@ -36,9 +40,11 @@
         setAnimate: function (animate) {
             if (animate.enable) {
                 var eles = $(animate.ele);
+                if (eles.length == 0) return;
                 var top = $(window).scrollTop();
                 if (eles && eles.length > 0) {
                     for (var i = 0; i < eles.length; i++) {
+                        eles[i].MyType = "Animate";
                         var _top = $(window).height();
                         if (top + _top - eles[i].offsetTop >= $(eles[i]).height() - 80) {
                             $(eles[i]).removeClass('transparent');
@@ -50,7 +56,11 @@
         },
         setTabs: function (tabs) {
             if (!tabs.enable) return;
-            $(tabs.ele).click(function () {
+            var jq_tabs = $(tabs.ele);
+            if (jq_tabs.length == 0) return;
+            for (var i = 0; i < jq_tabs.length; i++)
+                jq_tabs[i].MyType = "Tabs";
+            jq_tabs.click(function () {
                 if ($(this).hasClass(tabs.activeClass)) return;
                 var actived_tab = $(tabs.ele + '.' + tabs.activeClass);
                 var actived_form = $(actived_tab.data('for'));
@@ -66,6 +76,9 @@
         },
         setNumberInput: function (options) {
             var inputs = $(options.ele);
+            if (inputs.length == 0) return;
+            for (var i = 0; i < inputs.length; i++)
+                inputs[i].MyType = "Number";
             var strHtml = "<a class='item-amount-minus' href='javascript:;'>-</a>" +
                 "<input type='text' class='text-amount' value='" + options.min + "'/>" +
                 "<a class='item-amount-plus' href='javascript:;'>+</a>";
@@ -117,6 +130,29 @@
                     btn_plus.removeClass('disabled');
                 }
             }).css("ime-mode", "disabled");
+        },
+        setAreas:function (option) {
+            var eles = $(option.ele);
+            if(eles.length==0)return;
+            for (var i = 0; i < jq_tabs.length; i++)
+                eles[i].MyType = "Areas";
+            var str = "<select name='province'></select>";
         }
     });
+    $.fn.getNumber = function () {
+        if (this.length === 0) {
+            throw "请选择正确的元素！"
+        } else {
+            if (this[0].MyType && this[0].MyType === "Number") {
+                if (this.length === 1) {
+                    return parseInt(this.find(".text-amount").val(), 10);
+                }
+                else {
+                    throw "请选择单一的元素！"
+                }
+            } else {
+                throw "该元素不是数量组件！"
+            }
+        }
+    }
 })(jQuery);
