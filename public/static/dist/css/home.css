@@ -31,7 +31,7 @@
     -o-transition: left 1.5s; /* Opera */
 }
 
-.slide .content-box {
+.slide > .content-box {
     float: left;
 }
 
