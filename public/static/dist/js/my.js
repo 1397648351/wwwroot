@@ -40,9 +40,9 @@
             });
         },
         /*设置动画*/
-        setAnimate: function (animate) {
-            if (animate.enable) {
-                var eles = $(animate.ele);
+        setAnimate: function (options) {
+            if (options.enable) {
+                var eles = $(options.ele);
                 if (eles.length == 0) return;
                 var top = $(window).scrollTop();
                 if (eles && eles.length > 0) {
@@ -57,26 +57,28 @@
                 }
             }
         },
-        setTabs: function (tabs) {
-            if (!tabs.enable) return;
-            var jq_tabs = $(tabs.ele);
+        /*标签页*/
+        setTabs: function (options) {
+            if (!options.enable) return;
+            var jq_tabs = $(options.ele);
             if (jq_tabs.length == 0) return;
             for (var i = 0; i < jq_tabs.length; i++)
                 jq_tabs[i].MyType = "Tabs";
             jq_tabs.click(function () {
-                if ($(this).hasClass(tabs.activeClass)) return;
-                var actived_tab = $(tabs.ele + '.' + tabs.activeClass);
+                if ($(this).hasClass(options.activeClass)) return;
+                var actived_tab = $(options.ele + '.' + options.activeClass);
                 var actived_form = $(actived_tab.data('for'));
-                var underLine = $(this).parent().find(tabs.underLine);
-                var index = $(this).parent().find(tabs.ele).index(this);
-                var count = $(this).parent().find(tabs.ele).length;
-                actived_tab.removeClass(tabs.activeClass);
-                $(this).addClass(tabs.activeClass);
+                var underLine = $(this).parent().find(options.underLine);
+                var index = $(this).parent().find(options.ele).index(this);
+                var count = $(this).parent().find(options.ele).length;
+                actived_tab.removeClass(options.activeClass);
+                $(this).addClass(options.activeClass);
                 actived_form.css('display', 'none');
                 $($(this).data('for')).css('display', 'block');
                 underLine.css('left', (100 * index / count) + '%');
             })
         },
+        /*数字Input*/
         setNumberInput: function (options) {
             var inputs = $(options.ele);
             if (inputs.length == 0) return;
@@ -154,6 +156,12 @@
                 options.callback(finalnum);
             }
         },
+        /**
+         * 轮播
+         * option.ele: 所在元素
+         * option.boxClass: 单个元素的类
+         * option.interval: 轮播时间间隔
+         */
         setSlide: function (options) {
             var cur = 0;
             var eles = $(options.ele);
@@ -208,20 +216,22 @@
             }
         }
     });
+    /*获取数字Input值*/
     $.fn.getNumber = function () {
         if (this.length === 0) {
             throw "请选择正确的元素！"
         } else {
-            if (this[0].MyType && this[0].MyType === "Number") {
-                if (this.length === 1) {
+            if (this.length === 1) {
+                if (this[0].MyType && this[0].MyType === "Number") {
                     return parseInt(this.find(".text-amount").val(), 10);
+                } else {
+                    throw "该元素不是数量组件！"
                 }
-                else {
-                    throw "请选择单一的元素！"
-                }
-            } else {
-                throw "该元素不是数量组件！"
             }
+            else {
+                throw "请选择单一的元素！"
+            }
+
         }
     }
 })(jQuery);

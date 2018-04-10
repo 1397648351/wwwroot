@@ -333,7 +333,8 @@ a {
     width: 129px;
     height: 37px;
 }
-.item-amount > *{
+
+.item-amount > * {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
@@ -348,13 +349,13 @@ a {
 }
 
 .item-amount .item-amount-minus.disabled,
-.item-amount .item-amount-plus.disabled{
+.item-amount .item-amount-plus.disabled {
     color: #e5e5e5;
     cursor: default;
-    pointer-events:none;
+    pointer-events: none;
 }
 
-.item-amount .text-amount{
+.item-amount .text-amount {
     width: 55px;
     height: 100%;
     border-style: solid;
@@ -364,4 +365,49 @@ a {
     -moz-user-select: text;
     -khtml-user-select: text;
     user-select: text;
+}
+
+.slide {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    transition: left 1.5s;
+    -moz-transition: left 1.5s; /* Firefox 4 */
+    -webkit-transition: left 1.5s; /* Safari 和 Chrome */
+    -o-transition: left 1.5s; /* Opera */
+}
+
+.slide > .content-box {
+    float: left;
+}
+
+.slide-btn {
+    position: absolute;
+    height: 22px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.slide-btn > li {
+    /*float: left;*/
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.slide-btn > li > span {
+    overflow: hidden;
+    display: block;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999em;
+    background-color: transparent;
+    background-image: url(../images/home/slide-btn.png);
+    background-repeat: no-repeat;
+    background-position: 0 -27px;
+}
+
+.slide-btn > li.slide-btn-cur > span {
+    background-position: 0 0;
 }
