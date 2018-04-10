@@ -10,6 +10,8 @@
 
 namespace app\home\controller;
 
+use app\common\controller\BaseController;
+
 /**
  * 支付回调处理
  * Class PayBackController

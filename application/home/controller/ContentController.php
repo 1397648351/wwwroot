@@ -8,6 +8,8 @@
 
 namespace app\home\controller;
 
+use app\common\controller\BaseController;
+
 class ContentController extends BaseController
 {
     public function kids()
@@ -15,22 +17,22 @@ class ContentController extends BaseController
         return $this->fetch();
     }
 
-    public  function  skin()
+    public function skin()
     {
         return $this->fetch();
     }
 
-    public  function  inheritance()
+    public function inheritance()
     {
         return $this->fetch();
     }
 
-    public  function  medication()
+    public function medication()
     {
         return $this->fetch();
     }
 
-    public  function  process()
+    public function process()
     {
         return $this->fetch();
     }

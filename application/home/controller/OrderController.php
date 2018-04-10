@@ -9,8 +9,10 @@
 // +----------------------------------------------------------------------
 
 namespace app\home\controller;
+
 use Payment\Client\Charge;
 use Payment\Common\PayException;
+use app\common\controller\BaseController;
 
 /**
  * 下单支付处理
@@ -31,7 +33,7 @@ class OrderController extends BaseController
         $payParams = $this->setParam($payType);
         try {
             $str = Charge::run($payType['type'], $payParams['config'], $payParams['pay_param']);
-        } catch (PayException $e){
+        } catch (PayException $e) {
             echo $e->errorMessage();
             exit;
         }
@@ -46,7 +48,7 @@ class OrderController extends BaseController
     public function setParam($payType)
     {
         $params = array();
-        switch ($payType){
+        switch ($payType) {
             case 'ali':
                 $params['type'] = 'ali_wap';
                 $params['config'] = $this->aliConfigData();
@@ -60,7 +62,7 @@ class OrderController extends BaseController
             default:
                 break;
         }
-        if(empty($params)){
+        if (empty($params)) {
             $this->resJson(array(), 2001, '支付类型不存在');
         }
         return $params;
@@ -84,7 +86,7 @@ class OrderController extends BaseController
         //需要支付金额 元
         $payParam['amount'] = $req->param('amount');
         //过期时间（当前时间+过期s数） 时间戳
-        $payParam['timeout_express'] = 3600+time();
+        $payParam['timeout_express'] = 3600 + time();
         $payParam['return_param'] = '';
         //商品类型  0：虚拟 1：实物  否
         $payParam['goods_type'] = $req->param('goods_type');

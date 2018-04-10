@@ -10,10 +10,10 @@
 
 namespace app\home\controller;
 
-
 use org\Sms;
 use Yurun\OAuthLogin\QQ;
 use Yurun\OAuthLogin\Weixin;
+use app\common\controller\BaseController;
 
 class UserController extends BaseController
 {
@@ -22,21 +22,24 @@ class UserController extends BaseController
     {
         $req = $this->request;
         if (!$req->isPost()) {
-             return $this->fetch('login');
+            return $this->fetch('login');
         }
-        $loginType = $this->checkEmpty($req->param('loginType'),'loginType不能为空');
+        $loginType = $this->checkEmpty($req->param('loginType'), 'loginType不能为空');
         $user = array();
-        switch ($loginType){
+        switch ($loginType) {
             case 1:
-                $user = $this->normalLogin(); break;
+                $user = $this->normalLogin();
+                break;
             case 2:
-                $user = $this->mobileLogin(); break;
+                $user = $this->mobileLogin();
+                break;
             case 3:
-                $user = $this->quickLogin(); break;
+                $user = $this->quickLogin();
+                break;
             default:
                 $this->resJson(array(), 1004, '登录类型错误');
         }
-        if(empty($user)){
+        if (empty($user)) {
             $this->resJson($user, 1000, '用户不存在');
         }
         session('userInfo', $user);
@@ -61,21 +64,21 @@ class UserController extends BaseController
     public function register()
     {
         $req = $this->request;
-        if(!$req->isPost()){
+        if (!$req->isPost()) {
             return $this->fetch('register');
         }
-        $username = $this->checkEmpty($req->param('username'),'username不能为空');
+        $username = $this->checkEmpty($req->param('username'), 'username不能为空');
         $password = $this->checkEmpty($req->param('password'), 'password不能为空');
         $mobile = $this->checkMobile($req->param('mobile'), 'mobile不能为空');
         $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
         $sms = new Sms();
         $res = $sms->verify($mobile, $verification_code);
-        if(empty($res)){
+        if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
         $userId = $userModel->addInfo($username, md5($password), $mobile);
-        if($res){
+        if ($res) {
             $user = $userModel->find($userId);
             $this->resJson($user, '200', '注册成功');
         } else {
@@ -91,7 +94,7 @@ class UserController extends BaseController
     public function resetPwd()
     {
         $req = $this->request;
-        if(!$req->isPost()){
+        if (!$req->isPost()) {
             return $this->fetch('reset');
         }
         $mobile = $this->checkMobile($req->param('mobile'));
@@ -99,12 +102,12 @@ class UserController extends BaseController
         $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
         $sms = new Sms();
         $res = $sms->verify($mobile, $verification_code);
-        if(empty($res)) {
+        if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
         $result = $userModel->resetPwd($mobile, md5($password));
-        if($result) {
+        if ($result) {
             $this->resJson($result, 200, '重置成功');
         }
         $this->resJson(array(), 5001, '重置密码失败');
@@ -120,10 +123,10 @@ class UserController extends BaseController
     {
         $req = $this->request;
         $mobile = $this->checkMobile($req->param('mobile'));
-        $verificationCode = $this->checkEmpty($req->param('verification_code'),'verification_code不能为空');
+        $verificationCode = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
         $sms = new Sms();
         $res = $sms->verify($mobile, $verificationCode);
-        if(empty($res)){
+        if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
