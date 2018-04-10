@@ -21,12 +21,18 @@
                     min: 1,
                     max: 999,
                     callback: null
+                },
+                slide: {
+                    ele: ".slide",
+                    boxClass: 'slide-box',
+                    interval: 5000
                 }
             };
             option = $.extend(true, default_option, option);
             $.setAnimate(option.animate);
             $.setTabs(option.tabs);
             $.setNumberInput(option.number);
+            $.setSlide(option.slide);
             $(window).scroll(function (event) {
                 if (option.animate) {
                     $.setAnimate(option.animate);
@@ -96,7 +102,7 @@
                 if (cur_num - 1 <= options.min) {
                     btn_minus.addClass('disabled');
                 }
-                if(typeof(options.callback) === "function"){
+                if (typeof(options.callback) === "function") {
                     var finalnum = parseInt(input.val(), 10);
                     options.callback(finalnum);
                 }
@@ -113,7 +119,7 @@
                 if (cur_num + 1 >= options.max) {
                     btn_plus.addClass('disabled');
                 }
-                if(typeof(options.callback) === "function"){
+                if (typeof(options.callback) === "function") {
                     var finalnum = parseInt(input.val(), 10);
                     options.callback(finalnum);
                 }
@@ -126,7 +132,7 @@
                     btn_minus.addClass('disabled');
                     btn_plus.removeClass('disabled');
                 }
-                if(typeof(options.callback) === "function"){
+                if (typeof(options.callback) === "function") {
                     var finalnum = parseInt(input.val(), 10);
                     options.callback(finalnum);
                 }
@@ -138,14 +144,67 @@
                     btn_minus.addClass('disabled');
                     btn_plus.removeClass('disabled');
                 }
-                if(typeof(options.callback) === "function"){
+                if (typeof(options.callback) === "function") {
                     var finalnum = parseInt(input.val(), 10);
                     options.callback(finalnum);
                 }
             }).css("ime-mode", "disabled");
-            if(typeof(options.callback) === "function"){
+            if (typeof(options.callback) === "function") {
                 var finalnum = parseInt(input.val(), 10);
                 options.callback(finalnum);
+            }
+        },
+        setSlide: function (options) {
+            var cur = 0;
+            var eles = $(options.ele);
+            if (eles.length == 0) return;
+            for (var i = 0; i < eles.length; i++)
+                eles[i].MyType = "Slide";
+            for (var i = 0; i < eles.length; i++) {
+                var ele = $(eles[i]);
+                var children = ele.children('.' + options.boxClass);
+                var count = children.length;
+                ele.css('width', count * 100 + "%");
+                ele.children().css('width', 100 / count + '%');
+                var hover = false;
+                children.mouseover(function () {
+                    hover = true;
+                });
+                children.mouseleave(function () {
+                    hover = false;
+                });
+                var html = '<ul class="slide-btn">';
+                for (var i = 0; i < count; i++) {
+                    if (i == 0)
+                        html += '<li class="slide-btn-cur"><span>' + i + '</span></li>';
+                    else
+                        html += '<li><span>' + i + '</span></li>';
+                }
+                html += '</ul>';
+                ele.parent().append(html);
+                var slideBtns = ele.parent().children('.slide-btn').children('li');
+                slideBtns.mouseover(function () {
+                    hover = true;
+                    if ($(this).hasClass('.slide-btn-cur')) return;
+                    var curnum = slideBtns.index(this);
+                    ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
+                    $(this).addClass('slide-btn-cur');
+                    ele.css('left', -100 * curnum + '%');
+                });
+                slideBtns.mouseleave(function () {
+                    hover = false;
+                });
+                window.setInterval(function () {
+                    if (hover) return;
+                    if (cur == count - 1) {
+                        cur = 0;
+                    } else {
+                        cur++;
+                    }
+                    ele.css('left', -100 * cur + '%');
+                    ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
+                    ele.parent().children('.slide-btn').children().eq(cur).addClass('slide-btn-cur');
+                }, options.interval);
             }
         }
     });
