@@ -12,13 +12,22 @@
 }
 
 .contents > .content-0 {
-    background-image: url(../images/home/head_bg.png);
-    background-position: center;
-    background-repeat: repeat-y;
     height: 637px;
     overflow: hidden;
     text-align: center;
     position: relative;
+}
+
+.slide-box.slide-box-1{
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.slide-box.slide-box-2{
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
 }
 
 .contents > .content-0 .content-box > .content-left {
