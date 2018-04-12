@@ -194,10 +194,10 @@
                 slideBtns.mouseover(function () {
                     hover = true;
                     if ($(this).hasClass('.slide-btn-cur')) return;
-                    var curnum = slideBtns.index(this);
+                    cur = slideBtns.index(this);
                     ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
                     $(this).addClass('slide-btn-cur');
-                    ele.css('left', -100 * curnum + '%');
+                    ele.css('left', -100 * cur + '%');
                 });
                 slideBtns.mouseleave(function () {
                     hover = false;
