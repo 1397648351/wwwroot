@@ -7,7 +7,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        return 'mobile';
+        return $this->fetch();
     }
 
     public function test()
