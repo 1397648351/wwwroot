@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+:root {
+    font-size: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+body {
+    background-color: #fff;
+    background-repeat: repeat;
+    font-size: 1.2rem;
+    font-family: "microsoft yahei";
+}
+
+a {
+    color: inherit;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px #000;
+}
+
+.contents {
+    background-color: transparent;
+    color: #666;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.4rem;
+}
+
+.contents > [class^=content-] {
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center 0px;
+    background-color: transparent;
+    height: 960px;
+}
+
+.contents > [class^=content-] > .content-box {
+    width: 610px;
+    margin: auto;
+    height: 100%;
+}
+
+.contents .content-0 {
+    padding-top: 100px;
+}
