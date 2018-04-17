@@ -47,6 +47,31 @@ class UserController extends BaseController
     }
 
     /**
+     * 三方登录跳转二维码
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function qrLogin()
+    {
+        $type = $_GET['type'];
+        $baseUrl = urlencode('http://www.picagene.com');
+        $wxAppId = 'wx157864b4de047dad';
+        if($type == 'wechat'){
+            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
+        } else {
+            $url = "";
+        }
+        $this->redirect($url);
+    }
+
+    public function wxLogin()
+    {
+        $code = $_GET['code'];
+        $wxAppId = '';
+        $wxAppSecret = '';
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
+    }
+
+    /**
      * 退出
      * @author LiuTao liut1@kexinbao100.com
      */

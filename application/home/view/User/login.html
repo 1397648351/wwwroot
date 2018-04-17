@@ -52,10 +52,10 @@
                 </div>
                 <div class="form-footer">
                     <span class="">其他方式登录：</span>
-                    <a class="action-qq">
+                    <a class="action-qq three_login" data-type="qq">
                         <img src="__PCRESOURCE__/images/register/qq_03.jpg"/>&nbsp;QQ登录
                     </a>
-                    <a class="action-wc">
+                    <a class="action-wc three_login" data-type="wechat">
                         <img src="__PCRESOURCE__/images/register/WeChat_03.jpg"/>&nbsp;微信登录
                     </a>
                 </div>
@@ -86,6 +86,11 @@
         });
 
         login.init(loginUrl,successUrl);
+
+        $(".three_login").click(function () {
+            var type = $(this).data('type');
+            window.location.href = "{:url('user/qrLogin')}?type="+type;
+        })
     })
 
 </script>
