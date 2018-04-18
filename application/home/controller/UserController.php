@@ -52,23 +52,32 @@ class UserController extends BaseController
      */
     public function qrLogin()
     {
-        $type = $_GET['type'];
-        $baseUrl = urlencode('http://www.picagene.com');
-        $wxAppId = 'wx157864b4de047dad';
-        if($type == 'wechat'){
-            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
-        } else {
-            $url = "";
-        }
+        $wxOAuthConfig = config('variable.wxOAuthConfig');
+        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
+        $url = $wxOAuth->getAuthUrl();
         $this->redirect($url);
+//        $type = $_GET['type'];
+//        $baseUrl = urlencode('http://www.picagene.com');
+//        $wxAppId = config('variable.wx_app_id');
+//        if($type == 'wechat'){
+//            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
+//        } else {
+//            $url = "";
+//        }
+//        $this->redirect($url);
     }
 
     public function wxLogin()
     {
         $code = $_GET['code'];
-        $wxAppId = '';
-        $wxAppSecret = '';
+        $wxAppId = config('variable.wx_app_id');;
+        $wxAppSecret = config('variable.wx_app_id');;
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
+        $res = $this->getOauthAccessToken($code, $url);
+        $openid = $res['openid'];
+        $access_token = $res['access_token'];
+        $info = $this->getOauthUserinfo($access_token, $openid);
+        dump($info);
     }
 
     /**
@@ -179,10 +188,75 @@ class UserController extends BaseController
      */
     private function quickLogin()
     {
-        $qqOAuthConfig = array();
-        $wxOAuthConfig = array();
-        $qqOAuth = new QQ\OAuth2($qqOAuthConfig['appId'], $qqOAuthConfig['appSecret'], $qqOAuthConfig['callbackUrl']);
-        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['appId'], $wxOAuthConfig['appSecret'], $wxOAuthConfig['callbackUrl']);
+//        $qqOAuthConfig = array();
+        $wxOAuthConfig = config('variable.wxOAuthConfig');
+//        $qqOAuth = new QQ\OAuth2($qqOAuthConfig['appId'], $qqOAuthConfig['appSecret'], $qqOAuthConfig['callbackUrl']);
+        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
+        $url = $wxOAuth->getAuthUrl();
+        $this->redirect($url);
+        header('location'.$url);
     }
 
+
+    /**
+     * 通过code获取Access Token
+     * @return array {access_token,expires_in,refresh_token,openid,scope}
+     */
+    public function getOauthAccessToken($code,$url){
+        if (!$code) return false;
+        $result = $this->http_get($url);
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            $this->user_token = $json['access_token'];
+            return $json;
+        }
+        return false;
+    }
+
+    /**
+     * 获取授权后的用户资料
+     * @param string $access_token
+     * @param string $openid
+     * @return array {openid,nickname,sex,province,city,country,headimgurl,privilege,[unionid]}
+     * 注意：unionid字段 只有在用户将公众号绑定到微信开放平台账号后，才会出现。建议调用前用isset()检测一下
+     */
+    public function getOauthUserinfo($access_token,$openid){
+        $result = $this->http_get('https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$openid);
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            return $json;
+        }
+        return false;
+    }
+
+    private function http_get($url){
+        $oCurl = curl_init();
+        if(stripos($url,"https://")!==FALSE){
+            curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($oCurl, CURLOPT_SSLVERSION, 1); //CURL_SSLVERSION_TLSv1
+        }
+        curl_setopt($oCurl, CURLOPT_URL, $url);
+        curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, 1 );
+        $sContent = curl_exec($oCurl);
+        $aStatus = curl_getinfo($oCurl);
+        curl_close($oCurl);
+        if(intval($aStatus["http_code"])==200){
+            return $sContent;
+        }else{
+            return false;
+        }
+    }
 }
