@@ -54,18 +54,18 @@ class UserController extends BaseController
     public function qrLogin()
     {
         $wxOAuthConfig = config('variable.wxOAuthConfig');
-        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
-        $url = $wxOAuth->getAuthUrl();
-        $this->redirect($url);
-//        $type = $_GET['type'];
-//        $baseUrl = urlencode('http://www.picagene.com');
-//        $wxAppId = config('variable.wx_app_id');
-//        if($type == 'wechat'){
-//            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
-//        } else {
-//            $url = "";
-//        }
+//        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
+//        $url = $wxOAuth->getAuthUrl();
 //        $this->redirect($url);
+        $type = $_GET['type'];
+        $baseUrl = urlencode($wxOAuthConfig['back_url']);
+        $wxAppId = $wxOAuthConfig['app_id'];
+        if($type == 'wechat'){
+            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
+        } else {
+            $url = "";
+        }
+        $this->redirect($url);
     }
 
     public function wxLogin()
@@ -81,6 +81,15 @@ class UserController extends BaseController
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
         dump($userInfo);
+    }
+
+    public function test()
+    {
+        $wxAppId = config('variable.wx_app_id');;
+        $wxAppSecret = config('variable.wx_app_id');
+        $wechat = new Wechat($wxAppId, $wxAppSecret);
+        $res = $wechat->http_get('https://api.51kxjk.com/api/v1/banners');
+        dump($res);
     }
 
     /**
