@@ -71,8 +71,8 @@ class UserController extends BaseController
     public function wxLogin()
     {
         $code = $_GET['code'];
-        $wxAppId = config('variable.wx_app_id');;
-        $wxAppSecret = config('variable.wx_app_id');
+        $wxAppId = config('variable.wx_app_id');
+        $wxAppSecret = config('variable.wx_app_secret');
         $wechat = new Wechat($wxAppId, $wxAppSecret);
         $res = $wechat->getOauthAccessToken($code);
         //$url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
