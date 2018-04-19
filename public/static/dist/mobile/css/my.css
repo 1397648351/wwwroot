@@ -40,15 +40,10 @@ a {
     background-size: auto;
     background-position: center 0px;
     background-color: transparent;
-    height: 960px;
 }
 
 .contents > [class^=content-] > .content-box {
-    width: 610px;
     margin: auto;
     height: 100%;
-}
-
-.contents .content-0 {
-    padding-top: 100px;
+    padding: 40px 20px;
 }
