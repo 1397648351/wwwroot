@@ -75,21 +75,12 @@ class UserController extends BaseController
         $wxAppSecret = config('variable.wx_app_id');
         $wechat = new Wechat($wxAppId, $wxAppSecret);
         $res = $wechat->getOauthAccessToken($code);
-        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
-        $info = $this->getOauthAccessToken($code, $url);
+        //$url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
+        //$info = $this->getOauthAccessToken($code, $url);
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
         dump($userInfo);
-    }
-
-    public function test()
-    {
-        $wxAppId = config('variable.wx_app_id');;
-        $wxAppSecret = config('variable.wx_app_id');
-        $wechat = new Wechat($wxAppId, $wxAppSecret);
-        $res = $wechat->http_get('https://api.51kxjk.com/api/v1/banners');
-        dump($res);
     }
 
     /**
