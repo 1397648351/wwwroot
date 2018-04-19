@@ -117,7 +117,7 @@ class Wechat
      * GET 请求
      * @param string $url
      */
-    public function http_get($url){
+    private function http_get($url){
         $oCurl = curl_init();
         if(stripos($url,"https://")!==FALSE){
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
