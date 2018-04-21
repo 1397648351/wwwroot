@@ -130,8 +130,8 @@ class OrderController extends BaseController
     {
         $data = array();
         $data['use_sandbox'] = true;
-        $data['partner'] = '';//收款支付宝用户ID(2088开头)
-        $data['app_id'] = '';
+        $data['partner'] = config('aliPayConfig.partner');//收款支付宝用户ID(2088开头)
+        $data['app_id'] = config('aliPayConfig.app_id');
         $data['sign_type'] = 'RSA2'; //签名方式
         $data['ali_public_key'] = '';
         $data['rsa_private_key'] = '';
@@ -151,17 +151,17 @@ class OrderController extends BaseController
         $data = array();
         //微信支付验收模式
         $data['use_sendbox'] = true;
-        $data['app_id'] = '';
+        $data['app_id'] = config('wxPayConfig.app_id');
         //微信支付商户号
-        $data['mch_id'] = '';
+        $data['mch_id'] = config('wxPayConfig.mch_id');
         //商户中心配置
-        $data['md5_key'] = '';
+        $data['md5_key'] = config('wxPayConfig.key');
         //证书pem路径
-        $data['app_cert_pem'] = '';
+        $data['app_cert_pem'] = '../extend/org/Wx/cert/apiclient_cert.pem';
         //证书秘钥pem路径
-        $data['app_key_pem'] = '';
+        $data['app_key_pem'] = '../extend/org/Wx/cert/apiclient_cert.pem';
         //签名方式 MD5 HMAC-SHA256
-        $data['sign_type'] = '';
+        $data['sign_type'] = 'MD5';
         $data['limit_pay'] = array('no_credit');
         $data['fee_type'] = 'CNY';
         //异步回调url

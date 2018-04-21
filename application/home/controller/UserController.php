@@ -18,7 +18,7 @@ use app\common\controller\BaseController;
 
 class UserController extends BaseController
 {
-    //loginType 1:三方登录   2：账号(或邮箱)密码登录 3、手机登录
+    //loginType 1：账号(或邮箱)密码登录  2、手机登录
     public function login()
     {
         $req = $this->request;
@@ -33,9 +33,6 @@ class UserController extends BaseController
                 break;
             case 2:
                 $user = $this->mobileLogin();
-                break;
-            case 3:
-                $user = $this->quickLogin();
                 break;
             default:
                 $this->resJson(array(), 1004, '登录类型错误');
@@ -54,9 +51,6 @@ class UserController extends BaseController
     public function qrLogin()
     {
         $wxOAuthConfig = config('variable.wxOAuthConfig');
-//        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
-//        $url = $wxOAuth->getAuthUrl();
-//        $this->redirect($url);
         $type = $_GET['type'];
         $baseUrl = urlencode($wxOAuthConfig['back_url']);
         $wxAppId = $wxOAuthConfig['app_id'];
@@ -71,16 +65,17 @@ class UserController extends BaseController
     public function wxLogin()
     {
         $code = $_GET['code'];
-        $wxAppId = config('variable.wx_app_id');
-        $wxAppSecret = config('variable.wx_app_secret');
+        $wxAppId = config('variable.wx_app_id');;
+        $wxAppSecret = config('variable.wx_app_id');
         $wechat = new Wechat($wxAppId, $wxAppSecret);
         $res = $wechat->getOauthAccessToken($code);
-        //$url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxAppId.'&secret='.$wxAppSecret.'&code='.$code.'&grant_type=authorization_code';
-        //$info = $this->getOauthAccessToken($code, $url);
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
-        dump($userInfo);
+        $userQqModel = model('UserQq');
+        $res = $userQqModel->addInfo($userInfo);
+        session('userInfo', $userInfo);
+        $this->fetch('Index/index');
     }
 
     /**
@@ -183,21 +178,6 @@ class UserController extends BaseController
         $userModel = model('user');
         $user = $userModel->findByKeyAndPwd($key, md5($password));
         return $user;
-    }
-
-    /**
-     * 微信、QQ快捷登录
-     * @author LiuTao liut1@kexinbao100.com
-     */
-    private function quickLogin()
-    {
-//        $qqOAuthConfig = array();
-        $wxOAuthConfig = config('variable.wxOAuthConfig');
-//        $qqOAuth = new QQ\OAuth2($qqOAuthConfig['appId'], $qqOAuthConfig['appSecret'], $qqOAuthConfig['callbackUrl']);
-        $wxOAuth = new Weixin\OAuth2($wxOAuthConfig['app_id'], $wxOAuthConfig['app_secret'], $wxOAuthConfig['back_url']);
-        $url = $wxOAuth->getAuthUrl();
-        $this->redirect($url);
-        header('location'.$url);
     }
 
 }

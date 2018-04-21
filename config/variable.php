@@ -9,25 +9,31 @@
 // +----------------------------------------------------------------------
 
 return [
-    //微信应用
-    'wx_app_id' => 'wx157864b4de047dad',
-    'wx_app_secret' => 'ee7a31ac117cc19354b686cf6c696a24',
-
-    //QQ应用
-    'qq_app_id' => '',
-    'qq_app_secret' => '',
 
     //微信商户
-    'wx_pay_app_id' => '',
-    'wx_pay_app_secret' => '',
+    'wxPayConfig' => array(
+        'key' => 'Ude487XydqwpuPU83NFb67xnry9utn34',
+        'app_id' => 'wxbf9c8fbe1173ff7d',
+        'mch_id' => '1502488301'
+    ),
 
-    //支付宝 商户
-    'ali_pay_app_id' => '',
-    'ali_pay_app_secret' => '',
+    //支付宝支付
+    'aliPayConfig' => array(
+        'partner' => '',
+        'app_id' => '',
+    ),
 
+    //微信登录
     'wxOAuthConfig' => array(
         'app_id' => 'wx157864b4de047dad',
         'app_secret' => 'ee7a31ac117cc19354b686cf6c696a24',
         'back_url' => 'http://www.picagene.com/user/wxLogin'
-    )
+    ),
+
+    //QQ登录
+    'qqOAuthConfig' => array(
+        'app_id' => '',
+        'app_secret' => '',
+        'back_url' => ''
+    ),
 ];
