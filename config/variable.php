@@ -36,4 +36,10 @@ return [
         'app_secret' => '',
         'back_url' => ''
     ),
+
+    //云信
+    'yunConfig' => array(
+        'app_id' => '660dc5e6110f25d94186ff946cacfdfa',
+        'app_key' => '0f254164ce23'
+    ),
 ];
