@@ -48,3 +48,67 @@
     background-position: center;
     background-repeat: repeat-y;
 }
+
+.content-title{
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-title > img{
+    width: 100%;
+}
+
+.content-left,
+.content-right {
+    display: inline-block;
+    vertical-align: middle;
+    width: 49%;
+}
+
+.content-left > *,
+.content-right > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 4px;
+    padding: 10px 15px;
+    text-align: left;
+    box-shadow: 0 0 21px rgba(30, 33, 74, .09);
+}
+
+.card-group .card > * {
+    display: block;
+}
+
+.card > .card-icon{
+    width: 60px;
+    height: 60px;
+}
+
+.card > .card-title{
+    display: block;
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding: 10px 0
+}
+
+.card-group .card .card-box {
+    word-wrap: break-word;
+}
+
+.content-left > .card {
+    margin-right: 5px;
+}
+
+.content-right > .card {
+    margin-left: 5px;
+}
+
+.card.card-3{
+    margin-top: 20px;
+}
