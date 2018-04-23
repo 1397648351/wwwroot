@@ -13,6 +13,7 @@ class IndexController extends BaseController
 
     public function test()
     {
-        echo 'hello,ThinkPHP5';
+        $req = $this->request->ip();
+        echo $req;
     }
 }
