@@ -233,5 +233,23 @@
             }
 
         }
+    };
+    /*获取数字Input值*/
+    $.fn.getTabVal = function () {
+        if (this.length === 0) {
+            throw "请选择正确的元素！"
+        } else {
+            if (this.length === 1) {
+                var ele = this.find(".form-type-tab.tab-active");
+                if (ele[0].MyType && ele[0].MyType === "Tabs") {
+                    return ele.data("for");
+                } else {
+                    throw "该元素不是数量组件！"
+                }
+            }
+            else {
+                throw "请选择单一的元素！"
+            }
+        }
     }
 })(jQuery);

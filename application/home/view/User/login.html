@@ -87,6 +87,11 @@
 
         login.init(loginUrl,successUrl);
 
+        $("#login").click(function(){
+            console.log($(".form-type").getTabVal());
+        });
+
+
         $(".three_login").click(function () {
             var type = $(this).data('type');
             window.location.href = "{:url('user/qrLogin')}?type="+type;

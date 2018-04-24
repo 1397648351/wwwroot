@@ -8,11 +8,13 @@ class IndexController extends BaseController
 {
     public function index()
     {
+        $this->assign('price', 998);
         return $this->fetch();
     }
 
     public function test()
     {
-        echo 'hello,ThinkPHP5';
+        $req = $this->request->ip();
+        echo $req;
     }
 }

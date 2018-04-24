@@ -23,7 +23,15 @@ class OrderController extends BaseController
 {
     public function order()
     {
-        $req = $this->request;
+        //$req = $this->request;
+        if(!session('?username')){
+            $this->error("请先登录！",'User/login');
+            //$this->redirect('User/login');
+        }
+        $this->assign("price", 449);
+        if (session('?username')) {
+            $this->assign("username", session('username'));
+        }
         return $this->fetch();
     }
 

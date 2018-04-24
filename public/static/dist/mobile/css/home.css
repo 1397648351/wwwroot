@@ -28,7 +28,7 @@
     font-weight: bold;
     border: 1px solid #0a69d6;
     border-radius: 5px;
-    padding: 5px 15px;
+    padding: 7px 15px;
     background-color: #f6f5f4;
 }
 
@@ -43,8 +43,90 @@
     text-align: center;
     font-weight: normal;
     border-radius: 5px 0 0 5px;
-    padding: 4px 0;
+    padding: 7px 0;
     background-image: url(../images/home/btn_buy.png);
     background-position: center;
     background-repeat: repeat-y;
+}
+
+.content-title {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-title > img {
+    width: 100%;
+    max-width: 610px;
+}
+
+.content-left,
+.content-right {
+    display: inline-block;
+    vertical-align: middle;
+    width: 49%;
+}
+
+.content-left > *,
+.content-right > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 4px;
+    padding: 10px 15px;
+    text-align: left;
+    box-shadow: 0 0 21px rgba(30, 33, 74, .09);
+}
+
+.card-group .card > * {
+    display: block;
+}
+
+.card > .card-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.card > .card-title {
+    display: block;
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding: 10px 0
+}
+
+.card-group .card .card-box {
+    word-wrap: break-word;
+}
+
+.content-left > .card {
+    margin-right: 5px;
+}
+
+.content-right > .card {
+    margin-left: 5px;
+}
+
+.card.card-3 {
+    margin-top: 20px;
+}
+
+@media screen and (orientation:landscape) {
+    /* css[横向定义样式] */
+    .contents{
+        font-size: 1.4rem;
+        letter-spacing: 0.1rem;
+        line-height: 2.4rem;
+    }
+
+    .contents > [class^="content-"] > .content-box{
+        padding: 60px 40px;
+    }
+
+    .card{
+        padding: 20px 30px;
+    }
 }
