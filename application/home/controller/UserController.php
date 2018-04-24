@@ -44,6 +44,21 @@ class UserController extends BaseController
         $this->resJson($user, 200, '登录成功');
     }
 
+    public function sendSms()
+    {
+        $req = $this->request();
+        $mobile = $req->param('mobile');
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->sendSmsCode($mobile);
+        if($res['code'] == 200){
+            $this->resJson(array(), 200, '发送成功');
+        }
+        $this->resJson($res, $res['code'], '发送失败');
+    }
+
     /**
      * 三方登录跳转二维码
      * @author LiuTao liut1@kexinbao100.com
@@ -76,6 +91,16 @@ class UserController extends BaseController
         $res = $userQqModel->addInfo($userInfo);
         session('userInfo', $userInfo);
         $this->fetch('Index/index');
+    }
+
+    public function test()
+    {
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->sendSmsCode('15052036796');
+        dump($res);
     }
 
     /**
