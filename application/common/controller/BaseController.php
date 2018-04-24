@@ -50,4 +50,28 @@ class BaseController extends Controller {
         $str = json_encode($res, JSON_UNESCAPED_UNICODE);
         exit($str);
     }
+
+    /**
+     * 返回流水
+     * @param null $form
+     * @return string
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function getMgid($form = null)
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        $usec = substr(str_replace('0.', '', $usec), 0, 4);
+        $mm = date("Ym");
+        if (empty($form)) {
+            $str = rand_string(15, 1);
+            return $mm . $usec . $str;
+        } else {
+            if (strlen($form) > 6) {
+                $form = substr($form, 0, 6);
+            }
+            $form = $form . $mm;
+            $str = rand_string(25 - strlen($form) - strlen($usec), 1);
+            return $form . $usec . $str;
+        }
+    }
 }

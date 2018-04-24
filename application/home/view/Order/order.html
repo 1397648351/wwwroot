@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="content-details-right">
-                        <input type="button" class="btn-confirm" value="提交订单"/>
+                        <input type="button" class="btn-confirm" id="send_order" value="提交订单"/>
                     </div>
                 </div>
             </div>
@@ -146,6 +146,10 @@
             payType = $(this).data('pay');
             //console.log(payType);
         });
+        
+        $("#send_order").click(function () {
+            window.location.href = "{:url('Order/pay')}?pay_type=wx";
+        })
     });
 </script>
 {/block}

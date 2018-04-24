@@ -45,19 +45,20 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    public function setParam($payType)
+    private function setParam($payType)
     {
         $params = array();
+        $outTradeNo = $this->getMgid().'_'.$payType;
         switch ($payType) {
             case 'ali':
                 $params['type'] = 'ali_wap';
                 $params['config'] = $this->aliConfigData();
-                $params['pay_param'] = $this->setAliPayParam();
+                $params['pay_param'] = $this->setAliPayParam($outTradeNo);
                 break;
-            case 'weixin':
+            case 'wx':
                 $params['type'] = 'wx_wap';
                 $params['config'] = $this->wxConfigData();
-                $params['pay_param'] = $this->setWxPayParam();
+                $params['pay_param'] = $this->setWxPayParam($outTradeNo);
                 break;
             default:
                 break;
@@ -99,23 +100,23 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam()
+    private function setWxPayParam($outTradeNo)
     {
         $payParam = array();
         $req = $this->request;
-        $payParam['body'] = $req->param('body');
-        $payParam['subject'] = $req->param('subject');
-        $payParam['order_no'] = '订单号';
+        $payParam['body'] = '商品测试';
+        $payParam['subject'] = '商品subject';
+        $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = $req->param('amount');
+        $payParam['amount'] = '0.01';
         //用户客户端实际IP地址
-        $payParam['client_ip'] = $req->param('client_ip');
+        $payParam['client_ip'] = '127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';
         $payParam['type'] = 'Wap';
         //wap网站的url地址
-        $payParam['wap_url'] = '';
+        $payParam['wap_url'] = 'http://www.picagene.com/';
         //wap网站名称
         $payParam['wap_name'] = '基因检测';
         return $payParam;
@@ -165,9 +166,9 @@ class OrderController extends BaseController
         $data['limit_pay'] = array('no_credit');
         $data['fee_type'] = 'CNY';
         //异步回调url
-        $data['notify_url'] = '';
+        $data['notify_url'] = 'http://www.picagene.com/';
         //同步通知回调url
-        $data['redirect_url'] = '';
+        $data['redirect_url'] = 'http://www.picagene.com/PayBack/wxBack';
         $data['return_raw'] = 'true';
         return $data;
     }
