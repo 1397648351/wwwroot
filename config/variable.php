@@ -40,6 +40,8 @@ return [
     //云信
     'yunConfig' => array(
         'app_id' => '660dc5e6110f25d94186ff946cacfdfa',
-        'app_key' => '0f254164ce23'
+        'app_key' => '0f254164ce23',
+        'login_template_id' => '3952755',
+        'register_template_id' => '3902746',
     ),
 ];

@@ -44,19 +44,51 @@ class UserController extends BaseController
         $this->resJson($user, 200, '登录成功');
     }
 
+    /**
+     * 发送验证码
+     * @param mobile 手机
+     * @param type 类型   login  register
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function sendSms()
     {
-        $req = $this->request();
+        $req = $this->request;
         $mobile = $req->param('mobile');
+        $type = $req->param('type');
         $yunXinConfig = config('variable.yunConfig');
         $appId = $yunXinConfig['app_id'];
         $appKey = $yunXinConfig['app_key'];
+        if($type == 'login'){
+            $templateId = $yunXinConfig['login_template_id'];
+        } else {
+            $templateId = $yunXinConfig['register_template_id'];
+        }
         $sms = new Sms($appId, $appKey);
-        $res = $sms->sendSmsCode($mobile);
+        $res = $sms->sendSmsCode($mobile,'', $templateId);
         if($res['code'] == 200){
             $this->resJson(array(), 200, '发送成功');
         }
         $this->resJson($res, $res['code'], '发送失败');
+    }
+
+    /**
+     * 短信验证
+     * @param $mobile 手机号
+     * @param $code 验证码
+     * @return bool
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function verifyCode($mobile, $code)
+    {
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->verifycode($mobile, $code);
+        if($res['code'] == 200){
+            return true;
+        }
+        return false;
     }
 
     /**
