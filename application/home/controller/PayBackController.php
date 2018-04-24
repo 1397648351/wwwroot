@@ -11,6 +11,7 @@
 namespace app\home\controller;
 
 use app\common\controller\BaseController;
+use think\facade\Request;
 
 /**
  * 支付回调处理
@@ -25,7 +26,8 @@ class PayBackController extends BaseController
      */
     public function wxBack()
     {
-
+        $req = Request::param();;
+        dump($req);
     }
 
     /**
