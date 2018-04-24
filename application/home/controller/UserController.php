@@ -12,8 +12,6 @@ namespace app\home\controller;
 
 use org\Sms;
 use org\Wechat;
-use Yurun\OAuthLogin\QQ;
-use Yurun\OAuthLogin\Weixin;
 use app\common\controller\BaseController;
 
 class UserController extends BaseController
@@ -72,26 +70,6 @@ class UserController extends BaseController
     }
 
     /**
-     * 短信验证
-     * @param $mobile 手机号
-     * @param $code 验证码
-     * @return bool
-     * @author LiuTao liut1@kexinbao100.com
-     */
-    public function verifyCode($mobile, $code)
-    {
-        $yunXinConfig = config('variable.yunConfig');
-        $appId = $yunXinConfig['app_id'];
-        $appKey = $yunXinConfig['app_key'];
-        $sms = new Sms($appId, $appKey);
-        $res = $sms->verifycode($mobile, $code);
-        if($res['code'] == 200){
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * 三方登录跳转二维码
      * @author LiuTao liut1@kexinbao100.com
      */
@@ -123,16 +101,6 @@ class UserController extends BaseController
         $res = $userQqModel->addInfo($userInfo);
         session('userInfo', $userInfo);
         $this->fetch('Index/index');
-    }
-
-    public function test()
-    {
-        $yunXinConfig = config('variable.yunConfig');
-        $appId = $yunXinConfig['app_id'];
-        $appKey = $yunXinConfig['app_key'];
-        $sms = new Sms($appId, $appKey);
-        $res = $sms->sendSmsCode('15052036796');
-        dump($res);
     }
 
     /**
@@ -212,9 +180,8 @@ class UserController extends BaseController
     {
         $req = $this->request;
         $mobile = $this->checkMobile($req->param('mobile'));
-        $verificationCode = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
-        $sms = new Sms();
-        $res = $sms->verify($mobile, $verificationCode);
+        $code = $this->checkEmpty($req->param('code'), 'code不能为空');
+        $res = $this->verifyCode($mobile, $code);
         if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
@@ -237,4 +204,23 @@ class UserController extends BaseController
         return $user;
     }
 
+    /**
+     * 短信验证
+     * @param $mobile 手机号
+     * @param $code 验证码
+     * @return bool
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    private function verifyCode($mobile, $code)
+    {
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->verifycode($mobile, $code);
+        if($res['code'] == 200){
+            return true;
+        }
+        return false;
+    }
 }
