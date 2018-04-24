@@ -28,7 +28,7 @@
     font-weight: bold;
     border: 1px solid #0a69d6;
     border-radius: 5px;
-    padding: 5px 15px;
+    padding: 7px 15px;
     background-color: #f6f5f4;
 }
 
@@ -43,20 +43,21 @@
     text-align: center;
     font-weight: normal;
     border-radius: 5px 0 0 5px;
-    padding: 4px 0;
+    padding: 7px 0;
     background-image: url(../images/home/btn_buy.png);
     background-position: center;
     background-repeat: repeat-y;
 }
 
-.content-title{
+.content-title {
     display: block;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.content-title > img{
+.content-title > img {
     width: 100%;
+    max-width: 610px;
 }
 
 .content-left,
@@ -85,12 +86,12 @@
     display: block;
 }
 
-.card > .card-icon{
+.card > .card-icon {
     width: 60px;
     height: 60px;
 }
 
-.card > .card-title{
+.card > .card-title {
     display: block;
     font-size: 2.0rem;
     font-weight: 600;
@@ -109,6 +110,23 @@
     margin-left: 5px;
 }
 
-.card.card-3{
+.card.card-3 {
     margin-top: 20px;
+}
+
+@media screen and (orientation:landscape) {
+    /* css[横向定义样式] */
+    .contents{
+        font-size: 1.4rem;
+        letter-spacing: 0.1rem;
+        line-height: 2.4rem;
+    }
+
+    .contents > [class^="content-"] > .content-box{
+        padding: 60px 40px;
+    }
+
+    .card{
+        padding: 20px 30px;
+    }
 }

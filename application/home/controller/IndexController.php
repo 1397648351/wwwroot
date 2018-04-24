@@ -8,6 +8,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
+        $this->assign('price', 998);
         return $this->fetch();
     }
 
