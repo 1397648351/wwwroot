@@ -47,3 +47,55 @@ a {
     height: 100%;
     padding: 40px 20px;
 }
+
+.panel-describe {
+    text-align: center;
+}
+
+.panel-describe > .describe-kinds {
+    display: block;
+    margin-top: 10px;
+}
+
+.panel-describe > .describe-kinds > .describe-kinds-piece {
+    display: block;
+    letter-spacing: 0.2rem;
+}
+
+.panel-describe > .describe-kinds > .describe-kinds-piece:before {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+    width: 17px;
+    height: 17px;
+    content: '';
+    background-image: url(../images/home/duihao.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    margin-right: 5px;
+}
+
+.btn.btn-blue {
+    background-image: url(../images/home/Button_05.jpg);
+    color: #fff;
+}
+
+.btn {
+    display: block;
+    background-color: #fff;
+    background-size: 100%;
+    border: none;
+    width: 110px;
+    height: 35px;
+    color: #5a94ea;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 3px;
+    margin: auto;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.content-bottom{
+
+}
