@@ -10,6 +10,7 @@
 
 namespace app\home\controller;
 
+use houdunwang\qrcode\QrCode;
 use Payment\Client\Charge;
 use Payment\Common\PayException;
 use app\common\controller\BaseController;
@@ -24,14 +25,14 @@ class OrderController extends BaseController
     public function order()
     {
         //$req = $this->request;
-        if(!session('?username')){
-            $this->error("请先登录！",'User/login');
-            //$this->redirect('User/login');
-        }
+//        if(!session('?username')){
+//            $this->error("请先登录！",'User/login');
+//            //$this->redirect('User/login');
+//        }
         $this->assign("price", 449);
-        if (session('?username')) {
-            $this->assign("username", session('username'));
-        }
+//        if (session('?username')) {
+//            $this->assign("username", session('username'));
+//        }
         return $this->fetch();
     }
 
@@ -40,11 +41,22 @@ class OrderController extends BaseController
         $payType = $this->request->param('pay_type');
         $payParams = $this->setParam($payType);
         try {
-            $str = Charge::run($payType['type'], $payParams['config'], $payParams['pay_param']);
+            $res = Charge::run($payParams['type'], $payParams['config'], $payParams['pay_param']);
+            if($res['return_msg'] == 'OK') {
+                $code_url = $res['code_url'];
+            }
         } catch (PayException $e) {
             echo $e->errorMessage();
             exit;
         }
+    }
+
+    public function setQr()
+    {
+        $codeUrl = 'weixin://wxpay/bizpayurl?pr=u06SMB5';
+        $s = QrCode::save($codeUrl, './qr/'.time().'.png');
+        $res = $this->assertTrue($s);
+        dump($res);
     }
 
     /**
@@ -59,12 +71,12 @@ class OrderController extends BaseController
         $outTradeNo = $this->getMgid().'_'.$payType;
         switch ($payType) {
             case 'ali':
-                $params['type'] = 'ali_wap';
+                $params['type'] = 'ali_qr';
                 $params['config'] = $this->aliConfigData();
                 $params['pay_param'] = $this->setAliPayParam($outTradeNo);
                 break;
             case 'wx':
-                $params['type'] = 'wx_wap';
+                $params['type'] = 'wx_qr';
                 $params['config'] = $this->wxConfigData();
                 $params['pay_param'] = $this->setWxPayParam($outTradeNo);
                 break;
@@ -122,11 +134,13 @@ class OrderController extends BaseController
         $payParam['timeout_express'] = 3600 + time();
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';
-        $payParam['type'] = 'Wap';
-        //wap网站的url地址
-        $payParam['wap_url'] = 'http://www.picagene.com/';
-        //wap网站名称
-        $payParam['wap_name'] = '基因检测';
+//        $payParam['type'] = 'Wap';
+//        //wap网站的url地址
+//        $payParam['wap_url'] = 'http://www.picagene.com/';
+//        //wap网站名称
+//        $payParam['wap_name'] = '基因检测';
+        $payParam['product_id'] = '1';
+        $payParam['openid'] = '';
         return $payParam;
     }
 
@@ -139,8 +153,8 @@ class OrderController extends BaseController
     {
         $data = array();
         $data['use_sandbox'] = true;
-        $data['partner'] = config('aliPayConfig.partner');//收款支付宝用户ID(2088开头)
-        $data['app_id'] = config('aliPayConfig.app_id');
+        $data['partner'] = config('variable.aliPayConfig.partner');//收款支付宝用户ID(2088开头)
+        $data['app_id'] = config('variable.aliPayConfig.app_id');
         $data['sign_type'] = 'RSA2'; //签名方式
         $data['ali_public_key'] = '';
         $data['rsa_private_key'] = '';
@@ -160,15 +174,15 @@ class OrderController extends BaseController
         $data = array();
         //微信支付验收模式
         $data['use_sendbox'] = true;
-        $data['app_id'] = config('wxPayConfig.app_id');
+        $data['app_id'] = config('variable.wxPayConfig.app_id');
         //微信支付商户号
-        $data['mch_id'] = config('wxPayConfig.mch_id');
+        $data['mch_id'] = config('variable.wxPayConfig.mch_id');
         //商户中心配置
-        $data['md5_key'] = config('wxPayConfig.key');
+        $data['md5_key'] = config('variable.wxPayConfig.key');
         //证书pem路径
-        $data['app_cert_pem'] = '../extend/org/Wx/cert/apiclient_cert.pem';
+        $data['app_cert_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
         //证书秘钥pem路径
-        $data['app_key_pem'] = '../extend/org/Wx/cert/apiclient_cert.pem';
+        $data['app_key_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
         //签名方式 MD5 HMAC-SHA256
         $data['sign_type'] = 'MD5';
         $data['limit_pay'] = array('no_credit');
