@@ -127,9 +127,12 @@ class UserController extends BaseController
         $username = $this->checkEmpty($req->param('username'), 'username不能为空');
         $password = $this->checkEmpty($req->param('password'), 'password不能为空');
         $mobile = $this->checkMobile($req->param('mobile'), 'mobile不能为空');
-        $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
-        $sms = new Sms();
-        $res = $sms->verify($mobile, $verification_code);
+        $verification_code = $this->checkEmpty($req->param('code'), 'code不能为空');
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->verifyCode($mobile, $verification_code);
         if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
@@ -157,8 +160,11 @@ class UserController extends BaseController
         $mobile = $this->checkMobile($req->param('mobile'));
         $password = $this->checkEmpty($req->param('password'), 'password不能为空');
         $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
-        $sms = new Sms();
-        $res = $sms->verify($mobile, $verification_code);
+        $yunXinConfig = config('variable.yunConfig');
+        $appId = $yunXinConfig['app_id'];
+        $appKey = $yunXinConfig['app_key'];
+        $sms = new Sms($appId, $appKey);
+        $res = $sms->verifyCode($mobile, $verification_code);
         if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }

@@ -252,7 +252,7 @@ class Sms
      * @param  $code [验证码]
      * @return $result      [返回array数组对象]
      */
-    public function verifycode($mobile, $code = '')
+    public function verifyCode($mobile, $code = '')
     {
         $url = 'https://api.netease.im/sms/verifycode.action';
         $data = array(

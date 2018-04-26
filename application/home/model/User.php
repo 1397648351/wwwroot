@@ -24,7 +24,7 @@ class User extends Base
     public function addInfo($username, $password, $mobile)
     {
         $data = array();
-        $data['name'] = $username;
+        $data['nickname'] = $username;
         $data['password'] = $password;
         $data['mobile'] = $mobile;
         $data['create_time'] = time();
@@ -62,7 +62,7 @@ class User extends Base
     public function findByKeyAndPwd($key, $pwd)
     {
         $map = array();
-        $map['name|mail'] = $key;
+        $map['nickname|mail'] = $key;
         $map['password'] = $pwd;
         return $this->findByWhere($map);
     }

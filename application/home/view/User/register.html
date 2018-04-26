@@ -21,37 +21,37 @@
                     <div class="def-input def-inputbtn def-check">
                         <label for="">用&nbsp;户&nbsp;名</label>
                         <div class="cut-line"></div>
-                        <input type="text" id="key"/>
-                        <span class="state state-success"></span>
+                        <input type="text" class="verify" id="key"/>
+                        <span class="state"></span>
                     </div>
                     <div class="def-input def-inputbtn def-check">
                         <label for="">设置密码</label>
                         <div class="cut-line"></div>
-                        <input type="text" />
-                        <span class="state state-problem"></span>
+                        <input type="password" class="verify" id="pwd"/>
+                        <span class="state"></span>
                     </div>
                     <div class="def-input def-inputbtn def-check">
                         <label for="">确认密码</label>
                         <div class="cut-line"></div>
-                        <input type="text" />
-                        <span class="state state-error"></span>
+                        <input type="password" class="verify" id="sure_pwd"/>
+                        <span class="state"></span>
                     </div>
                     <div class="def-input def-inputbtn def-check">
                         <label for="">手&nbsp;机&nbsp;号</label>
                         <div class="cut-line"></div>
-                        <input type="text" />
-                        <span class="state state-success"></span>
+                        <input type="text" class="verify" id="mobile"/>
+                        <span class="state"></span>
                     </div>
                     <div class="def-input def-inputbtn def-check def-check-btn">
                         <label for="">手机验证</label>
                         <div class="cut-line"></div>
-                        <input type="text" />
-                        <span class="state state-success"></span>
-                        <input type="button" class="def-input-btn" value="获取验证码"/>
+                        <input type="text" class="verify" id="code"/>
+                        <span class="state"></span>
+                        <input type="button" class="def-input-btn" id="send_code" value="获取验证码"/>
                     </div>
                 </div>
                 <div class="form-btn">
-                    <input type="button" value="注册" id="login" class="def-input">
+                    <input type="button" value="注册" id="register" class="def-input">
                 </div>
             </div>
         </div>
@@ -79,7 +79,138 @@
             }
         });
 
-        login.init(loginUrl,successUrl);
+        $("#register").click(function () {
+            var nickname = $("#key").val();
+            var pwd = $("#pwd").val();
+            var sure_pwd = $("#sure_pwd").val();
+            var mobile = $("#mobile").val();
+            var code = $("#code").val();
+            var res1 = checkParam(nickname,'key');
+            var res2 = checkParam(pwd,'pwd');
+            var res3 = checkParam(sure_pwd,'sure_pwd');
+            var res4 = checkParam(mobile,'mobile');
+            var res5 = checkParam(code,'code');
+            if(res1 && res2 && res3 && res4 && res5){
+                var registerUrl = "{:url('User/register')}";
+                $.post(registerUrl,{
+                    username:nickname,
+                    password:pwd,
+                    mobile:mobile,
+                    code:code
+                },function (res) {
+                    if(res.status_code == 200){
+                        window.location.href = "{:url('Index/index')}?user_id="+res.data.id;
+                    } else{
+                        console.log(res);
+                    }
+                })
+            }
+        });
+
+        $("#send_code").click(function () {
+            var mobile = $("#mobile").val();
+            var res = checkParam(mobile, 'mobile');
+            if(res) {
+                var sendUrl = "{:url('User/sendSms')}";
+                $.post(sendUrl, {
+                    mobile: mobile,
+                    type: 'register'
+                }, function (res) {
+                    if (res.status_code != 200) {
+                        console.log(res.status_code);
+                    }
+                })
+            }
+        });
+
+        //输入框失焦事件
+        $(".verify").blur(function () {
+            var value = $(this).val();
+            var elementId = $(this).attr('id');
+            $(this).removeClass('verify-error');
+            $(this).next(".state").removeClass('state-error');
+            $(this).next(".state").removeClass('state-success');
+            checkParam(value, elementId);
+        });
+
+        /**
+         * 参数验证
+         * @param param
+         * @param describe
+         * @returns {boolean}
+         */
+        function checkParam(param, describe) {
+            var flag = true;
+            var msg = '';
+            switch (describe){
+                case "key":
+                    if(param.length<1) {
+                        $("#key").next(".state").addClass('state-error');
+                        msg = '用户名不能为空';
+                        flag = false;
+                    }else {
+                        $("#key").next(".state").addClass('state-success');
+                    }
+                    break;
+                case "pwd":
+                    if(param.length<1){
+                        $("#pwd").next(".state").addClass('state-error');
+                        msg = '密码不能为空';
+                        flag = false;
+                    } else {
+                        $("#pwd").next(".state").addClass('state-success');
+                    }
+                    break;
+                case "sure_pwd":
+                    var pwd = $("#pwd").val();
+                    if(param.length<1){
+                        $("#sure_pwd").next(".state").addClass('state-error');
+                        msg = '确认密码不能为空';
+                        flag = false;
+                    }else if(param != pwd){
+                        $("#sure_pwd").next(".state").addClass('state-error');
+                        msg = '两次密码输入不一致';
+                        flag = false;
+                    } else {
+                        $("#sure_pwd").next(".state").addClass('state-success');
+                    }
+                    break;
+                case "mobile":
+                    if(param.length == 0 ){
+                        $("#mobile").next(".state").addClass('state-error');
+                        msg = '手机号不能为空';
+                        flag = false;
+                    }else if(!(/^1\d{10}$/.test(param))){
+                        $("#mobile").next(".state").addClass('state-error');
+                        msg = '手机号格式不正确';
+                        flag = false;
+                    } else{
+                        $("#mobile").next(".state").addClass('state-success');
+                    }
+                    break;
+                case "code":
+                    if(param.length == 0 ){
+                        $("#code").next(".state").addClass('state-error');
+                        msg = '验证码不能为空';
+                        flag = false;
+                    } else if(!(/^\d{6}$/.test(param))){
+                        $("#code").next(".state").addClass('state-error');
+                        msg = '验证码格式不正确';
+                        flag = false;
+                    }else {
+                        $("#code").next(".state").addClass('state-success');
+                    }
+                    break;
+                default :
+                    break;
+            }
+            if(flag){
+                return true;
+            } else {
+                console.log(msg);
+                return false;
+            }
+        }
     })
 
 </script>
