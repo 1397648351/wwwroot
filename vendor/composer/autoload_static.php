@@ -10,12 +10,18 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '0f066c7cf996f26fedf8f5e90a916a95' => __DIR__ . '/..' . '/houdunwang/config/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         't' => 
         array (
             'think\\composer\\' => 15,
+        ),
+        'h' => 
+        array (
+            'houdunwang\\qrcode\\' => 18,
+            'houdunwang\\config\\' => 18,
         ),
         'a' => 
         array (
@@ -43,6 +49,14 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         'think\\composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/topthink/think-installer/src',
+        ),
+        'houdunwang\\qrcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/houdunwang/qrcode/src',
+        ),
+        'houdunwang\\config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/houdunwang/config/src',
         ),
         'app\\' => 
         array (
@@ -79,11 +93,22 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'B' => 
+        array (
+            'BaconQrCode' => 
+            array (
+                0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitb38f841121030e2702c61933267e6e91::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitb38f841121030e2702c61933267e6e91::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb38f841121030e2702c61933267e6e91::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

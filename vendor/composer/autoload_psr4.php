@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'think\\composer\\' => array($vendorDir . '/topthink/think-installer/src'),
+    'houdunwang\\qrcode\\' => array($vendorDir . '/houdunwang/qrcode/src'),
+    'houdunwang\\config\\' => array($vendorDir . '/houdunwang/config/src'),
     'app\\' => array($baseDir . '/application'),
     'Yurun\\Until\\' => array($vendorDir . '/yurunsoft/yurun-event/Src', $vendorDir . '/yurunsoft/yurun-http'),
     'Yurun\\OAuthLogin\\' => array($vendorDir . '/yurunsoft/yurun-oauth-login/src'),
