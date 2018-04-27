@@ -30,4 +30,29 @@ class GoodsOrder extends Base
             return false;
         }
     }
+
+    public function findByOutTradeNo($outTradeNo)
+    {
+        $map = array();
+        $map['out_trade_no'] = $outTradeNo;
+        return $this->findByWhere($map);
+    }
+
+    /**
+     * @param $out_trade_no
+     * @param $openid
+     * @param $result_code
+     * @return false|int
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function updateInfo($out_trade_no, $openid, $result_code)
+    {
+        $map = array();
+        $map['out_trade_no'] = $out_trade_no;
+        $data = array();
+        $data['status'] = $result_code;
+        $data['openid'] = $openid;
+        $data['update_time'] = time();
+        return $this->updateDataByMap($data, $map);
+    }
 }

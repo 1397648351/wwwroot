@@ -30,10 +30,20 @@ class PayBackController extends BaseController
         $type = 'wx_charge';
         $config = $this->wxConfigData();
         $ret =  Notify::getNotifyData($type, $config);
-//        Log::write('回调信息', $ret);
-//        Log::write('回调信息11111', json_encode($ret));
+        $openid = $ret['openid'];
+        $out_trade_no = $ret['out_trade_no'];
+        $result_code = $ret['result_code']=='SUCCESS' ? 1 : -1;
+        $goodsOrderModel = model('goodsOrder');
+        $goodsOrderInfo = $goodsOrderModel->findByOutTradeNo($out_trade_no);
+        if($result_code == $goodsOrderInfo['status']){
+            $this->resJson(array(), 200);
+        } else {
+            $res = $goodsOrderModel->updateInfo($out_trade_no, $openid, $result_code);
+        }
         $this->resJson(array(), 200);
     }
+
+
 
     /**
      * 支付宝支付回调
