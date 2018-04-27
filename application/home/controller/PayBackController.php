@@ -11,7 +11,8 @@
 namespace app\home\controller;
 
 use app\common\controller\BaseController;
-use think\facade\Request;
+use Payment\Client\Notify;
+use think\facade\Log;
 
 /**
  * 支付回调处理
@@ -26,8 +27,12 @@ class PayBackController extends BaseController
      */
     public function wxBack()
     {
-        $req = Request::param();;
-        dump($req);
+        $type = 'wx_charge';
+        $config = $this->wxConfigData();
+        $ret =  Notify::getNotifyData($type, $config);
+//        Log::write('回调信息', $ret);
+//        Log::write('回调信息11111', json_encode($ret));
+        $this->resJson(array(), 200);
     }
 
     /**

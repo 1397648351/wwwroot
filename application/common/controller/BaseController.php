@@ -119,4 +119,55 @@ class BaseController extends Controller {
         }
         return $str;
     }
+
+    /**
+     * 支付宝配置
+     * @return array
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    protected function aliConfigData()
+    {
+        $data = array();
+        $data['use_sandbox'] = true;
+        $data['partner'] = config('variable.aliPayConfig.partner');//收款支付宝用户ID(2088开头)
+        $data['app_id'] = config('variable.aliPayConfig.app_id');
+        $data['sign_type'] = 'RSA2'; //签名方式
+        $data['ali_public_key'] = '';
+        $data['rsa_private_key'] = '';
+        $data['limit_pay'] = array();
+        $data['notify_url'] = '';//异步回调url
+        $data['return_url'] = '';//同步通知回调url
+        $data['return_raw'] = 'true';
+        return $data;
+    }
+
+    /**
+     * 微信配置
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    protected function wxConfigData()
+    {
+        $data = array();
+        //微信支付验收模式
+        $data['use_sendbox'] = true;
+        $data['app_id'] = config('variable.wxPayConfig.app_id');
+        //微信支付商户号
+        $data['mch_id'] = config('variable.wxPayConfig.mch_id');
+        //商户中心配置
+        $data['md5_key'] = config('variable.wxPayConfig.key');
+        //证书pem路径
+        $data['app_cert_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
+        //证书秘钥pem路径
+        $data['app_key_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
+        //签名方式 MD5 HMAC-SHA256
+        $data['sign_type'] = 'MD5';
+        $data['limit_pay'] = array('no_credit');
+        $data['fee_type'] = 'CNY';
+        //异步回调url
+        $data['notify_url'] = 'http://liutaolight.mynatapp.cc/wwwroot/public/PayBack/wxBack';
+        //同步通知回调url
+        $data['redirect_url'] = 'http://www.picagene.com';
+        $data['return_raw'] = 'true';
+        return $data;
+    }
 }

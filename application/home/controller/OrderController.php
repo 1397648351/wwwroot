@@ -38,12 +38,31 @@ class OrderController extends BaseController
 
     public function pay()
     {
-        $payType = $this->request->param('pay_type');
-        $payParams = $this->setParam($payType);
+        $req = $this->request;
+        $payType = $req->param('pay_type');
+        $goodsId = $req->param('goods_id');
+        $goodsModel = model('goods');
+        $goods = $goodsModel->find($goodsId);
+        if(empty($goods)){
+            $this->resJson(array(), 2001, '商品不存在');
+        }
+        $payParams = $this->setParam($payType, $goods);
         try {
             $res = Charge::run($payParams['type'], $payParams['config'], $payParams['pay_param']);
             if($res['return_msg'] == 'OK') {
+                $goodsOrderModel = model('goodsOrder');
+                $user = session('user');
+                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $payParams['out_trade_no'], $payType);
                 $code_url = $res['code_url'];
+                $qrName = $goodsOrderId.'.png';
+                //生成支付二维码
+                $this->setQr($code_url, $qrName);
+                $this->assign('pay_img', $qrName);
+                return $this->fetch();
+                //保存收货地址和发票相关内容
+                //$this->setAddress($goodsOrderId);
+            } else {
+                $this->resJson($res, 200);
             }
         } catch (PayException $e) {
             echo $e->errorMessage();
@@ -51,12 +70,45 @@ class OrderController extends BaseController
         }
     }
 
-    public function setQr()
+    /**
+     * @param $goodsOrderId 订单编号
+     * @return mixed
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    private function setAddress($goodsOrderId)
     {
-        $codeUrl = 'weixin://wxpay/bizpayurl?pr=u06SMB5';
-        $s = QrCode::save($codeUrl, './qr/'.time().'.png');
-        $res = $this->assertTrue($s);
-        dump($res);
+        $req = $this->request;
+        $username = $this->checkEmpty($req->param('username'),'收件人姓名不能为空！');
+        $mobile = $this->checkEmpty($req->param('mobile'),'手机号不问为空！');
+        $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
+        $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
+        //发票类型  0：无  1：个人  2：公司
+        $invoiceType = $req->param('invoice_type');
+        //抬头
+        $invoiceTitle = $req->param('invoice_title');
+        //税号
+        $payTaxesId = $req->param('pay_taxes_id');
+        $addressModel = model('address');
+        $addressId = $addressModel->addInfo($username, $mobile, $city, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId);
+        return $addressId;
+    }
+
+    /**
+     * 设置支付二维码
+     * @param $codeUrl
+     * @param $goodsOrderId
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    private function setQr($codeUrl,$qrName)
+    {
+        $s = QrCode::width(500)
+            //高度
+            ->height(500)
+            //背景颜色
+            ->backColor(5, 10, 0)
+            //前景颜色
+            ->foreColor(55, 255, 110)
+            ->save($codeUrl, '../qr/'.$qrName);
     }
 
     /**
@@ -65,7 +117,7 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setParam($payType)
+    private function setParam($payType,$goods)
     {
         $params = array();
         $outTradeNo = $this->getMgid().'_'.$payType;
@@ -73,12 +125,12 @@ class OrderController extends BaseController
             case 'ali':
                 $params['type'] = 'ali_qr';
                 $params['config'] = $this->aliConfigData();
-                $params['pay_param'] = $this->setAliPayParam($outTradeNo);
+                $params['pay_param'] = $this->setAliPayParam($outTradeNo,$goods);
                 break;
             case 'wx':
                 $params['type'] = 'wx_qr';
                 $params['config'] = $this->wxConfigData();
-                $params['pay_param'] = $this->setWxPayParam($outTradeNo);
+                $params['pay_param'] = $this->setWxPayParam($outTradeNo,$goods);
                 break;
             default:
                 break;
@@ -86,6 +138,7 @@ class OrderController extends BaseController
         if (empty($params)) {
             $this->resJson(array(), 2001, '支付类型不存在');
         }
+        $params['out_trade_no'] = $outTradeNo;
         return $params;
     }
 
@@ -94,25 +147,24 @@ class OrderController extends BaseController
      * @param $param
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setAliPayParam()
+    private function setAliPayParam($outTradeNo,$goods)
     {
         $payParam = array();
-        $req = $this->request;
         //商品具体描述
-        $payParam['body'] = $req->param('body');
+        $payParam['body'] = $goods['body'];
         //商品标题
-        $payParam['subject'] = $req->param('subject');
+        $payParam['subject'] = $goods['subject'];
         //订单号
-        $payParam['order_no'] = '订单号';
+        $payParam['order_no'] = $outTradeNo;
         //需要支付金额 元
-        $payParam['amount'] = $req->param('amount');
+        $payParam['amount'] = $goods['price'];
         //过期时间（当前时间+过期s数） 时间戳
         $payParam['timeout_express'] = 3600 + time();
-        $payParam['return_param'] = '';
+        $payParam['return_param'] = 'pica';
         //商品类型  0：虚拟 1：实物  否
-        $payParam['goods_type'] = $req->param('goods_type');
+        $payParam['goods_type'] = '0';
         //门店标记  否
-        $payParam['store_id'] = $req->param('store_id');
+        $payParam['store_id'] = '';
         return $payParam;
     }
 
@@ -120,12 +172,11 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo)
+    private function setWxPayParam($outTradeNo,$goods)
     {
         $payParam = array();
-        $req = $this->request;
-        $payParam['body'] = '商品测试';
-        $payParam['subject'] = '商品subject';
+        $payParam['body'] = $goods['body'];
+        $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
         $payParam['amount'] = '0.01';
@@ -134,64 +185,8 @@ class OrderController extends BaseController
         $payParam['timeout_express'] = 3600 + time();
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';
-//        $payParam['type'] = 'Wap';
-//        //wap网站的url地址
-//        $payParam['wap_url'] = 'http://www.picagene.com/';
-//        //wap网站名称
-//        $payParam['wap_name'] = '基因检测';
-        $payParam['product_id'] = '1';
+        $payParam['product_id'] = $goods['id'];
         $payParam['openid'] = '';
         return $payParam;
-    }
-
-    /**
-     * 支付宝配置
-     * @return array
-     * @author LiuTao liut1@kexinbao100.com
-     */
-    private function aliConfigData()
-    {
-        $data = array();
-        $data['use_sandbox'] = true;
-        $data['partner'] = config('variable.aliPayConfig.partner');//收款支付宝用户ID(2088开头)
-        $data['app_id'] = config('variable.aliPayConfig.app_id');
-        $data['sign_type'] = 'RSA2'; //签名方式
-        $data['ali_public_key'] = '';
-        $data['rsa_private_key'] = '';
-        $data['limit_pay'] = array();
-        $data['notify_url'] = '';//异步回调url
-        $data['return_url'] = '';//同步通知回调url
-        $data['return_raw'] = 'true';
-        return $data;
-    }
-
-    /**
-     * 微信配置
-     * @author LiuTao liut1@kexinbao100.com
-     */
-    private function wxConfigData()
-    {
-        $data = array();
-        //微信支付验收模式
-        $data['use_sendbox'] = true;
-        $data['app_id'] = config('variable.wxPayConfig.app_id');
-        //微信支付商户号
-        $data['mch_id'] = config('variable.wxPayConfig.mch_id');
-        //商户中心配置
-        $data['md5_key'] = config('variable.wxPayConfig.key');
-        //证书pem路径
-        $data['app_cert_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
-        //证书秘钥pem路径
-        $data['app_key_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
-        //签名方式 MD5 HMAC-SHA256
-        $data['sign_type'] = 'MD5';
-        $data['limit_pay'] = array('no_credit');
-        $data['fee_type'] = 'CNY';
-        //异步回调url
-        $data['notify_url'] = 'http://www.picagene.com/';
-        //同步通知回调url
-        $data['redirect_url'] = 'http://www.picagene.com/PayBack/wxBack';
-        $data['return_raw'] = 'true';
-        return $data;
     }
 }
