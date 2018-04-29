@@ -48,7 +48,6 @@
     background-position: center;
     background-repeat: repeat-y;
 }
-
 .content-title {
     display: block;
     margin-bottom: 20px;
@@ -112,6 +111,10 @@
 
 .card.card-3 {
     margin-top: 20px;
+}
+
+.contents > .content-2{
+    background-image: url(../images/home/bakcgroundii_02.png);
 }
 
 @media screen and (orientation:landscape) {
