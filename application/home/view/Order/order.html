@@ -34,15 +34,15 @@
                 <div class="content-details">
                     <div class="form-group">
                         <label class="form-group-th">收件人姓名</label>
-                        <input class="form-control" value="{$username|default=''}" placeholder="输入姓名"/>
+                        <input class="form-control" value="{$username|default=''}" placeholder="输入收件人姓名"/>
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">手机号码</label>
-                        <input class="form-control" value="" placeholder="输入电话号码"/>
+                        <input class="form-control" value="" placeholder="输入收件人联系方式"/>
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">邮箱</label>
-                        <input class="form-control" value="" placeholder="输入邮箱号码"/>
+                        <input class="form-control" value="" placeholder="输入邮箱号码获取电子版材料"/>
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">所在地区</label>
@@ -71,26 +71,27 @@
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">需要发票</label>
-                        <input type="radio" id="invoice_0" name="invoice_need" value="不需要"/>
+                        <input type="radio" checked id="invoice_0" name="invoice_need" value="不需要"/>
                         <label for="invoice_0" class="radio-text">不需要</label>
                         <input type="radio" id="invoice_1" name="invoice_need" value="个人"/>
                         <label for="invoice_1" class="radio-text">个人</label>
                         <input type="radio" id="invoice_2" name="invoice_need" value="公司"/>
                         <label for="invoice_2" class="radio-text">公司</label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" name="invoice">
                         <label class="form-group-th">发票抬头</label>
                         <input class="form-control" value="" placeholder="请输入中文抬头"/>
                         <div class="form-tip">请妥善保管发票。退货、退款若无法提供发票，需扣除手续费用。发票内容为技术服务费。</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" name="invoice">
                         <label class="form-group-th">纳税人识别号</label>
-                        <input class="form-control" value="" placeholder="请输入中文抬头"/>
+                        <input class="form-control" value="" placeholder="输入18位纳税人识别号"/>
                         <div class="form-tip">购买方为企业的，索取增值税普通发票时，应向销售方提供纳税人识别号或统一社会信用代码。</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" name="invoice">
                         <label class="form-group-th">留言</label>
-                        <input class="form-control" value="" placeholder="选填" style="width: 536px;"/>
+                        <input class="form-control" value="" placeholder="有特殊需求请在此键入，但无法保证实现。详情请来电咨询。选填" style="width: 536px;"/>
+                        <div class="form-tip">如需发票请认真核对抬头和纳税人识别号，一经开出恕不再次开具。</div>
                     </div>
                 </div>
             </div>
@@ -122,6 +123,7 @@
 <script src="__COMMONRESOURCE__/js/PCASClass.js" type="text/javascript"></script>
 <script>
     $(function () {
+        $('[name=invoice]').hide()
         var payType = $($(".pay-typ")[0]).data('pay');
         $.my_init({
             animate: {
@@ -136,6 +138,13 @@
                     $("#total_price").text(totalprice);
                     $("#final_price").text(finalprice);
                 }
+            }
+        });
+        $("[name='invoice_need']").change(function () {
+            if(this.id=='invoice_0'){
+                $('[name=invoice]').hide()
+            }else{
+                $('[name=invoice]').show()
             }
         });
         new PCAS('P1', 'C1');

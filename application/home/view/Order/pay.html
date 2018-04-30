@@ -1,11 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>支付</title>
-</head>
-<body>
+{extend name="Template:base" /}
+{block name="title"}基因检测-支付{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__PCRESOURCE__/css/pay.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    <div class="contents">
+        <div class="title">
+            <img class="logo" src="__COMMONRESOURCE__/images/logo.png"/>
+            <span class="title-text">收银台</span>
+        </div>
+        <div class="info">
+            <div class="detail">订单编号：</div>
+            <div class="detail">订单类型：</div>
+        </div>
+        <div class="qr-content">
+            <img class="pay-type" src="__COMMONRESOURCE__/images/WePayLogo.png">
+            <img class="qrcode" src="__QR__/{$pay_img|default='36.png'}">
+            <div>
+                <img class="dec" src="__COMMONRESOURCE__/images/text.png">
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
 
-<img src="__QR__/{$pay_img}">
-</body>
-</html>
+{block name="other_js"}
+<!-- other js -->
+{/block}

@@ -108,7 +108,7 @@ class OrderController extends BaseController
             ->backColor(5, 10, 0)
             //前景颜色
             ->foreColor(55, 255, 110)
-            ->save($codeUrl, '../qr/'.$qrName);
+            ->save($codeUrl, 'qr/'.$qrName);
     }
 
     /**

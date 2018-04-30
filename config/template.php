@@ -32,6 +32,7 @@ return [
     'taglib_end' => '}',
     // 视图输出字符串内容替换
     'tpl_replace_string' => [
+        '__QR__' => '/qr',
         '__STATIC__' => '/static',
         '__COMMONRESOURCE__' => '/static/dist/common',
         '__PCRESOURCE__' => '/static/dist/pc',

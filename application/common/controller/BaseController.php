@@ -164,7 +164,7 @@ class BaseController extends Controller {
         $data['limit_pay'] = array('no_credit');
         $data['fee_type'] = 'CNY';
         //异步回调url
-        $data['notify_url'] = 'http://liutaolight.mynatapp.cc/wwwroot/public/PayBack/wxBack';
+        $data['notify_url'] = 'http://www.picagene.com/PayBack/wxBack';
         //同步通知回调url
         $data['redirect_url'] = 'http://www.picagene.com';
         $data['return_raw'] = 'true';

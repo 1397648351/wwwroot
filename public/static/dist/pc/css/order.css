@@ -111,6 +111,7 @@ body {
 }
 
 .form-group .form-control {
+    width: 250px;
     height: 37px;
     border: 1px solid #d2d2d2;
     border-radius: 4px;
