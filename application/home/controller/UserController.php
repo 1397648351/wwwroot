@@ -13,6 +13,7 @@ namespace app\home\controller;
 use org\Sms;
 use org\Wechat;
 use app\common\controller\BaseController;
+use Yurun\OAuthLogin\QQ\OAuth2;
 
 class UserController extends BaseController
 {
@@ -75,18 +76,27 @@ class UserController extends BaseController
      */
     public function qrLogin()
     {
-        $wxOAuthConfig = config('variable.wxOAuthConfig');
         $type = $_GET['type'];
-        $baseUrl = urlencode($wxOAuthConfig['back_url']);
-        $wxAppId = $wxOAuthConfig['app_id'];
         if($type == 'wechat'){
+            $wxOAuthConfig = config('variable.wxOAuthConfig');
+            $baseUrl = urlencode($wxOAuthConfig['back_url']);
+            $wxAppId = $wxOAuthConfig['app_id'];
             $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
         } else {
-            $url = "";
+            $qqOAuthConfig = config('variable.qqOAuthConfig');
+            $qqAppId = $qqOAuthConfig['app_id'];
+            $qqAppSecret = $qqOAuthConfig['app_secret'];
+            $baseUrl = urlencode($qqOAuthConfig['back_url']);
+            $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
+            $url = $qqOAuth->getAuthUrl($baseUrl, 'picagene');
         }
         $this->redirect($url);
     }
 
+    /**
+     * 微信登录 用户信息保存
+     * @author LiuTao liut1@kexinbao100.com
+     */
     public function wxLogin()
     {
         $code = $_GET['code'];
@@ -97,10 +107,30 @@ class UserController extends BaseController
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
-        $userQqModel = model('UserQq');
-        $res = $userQqModel->addInfo($userInfo);
+        $userWxModel = model('UserWx');
+        $res = $userWxModel->addInfo($userInfo);
         session('userInfo', $userInfo);
         $this->fetch('Index/index');
+    }
+
+    /**
+     * QQ登录 用户信息保存
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function qqLogin()
+    {
+        $qqOAuthConfig = config('variable.qqOAuthConfig');
+        $qqAppId = $qqOAuthConfig['app_id'];
+        $qqAppSecret = $qqOAuthConfig['app_secret'];
+        $baseUrl = urlencode($qqOAuthConfig['back_url']);
+        $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
+        $accessToken = $qqOAuth->getAccessToken('picagene');
+        $userInfo = $qqOAuth->getUserInfo($accessToken);
+        dump($userInfo);
+//        $userQqModel = model('UserQq');
+//        $res = $userQqModel->addInfo($userInfo);
+//        session('userInfo', $userInfo);
+//        $this->fetch('Index/index');
     }
 
     /**

@@ -32,9 +32,9 @@ return [
 
     //QQ登录
     'qqOAuthConfig' => array(
-        'app_id' => '',
-        'app_secret' => '',
-        'back_url' => ''
+        'app_id' => '101474732',
+        'app_secret' => 'ef07ca0137b27942c3d0efa36d93d4c4',
+        'back_url' => 'http://www.picagene.com/user/qqLogin'
     ),
 
     //云信
