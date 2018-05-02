@@ -86,7 +86,7 @@ class UserController extends BaseController
             $qqOAuthConfig = config('variable.qqOAuthConfig');
             $qqAppId = $qqOAuthConfig['app_id'];
             $qqAppSecret = $qqOAuthConfig['app_secret'];
-            $baseUrl = urlencode($qqOAuthConfig['back_url']);
+            $baseUrl = $qqOAuthConfig['back_url'];
             $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
             $url = $qqOAuth->getAuthUrl($baseUrl, 'picagene');
         }
@@ -122,7 +122,7 @@ class UserController extends BaseController
         $qqOAuthConfig = config('variable.qqOAuthConfig');
         $qqAppId = $qqOAuthConfig['app_id'];
         $qqAppSecret = $qqOAuthConfig['app_secret'];
-        $baseUrl = urlencode($qqOAuthConfig['back_url']);
+        $baseUrl = $qqOAuthConfig['back_url'];
         $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
         $accessToken = $qqOAuth->getAccessToken('picagene');
         $userInfo = $qqOAuth->getUserInfo($accessToken);
