@@ -126,11 +126,10 @@ class UserController extends BaseController
         $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
         $accessToken = $qqOAuth->getAccessToken('picagene');
         $userInfo = $qqOAuth->getUserInfo($accessToken);
-        dump($userInfo);
-//        $userQqModel = model('UserQq');
-//        $res = $userQqModel->addInfo($userInfo);
-//        session('userInfo', $userInfo);
-//        $this->fetch('Index/index');
+        $userQqModel = model('UserQq');
+        $res = $userQqModel->addInfo($userInfo);
+        session('userInfo', $userInfo);
+        $this->fetch('Index/index');
     }
 
     /**
