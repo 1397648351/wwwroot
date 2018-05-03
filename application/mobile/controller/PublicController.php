@@ -67,12 +67,11 @@ class PublicController extends BaseController
             if ($user) {
                 $res = $userWxModel->updateInfo($user['id'],$userInfo);
                 $sql = $userWxModel->getLastSql();
-                dump($sql);exit;
             } else {
                 $res = $userWxModel->addInfo($userInfo);
                 $sql = $userWxModel->getLastSql();
-                dump($sql);exit;
             }
+            dump($sql);exit;
         }
     }
 }
