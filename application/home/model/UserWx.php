@@ -15,6 +15,7 @@ class UserWx extends Base
 {
     public function addInfo($wxUser)
     {
+        return 1;
         $data = array();
         $data['openid'] = $wxUser['openid'];
         $data['nickname'] = $wxUser['nickname'];
