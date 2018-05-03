@@ -32,6 +32,7 @@ class PublicController extends BaseController
                 $this->redirect($res);
             }
             $info = $Wechat->getOauthAccessToken();
+            dump($info);exit;
             if ($info['openid']) {
                 session('openid', $info['openid']);
                 $this->saveUserInfo($info);
