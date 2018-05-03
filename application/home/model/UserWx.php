@@ -22,7 +22,6 @@ class UserWx extends Base
         $data['headimgurl'] = $wxUser['headimgurl'];
         $data['create_time'] = time();
         $res = $this->save($data);
-        return $res;
         if($res){
             return $this->id;
         }else{
