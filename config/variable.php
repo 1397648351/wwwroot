@@ -23,6 +23,11 @@ return [
         'app_id' => '',
     ),
 
+    'wxMobile' => array(
+        'app_id' => 'wxbf9c8fbe1173ff7d',
+        'app_secret' => 'd4bff0a6082b6661ca88ab3180245a67'
+    ),
+
     //微信登录
     'wxOAuthConfig' => array(
         'app_id' => 'wx157864b4de047dad',

@@ -23,7 +23,7 @@ class PublicController extends BaseController
         $code = $this->request->param('code');
         $url = $this->getBaseUrl().url();
         if(empty($openid)){
-            $wxOAuthConfig = config('variable.wxOAuthConfig');
+            $wxOAuthConfig = config('variable.wxMobile');
             $wxAppId = $wxOAuthConfig['app_id'];;
             $wxAppSecret = $wxOAuthConfig['app_secret'];
             $Wechat = new Wechat($wxAppId, $wxAppSecret);
@@ -46,7 +46,7 @@ class PublicController extends BaseController
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $wxOAuthConfig = config('variable.wxOAuthConfig');
+        $wxOAuthConfig = config('variable.wxMobile');
         $wxAppId = $wxOAuthConfig['app_id'];;
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
@@ -56,7 +56,7 @@ class PublicController extends BaseController
 
     private function saveUserInfo($info)
     {
-        $wxOAuthConfig = config('variable.wxOAuthConfig');
+        $wxOAuthConfig = config('variable.wxMobile');
         $wxAppId = $wxOAuthConfig['app_id'];;
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
