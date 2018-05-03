@@ -32,7 +32,6 @@ class PublicController extends BaseController
                 $this->redirect($res);
             }
             $info = $Wechat->getOauthAccessToken();
-            dump($info);exit;
             if ($info['openid']) {
                 session('openid', $info['openid']);
                 $this->saveUserInfo($info);
@@ -62,6 +61,7 @@ class PublicController extends BaseController
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
         $userInfo = $Wechat->getOauthUserinfo($info['access_token'], $info['openid']);
+        dump($userInfo);exit;
         if(!empty($userInfo)) {
             $userWxModel = model('home/UserWx');
             $user = $userWxModel->findByOpenId($info['openid']);
