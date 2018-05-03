@@ -28,7 +28,8 @@ class PublicController extends BaseController
             $wxAppSecret = $wxOAuthConfig['app_secret'];
             $Wechat = new Wechat($wxAppId, $wxAppSecret);
             if(empty($code)){
-                redirect($Wechat->getOauthRedirect($url, 'picagene', 'snsapi_userinfo'));
+                $res = $Wechat->getOauthRedirect($url, 'picagene', 'snsapi_userinfo');
+                $this->redirect($res);
             }
             $info = $Wechat->getOauthAccessToken();
             if ($info['openid']) {
