@@ -66,12 +66,8 @@ class PublicController extends BaseController
             $user = $userWxModel->findByOpenId($userInfo['openid']);
             if ($user) {
                 $res = $userWxModel->updateInfo($user['id'],$userInfo);
-                $sql = $userWxModel->getLastSql();
             } else {
                 $res = $userWxModel->addInfo($userInfo);
-                dump($res);exit;
-                $sql = $userWxModel->getLastSql();
-                dump($sql);exit;
             }
         }
     }
