@@ -171,7 +171,10 @@ class Wechat
      * @return array|bool 返回签名字串
      */
     public function getJsSign($url, $timestamp=0, $noncestr='', $appid=''){
-        if (!$this->jsapi_ticket && !$this->getJsTicket($appid) || !$url) return false;
+//        if (!$this->jsapi_ticket && !$this->getJsTicket($appid) || !$url) return false;
+        if(!$this->getJsTicket($appid)){
+            return false;
+        }
         if (!$timestamp)
             $timestamp = time();
         if (!$noncestr)
