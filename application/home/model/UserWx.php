@@ -15,7 +15,6 @@ class UserWx extends Base
 {
     public function addInfo($wxUser)
     {
-        return 1;
         $data = array();
         $data['openid'] = $wxUser['openid'];
         $data['nickname'] = $wxUser['nickname'];
@@ -23,6 +22,7 @@ class UserWx extends Base
         $data['headimgurl'] = $wxUser['headimgurl'];
         $data['create_time'] = time();
         $res = $this->save($data);
+        return $res;
         if($res){
             return $this->id;
         }else{
