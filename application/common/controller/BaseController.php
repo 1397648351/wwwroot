@@ -19,6 +19,16 @@ class BaseController extends Controller {
     }
 
     /**
+     * 获取基础的URL
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        //return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . (strpos($_SERVER['HTTP_HOST'], ':') === false ? $_SERVER['SERVER_PORT'] == '80' ? '' : ':' . $_SERVER['SERVER_PORT'] : '');
+        return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+    }
+
+    /**
      * 非空验证
      * @param $data
      * @param string $describe

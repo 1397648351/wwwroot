@@ -99,11 +99,10 @@ class UserController extends BaseController
      */
     public function wxLogin()
     {
-        $code = $_GET['code'];
         $wxAppId = config('variable.wx_app_id');;
         $wxAppSecret = config('variable.wx_app_id');
         $wechat = new Wechat($wxAppId, $wxAppSecret);
-        $res = $wechat->getOauthAccessToken($code);
+        $res = $wechat->getOauthAccessToken();
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);

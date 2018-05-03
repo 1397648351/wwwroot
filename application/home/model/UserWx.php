@@ -13,13 +13,13 @@ namespace app\home\model;
 
 class UserWx extends Base
 {
-    public function addInfo($qqUser)
+    public function addInfo($wxUser)
     {
         $data = array();
-        $data['openid'] = $qqUser['openid'];
-        $data['nickname'] = $qqUser['nickname'];
-        $data['sex'] = $qqUser['sex'];
-        $data['headimgurl'] = $qqUser['headimgurl'];
+        $data['openid'] = $wxUser['openid'];
+        $data['nickname'] = $wxUser['nickname'];
+        $data['sex'] = $wxUser['sex'];
+        $data['headimgurl'] = $wxUser['headimgurl'];
         $data['create_time'] = time();
         $res = $this->save($data);
         if($res){
@@ -29,4 +29,21 @@ class UserWx extends Base
         }
     }
 
+    public function findByOpenId($openid)
+    {
+        $map = array();
+        $map['openid'] = $openid;
+        return $this->findByWhere($map);
+    }
+
+    public function updateInfo($id, $wxUser)
+    {
+        $map = array();
+        $map['id'] = $id;
+        $data = array();
+        $data['nickname'] = $wxUser['nickname'];
+        $data['headimgurl'] = $wxUser['headimgurl'];
+        $data['update_time'] = time();
+        $res = $this->updateDataByMap($data, $map);
+    }
 }

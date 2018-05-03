@@ -1,12 +1,12 @@
 <?php
 namespace app\mobile\controller;
 
-use app\common\controller\BaseController;
 
-class IndexController extends BaseController
+class IndexController extends PublicController
 {
     public function index()
     {
+        $this->getJsSign();
         $this->assign('price', 998);
         return $this->fetch();
     }
