@@ -56,13 +56,13 @@
                 'checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseWXPay', 'onMenuShareQQ', 'onMenuShareQZone'
             ]
         });
-        wx.hideOptionMenu();
-        wx.showMenuItems({
-            menuList: [
-                'menuItem:share:appMessage',
-                'menuItem:share:timeline'
-            ] // 要显示的菜单项，所有menu项见附录3
-        });
+//        wx.hideOptionMenu();
+//        wx.showMenuItems({
+//            menuList: [
+//                'menuItem:share:appMessage',
+//                'menuItem:share:timeline'
+//            ] // 要显示的菜单项，所有menu项见附录3
+//        });
         wx.onMenuShareTimeline({
             title: title, // 分享标题
             link: baseurl, // 分享链接
