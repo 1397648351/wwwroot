@@ -62,7 +62,7 @@ class PublicController extends BaseController
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
         $userInfo = $Wechat->getOauthUserinfo($info['access_token'], $info['openid']);
         if(!empty($userInfo)) {
-            $userWxModel = model('UserWx');
+            $userWxModel = model('home/UserWx');
             $user = $userWxModel->findByOpenId($info['openid']);
             if (empty($user)) {
                 $res = $userWxModel->addInfo($info);
