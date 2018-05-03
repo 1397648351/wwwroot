@@ -19,24 +19,25 @@ class PublicController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $openid = session('openid');
-        $code = $this->request->param('code');
-        $url = $this->getBaseUrl().url();
-        if(empty($openid)){
-            $wxOAuthConfig = config('variable.wxMobile');
-            $wxAppId = $wxOAuthConfig['app_id'];;
-            $wxAppSecret = $wxOAuthConfig['app_secret'];
-            $Wechat = new Wechat($wxAppId, $wxAppSecret);
-            if(empty($code)){
-                $res = $Wechat->getOauthRedirect($url, 'picagene', 'snsapi_userinfo');
-                $this->redirect($res);
-            }
-            $info = $Wechat->getOauthAccessToken();
-            if ($info['openid']) {
-                session('openid', $info['openid']);
-                $this->saveUserInfo($info);
-            }
-        }
+
+//        $openid = session('openid');
+//        $code = $this->request->param('code');
+//        $url = $this->getBaseUrl().url();
+//        if(empty($openid)){
+//            $wxOAuthConfig = config('variable.wxMobile');
+//            $wxAppId = $wxOAuthConfig['app_id'];;
+//            $wxAppSecret = $wxOAuthConfig['app_secret'];
+//            $Wechat = new Wechat($wxAppId, $wxAppSecret);
+//            if(empty($code)){
+//                $res = $Wechat->getOauthRedirect($url, 'picagene', 'snsapi_userinfo');
+//                $this->redirect($res);
+//            }
+//            $info = $Wechat->getOauthAccessToken();
+//            if ($info['openid']) {
+//                session('openid', $info['openid']);
+//                $this->saveUserInfo($info);
+//            }
+//        }
     }
 
     /**
@@ -51,7 +52,7 @@ class PublicController extends BaseController
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
         $signPackage = $Wechat->getJsSign($url);
-        $this->assign('local_url', $url);
+        dump($signPackage);exit;
         $this->assign('signPackage', $signPackage);
     }
 
