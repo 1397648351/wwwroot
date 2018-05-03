@@ -65,7 +65,7 @@ class PublicController extends BaseController
             $userWxModel = model('home/UserWx');
             $user = $userWxModel->findByOpenId($userInfo['openid']);
             $sql = $userWxModel->getLastSql();
-            dump($sql);
+            dump($sql);exit;
             if (empty($user)) {
                 $res = $userWxModel->addInfo($userInfo);
                 dump('add:'.$res);exit;
