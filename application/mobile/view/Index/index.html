@@ -84,9 +84,7 @@
     $("#pay").click(function () {
         var url = "{:url('Index/wxPay')}";
         $.post(url,{goods_id:1},function (res) {
-            alert(1);
             if(res.status_code == 200){
-                alert(2);
                 var data = res.data;
                 wxPay(data['timeStamp'],data['nonceStr'],data['package'],data['signType'],data['paySign']);
             }
