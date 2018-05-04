@@ -52,7 +52,7 @@ class OrderController extends BaseController
             if($res['return_msg'] == 'OK') {
                 $goodsOrderModel = model('goodsOrder');
                 $user = session('user');
-                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $payParams['out_trade_no'], $payType);
+                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], '',$payParams['out_trade_no'], $payType);
                 $code_url = $res['code_url'];
                 $qrName = $goodsOrderId.'.png';
                 //生成支付二维码

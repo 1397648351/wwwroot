@@ -13,12 +13,13 @@ namespace app\home\model;
 
 class GoodsOrder extends Base
 {
-    public function addInfo($goods,$userId,$outTradeNo,$payType)
+    public function addInfo($goods,$userId,$openid,$outTradeNo,$payType)
     {
         $data = array();
         $data['goods_id'] = $goods['id'];
         $data['out_trade_no'] = $outTradeNo;
         $data['user_id'] = $userId;
+        $data['openid'] = $openid;
         $data['type'] = $payType=='wx'?1:2;
         $data['status'] = 0;
         $data['money'] = $goods['price'];

@@ -27,7 +27,7 @@ class IndexController extends PublicController
         $goods = $goodsModel->find($goodsId);
         $goodsOrderModel = model('home/goodsOrder');
         $openid = session('openid');
-        $goodsOrderId = $goodsOrderModel->addInfo($goods, $openid, $outTradeNo, 'wx');
+        $goodsOrderId = $goodsOrderModel->addInfo($goods, '',$openid, $outTradeNo, 'wx');
         $config = $this->wxConfigData();
         $type = 'wx_pub';
         $params['config'] = $this->wxConfigData();
