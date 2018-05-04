@@ -45,22 +45,16 @@
         timestamp: '<?php echo $signPackage["timestamp"];?>',
         nonceStr: '<?php echo $signPackage["nonceStr"];?>',
         signature: '<?php echo $signPackage["signature"];?>',
-        jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+        jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'chooseWXPay']
     });
 
     wx.ready(function () {
         wx.checkJsApi({
             jsApiList: [
-                'checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage'
+                'checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'chooseWXPay'
             ]
         });
-//        wx.hideOptionMenu();
-//        wx.showMenuItems({
-//            menuList: [
-//                'menuItem:share:appMessage',
-//                'menuItem:share:timeline'
-//            ] // 要显示的菜单项，所有menu项见附录3
-//        });
+        //分享朋友圈
         wx.onMenuShareTimeline({
             title: title, // 分享标题
             link: baseurl, // 分享链接
@@ -72,6 +66,7 @@
                 // 用户取消分享后执行的回调函数
             }
         });
+        //分享好友
         wx.onMenuShareAppMessage({
             title: title, // 分享标题
             desc: '基因检测', // 分享描述
@@ -86,5 +81,31 @@
                 // 用户取消分享后执行的回调函数
             }
         });
+        //分享到QQ
+        wx.onMenuShareQQ({
+            title: title, // 分享标题
+            desc: '基因检测', // 分享描述
+            link: baseurl, // 分享链接
+            imgUrl: imgurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
     });
+
+    function wxPay(timestamp,nonceStr,package,signType,paySign) {
+        wx.chooseWXPay({
+            timestamp: timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            nonceStr: nonceStr, // 支付签名随机串，不长于 32 位
+            package: package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+            signType: signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+            paySign: paySign, // 支付签名
+            success: function (res) {
+                // 支付成功后的回调函数
+            }
+        });
+    }
 </script>
