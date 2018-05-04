@@ -62,9 +62,9 @@
 //            ] // 要显示的菜单项，所有menu项见附录3
 //        });
         wx.onMenuShareTimeline({
-            title: '测试', // 分享标题
-            link: 'http://www.picagene.com', // 分享链接
-            imgUrl: 'https://mmbiz.qlogo.cn/mmbiz_png/Tmk7VvM4TMp7r5xECvdf8Gp8iaFnIj1wbcmYCT9icVhQOAic6ccXA2JduOJFpcf2oEzs2XImibzWvbuyhJBsoRGNnQ/0?wx_fmt=png', // 分享图标
+            title: title, // 分享标题
+            link: baseurl, // 分享链接
+            imgUrl: imgurl,
             success: function () {
 
             },
@@ -73,10 +73,10 @@
             }
         });
         wx.onMenuShareAppMessage({
-            title: '测试111', // 分享标题
-            desc: '哈哈哈', // 分享描述
-            link: 'http://www.picagene.com', // 分享链接
-            imgUrl: 'https://mmbiz.qlogo.cn/mmbiz_png/Tmk7VvM4TMp7r5xECvdf8Gp8iaFnIj1wbcmYCT9icVhQOAic6ccXA2JduOJFpcf2oEzs2XImibzWvbuyhJBsoRGNnQ/0?wx_fmt=png', // 分享图标
+            title: title, // 分享标题
+            desc: '基因检测', // 分享描述
+            link: baseurl, // 分享链接
+            imgUrl: imgurl,
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
