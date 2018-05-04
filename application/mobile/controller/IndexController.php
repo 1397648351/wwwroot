@@ -20,10 +20,10 @@ class IndexController extends PublicController
 
     public function wxPay()
     {
-        $req = $this->request;
+//        $req = $this->request;
         $outTradeNo = $this->getMgid().'_wx';
-        $goodsId = $req->param('goods_id');
-        $goodsModel = model('goods');
+        $goodsId = 1;
+        $goodsModel = model('home/goods');
         $goods = $goodsModel->find($goodsId);
         $config = $this->wxConfigData();
         $type = 'wx_pub';
