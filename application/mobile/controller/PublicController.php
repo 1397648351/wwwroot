@@ -52,7 +52,6 @@ class PublicController extends BaseController
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
         $signPackage = $Wechat->getJsSign($url);
-        dump($signPackage);exit;
         $this->assign('signPackage', $signPackage);
     }
 
