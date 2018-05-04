@@ -40,7 +40,7 @@
     var imgurl = 'https://mmbiz.qlogo.cn/mmbiz_png/Tmk7VvM4TMp7r5xECvdf8Gp8iaFnIj1wbcmYCT9icVhQOAic6ccXA2JduOJFpcf2oEzs2XImibzWvbuyhJBsoRGNnQ/0?wx_fmt=png';
     var title = '基因检测';
     wx.config({
-        debug: false, //true时有弹框提示
+        debug: true, //true时有弹框提示
         appId: '<?php echo $signPackage["appId"];?>',
         timestamp: '<?php echo $signPackage["timestamp"];?>',
         nonceStr: '<?php echo $signPackage["nonceStr"];?>',
@@ -97,6 +97,7 @@
     });
 
     function wxPay(timestamp,nonceStr,package,signType,paySign) {
+        alert(1);
         wx.chooseWXPay({
             timestamp: timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
             nonceStr: nonceStr, // 支付签名随机串，不长于 32 位
