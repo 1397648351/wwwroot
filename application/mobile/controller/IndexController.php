@@ -22,7 +22,7 @@ class IndexController extends PublicController
     {
         $req = $this->request;
         $outTradeNo = $this->getMgid().'_wx';
-        $goodsId = $req['goods_id'];
+        $goodsId = $req->param('goods_id');
         $goodsModel = model('home/goods');
         $goods = $goodsModel->find($goodsId);
         $goodsOrderModel = model('home/goodsOrder');
