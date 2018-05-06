@@ -48,6 +48,7 @@
     background-position: center;
     background-repeat: repeat-y;
 }
+
 .content-title {
     display: block;
     margin-bottom: 20px;
@@ -113,23 +114,133 @@
     margin-top: 20px;
 }
 
-.contents > .content-2{
+.contents > .content-2 {
     background-image: url(../images/home/bakcgroundii_02.png);
 }
 
-@media screen and (orientation:landscape) {
+.panel-describe {
+    z-index: 2;
+    position: relative;
+}
+
+.contents > .content-2 .content-bottom {
+    background-image: url(../images/home/Figure_03_03.png);
+    background-size: contain;
+    margin-top: -10px;
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.content-bottom .panel {
+    background-color: #fff;
+    width: 300px;
+    margin: 50px auto;
+    margin-bottom: 70px;
+    text-align: center;
+    box-shadow: 0px 0px 32px rgba(4, 0, 0, .06);
+    border-radius: 12px;
+    opacity: .97;
+    filter: alpha(opacity=50);
+}
+
+.panel .panel-title {
+    border-radius: 12px 12px 0 0;
+    background-size: cover;
+    background-position: 0 0;
+    line-height: 38px;
+    color: #fff;
+    background-image: url(../images/home/Figure_03_04.png);
+    background-repeat: no-repeat;
+}
+
+.panel .panel-body {
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+    color: #666;
+}
+
+.persion-icon {
+    border: 5px solid #678ae6;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
+.infos {
+    margin-top: 20px;
+}
+
+.info-line {
+    line-height: 2.4rem;
+}
+
+.info-detail {
+    width: 50%;
+    text-align: left;
+}
+
+.info-line > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.info-line .info-detail:last-child {
+    margin-left: -6px;
+}
+
+.info-detail::before {
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    background-image: url(../images/home/Figure_03_05.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+    margin-top: -3px;
+    background-repeat: no-repeat;
+}
+
+.info-detail.icon-blue::before {
+    background-position: 0 0;
+}
+
+.info-detail.icon-red::before {
+    background-position: -34px 0;
+}
+
+.info-detail.icon-green::before {
+    background-position: -68px 0;
+}
+
+.info-detail.icon-sky::before {
+    background-position: -102px 0;
+}
+
+.info-line:last-child {
+    margin-top: 18px;
+}
+
+.contents > .content-3 {
+    background-image: url(../images/home/background_02.png);
+}
+
+@media screen and (orientation: landscape) {
     /* css[横向定义样式] */
-    .contents{
+    .contents {
         font-size: 1.4rem;
         letter-spacing: 0.1rem;
         line-height: 2.4rem;
     }
 
-    .contents > [class^="content-"] > .content-box{
+    .contents > [class^="content-"] > .content-box {
         padding: 60px 40px;
     }
 
-    .card{
+    .card {
         padding: 20px 30px;
     }
 }

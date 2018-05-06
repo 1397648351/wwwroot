@@ -71,7 +71,41 @@
                     </div>
                     <a class="btn btn-blue" id="pay" href="javascript:;">了解更多</a>
                 </div>
-                <div class="content-bottom"></div>
+                <div class="content-bottom">
+                    <div class="panel">
+                        <div class="panel-title">你的祖源分析</div>
+                        <div class="panel-body">
+                            <div class="persion-icon">
+                                <img src="/static/dist/pc/images/home/yy_0001.png">
+                            </div>
+                            <div class="infos">
+                                <div class="info-line">
+                                    <div class="info-detail icon-blue">
+                                        58.9%英国
+                                    </div>
+                                    <div class="info-detail icon-red">
+                                        14.2%法国
+                                    </div>
+                                </div>
+                                <div class="info-line">
+                                    <div class="info-detail icon-green">
+                                        14.6%希腊
+                                    </div>
+                                    <div class="info-detail icon-sky">
+                                        12.3%中国
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-3">
+            <div class="content-box">
+                <div class="content-title">
+                    <img src="__MOBILERESOURCE__/images/home/title3.png"/>
+                </div>
             </div>
         </div>
     </div>
@@ -83,10 +117,10 @@
 <script>
     $("#pay").click(function () {
         var url = "{:url('Index/wxPay')}";
-        $.post(url,{goods_id:1},function (res) {
-            if(res.status_code == 200){
+        $.post(url, {goods_id: 1}, function (res) {
+            if (res.status_code == 200) {
                 var data = res.data;
-                wxPay(data['timeStamp'],data['nonceStr'],data['package'],data['signType'],data['paySign']);
+                wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign']);
             }
         });
     })
