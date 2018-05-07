@@ -1,0 +1,36 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-后台管理{/block}
+{block name="other_css"}
+<!-- other css -->
+{/block}
+{block name="body"}
+<div data-options="region:'north'" style="height:50px;">
+</div>
+<div data-options="region:'west',title:'菜单'" style="width:150px;">
+    <ul id="menu" class="easyui-tree"></ul>
+</div>
+<div data-options="region:'center',title:'Center'">
+    123123123
+</div>
+<div data-options="region:'south'" style="height:50px;">south region
+</div>
+{/block}
+{block name="other_js"}
+<script>
+    $('#menu').tree({
+        "data": [{
+            "text": "订单"
+        }, {
+            "text": "系统",
+            "children": [{
+                "text": "用户"
+            }, {
+                "text": "角色",
+            }]
+        }],
+        onClick:function (node) {
+            alert(node.text)
+        }
+    });
+</script>
+{/block}

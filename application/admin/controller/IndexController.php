@@ -1,10 +1,12 @@
 <?php
 namespace app\admin\controller;
 
-class IndexController
+use app\common\controller\BaseController;
+
+class IndexController extends BaseController
 {
     public function index()
     {
-        return '后台管理模块';
+        return $this->fetch();
     }
 }
