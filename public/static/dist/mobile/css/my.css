@@ -37,7 +37,7 @@ a {
 
 .contents > [class^=content-] {
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     background-position: center 0px;
     background-color: transparent;
 }
@@ -54,7 +54,11 @@ a {
 
 .panel-describe > .describe-kinds {
     display: block;
-    margin-top: 10px;
+    margin: 10px auto;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    text-align: left;
 }
 
 .panel-describe > .describe-kinds > .describe-kinds-piece {
@@ -92,10 +96,11 @@ a {
     text-align: center;
     border-radius: 3px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     cursor: pointer;
 }
 
-.content-bottom{
-
+.content-bottom {
+    margin-top: 50px;
+    position: relative;
 }

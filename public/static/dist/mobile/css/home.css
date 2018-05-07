@@ -226,6 +226,183 @@
 
 .contents > .content-3 {
     background-image: url(../images/home/background_02.png);
+    color: #fff;
+}
+
+.content-bottom .content-bottom-img {
+    width: 100%;
+}
+
+.contents > .content-5 {
+    background-image: url(../images/home/background_06.png);
+}
+
+.selects-group {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.selects-group:first-child {
+    margin-top: 0;
+}
+
+.selects {
+    display: inline-block;
+    width: 40vw;
+    border-radius: 2px;
+    background-color: #fff;
+    background-repeat: repeat-y;
+    background-position: center;
+    position: relative;
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 0 1px #fff;
+    padding: 15px;
+    position: relative;
+    vertical-align: middle;
+    /*height: 260px;*/
+    height: 100%;
+}
+
+.selects:nth-child(even) {
+    margin-left: 2vw;
+}
+
+.selects:nth-child(odd) {
+    margin-right: 2vw;
+}
+
+.selects > * {
+    vertical-align: middle;
+    height: 100%;
+}
+
+.selects:before {
+    content: '';
+    background-image: url(../images/home/icon_09.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    width: 49px;
+    height: 72px;
+    margin: auto;
+}
+
+.selects-content {
+    height: auto;
+    text-align: left;
+}
+
+.selects-content-box {
+    vertical-align: middle;
+}
+
+.selects-content-box > .selectes-words, .selects-content-box > .selectes-title {
+    width: 100%;
+    display: block;
+}
+
+.selects-content-box > .selectes-title {
+    font-size: 1.6rem;
+}
+
+.selects-content-box > .selectes-words {
+    word-break: break-all;
+    margin-top: 16px;
+}
+
+.selects.selects-1:before {
+    background-position: 0 -88px;
+}
+
+.selects.selects-2:before {
+    background-position: -67px -87px;
+}
+
+.selects.selects-3:before {
+    background-position: -136px -87px;
+}
+
+.selects.selects-4::before {
+    background-position: -202px -87px;
+}
+
+.content-6 .content-bottom {
+    height: 600px;
+}
+
+.contents > .content-7 {
+    background-image: url(../images/home/background_02.jpg);
+}
+
+.options-group .options {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.options-group .options > * {
+    display: block;
+    margin: auto;
+}
+
+.options .options-icon {
+    background-image: url(../images/home/icon_05.png);
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 46px;
+}
+
+.options .options-name {
+    font-size: 1.8rem;
+    line-height: 3.7rem;
+    font-weight: 600;
+}
+
+.options .options-text {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    font-weight: 300;
+}
+
+.options-group .options:after {
+    content: '';
+    background-image: url(../images/home/Selected.png);
+    background-position: bottom;
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: height .2s linear;
+    -moz-transition: height .2s linear;
+    -webkit-transition: height .2s linear;
+    -o-transition: height .2s linear;
+}
+
+.options-group .options:hover:after {
+    height: 9px;
+}
+
+.options .options-icon.options-icon-1 {
+    background-position: 0 0;
+}
+
+.options .options-icon.options-icon-2 {
+    background-position: -62px 0;
+}
+
+.options .options-icon.options-icon-3 {
+    background-position: -125px 0;
+}
+
+.options .options-icon.options-icon-4 {
+    background-position: -186px 0;
 }
 
 @media screen and (orientation: landscape) {
