@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\BaseController;
+use app\admin\model\GoodsOrder;
 
 class IndexController extends BaseController
 {
@@ -16,7 +17,11 @@ class IndexController extends BaseController
         if ($this->request->isGet()) {
             return $this->fetch();
         } elseif ($this->request->isAjax()) {
-
+            $orderModel = model('goodsOrder');
+            $page = $this->request->param("page");
+            $rows = $this->request->param("rows");
+            $res = $orderModel->findAll($page, $rows);
+            $this->resTableJson($res['data'], $res['total']);
         }
     }
 }
