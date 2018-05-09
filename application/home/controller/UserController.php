@@ -103,6 +103,7 @@ class UserController extends BaseController
         $wxAppSecret = config('variable.wx_app_id');
         $wechat = new Wechat($wxAppId, $wxAppSecret);
         $res = $wechat->getOauthAccessToken();
+        dump($res);exit;
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
