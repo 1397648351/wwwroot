@@ -63,13 +63,13 @@ class User extends Base
         }
     }
 
-    public function addInfoByQq($user)
+    public function addInfoByQq($user,$openid)
     {
         $data = array();
-        $data['qq_openid'] = $user['openid'];
-        $data['avatar'] = $user['headimgurl'];
+        $data['qq_openid'] = $openid;
+        $data['avatar'] = $user['figureurl_qq_2'];
         $data['nickname'] = $user['nickname'];
-        $data['sex'] = $user['sex'];
+        $data['sex'] = $user['gender']=='男'?1:2;
         $data['create_time'] = time();
         $res = $this->save($data);
         if($res){

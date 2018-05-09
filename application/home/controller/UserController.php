@@ -129,13 +129,13 @@ class UserController extends BaseController
         $baseUrl = $qqOAuthConfig['back_url'];
         $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
         $accessToken = $qqOAuth->getAccessToken('picagene');
+        $openid = $qqOAuth->getOpenID($accessToken);
         $userInfo = $qqOAuth->getUserInfo($accessToken);
-        dump($userInfo);exit;
         $userModel = model('User');
-        $user = $userModel->findByOpenid($userInfo['openid'],'qq');
+        $user = $userModel->findByOpenid($openid,'qq');
         if(empty($user)) {
-            $res = $userModel->addInfoByQq($userInfo);
-            $user = $userModel->findByOpenid($userInfo['openid'],'qq');
+            $res = $userModel->addInfoByQq($userInfo,$openid);
+            $user = $userModel->findByOpenid($openid,'qq');
         }
         session('userInfo', $user);
         $this->redirect('Index/index');
