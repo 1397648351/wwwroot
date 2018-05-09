@@ -114,7 +114,7 @@ class UserController extends BaseController
             $user = $userModel->findByWxOpenid($openid,'wx');
         }
         session('userInfo', $user);
-        $this->fetch('Index/index');
+        $this->redirect('Index/index');
     }
 
     /**
@@ -137,7 +137,7 @@ class UserController extends BaseController
             $user = $userModel->findByOpenid($userInfo['openid'],'qq');
         }
         session('userInfo', $user);
-        $this->fetch('Index/index');
+        $this->redirect('Index/index');
     }
 
     /**
