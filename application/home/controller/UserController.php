@@ -106,9 +106,13 @@ class UserController extends BaseController
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
-        $userWxModel = model('UserWx');
-        $res = $userWxModel->addInfo($userInfo);
-        session('userInfo', $userInfo);
+        $userModel = model('User');
+        $user = $userModel->findByOpenid($openid,'wx');
+        if(empty($user)) {
+            $res = $userModel->addInfoByWx($userInfo);
+            $user = $userModel->findByWxOpenid($openid,'wx');
+        }
+        session('userInfo', $user);
         $this->fetch('Index/index');
     }
 
@@ -125,9 +129,13 @@ class UserController extends BaseController
         $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
         $accessToken = $qqOAuth->getAccessToken('picagene');
         $userInfo = $qqOAuth->getUserInfo($accessToken);
-        $userQqModel = model('UserQq');
-        $res = $userQqModel->addInfo($userInfo);
-        session('userInfo', $userInfo);
+        $userModel = model('User');
+        $user = $userModel->findByOpenid($userInfo['openid'],'qq');
+        if(empty($user)) {
+            $res = $userModel->addInfoByQq($userInfo);
+            $user = $userModel->findByOpenid($userInfo['openid'],'qq');
+        }
+        session('userInfo', $user);
         $this->fetch('Index/index');
     }
 

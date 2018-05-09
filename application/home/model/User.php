@@ -36,9 +36,47 @@ class User extends Base
         }
     }
 
-    public function addInfoByThreeParty()
+    public function findByOpenid($openid, $type)
     {
+        $map = array();
+        if($type == 'wx'){
+            $map['openid'] = $openid;
+        } else{
+            $map['qq_openid'] = $openid;
+        }
+        return $this->findByWhere($map);
+    }
 
+    public function addInfoByWx($user)
+    {
+        $data = array();
+        $data['wx_openid'] = $user['openid'];
+        $data['avatar'] = $user['headimgurl'];
+        $data['nickname'] = $user['nickname'];
+        $data['sex'] = $user['sex'];
+        $data['create_time'] = time();
+        $res = $this->save($data);
+        if($res){
+            return $this->id;
+        }else{
+            return false;
+        }
+    }
+
+    public function addInfoByQq($user)
+    {
+        $data = array();
+        $data['qq_openid'] = $user['openid'];
+        $data['avatar'] = $user['headimgurl'];
+        $data['nickname'] = $user['nickname'];
+        $data['sex'] = $user['sex'];
+        $data['create_time'] = time();
+        $res = $this->save($data);
+        if($res){
+            return $this->id;
+        }else{
+            return false;
+        }
     }
 
     /**
