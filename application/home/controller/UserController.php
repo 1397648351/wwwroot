@@ -130,6 +130,7 @@ class UserController extends BaseController
         $qqOAuth = new OAuth2($qqAppId, $qqAppSecret, $baseUrl);
         $accessToken = $qqOAuth->getAccessToken('picagene');
         $userInfo = $qqOAuth->getUserInfo($accessToken);
+        dump($userInfo);exit;
         $userModel = model('User');
         $user = $userModel->findByOpenid($userInfo['openid'],'qq');
         if(empty($user)) {
