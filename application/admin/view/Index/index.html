@@ -2,13 +2,14 @@
 {block name="title"}基因检测-后台管理{/block}
 {block name="other_css"}
 <!-- other css -->
-{/block}
-{block name="body"}
 <style>
-    #tabs{
-
+    #tabs .tabs-panels > .panel > .panel-body {
+        overflow: hidden;
     }
 </style>
+{/block}
+{block name="class"}easyui-layout{/block}
+{block name="body"}
 <div data-options="region:'north'" style="height:50px;">
 </div>
 <div data-options="region:'west',title:'菜单'" style="width:150px;">
@@ -16,9 +17,8 @@
 </div>
 <div data-options="region:'center',title:'Center'">
     <div id="tabs" height="100%" class="easyui-tabs">
-        <div title="Tab1">
-            <iframe name="indextab" scrolling="auto" src="https://wwww.baidu.com" frameborder="0"
-                    style="width:100%;height:100%;"></iframe>
+        <div title="首页">
+            首页
         </div>
 
     </div>
@@ -30,7 +30,8 @@
 <script>
     $('#menu').tree({
         "data": [{
-            "text": "订单管理"
+            "text": "订单管理",
+            "url": "{:url('Index/order')}"
         }, {
             "text": "商品管理"
         }, {
@@ -45,23 +46,14 @@
             // 添加一个新的标签页面板（tab panel）
             $('#tabs').tabs('add', {
                 title: node.text,
-                href:"https://wwww.baidu.com",
-                closable: true,
-                height: '100%',
-                tools: [{
-                    iconCls: 'icon-mini-refresh',
-                    handler: function () {
-                        alert('refresh');
-                    }
-                }]
+                content: '<iframe name="indextab" scrolling="auto" src="' + node.url + '" frameborder="0" style="width:100%;height:100%;"></iframe>',
+                closable: true
             });
         }
-
     });
     $('#tabs').tabs({
-        fit:true,
-        plain:false,
-        border:false
+        fit: true,
+        border: false,
     });
 </script>
 {/block}
