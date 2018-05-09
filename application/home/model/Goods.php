@@ -10,6 +10,7 @@
 
 namespace app\home\model;
 
+use app\common\model\Base;
 
 class Goods extends Base
 {

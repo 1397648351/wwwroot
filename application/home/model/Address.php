@@ -10,6 +10,7 @@
 
 namespace app\home\model;
 
+use app\common\model\Base;
 
 class Address extends Base
 {
@@ -26,9 +27,9 @@ class Address extends Base
         $data['pay_taxes_id'] = $payTaxesId;
         $data['create_time'] = time();
         $res = $this->save($data);
-        if($res){
+        if ($res) {
             return $this->id;
-        }else{
+        } else {
             return false;
         }
     }

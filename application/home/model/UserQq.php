@@ -10,6 +10,7 @@
 
 namespace app\home\model;
 
+use app\common\model\Base;
 
 class UserQq extends Base
 {
@@ -22,9 +23,9 @@ class UserQq extends Base
         $data['headimgurl'] = $qqUser['headimgurl'];
         $data['create_time'] = time();
         $res = $this->save($data);
-        if($res){
+        if ($res) {
             return $this->id;
-        }else{
+        } else {
             return false;
         }
     }

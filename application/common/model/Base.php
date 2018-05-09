@@ -8,7 +8,7 @@
 // | Date  : 2018/3/22
 // +----------------------------------------------------------------------
 
-namespace app\home\model;
+namespace app\common\model;
 
 
 use think\Model;
