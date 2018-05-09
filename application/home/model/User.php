@@ -40,7 +40,7 @@ class User extends Base
     {
         $map = array();
         if($type == 'wx'){
-            $map['openid'] = $openid;
+            $map['wx_openid'] = $openid;
         } else{
             $map['qq_openid'] = $openid;
         }
