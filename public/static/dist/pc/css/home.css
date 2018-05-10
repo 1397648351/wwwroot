@@ -12,7 +12,7 @@
 }
 
 .contents > .content-0 {
-    height: 637px;
+    min-height: 300px;
     overflow: hidden;
     text-align: center;
     position: relative;
@@ -32,6 +32,10 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
+}
+
+.slide-image-box img{
+    width: 100%;
 }
 
 .slide-box.slide-box-2 .slide-image-box{

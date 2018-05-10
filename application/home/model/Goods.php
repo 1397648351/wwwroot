@@ -21,4 +21,10 @@ class Goods extends Base
         $fields = 'id,subject,price,body,cover';
         return $this->findByWhere($map, $fields);
     }
+
+    public function fetchAll()
+    {
+        $fields = 'id,subject,price,body,cover';
+        return $this->field($fields)->select();
+    }
 }

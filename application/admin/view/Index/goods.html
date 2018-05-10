@@ -1,0 +1,60 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-商品管理{/block}
+{block name="other_css"}
+<!-- other css -->
+<style>
+    .datagrid-body {
+        overflow-x: scroll;
+    }
+</style>
+{/block}
+{block name="class"}{/block}
+{block name="body"}
+<table id="orderList" width="100%"></table>
+
+{/block}
+{block name="other_js"}
+<script>
+    $('#orderList').datagrid({
+        url: "{:url('Index/goods')}",
+        method: "POST",
+        pagination: true,
+        striped: true,
+        singleSelect: true,
+        pagePosition: 'top',
+        columns: [[
+            {field: 'id', title: 'ID', width: 50, align: 'center', checkbox: true},
+            {field: 'subject', title: '商品名称', width: 150, align: 'center', editor: 'text'},
+            {field: 'price', title: '价格', width: 70, align: 'center'},
+            {field: 'body', title: '描述', width: 200, align: 'center'},
+            {
+                field: 'cover', title: '图片', width: 300, align: 'center', fixed: true,
+                formatter: function (value, row, index) {
+                    var img = '<img src="__COMMONRESOURCE__/images/slider/' + value + '" height="100" width="300" title="' + value + '" alt="' + value + '" />'
+                    return img;
+                }
+            },
+            {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
+            {field: 'update_time', title: '更新时间', width: 150, align: 'center'},
+            {
+                field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
+                    var e = '<a href="#" onclick="editrow(' + index + ')">Edit</a>';
+                    return e;
+                }
+            }
+        ]]
+    });
+    $('#orderList').datagrid('getPager').pagination({
+        beforePageText: '第',
+        afterPageText: '页，共 {pages} 页',
+        displayMsg: '当前显示 {from} - {to} 条记录，共 {total} 条记录',
+    });
+
+    function editrow(row) {
+        $('#orderList').datagrid('selectRow',row);
+        var rowdata = $('#orderList').datagrid('getSelected');
+
+    }
+
+</script>
+{/block}

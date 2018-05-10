@@ -33,7 +33,8 @@
             "text": "订单管理",
             "url": "{:url('Index/order')}"
         }, {
-            "text": "商品管理"
+            "text": "商品管理",
+            "url": "{:url('Index/goods')}"
         }, {
             "text": "系统",
             "children": [{
@@ -43,10 +44,21 @@
             }]
         }],
         onClick: function (node) {
+            var tab = $('#tabs').tabs('getTab', node.text);
+            if(tab){
+                $('#tabs').tabs('select', node.text);
+                return;
+            }
+            var content = '';
+            if (!node.url) {
+                content = "empty";
+            } else {
+                content = '<iframe name="indextab" scrolling="auto" src="' + node.url + '" frameborder="0" style="width:100%;height:100%;"></iframe>';
+            }
             // 添加一个新的标签页面板（tab panel）
             $('#tabs').tabs('add', {
                 title: node.text,
-                content: '<iframe name="indextab" scrolling="auto" src="' + node.url + '" frameborder="0" style="width:100%;height:100%;"></iframe>',
+                content: content,
                 closable: true
             });
         }

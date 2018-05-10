@@ -24,4 +24,17 @@ class IndexController extends BaseController
             $this->resTableJson($res['data'], $res['total']);
         }
     }
+
+    public function goods()
+    {
+        if ($this->request->isGet()) {
+            return $this->fetch();
+        } elseif ($this->request->isAjax()) {
+            $orderModel = model('goods');
+            $page = $this->request->param("page");
+            $rows = $this->request->param("rows");
+            $res = $orderModel->findAll($page, $rows);
+            $this->resTableJson($res['data'], $res['total']);
+        }
+    }
 }

@@ -174,6 +174,23 @@
                 var count = children.length;
                 ele.css('width', count * 100 + "%");
                 ele.children().css('width', 100 / count + '%');
+                var imgs = ele.find('.content-box.slide-box>.slide-image-box>img');
+                var height = 0;
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i].height > height) {
+                        height = imgs[i].height;
+                    }
+                }
+                ele.parent().css('height', height);
+                $(window).bind('resize',function (e) {
+                    height = 0;
+                    for (var i = 0; i < imgs.length; i++) {
+                        if (imgs[i].height > height) {
+                            height = imgs[i].height;
+                        }
+                    }
+                    ele.parent().css('height', height);
+                });
                 var hover = false;
                 children.mouseover(function () {
                     hover = true;
