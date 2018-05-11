@@ -23,4 +23,20 @@ class Goods extends Base
         $result['data'] = $data;
         return $result;
     }
+
+    public function editItem($data, $type)
+    {
+        if ($type == 'add') $data['create_time'] = time();
+        $data['update_time'] = time();
+        if ($type == 'add') {
+            $this->insert($data, true);
+        } else {
+            $this->where('id', $data['id'])->data($data)->update();;
+        }
+    }
+
+    public function delItem($id)
+    {
+        $this->where('id', $id)->delete();
+    }
 }

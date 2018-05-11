@@ -6,33 +6,39 @@
     .datagrid-body {
         overflow-x: scroll;
     }
-    .pd-txt{
-        margin-bottom:10px;
+
+    .pd-txt {
+        margin-bottom: 10px;
     }
 </style>
 {/block}
 {block name="class"}{/block}
 {block name="body"}
 <table id="orderList" width="100%"></table>
-<div id="win" class="easyui-window" title="添加" style="width:300px;height:300px"
-     data-options="iconCls:'icon-edit',modal:true,closed:false,minimizable:false">
-    <div class="easyui-panel" data-options="fit:true" style="padding:10px;">
+<div id="win" class="easyui-window" title="添加" style="width:350px;height:340px"
+     data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
         <form id="ff" method="post">
             <div class="pd-txt">
-                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="name"
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="name" id="name"
                        data-options="label:'商品名称：',required:true,missingMessage:'请输入商品名称'"/>
             </div>
             <div class="pd-txt">
                 <input class="easyui-validatebox easyui-numberbox" style="width:100%" type="text" name="price"
-                       data-options="label:'价格：',required:true,missingMessage:'请输入价格'"/>
+                       id="price"
+                       data-options="label:'价格：',required:true,missingMessage:'请输入价格',min:1"/>
             </div>
             <div class="pd-txt">
-                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover"
-                       data-options="label:'图片：',required:true,missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="img" id="img"
+                       data-options="label:'图片名称：',required:true,missingMessage:'请输入图片名称',validType:'image'"/>
             </div>
             <div class="pd-txt">
-                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="body"
-                       data-options="label:'描述：',required:false"/>
+                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover" id="cover"
+                       data-options="label:'图片：',missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%;" type="text" name="body" id="body"
+                       data-options="label:'描述：',required:false,multiline:true,height:60"/>
             </div>
             <div style="text-align:center;padding:5px 0">
                 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
@@ -43,6 +49,7 @@
 {/block}
 {block name="other_js"}
 <script>
+    var type = '', id = '';
     $('#orderList').datagrid({
         url: "{:url('Index/goods')}",
         method: "POST",
@@ -66,7 +73,7 @@
             {field: 'update_time', title: '更新时间', width: 150, align: 'center'},
             {
                 field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
-                    var e = '<a href="#" onclick="editrow(' + index + ')">Edit</a>';
+                    var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="editrow(' + index + ')">编辑</a>';
                     return e;
                 }
             }
@@ -74,7 +81,15 @@
         toolbar: [{
             iconCls: 'icon-add',
             handler: function () {
-
+                $('#ff').form('reset');
+                $("#win").window({
+                    closed: false,
+                    title: "添加"
+                });
+                // $('#cover').filebox({
+                //     required: true
+                // });
+                type = 'add';
             }
         }, '-', {
             id: 'btn_remove',
@@ -82,6 +97,32 @@
             disabled: true,
             handler: function () {
                 var rowdata = $('#orderList').datagrid('getSelected');
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('Index/upload')}",
+                    data: {
+                        id:rowdata.id,
+                        type:'del'
+                    },
+                    success: function (response) {
+                        // 根据返回结果指定界面操作
+                        if (response.status_code == "1001") {
+                            $.messager.progress('close');
+                            $.messager.show({
+                                title: '成功',
+                                msg: '保存成功'
+                            });
+                            $('#orderList').datagrid('reload');
+                        }else{
+                            $.messager.progress('close');
+                            $.messager.alert('错误', response.msg, 'error');
+                        }
+                    },
+                    error: function () {
+                        $.messager.progress('close');
+                        $.messager.alert('错误', '上传错误！', 'error');
+                    }
+                })
             }
         }],
         onCheck: function (rowIndex, rowData) {
@@ -89,27 +130,97 @@
         },
         onLoadSuccess: function (data) {
             $('#btn_remove').linkbutton("disable");
+            $('a[name=btn_action]').linkbutton();
         }
     });
-    $('#orderList').datagrid('getPager').pagination({
-        beforePageText: '第',
-        afterPageText: '页，共 {pages} 页',
-        displayMsg: '当前显示 {from} - {to} 条记录，共 {total} 条记录',
-    });
+
+    $("#cover").filebox({
+        onChange: function (e) {
+            // var selectedFile = $('#cover').parent().find('input[type="file"]')[0].files[0];
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var dataURL = reader.result;
+            //     //加载图片获取图片真实宽度和高度
+            //     var image = new Image();
+            //     image.onload = function () {
+            //         var width = image.width;
+            //         var height = image.height;
+            //         $("#").attr('src', dataURL);
+            //     }
+            //     image.src = dataURL;
+            // };
+            // reader.readAsDataURL(selectedFile);
+        }
+    })
+
+    function submitForm() {
+        if (!$('#ff').form('validate')) {
+            $.messager.alert('错误', '请输入正确的信息！', 'error');
+            return;
+        }
+        var formData = new FormData();
+        var selectedFile = $('#cover').parent().find('input[type="file"]')[0].files[0];
+        formData.append("file", selectedFile);
+        formData.append("name", $('#name').textbox('getValue'));
+        formData.append("price", $('#price').numberbox('getValue'));
+        formData.append("img", $('#img').textbox('getValue'));
+        formData.append("body", $('#body').textbox('getValue'));
+        formData.append("type", type);
+        formData.append("id", id);
+        $.messager.progress({
+            title: '正在保存'
+        });
+        $.ajax({
+            type: 'post',
+            url: "{:url('Index/upload')}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // 根据返回结果指定界面操作
+                if (response.status_code == "1001") {
+                    $.messager.progress('close');
+                    $.messager.show({
+                        title: '成功',
+                        msg: '保存成功'
+                    });
+                    $("#win").window('close');
+                }
+                $('#orderList').datagrid('reload');
+            },
+            error: function () {
+                $.messager.progress('close');
+                $.messager.alert('错误', '上传错误！', 'error');
+            }
+        })
+    }
 
     function editrow(row) {
         $('#orderList').datagrid('selectRow', row);
         var rowdata = $('#orderList').datagrid('getSelected');
-
+        $('#ff').form('reset');
+        $('#name').textbox("setValue", rowdata.subject);
+        $('#price').numberbox("setValue", rowdata.price);
+        $('#img').textbox("setValue", rowdata.cover);
+        $('#body').textbox("setValue", rowdata.body);
+        // $('#cover').filebox({
+        //     required: false
+        // });
+        id = rowdata.id;
+        $("#win").window({
+            closed: false,
+            title: "修改"
+        });
+        type = 'edit';
     }
 
     $.extend($.fn.validatebox.defaults.rules, {
-        number: {
+        image: {
             validator: function (value) {
-                var re = /\D/;
-                return !re.test(value);
+                var re = /\.jpg|\.png|\.jpeg/i
+                return value.match(re) != null;
             },
-            message: '请输入数字.'
+            message: '请输入正确的文件名.'
         }
     });
 

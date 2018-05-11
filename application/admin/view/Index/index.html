@@ -10,18 +10,14 @@
 {/block}
 {block name="class"}easyui-layout{/block}
 {block name="body"}
-<div data-options="region:'north'" style="height:50px;">
+<div class="easyui-panel" data-options="region:'north'" style="height:55px;padding:5px 20px;">
+    <img src="__COMMONRESOURCE__/images/logo.png" height="40"/>
 </div>
 <div data-options="region:'west',title:'菜单'" style="width:150px;">
     <ul id="menu" class="easyui-tree"></ul>
 </div>
 <div data-options="region:'center',title:'Center'">
-    <div id="tabs" height="100%" class="easyui-tabs">
-        <div title="首页">
-            首页
-        </div>
-
-    </div>
+    <div id="tabs" height="100%" class="easyui-tabs"></div>
 </div>
 <div data-options="region:'south'" style="height:50px;">底部</div>
 
@@ -31,21 +27,16 @@
     $('#menu').tree({
         "data": [{
             "text": "订单管理",
-            "url": "{:url('Index/order')}"
+            "url": "{:url('Index/order')}",
+            children: []
         }, {
             "text": "商品管理",
             "url": "{:url('Index/goods')}"
-        }, {
-            "text": "系统",
-            "children": [{
-                "text": "用户"
-            }, {
-                "text": "角色",
-            }]
         }],
         onClick: function (node) {
+            if (!$('#menu').tree('isLeaf', node.target)) return;
             var tab = $('#tabs').tabs('getTab', node.text);
-            if(tab){
+            if (tab) {
                 $('#tabs').tabs('select', node.text);
                 return;
             }
@@ -59,7 +50,18 @@
             $('#tabs').tabs('add', {
                 title: node.text,
                 content: content,
-                closable: true
+                closable: true,
+                tools: [{
+                    iconCls: 'icon-mini-refresh',
+                    handler: function () {
+                        $('#tabs').tabs('update', {
+                            tab: $('#tabs').tabs('getSelected'),
+                            options: {
+                                content: content
+                            }
+                        });
+                    }
+                }]
             });
         }
     });
