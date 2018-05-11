@@ -11,12 +11,10 @@ class IndexController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $u = array();
-        $u['nickname'] = 'liutao';
-        session('userInfo', $u);
         $login = false;
         $action = $this->request->action();
-        if ($action != 'login') {
+        if ($action != 'login' && $action != 'logout') {
+            $user = array();
             if (session('?userInfo')) {
                 $user = session('userInfo');
                 if ($this->validateLogin($user['nickname'])) {
@@ -27,6 +25,7 @@ class IndexController extends BaseController
                 session(null);
                 $this->redirect(url('Index/login'));
             }
+            $this->assign('userInfo', $user);
         }
     }
 
@@ -92,15 +91,32 @@ class IndexController extends BaseController
 
     public function login()
     {
-        if ($this->request->isGet()) return $this->fetch();
+        session(null);
+        if ($this->request->isGet()) {
+            return $this->fetch();
+        }
+        $user = $_POST['user'];
+        $psw = md5($_POST['psw']);
+        if ($this->validateLogin($user, $psw)) {
+            $this->resJson(array());
+        } else {
+            $this->resJson(array(), 400, '用户名或密码错误！');
+        }
     }
 
-    public function validateLogin($user, $psw = null)
+    public function logout()
+    {
+        session(null);
+        $this->redirect(url('Index/login'));
+    }
+
+    public function validateLogin($user = null, $psw = null)
     {
         $userModel = model('user');
         $user = $userModel->getUser($user, $psw);
         if (isset($user) && $user['role'] == 1) {
-            session('userInfo', $user);
+            if (!session('?userInfo'))
+                session('userInfo', $user);
             return true;
         }
         return false;

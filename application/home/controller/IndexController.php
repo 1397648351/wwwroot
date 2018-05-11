@@ -19,7 +19,8 @@ class IndexController extends BaseController
     public function test()
     {
         //echo Env::get('app_path');
-        echo Env::get('root_path');
+        echo md5('Picagene789');
+        //echo Env::get('root_path');
 //        $req = $this->request->ip();
 //        echo $req;
     }

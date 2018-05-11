@@ -17,9 +17,10 @@ class User extends Base
         $map = array();
         $map['nickname'] = $user;
         $map['role'] = 1;
+        $fields = 'id,nickname,role';
         if (isset($psw) && !empty($psw)) {
-            $map['password'] = $user;
+            $map['password'] = $psw;
         }
-        return $this->where($map)->find();
+        return $this->field($fields)->where($map)->find();
     }
 }
