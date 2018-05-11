@@ -14,7 +14,7 @@
 {/block}
 {block name="class"}{/block}
 {block name="body"}
-<table id="orderList" width="100%"></table>
+<table id="orderList"></table>
 <div id="win" class="easyui-window" title="添加" style="width:350px;height:340px"
      data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
     <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
@@ -52,16 +52,18 @@
     var type = '', id = '';
     $('#orderList').datagrid({
         url: "{:url('Index/goods')}",
+        fit: true,
         method: "POST",
         pagination: true,
         striped: true,
         singleSelect: true,
-        pagePosition: 'top',
+        pagePosition: 'bottom',
+        border:false,
         columns: [[
-            {field: 'id', title: 'ID', width: 50, align: 'center', checkbox: true},
+            {field: 'id', title: 'ID', width: 50, align: 'center'},
             {field: 'subject', title: '商品名称', width: 150, align: 'center', editor: 'text'},
             {field: 'price', title: '价格', width: 70, align: 'center'},
-            {field: 'body', title: '描述', width: 200, align: 'center'},
+            {field: 'body', title: '描述', width: 300, align: 'center'},
             {
                 field: 'cover', title: '图片', width: 300, align: 'center', fixed: true,
                 formatter: function (value, row, index) {
@@ -72,7 +74,7 @@
             {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
             {field: 'update_time', title: '更新时间', width: 150, align: 'center'},
             {
-                field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
+                field: 'action', title: '操作', width: 50, align: 'center', formatter: function (value, row, index) {
                     var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="editrow(' + index + ')">编辑</a>';
                     return e;
                 }
@@ -101,8 +103,8 @@
                     type: 'post',
                     url: "{:url('Index/upload')}",
                     data: {
-                        id:rowdata.id,
-                        type:'del'
+                        id: rowdata.id,
+                        type: 'del'
                     },
                     success: function (response) {
                         // 根据返回结果指定界面操作
@@ -113,7 +115,7 @@
                                 msg: '保存成功'
                             });
                             $('#orderList').datagrid('reload');
-                        }else{
+                        } else {
                             $.messager.progress('close');
                             $.messager.alert('错误', response.msg, 'error');
                         }

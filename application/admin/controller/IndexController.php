@@ -8,6 +8,28 @@ use think\facade\Env;
 
 class IndexController extends BaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $u = array();
+        $u['nickname'] = 'liutao';
+        session('userInfo', $u);
+        $login = false;
+        $action = $this->request->action();
+        if ($action != 'login') {
+            if (session('?userInfo')) {
+                $user = session('userInfo');
+                if ($this->validateLogin($user['nickname'])) {
+                    $login = true;
+                }
+            }
+            if (!$login) {
+                session(null);
+                $this->redirect(url('Index/login'));
+            }
+        }
+    }
+
     public function index()
     {
         return $this->fetch();
@@ -66,5 +88,21 @@ class IndexController extends BaseController
         } catch (Exception $e) {
             $this->resJson($datas, '500', $e->getMessage());
         }
+    }
+
+    public function login()
+    {
+        if ($this->request->isGet()) return $this->fetch();
+    }
+
+    public function validateLogin($user, $psw = null)
+    {
+        $userModel = model('user');
+        $user = $userModel->getUser($user, $psw);
+        if (isset($user) && $user['role'] == 1) {
+            session('userInfo', $user);
+            return true;
+        }
+        return false;
     }
 }

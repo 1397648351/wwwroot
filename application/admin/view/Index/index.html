@@ -10,13 +10,24 @@
 {/block}
 {block name="class"}easyui-layout{/block}
 {block name="body"}
-<div class="easyui-panel" data-options="region:'north'" style="height:55px;padding:5px 20px;">
-    <img src="__COMMONRESOURCE__/images/logo.png" height="40"/>
+<div class="easyui-panel" data-options="region:'north'" style="height:55px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'west',border:false" style="width:150px;padding: 5px 20px;">
+            <img src="__COMMONRESOURCE__/images/logo.png" height="40"/>
+        </div>
+        <div data-options="region:'center',border:false"></div>
+        <div data-options="region:'east',border:false" style="width:120px;padding: 10px;">
+            <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-man">admin</a>
+            <div id="mm1">
+                <div iconCls="icon-remove">退出</div>
+            </div>
+        </div>
+    </div>
 </div>
 <div data-options="region:'west',title:'菜单'" style="width:150px;">
     <ul id="menu" class="easyui-tree"></ul>
 </div>
-<div data-options="region:'center',title:'Center'">
+<div data-options="region:'center'">
     <div id="tabs" height="100%" class="easyui-tabs"></div>
 </div>
 <div data-options="region:'south'" style="height:50px;">底部</div>
@@ -54,6 +65,7 @@
                 tools: [{
                     iconCls: 'icon-mini-refresh',
                     handler: function () {
+                        $('#tabs').tabs('select', node.text);
                         $('#tabs').tabs('update', {
                             tab: $('#tabs').tabs('getSelected'),
                             options: {
