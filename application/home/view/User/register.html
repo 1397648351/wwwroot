@@ -85,32 +85,50 @@
             var sure_pwd = $("#sure_pwd").val();
             var mobile = $("#mobile").val();
             var code = $("#code").val();
-            var res1 = checkParam(nickname,'key');
-            var res2 = checkParam(pwd,'pwd');
-            var res3 = checkParam(sure_pwd,'sure_pwd');
-            var res4 = checkParam(mobile,'mobile');
-            var res5 = checkParam(code,'code');
-            if(res1 && res2 && res3 && res4 && res5){
+            var res1 = checkParam(nickname, 'key');
+            var res2 = checkParam(pwd, 'pwd');
+            var res3 = checkParam(sure_pwd, 'sure_pwd');
+            var res4 = checkParam(mobile, 'mobile');
+            var res5 = checkParam(code, 'code');
+            if (res1 && res2 && res3 && res4 && res5) {
                 var registerUrl = "{:url('User/register')}";
-                $.post(registerUrl,{
-                    username:nickname,
-                    password:pwd,
-                    mobile:mobile,
-                    code:code
-                },function (res) {
-                    if(res.status_code == 200){
-                        window.location.href = "{:url('Index/index')}?user_id="+res.data.id;
-                    } else{
+                $.post(registerUrl, {
+                    username: nickname,
+                    password: pwd,
+                    mobile: mobile,
+                    code: code
+                }, function (res) {
+                    if (res.status_code == 200) {
+                        window.location.href = "{:url('Index/index')}?user_id=" + res.data.id;
+                    } else {
                         console.log(res);
                     }
                 })
+            } else {
+                alert('请输入正确的手机号');
+                clearInterval(interval);
+                $("#send_code").prop('disabled', false);
+                $("#send_code").val('获取验证码');
             }
         });
 
         $("#send_code").click(function () {
+            $("#send_code").prop('disabled', true);
+            var second = 20;
+            $("#send_code").val(second + 's');
+            var interval = setInterval(function () {
+                second -= 1;
+                if (second == 0) {
+                    clearInterval(interval);
+                    $("#send_code").prop('disabled', false);
+                    $("#send_code").val('获取验证码');
+                } else {
+                    $("#send_code").val(second + 's');
+                }
+            }, 1000);
             var mobile = $("#mobile").val();
             var res = checkParam(mobile, 'mobile');
-            if(res) {
+            if (res) {
                 var sendUrl = "{:url('User/sendSms')}";
                 $.post(sendUrl, {
                     mobile: mobile,
@@ -118,8 +136,19 @@
                 }, function (res) {
                     if (res.status_code != 200) {
                         console.log(res.status_code);
+                    } else {
+                        alert(res.msg);
+                        clearInterval(interval);
+                        $("#send_code").prop('disabled', false);
+                        $("#send_code").val('获取验证码');
                     }
                 })
+            } else {
+                alert('请输入正确的手机号');
+                clearInterval(interval);
+                $('#mobile').val('');
+                $("#send_code").prop('disabled', false);
+                $("#send_code").val('获取验证码');
             }
         });
 
@@ -142,18 +171,18 @@
         function checkParam(param, describe) {
             var flag = true;
             var msg = '';
-            switch (describe){
+            switch (describe) {
                 case "key":
-                    if(param.length<1) {
+                    if (param.length < 1) {
                         $("#key").next(".state").addClass('state-error');
                         msg = '用户名不能为空';
                         flag = false;
-                    }else {
+                    } else {
                         $("#key").next(".state").addClass('state-success');
                     }
                     break;
                 case "pwd":
-                    if(param.length<1){
+                    if (param.length < 1) {
                         $("#pwd").next(".state").addClass('state-error');
                         msg = '密码不能为空';
                         flag = false;
@@ -163,11 +192,11 @@
                     break;
                 case "sure_pwd":
                     var pwd = $("#pwd").val();
-                    if(param.length<1){
+                    if (param.length < 1) {
                         $("#sure_pwd").next(".state").addClass('state-error');
                         msg = '确认密码不能为空';
                         flag = false;
-                    }else if(param != pwd){
+                    } else if (param != pwd) {
                         $("#sure_pwd").next(".state").addClass('state-error');
                         msg = '两次密码输入不一致';
                         flag = false;
@@ -176,35 +205,35 @@
                     }
                     break;
                 case "mobile":
-                    if(param.length == 0 ){
+                    if (param.length == 0) {
                         $("#mobile").next(".state").addClass('state-error');
                         msg = '手机号不能为空';
                         flag = false;
-                    }else if(!(/^1\d{10}$/.test(param))){
+                    } else if (!(/^1\d{10}$/.test(param))) {
                         $("#mobile").next(".state").addClass('state-error');
                         msg = '手机号格式不正确';
                         flag = false;
-                    } else{
+                    } else {
                         $("#mobile").next(".state").addClass('state-success');
                     }
                     break;
                 case "code":
-                    if(param.length == 0 ){
+                    if (param.length == 0) {
                         $("#code").next(".state").addClass('state-error');
                         msg = '验证码不能为空';
                         flag = false;
-                    } else if(!(/^\d{6}$/.test(param))){
+                    } else if (!(/^\d{6}$/.test(param))) {
                         $("#code").next(".state").addClass('state-error');
                         msg = '验证码格式不正确';
                         flag = false;
-                    }else {
+                    } else {
                         $("#code").next(".state").addClass('state-success');
                     }
                     break;
                 default :
                     break;
             }
-            if(flag){
+            if (flag) {
                 return true;
             } else {
                 console.log(msg);

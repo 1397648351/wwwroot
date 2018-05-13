@@ -16,6 +16,16 @@ class IndexController extends BaseController
         return $this->fetch();
     }
 
+    public function agreement()
+    {
+        return $this->fetch();
+    }
+
+    public function agreement1()
+    {
+        return $this->fetch();
+    }
+
     public function test()
     {
         //echo Env::get('app_path');

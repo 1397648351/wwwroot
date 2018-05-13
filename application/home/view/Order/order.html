@@ -54,7 +54,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">详细地址</label>
-                        <input class="form-control" id="detail_address" value="" placeholder="输入详细地址" style="width: 536px;"/>
+                        <input class="form-control" id="detail_address" value="" placeholder="输入详细地址"
+                               style="width: 536px;"/>
                     </div>
                 </div>
             </div>
@@ -66,7 +67,7 @@
                     <div class="form-group">
                         <label class="form-group-th">支付方式</label>
                         <!--<a href="javascript:;" class="pay-type selected" data-pay="ali"><img-->
-                                <!--src="__PCRESOURCE__/images/gmym/gm_06.png"/></a>-->
+                        <!--src="__PCRESOURCE__/images/gmym/gm_06.png"/></a>-->
                         <a href="javascript:;" class="pay-type" data-pay="wx"><img
                                 src="__PCRESOURCE__/images/gmym/gm_08.png"/></a>
                     </div>
@@ -91,7 +92,8 @@
                     </div>
                     <div class="form-group" name="invoice">
                         <label class="form-group-th">留言</label>
-                        <input class="form-control" id="user_msg" value="" placeholder="有特殊需求请在此键入，但无法保证实现。详情请来电咨询。选填" style="width: 536px;"/>
+                        <input class="form-control" id="user_msg" value="" placeholder="有特殊需求请在此键入，但无法保证实现。详情请来电咨询。选填"
+                               style="width: 536px;"/>
                         <div class="form-tip">如需发票请认真核对抬头和纳税人识别号，一经开出恕不再次开具。</div>
                     </div>
                 </div>
@@ -108,7 +110,14 @@
                         </div>
                     </div>
                     <div class="content-details-right">
-                        <input type="button" class="btn-confirm" id="send_order" value="提交订单"/>
+                        <div>
+                            <div style="text-align: left;margin-bottom: 10px;padding-left: 10px;">
+                                <input type="checkbox" id="agree" onchange="agreement(this);" value="我同意"/>
+                                <label for="agree">我同意《<a href="{:url('Index/agreement1')}" style="color: #0a69d6"
+                                                          target="_blank">知情同意书</a>》</label>
+                            </div>
+                            <input type="button" disabled class="btn-confirm" id="send_order" value="提交订单"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,14 +151,15 @@
                 }
             }
         });
+        agreement($('#agree').get(0));
         $("[name='invoice_need']").change(function () {
-            if(this.id=='invoice_0'){
+            if (this.id == 'invoice_0') {
                 invoice_type = 0;
                 $('[name=invoice]').hide()
-            }else{
-                if(this.id=='invoice_1'){
+            } else {
+                if (this.id == 'invoice_1') {
                     invoice_type = 1;
-                }else{
+                } else {
                     invoice_type = 2;
                 }
                 $('[name=invoice]').show()
@@ -161,43 +171,76 @@
             $(".pay-type.selected").removeClass("selected");
             $(this).addClass("selected");
             payType = $(this).data('pay');
-            //console.log(payType);
         });
-        
+
         $("#send_order").click(function () {
             var goodsId = $("#goods_id").val();
             var num = $('.item-amount').getNumber();
             var username = $("#name").val();
+            if (username == '') {
+                alert('请输入收件人姓名');
+                return;
+            }
             var mobile = $("#mobile").val();
+            if (mobile == '') {
+                alert('请输入联系电话');
+                return;
+            }
             var email = $("#email").val();
+            if (email == '') {
+                alert('请输入邮箱地址');
+                return;
+            }
             var city = $("#P1").val() + $("#C1").val();
+            if (city == '') {
+                alert('请选择地址');
+                return;
+            }
             var detail_address = $("#detail_address").val();
-            var invoice_title = $("#invoice_title").val();
-            var pay_taxes_id = $("#pay_taxes_id").val();
-            var user_msg = $("#user_msg").val();
+            if (detail_address == '') {
+                alert('请输入详细地址');
+                return;
+            }
+            var invoice_title = '';
+            var pay_taxes_id = '';
+            if (!$('#invoice_0').get(0).checked) {
+                invoice_title = $("#invoice_title").val();
+                pay_taxes_id = $("#pay_taxes_id").val();
+                if (invoice_title == '' || pay_taxes_id == '') {
+                    alert('请输入发票信息');
+                    return;
+                }
+            }
             var url = "{:url('Order/goodsOrder')}";
-            $.post(url,{
-                goods_id:goodsId,
-                num:num,
-                username:username,
-                mobile:mobile,
-                email:email,
-                city:city,
-                detail_address:detail_address,
-                invoice_type:invoice_type,
-                invoice_title:invoice_title,
-                pay_taxes_id:pay_taxes_id,
-                pay_type:'wx',
-                user_msg:user_msg
-            },function (res) {
-                if(res.status_code == 200){
+            $.post(url, {
+                goods_id: goodsId,
+                num: num,
+                username: username,
+                mobile: mobile,
+                email: email,
+                city: city,
+                detail_address: detail_address,
+                invoice_type: invoice_type,
+                invoice_title: invoice_title,
+                pay_taxes_id: pay_taxes_id,
+                pay_type: 'wx',
+                user_msg: user_msg
+            }, function (res) {
+                if (res.status_code == 200) {
                     order_id = res.data.order_id;
-                    window.location.href = "{:url('Order/pay')}?order_id="+order_id;
-                }else{
+                    window.location.href = "{:url('Order/pay')}?order_id=" + order_id;
+                } else {
                     alert(res.msg);
                 }
             })
         })
     });
+
+    function agreement(ele) {
+        if (ele.checked)
+            $("#send_order").prop('disabled', false);
+        else
+            $("#send_order").prop('disabled', true);
+    }
 </script>
 {/block}
