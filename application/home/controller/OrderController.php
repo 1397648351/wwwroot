@@ -34,50 +34,72 @@ class OrderController extends BaseController
             $id = 1;
         }
         $goodsModel = model('goods');
-        $good = $goodsModel->findById($id);
-        if(empty($good)){
+        $goods = $goodsModel->findById($id);
+        if(empty($goods)){
             $this->redirect(url('Order/order','id=1'));
             exit(1);
         }
-        $this->assign("price", $good['price']);
+//        $this->assign("price", $good['price']);
+        $this->assign('goods',$goods);
 //        if (session('?username')) {
 //            $this->assign("username", session('username'));
 //        }
         return $this->fetch();
     }
 
-    public function pay()
+    public function goodsOrder()
     {
         $req = $this->request;
         $payType = $req->param('pay_type');
         $goodsId = $req->param('goods_id');
+        $username = $this->checkEmpty($req->param('username'), '收件人姓名不能为空！');
+        $mobile = $this->checkEmpty($req->param('mobile'), '手机号不问为空！');
+        $email =$req->param('email');
+        $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
+        $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
+        $num = $req->param('num');
         $goodsModel = model('goods');
         $goods = $goodsModel->find($goodsId);
         if (empty($goods)) {
             $this->resJson(array(), 2001, '商品不存在');
         }
-        $payParams = $this->setParam($payType, $goods);
+        $payParams = $this->setParam($payType, $goods, $num);
         try {
             $res = Charge::run($payParams['type'], $payParams['config'], $payParams['pay_param']);
             if ($res['return_msg'] == 'OK') {
                 $goodsOrderModel = model('goodsOrder');
                 $user = session('user');
-                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], '', $payParams['out_trade_no'], $payType);
+                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $payParams['out_trade_no'], $payType, $num);
                 $code_url = $res['code_url'];
                 $qrName = $goodsOrderId . '.png';
                 //生成支付二维码
                 $this->setQr($code_url, $qrName);
-                $this->assign('pay_img', $qrName);
-                return $this->fetch();
                 //保存收货地址和发票相关内容
-                //$this->setAddress($goodsOrderId);
+                $res = $this->setAddress($goodsOrderId);
+                if($res){
+                    $data = array();
+                    $data['order_id'] = $goodsOrderId;
+                    $this->resJson($data, 200, '下单成功');
+                }else{
+                    $this->resJson($res, 2002,'地址保存失败');
+                }
             } else {
-                $this->resJson($res, 200);
+                $this->resJson($res, 2001,'下单失败');
             }
         } catch (PayException $e) {
             echo $e->errorMessage();
             exit;
         }
+    }
+
+    public function pay()
+    {
+        $orderId = $this->request->param('order_id');
+        $goodsOrderModel = model('goodsOrder');
+        $order = $goodsOrderModel->find($orderId);
+        $this->assign('pay_img', $orderId.'.png');
+        $this->assign('order',$order);
+        return $this->fetch();
     }
 
     /**
@@ -88,18 +110,21 @@ class OrderController extends BaseController
     private function setAddress($goodsOrderId)
     {
         $req = $this->request;
-        $username = $this->checkEmpty($req->param('username'), '收件人姓名不能为空！');
-        $mobile = $this->checkEmpty($req->param('mobile'), '手机号不问为空！');
-        $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
-        $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
+        $username = $req->param('username');
+        $mobile = $req->param('mobile');
+        $email =$req->param('email');
+        $city = $req->param('city');
+        $detailAdd = $req->param('detail_address');
         //发票类型  0：无  1：个人  2：公司
         $invoiceType = $req->param('invoice_type');
         //抬头
         $invoiceTitle = $req->param('invoice_title');
         //税号
         $payTaxesId = $req->param('pay_taxes_id');
+        //留言
+        $userMsg = $req->param('user_msg');
         $addressModel = model('address');
-        $addressId = $addressModel->addInfo($username, $mobile, $city, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId);
+        $addressId = $addressModel->addInfo($username, $mobile, $email, $city, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId, $userMsg);
         return $addressId;
     }
 
@@ -127,7 +152,7 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setParam($payType, $goods)
+    private function setParam($payType, $goods, $num)
     {
         $params = array();
         $outTradeNo = $this->getMgid() . '_' . $payType;
@@ -135,12 +160,12 @@ class OrderController extends BaseController
             case 'ali':
                 $params['type'] = 'ali_qr';
                 $params['config'] = $this->aliConfigData();
-                $params['pay_param'] = $this->setAliPayParam($outTradeNo, $goods);
+                $params['pay_param'] = $this->setAliPayParam($outTradeNo, $goods, $num);
                 break;
             case 'wx':
                 $params['type'] = 'wx_qr';
                 $params['config'] = $this->wxConfigData();
-                $params['pay_param'] = $this->setWxPayParam($outTradeNo, $goods);
+                $params['pay_param'] = $this->setWxPayParam($outTradeNo, $goods, $num);
                 break;
             default:
                 break;
@@ -157,7 +182,7 @@ class OrderController extends BaseController
      * @param $param
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setAliPayParam($outTradeNo, $goods)
+    private function setAliPayParam($outTradeNo, $goods, $num)
     {
         $payParam = array();
         //商品具体描述
@@ -167,7 +192,7 @@ class OrderController extends BaseController
         //订单号
         $payParam['order_no'] = $outTradeNo;
         //需要支付金额 元
-        $payParam['amount'] = $goods['price'];
+        $payParam['amount'] = $goods['price']*$num;
         //过期时间（当前时间+过期s数） 时间戳
         $payParam['timeout_express'] = 3600 + time();
         $payParam['return_param'] = 'pica';
@@ -182,14 +207,14 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo, $goods)
+    private function setWxPayParam($outTradeNo, $goods,$num)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = '0.01';
+        $payParam['amount'] = $goods['price']*$num;
         //用户客户端实际IP地址
         $payParam['client_ip'] = '127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();
