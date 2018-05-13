@@ -1,0 +1,67 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-登录{/block}
+{block name="other_css"}
+<!-- other css -->
+<style>
+    .pd-txt {
+        margin-bottom: 10px;
+    }
+    body{
+        min-width: 600px;
+        min-height: 500px;
+    }
+</style>
+{/block}
+{block name="class"}{/block}
+{block name="body"}
+<div id="win" class="easyui-window" title="登录" style="width:300px;height:200px;margin: 0 auto;"
+     data-options="iconCls:'icon-man',modal:false,minimizable:false,resizable:false,collapsible:false,draggable:false,closable:false,maximizable:false,inline:true,top:'150px'">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
+        <form id="ff" method="post">
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="user"
+                       id="user"
+                       data-options="label:'用户名：',required:true,missingMessage:'请输入用户名'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="password" name="psw" id="psw"
+                       data-options="label:'密码：',required:true,missingMessage:'请输入密码'"/>
+            </div>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"
+                   style="width:80px">登录</a>
+            </div>
+        </form>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<script>
+    $(window).bind('resize', function () {
+        $('#win').window('hcenter');
+        $('#win').window({top:'150px'});
+    });
+
+    function submitForm() {
+        $.ajax({
+            type: 'post',
+            url: "{:url('Index/login')}",
+            data: {
+                user: $('#user').textbox('getValue'),
+                psw: $('#psw').textbox('getValue')
+            },
+            success: function (response) {
+                // 根据返回结果指定界面操作
+                if (response.status_code == "1001") {
+                    top.location.href='{:url("Index/index")}';
+                } else {
+                    $.messager.alert('错误', response.msg, 'error');
+                }
+            },
+            error: function () {
+                $.messager.alert('错误', '登陆失败！', 'error');
+            }
+        })
+    }
+</script>
+{/block}

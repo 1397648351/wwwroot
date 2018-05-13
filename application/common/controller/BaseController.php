@@ -4,16 +4,18 @@ namespace app\common\controller;
 
 use think\Controller;
 
-class BaseController extends Controller {
-	function initialize() {
-		//echo 'aa<br />';
-	}
+class BaseController extends Controller
+{
+    function initialize()
+    {
+        //echo 'aa<br />';
+    }
 
     public function checkMobile($mobile)
     {
         $this->checkEmpty($mobile, 'mobile不能为空');
-        if(!preg_match('/^1[0-9]{10}$/', $mobile)){
-            $this->resJson($mobile,1011, '手机号格式错误');
+        if (!preg_match('/^1[0-9]{10}$/', $mobile)) {
+            $this->resJson($mobile, 1011, '手机号格式错误');
         }
         return $mobile;
     }
@@ -38,7 +40,7 @@ class BaseController extends Controller {
      */
     public function checkEmpty($data, $describe = '参数不能为空')
     {
-        if(empty($data)){
+        if (empty($data)) {
             $this->resJson(array(), 1002, $describe);
         }
         return $data;
@@ -57,6 +59,21 @@ class BaseController extends Controller {
         $res['data'] = $data;
         $res['status_code'] = $status_code;
         $res['msg'] = $msg;
+        $str = json_encode($res, JSON_UNESCAPED_UNICODE);
+        exit($str);
+    }
+
+    /**
+     * Grid json返回
+     * @param array $data 数据
+     * @param int $total 总行数
+     * @author WuZe wuzedc@163.com
+     */
+    public function resTableJson($data = array(), $total)
+    {
+        header('Content-Type:application/json; charset=utf-8');
+        $res['total'] = $total;
+        $res['rows'] = $data;
         $str = json_encode($res, JSON_UNESCAPED_UNICODE);
         exit($str);
     }

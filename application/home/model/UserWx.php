@@ -5,25 +5,22 @@
 // | Copyright (c) 2016 http://www.kexin.com.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: liutao <liut1@kexinbao100.com>
-// | Date  : 2018/4/27
+// | Date  : 2018/5/2
 // +----------------------------------------------------------------------
 
 namespace app\home\model;
 
 use app\common\model\Base;
 
-class GoodsOrder extends Base
+class UserWx extends Base
 {
-    public function addInfo($goods, $userId, $openid, $outTradeNo, $payType)
+    public function addInfo($wxUser)
     {
         $data = array();
-        $data['goods_id'] = $goods['id'];
-        $data['out_trade_no'] = $outTradeNo;
-        $data['user_id'] = $userId;
-        $data['openid'] = $openid;
-        $data['type'] = $payType == 'wx' ? 1 : 2;
-        $data['status'] = 0;
-        $data['money'] = $goods['price'];
+        $data['openid'] = $wxUser['openid'];
+        $data['nickname'] = $wxUser['nickname'];
+        $data['sex'] = $wxUser['sex'];
+        $data['headimgurl'] = $wxUser['headimgurl'];
         $data['create_time'] = time();
         $res = $this->save($data);
         if ($res) {
@@ -33,28 +30,21 @@ class GoodsOrder extends Base
         }
     }
 
-    public function findByOutTradeNo($outTradeNo)
+    public function findByOpenId($openid)
     {
         $map = array();
-        $map['out_trade_no'] = $outTradeNo;
+        $map['openid'] = $openid;
         return $this->findByWhere($map);
     }
 
-    /**
-     * @param $out_trade_no
-     * @param $openid
-     * @param $result_code
-     * @return false|int
-     * @author LiuTao liut1@kexinbao100.com
-     */
-    public function updateInfo($out_trade_no, $openid, $result_code)
+    public function updateInfo($id, $wxUser)
     {
         $map = array();
-        $map['out_trade_no'] = $out_trade_no;
+        $map['id'] = $id;
         $data = array();
-        $data['status'] = $result_code;
-        $data['openid'] = $openid;
+        $data['nickname'] = $wxUser['nickname'];
+        $data['headimgurl'] = $wxUser['headimgurl'];
         $data['update_time'] = time();
-        return $this->updateDataByMap($data, $map);
+        $res = $this->updateDataByMap($data, $map);
     }
 }

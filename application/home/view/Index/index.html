@@ -10,7 +10,7 @@
     <div class="contents">
         <div class="content-0">
             <div class="slide">
-                <div class="content-box slide-box slide-box-1">
+                <!-- <div class="content-box slide-box slide-box-1">
                     <div class="content-box">
                         <div class="content-left">
                             <img src="__PCRESOURCE__/images/home/chart_03.png"/>
@@ -31,19 +31,14 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+                {volist name="sliderList" id="slider"}
+                <div class="content-box slide-box">
+                    <a href="{:url('Order/order', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
+                        <img src="__COMMONRESOURCE__/images/slider/{$slider.cover}" title="{$slider.subject}" alt="{$slider.subject}"/>
+                    </a>
                 </div>
-                <div class="content-box slide-box slide-box-2">
-                    <a href="javascript:;" class="slide-image-box"></a>
-                </div>
-                <div class="content-box slide-box slide-box-3">
-                    <a href="javascript:;" class="slide-image-box"></a>
-                </div>
-                <div class="content-box slide-box slide-box-4">
-                    <a href="javascript:;" class="slide-image-box"></a>
-                </div>
-                <div class="content-box slide-box slide-box-5">
-                    <a href="javascript:;" class="slide-image-box"></a>
-                </div>
+                {/volist}
             </div>
         </div>
         <a class="top-link" href="javascript:;"></a>

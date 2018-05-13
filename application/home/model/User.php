@@ -10,6 +10,7 @@
 
 namespace app\home\model;
 
+use app\common\model\Base;
 
 class User extends Base
 {
@@ -29,9 +30,9 @@ class User extends Base
         $data['mobile'] = $mobile;
         $data['create_time'] = time();
         $res = $this->save($data);
-        if($res){
+        if ($res) {
             return $this->id;
-        }else{
+        } else {
             return false;
         }
     }
@@ -39,9 +40,9 @@ class User extends Base
     public function findByOpenid($openid, $type)
     {
         $map = array();
-        if($type == 'wx'){
+        if ($type == 'wx') {
             $map['wx_openid'] = $openid;
-        } else{
+        } else {
             $map['qq_openid'] = $openid;
         }
         return $this->findByWhere($map);
@@ -56,25 +57,25 @@ class User extends Base
         $data['sex'] = $user['sex'];
         $data['create_time'] = time();
         $res = $this->save($data);
-        if($res){
+        if ($res) {
             return $this->id;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function addInfoByQq($user,$openid)
+    public function addInfoByQq($user, $openid)
     {
         $data = array();
         $data['qq_openid'] = $openid;
         $data['avatar'] = $user['figureurl_qq_2'];
         $data['nickname'] = $user['nickname'];
-        $data['sex'] = $user['gender']=='男'?1:2;
+        $data['sex'] = $user['gender'] == '男' ? 1 : 2;
         $data['create_time'] = time();
         $res = $this->save($data);
-        if($res){
+        if ($res) {
             return $this->id;
-        }else{
+        } else {
             return false;
         }
     }
