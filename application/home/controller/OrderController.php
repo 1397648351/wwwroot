@@ -68,7 +68,7 @@ class OrderController extends BaseController
             $res = Charge::run($payParams['type'], $payParams['config'], $payParams['pay_param']);
             if ($res['return_msg'] == 'OK') {
                 $goodsOrderModel = model('goodsOrder');
-                $user = session('user');
+                $user = session('userInfo');
                 $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $payParams['out_trade_no'], $payType, $num);
                 $code_url = $res['code_url'];
                 $qrName = $goodsOrderId . '.png';
