@@ -16,7 +16,7 @@
             <li class="nav">
                 <a class="link-order" href="{:url('Order/order')}">购买</a>
             </li>
-            {if !session('?userInfo')}
+            {if !session('?userInfo') || session('userInfo')['role']!=0}
             <li class="nav">
                 <a class="link-register" href="{:url('User/register')}">注册</a>
             </li>
