@@ -142,8 +142,8 @@
             },
             number: {
                 callback: function (num) {
-                    var price = parseInt($("#price").text(), 10);
-                    var discount = parseInt($("#discount").text(), 10);
+                    var price = parseFloat($("#price").text());
+                    var discount = parseFloat($("#discount").text());
                     var totalprice = price * num;
                     var finalprice = totalprice - discount;
                     $("#total_price").text(totalprice);
