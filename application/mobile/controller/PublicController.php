@@ -19,6 +19,8 @@ class PublicController extends BaseController
     public function __construct()
     {
         parent::__construct();
+        if($this->request->isGet())
+            $this->getJsSign();
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl().url();
