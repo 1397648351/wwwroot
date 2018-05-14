@@ -19,7 +19,7 @@ use think\facade\Log;
  * Class PayBackController
  * @package app\home\controller
  */
-class PayBackController extends BaseController
+class PaybackController extends BaseController
 {
     /**
      * 微信支付回调
@@ -30,7 +30,6 @@ class PayBackController extends BaseController
         $type = 'wx_charge';
         $config = $this->wxConfigData();
         $ret =  Notify::getNotifyData($type, $config);
-        Log::write(json_encode($ret));
         $openid = $ret['openid'];
         $out_trade_no = $ret['out_trade_no'];
         $result_code = $ret['result_code']=='SUCCESS' ? 1 : -1;
