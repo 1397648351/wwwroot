@@ -24,26 +24,23 @@ class OrderController extends BaseController
 {
     public function order()
     {
-        //$req = $this->request;
-//        if(!session('?username')){
-//            $this->error("请先登录！",'User/login');
-//            //$this->redirect('User/login');
-//        }
+        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
+            $this->error("请先登录！", 'User/login');
+        }
         $id = $this->request->param('id');
         if (empty($id)) {
             $id = 1;
         }
         $goodsModel = model('goods');
         $goods = $goodsModel->findById($id);
-        if(empty($goods)){
-            $this->redirect(url('Order/order','id=1'));
+        if (empty($goods)) {
+            $this->redirect(url('Order/order', 'id=1'));
             exit(1);
         }
-//        $this->assign("price", $good['price']);
-        $this->assign('goods',$goods);
-//        if (session('?username')) {
-//            $this->assign("username", session('username'));
-//        }
+        $this->assign('goods', $goods);
+        if (session('?userInfo')) {
+            $this->assign("username", session('userInfo')['nickname']);
+        }
         return $this->fetch();
     }
 
@@ -54,7 +51,7 @@ class OrderController extends BaseController
         $goodsId = $req->param('goods_id');
         $username = $this->checkEmpty($req->param('username'), '收件人姓名不能为空！');
         $mobile = $this->checkEmpty($req->param('mobile'), '手机号不问为空！');
-        $email =$req->param('email');
+        $email = $req->param('email');
         $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
         $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
         $num = $req->param('num');
@@ -76,15 +73,15 @@ class OrderController extends BaseController
                 $this->setQr($code_url, $qrName);
                 //保存收货地址和发票相关内容
                 $res = $this->setAddress($goodsOrderId);
-                if($res){
+                if ($res) {
                     $data = array();
                     $data['order_id'] = $goodsOrderId;
                     $this->resJson($data, 200, '下单成功');
-                }else{
-                    $this->resJson($res, 2002,'地址保存失败');
+                } else {
+                    $this->resJson($res, 2002, '地址保存失败');
                 }
             } else {
-                $this->resJson($res, 2001,'下单失败');
+                $this->resJson($res, 2001, '下单失败');
             }
         } catch (PayException $e) {
             echo $e->errorMessage();
@@ -97,8 +94,8 @@ class OrderController extends BaseController
         $orderId = $this->request->param('order_id');
         $goodsOrderModel = model('goodsOrder');
         $order = $goodsOrderModel->find($orderId);
-        $this->assign('pay_img', $orderId.'.png');
-        $this->assign('order',$order);
+        $this->assign('pay_img', $orderId . '.png');
+        $this->assign('order', $order);
         return $this->fetch();
     }
 
@@ -112,7 +109,7 @@ class OrderController extends BaseController
         $req = $this->request;
         $username = $req->param('username');
         $mobile = $req->param('mobile');
-        $email =$req->param('email');
+        $email = $req->param('email');
         $city = $req->param('city');
         $detailAdd = $req->param('detail_address');
         //发票类型  0：无  1：个人  2：公司
@@ -136,14 +133,10 @@ class OrderController extends BaseController
      */
     private function setQr($codeUrl, $qrName)
     {
-        $s = QrCode::width(500)
-            //高度
-            ->height(500)
-            //背景颜色
-            ->backColor(5, 10, 0)
-            //前景颜色
-            ->foreColor(55, 255, 110)
-            ->save($codeUrl, 'qr/' . $qrName);
+        $s = QrCode::width(500)//高度
+        ->height(500)//背景颜色
+        ->backColor(5, 10, 0)//前景颜色
+        ->foreColor(55, 255, 110)->save($codeUrl, 'qr/' . $qrName);
     }
 
     /**
@@ -192,7 +185,7 @@ class OrderController extends BaseController
         //订单号
         $payParam['order_no'] = $outTradeNo;
         //需要支付金额 元
-        $payParam['amount'] = $goods['price']*$num;
+        $payParam['amount'] = $goods['price'] * $num;
         //过期时间（当前时间+过期s数） 时间戳
         $payParam['timeout_express'] = 3600 + time();
         $payParam['return_param'] = 'pica';
@@ -207,16 +200,16 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo, $goods,$num)
+    private function setWxPayParam($outTradeNo, $goods, $num)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = 0.01;//$goods['price']*$num;
+        $payParam['amount'] = $goods['price'] * $num;
         //用户客户端实际IP地址
-        $payParam['client_ip'] = '127.0.0.1';
+        $payParam['client_ip'] = $req = $this->request->ip();//'127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';
