@@ -93,7 +93,7 @@
             var btn_plus = inputs.find(".item-amount-plus");
             btn_minus.addClass('disabled');
             btn_minus.click(function () {
-                var cur_num = parseInt(input.val(), 10);
+                var cur_num = parseFloat(input.val());
                 if (cur_num <= options.min) return;
                 if (cur_num - 1 >= options.min) {
                     input.val(cur_num - 1);
@@ -105,12 +105,12 @@
                     btn_minus.addClass('disabled');
                 }
                 if (typeof(options.callback) === "function") {
-                    var finalnum = parseInt(input.val(), 10);
+                    var finalnum = parseFloat(input.val());
                     options.callback(finalnum);
                 }
             });
             btn_plus.click(function () {
-                var cur_num = parseInt(input.val(), 10);
+                var cur_num = parseFloat(input.val());
                 if (cur_num >= options.max) return;
                 if (cur_num + 1 <= options.max) {
                     input.val(cur_num + 1);
@@ -122,7 +122,7 @@
                     btn_plus.addClass('disabled');
                 }
                 if (typeof(options.callback) === "function") {
-                    var finalnum = parseInt(input.val(), 10);
+                    var finalnum = parseFloat(input.val());
                     options.callback(finalnum);
                 }
             });
@@ -135,7 +135,7 @@
                     btn_plus.removeClass('disabled');
                 }
                 if (typeof(options.callback) === "function") {
-                    var finalnum = parseInt(input.val(), 10);
+                    var finalnum = parseFloat(input.val());
                     options.callback(finalnum);
                 }
             }).bind("paste", function () {
@@ -147,12 +147,12 @@
                     btn_plus.removeClass('disabled');
                 }
                 if (typeof(options.callback) === "function") {
-                    var finalnum = parseInt(input.val(), 10);
+                    var finalnum = parseFloat(input.val());
                     options.callback(finalnum);
                 }
             }).css("ime-mode", "disabled");
             if (typeof(options.callback) === "function") {
-                var finalnum = parseInt(input.val(), 10);
+                var finalnum = parseFloat(input.val());
                 options.callback(finalnum);
             }
         },
@@ -181,11 +181,11 @@
                         height = imgs[i].height;
                     }
                 }
-                imgs[0].onload = function(e){
+                imgs[0].onload = function (e) {
                     $(window).trigger("resize");
                 }
                 ele.parent().css('height', height);
-                $(window).bind('resize',function (e) {
+                $(window).bind('resize', function (e) {
                     height = 0;
                     for (var i = 0; i < imgs.length; i++) {
                         if (imgs[i].height > height) {
