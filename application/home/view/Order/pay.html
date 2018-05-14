@@ -37,11 +37,11 @@
             var out_trade_no = $("#out_trade_no").val();
             $.post(url,{out_trade_no:out_trade_no},function (res) {
                 console.log(res.data);
-                if(res.staus_code == 200){
+                if(res.status_code == 200){
                     alert('支付成功');
                     clearInterval(interval);
                     window.location.href = "{:url('Index/index')}";
-                } else if(res.staus_code == 1001){
+                } else if(res.status_code == 1001){
                     alert('支付失败');
                     clearInterval(interval);
                     window.location.href = history.back(-1);
