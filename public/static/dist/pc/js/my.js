@@ -177,11 +177,12 @@
                 var imgs = ele.find('.content-box.slide-box>.slide-image-box>img');
                 var height = 0;
                 for (var i = 0; i < imgs.length; i++) {
-                    imgs[i].onload(function () {
-                        if (imgs[i].height > height) {
-                            height = imgs[i].height;
-                        }
-                    });
+                    if (imgs[i].height > height) {
+                        height = imgs[i].height;
+                    }
+                }
+                imgs[0].onload = function(e){
+                    $(window).trigger("resize");
                 }
                 ele.parent().css('height', height);
                 $(window).bind('resize',function (e) {
