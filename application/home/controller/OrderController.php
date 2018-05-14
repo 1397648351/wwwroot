@@ -214,7 +214,7 @@ class OrderController extends BaseController
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = $goods['price']*$num;
+        $payParam['amount'] = 0.01;//$goods['price']*$num;
         //用户客户端实际IP地址
         $payParam['client_ip'] = '127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();

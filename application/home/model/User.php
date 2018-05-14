@@ -122,4 +122,15 @@ class User extends Base
         $data['update_time'] = time();
         return $this->updateDataByMap($data, $map);
     }
+
+    public function updateInfo($id,$wxUser)
+    {
+        $map = array();
+        $map['id'] = $id;
+        $data = array();
+        $data['nickname'] = $wxUser['nickname'];
+        $data['avatar'] = $wxUser['headimgurl'];
+        $data['update_time'] = time();
+        $res = $this->updateDataByMap($data, $map);
+    }
 }
