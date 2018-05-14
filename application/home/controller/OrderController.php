@@ -110,19 +110,19 @@ class OrderController extends BaseController
             $trade_state = $ret['trade_state'];
             switch ($trade_state){
                 case 'SUCCESS':
-                    $this->resJson(array(), 200, '支付成功');
+                    $this->resJson($trade_state, 200, '支付成功');
                     break;
                 case 'NOPAY':
-                    $this->resJson(array(), 100, '未支付');
+                    $this->resJson($trade_state, 100, '未支付');
                     break;
                 case 'PAYERROR':
-                    $this->resJson(array(), 1001,'支付失败');
+                    $this->resJson($trade_state, 1001,'支付失败');
                     break;
                 case 'CLOSED':
-                    $this->resJson(array(), 100, '已关闭');
+                    $this->resJson($trade_state, 100, '已关闭');
                     break;
                 default :
-                    $this->resJson(array(), 100, '未支付');
+                    $this->resJson($trade_state, 100, '未支付');
                     break;
             }
         } catch (PayException $e) {

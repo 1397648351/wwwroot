@@ -36,6 +36,7 @@
             var url = "{:url('Order/queryPay')}";
             var out_trade_no = $("#out_trade_no").val();
             $.post(url,{out_trade_no:out_trade_no},function (res) {
+                console.log(res.data);
                 if(res.staus_code == 200){
                     alert('支付成功');
                     clearInterval(interval);
