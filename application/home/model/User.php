@@ -101,7 +101,7 @@ class User extends Base
     public function findByKeyAndPwd($key, $pwd)
     {
         $map = array();
-        $map['nickname|mail'] = $key;
+        $map['nickname|email'] = $key;
         $map['password'] = $pwd;
         return $this->findByWhere($map);
     }
