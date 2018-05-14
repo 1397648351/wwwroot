@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+.contents .content-0 {
+    background-image: url(../images/process_mobile/back1.png);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.content-0 .violet-b{
+    margin-top: 20px;
+    color: deepskyblue;
+}
+
+.content-0 .content-box > img {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.content-0 .content-bottom-img{
+    width: 80%;
+}
+.content-0 .content-bottom{
+    text-align: center;
+}
+
+.content-title {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-0 .describe-words{
+    font-size:14px;
+    line-height: 1.5;
+}
+.content-0 .content-title .title-size{
+    width: 30%;
+}
+
+.contents .content-1 {
+    background-image: url(../images/process_mobile/back03.jpg);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.content-1 .content-box > img {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.content-1 .describe-words{
+    font-size:14px;
+    line-height: 1.5;
+}
+.content-1 .content-bottom-img{
+    width: 70%;
+}
+.content-1 .content-bottom{
+    text-align: center;
+}
+.content-1 .content-title .title-size{
+    width: 50%;
+}
+
+.contents .content-2 {
+    background-image: url(../images/process_mobile/back1.png);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.content-2 .violet-b{
+    margin-top: 20px;
+    color: deepskyblue;
+}
+
+
+.content-2 .content-box > img {
+    margin: 20px 0;
+    width: 100%;
+}
+.content-2 .content-title .title-size{
+    width: 50%;
+}
+
+.content-title {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-2 .describe-words{
+    font-size:14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.content-2 .content-bottom-img{
+    width: 70%;
+    margin-bottom: -40px;
+}
+.content-2 .content-bottom{
+    text-align: center;
+}
+
+.contents .content-3 {
+    background-image: url(../images/process_mobile/back03.jpg);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.content-3 .violet-b{
+    margin-top: 20px;
+    color: deepskyblue;
+}
+
+.content-3 .content-box > img {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.content-title {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-3 .describe-words{
+    font-size:14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.content-3 .content-bottom-img{
+    width: 70%;
+}
+.content-3 .content-bottom{
+    text-align: center;
+}
+
+.content-3 .content-title .title-size{
+    width: 30%;
+}

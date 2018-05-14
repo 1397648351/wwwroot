@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\BaseController;
+use function PHPSTORM_META\type;
 use think\Exception;
 use think\facade\Env;
 
@@ -17,7 +18,7 @@ class IndexController extends BaseController
             $user = array();
             if (session('?userInfo')) {
                 $user = session('userInfo');
-                if ($this->validateLogin($user['nickname'])) {
+                if (isset($user['nickname']) && $this->validateLogin($user['nickname'])) {
                     $login = true;
                 }
             }
@@ -115,8 +116,7 @@ class IndexController extends BaseController
         $userModel = model('user');
         $user = $userModel->getUser($user, $psw);
         if (isset($user) && $user['role'] == 1) {
-            if (!session('?userInfo'))
-                session('userInfo', $user);
+            session('userInfo', $user);
             return true;
         }
         return false;

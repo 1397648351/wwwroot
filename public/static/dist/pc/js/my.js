@@ -181,6 +181,9 @@
                         height = imgs[i].height;
                     }
                 }
+                imgs[0].onload = function(e){
+                    $(window).trigger("resize");
+                }
                 ele.parent().css('height', height);
                 $(window).bind('resize',function (e) {
                     height = 0;
