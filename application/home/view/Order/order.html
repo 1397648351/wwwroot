@@ -90,7 +90,7 @@
                         <input class="form-control" id="pay_taxes_id" value="" placeholder="输入18位纳税人识别号"/>
                         <div class="form-tip">购买方为企业的，索取增值税普通发票时，应向销售方提供纳税人识别号或统一社会信用代码。</div>
                     </div>
-                    <div class="form-group" name="invoice">
+                    <div class="form-group">
                         <label class="form-group-th">留言</label>
                         <input class="form-control" id="user_msg" value="" placeholder="有特殊需求请在此键入，但无法保证实现。详情请来电咨询。选填"
                                style="width: 536px;"/>
@@ -211,6 +211,7 @@
                     return;
                 }
             }
+            var user_msg = $("#user_msg").val();
             var url = "{:url('Order/goodsOrder')}";
             $.post(url, {
                 goods_id: goodsId,
