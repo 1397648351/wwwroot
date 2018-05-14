@@ -12,6 +12,7 @@ namespace app\home\controller;
 
 use houdunwang\qrcode\QrCode;
 use Payment\Client\Charge;
+use Payment\Client\Query;
 use Payment\Common\PayException;
 use app\common\controller\BaseController;
 
@@ -97,6 +98,37 @@ class OrderController extends BaseController
         $this->assign('pay_img', $orderId . '.png');
         $this->assign('order', $order);
         return $this->fetch();
+    }
+
+    public function queryPay()
+    {
+        try {
+            $data = array();
+            $data['out_trade_no'] = $this->request->param('out_trade_no');
+            $config = $this->wxConfigData();
+            $ret = Query::run('wx_charge', $config, $data);
+            $trade_state = $ret['trade_state'];
+            switch ($trade_state){
+                case 'SUCCESS':
+                    $this->resJson(array(), 200, '支付成功');
+                    break;
+                case 'NOPAY':
+                    $this->resJson(array(), 100, '未支付');
+                    break;
+                case 'PAYERROR':
+                    $this->resJson(array(), 1001,'支付失败');
+                    break;
+                case 'CLOSED':
+                    $this->resJson(array(), 100, '已关闭');
+                    break;
+                default :
+                    $this->resJson(array(), 100, '未支付');
+                    break;
+            }
+        } catch (PayException $e) {
+            echo $e->errorMessage();
+            exit;
+        }
     }
 
     /**

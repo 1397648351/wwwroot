@@ -27,5 +27,24 @@
 {/block}
 
 {block name="other_js"}
-<!-- other js -->
+<script>
+
+    $(function () {
+
+        var interval = setInterval(function(){
+            $.post(url,{out_trade_no:out_trade_no},function (res) {
+                if(res.staus_code == 200){
+                    alert('支付成功');
+                    clearInterval(interval);
+                    window.location.href = "{:url('Index/index')}";
+                } else if(res.staus_code == 1001){
+                    alert('支付失败');
+                    clearInterval(interval);
+                    window.location.href = history.back(-1);
+                }
+            })
+        }, 5000);
+
+    })
+</script>
 {/block}
