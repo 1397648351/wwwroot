@@ -32,7 +32,12 @@ body {
     width: 50%;
     float: right;
     text-align: center;
+}
 
+.content-from *{
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    user-select: text;
 }
 
 .form-title {
@@ -169,7 +174,7 @@ input[type='checkbox'] {
 }
 
 .def-inputbtn.def-input > input[type='text'],
-.def-inputbtn.def-input > input[type='password']{
+.def-inputbtn.def-input > input[type='password'] {
     width: calc(100% - 138px);
     border: none;
     float: left;
@@ -193,18 +198,22 @@ input[type='checkbox'] {
     border: none;
 }
 
-.content-from.register-box{
+.def-inputbtn.def-input > .def-input-btn:disabled {
+    background-image: url(../images/register/Verification1.png);
+}
+
+.content-from.register-box {
     padding-top: 67px;
 }
 
-.def-input.def-inputbtn > label{
+.def-input.def-inputbtn > label {
     float: left;
     width: 70px;
     height: 38px;
     line-height: 38px;
 }
 
-.def-inputbtn.def-input.def-check > .cut-line{
+.def-inputbtn.def-input.def-check > .cut-line {
     float: left;
     margin-top: 11px;
     border-style: solid;
@@ -216,19 +225,19 @@ input[type='checkbox'] {
     vertical-align: middle;
 }
 
-.def-inputbtn.def-input.def-check{
+.def-inputbtn.def-input.def-check {
     font-size: 1.4rem;
     letter-spacing: 0;
     padding-left: 15px;
 }
 
 .def-inputbtn.def-input.def-check > input[type='text'],
-.def-inputbtn.def-input.def-check > input[type='password']{
+.def-inputbtn.def-input.def-check > input[type='password'] {
     width: 260px;
     padding: 11px 10px;
 }
 
-.def-inputbtn.def-input.def-check > .state{
+.def-inputbtn.def-input.def-check > .state {
     display: inline-block;
     vertical-align: middle;
     width: 16px;
@@ -237,20 +246,20 @@ input[type='checkbox'] {
     background-image: url(../images/register/icon.jpg);
 }
 
-.def-inputbtn.def-input.def-check > .state.state-problem{
+.def-inputbtn.def-input.def-check > .state.state-problem {
     background-position: 0 0;
 }
 
-.def-inputbtn.def-input.def-check > .state.state-error{
+.def-inputbtn.def-input.def-check > .state.state-error {
     background-position: -20px 0;
 }
 
-.def-inputbtn.def-input.def-check > .state.state-success{
+.def-inputbtn.def-input.def-check > .state.state-success {
     width: 17px;
     height: 17px;
     background-position: -40px 0;
 }
 
-.def-inputbtn.def-input.def-check.def-check-btn > input[type='text']{
+.def-inputbtn.def-input.def-check.def-check-btn > input[type='text'] {
     width: 146px;
 }

@@ -41,7 +41,7 @@
                     <input type="text" class="def-input" id="phone" placeholder="手机号"/>
                     <div class="def-input def-inputbtn">
                         <input type="password" id="code" placeholder="验证码"/>
-                        <input type="button" class="def-input-btn" value="获取验证码"/>
+                        <input type="button" class="def-input-btn" id="send_code" value="获取验证码"/>
                     </div>
                     <div class="bar">
                         <span class="register"><a href="#" class="">找回密码</a>&nbsp;/&nbsp;<a href="#" class="">注册新用户</a></span>
@@ -85,18 +85,141 @@
             }
         });
 
-        login.init(loginUrl,successUrl);
+        login.init(loginUrl, successUrl);
 
-        $("#login").click(function(){
+        $("#send_code").click(function () {
+            var mobile = $("#phone").val();
+            if (mobile == '') {
+                alert('请输入手机号');
+                return;
+            }
+            $("#send_code").prop('disabled', true);
+            var second = 20;
+            $("#send_code").val(second + 's');
+            var interval = setInterval(function () {
+                second -= 1;
+                if (second == 0) {
+                    clearInterval(interval);
+                    $("#send_code").prop('disabled', false);
+                    $("#send_code").val('获取验证码');
+                } else {
+                    $("#send_code").val(second + 's');
+                }
+            }, 1000);
+            var res = checkParam(mobile, 'mobile');
+            if (res) {
+                var sendUrl = "{:url('User/sendSms')}";
+                $.post(sendUrl, {
+                    mobile: mobile,
+                    type: 'login'
+                }, function (res) {
+                    if (res.status_code != 200) {
+                        console.log(res.status_code);
+                    }else{
+                        alert(res.msg);
+                        clearInterval(interval);
+                        $("#send_code").prop('disabled', false);
+                        $("#send_code").val('获取验证码');
+                    }
+                })
+            }else{
+                alert('请输入正确的手机号');
+                clearInterval(interval);
+                $('#phone').val('');
+                $("#send_code").prop('disabled', false);
+                $("#send_code").val('获取验证码');
+            }
+        });
+
+        $("#login").click(function () {
             console.log($(".form-type").getTabVal());
         });
 
 
         $(".three_login").click(function () {
             var type = $(this).data('type');
-            window.location.href = "{:url('user/qrLogin')}?type="+type;
+            window.location.href = "{:url('user/qrLogin')}?type=" + type;
         })
     })
+
+    /**
+     * 参数验证
+     * @param param
+     * @param describe
+     * @returns {boolean}
+     */
+    function checkParam(param, describe) {
+        var flag = true;
+        var msg = '';
+        switch (describe) {
+            case "key":
+                if (param.length < 1) {
+                    $("#key").next(".state").addClass('state-error');
+                    msg = '用户名不能为空';
+                    flag = false;
+                } else {
+                    $("#key").next(".state").addClass('state-success');
+                }
+                break;
+            case "pwd":
+                if (param.length < 1) {
+                    $("#pwd").next(".state").addClass('state-error');
+                    msg = '密码不能为空';
+                    flag = false;
+                } else {
+                    $("#pwd").next(".state").addClass('state-success');
+                }
+                break;
+            case "sure_pwd":
+                var pwd = $("#pwd").val();
+                if (param.length < 1) {
+                    $("#sure_pwd").next(".state").addClass('state-error');
+                    msg = '确认密码不能为空';
+                    flag = false;
+                } else if (param != pwd) {
+                    $("#sure_pwd").next(".state").addClass('state-error');
+                    msg = '两次密码输入不一致';
+                    flag = false;
+                } else {
+                    $("#sure_pwd").next(".state").addClass('state-success');
+                }
+                break;
+            case "mobile":
+                if (param.length == 0) {
+                    $("#mobile").next(".state").addClass('state-error');
+                    msg = '手机号不能为空';
+                    flag = false;
+                } else if (!(/^1\d{10}$/.test(param))) {
+                    $("#mobile").next(".state").addClass('state-error');
+                    msg = '手机号格式不正确';
+                    flag = false;
+                } else {
+                    $("#mobile").next(".state").addClass('state-success');
+                }
+                break;
+            case "code":
+                if (param.length == 0) {
+                    $("#code").next(".state").addClass('state-error');
+                    msg = '验证码不能为空';
+                    flag = false;
+                } else if (!(/^\d{6}$/.test(param))) {
+                    $("#code").next(".state").addClass('state-error');
+                    msg = '验证码格式不正确';
+                    flag = false;
+                } else {
+                    $("#code").next(".state").addClass('state-success');
+                }
+                break;
+            default :
+                break;
+        }
+        if (flag) {
+            return true;
+        } else {
+            console.log(msg);
+            return false;
+        }
+    }
 
 </script>
 {/block}

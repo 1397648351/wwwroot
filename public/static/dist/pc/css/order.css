@@ -213,3 +213,8 @@ body {
     border: 1px solid #0093d8;
     outline: medium;
 }
+
+.btn-confirm:disabled{
+    background-color: #6f767a;
+    border: 1px solid #6f767a;
+}
