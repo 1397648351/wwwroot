@@ -117,6 +117,10 @@ class UserController extends BaseController
         $openid = $res['openid'];
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
+        if($openid == 'oQsRq1VoXzhnoNXewAsxTZDxkZjU'){
+            dump($userInfo);
+            exit;
+        }
         $userModel = model('User');
         $user = $userModel->findByOpenid($openid, 'wx');
         if (empty($user)) {
@@ -124,11 +128,7 @@ class UserController extends BaseController
             $user = $userModel->findByOpenid($openid, 'wx');
         }
         session('userInfo', $user);
-        if($user['wx_openid'] == 'oQsRq1VoXzhnoNXewAsxTZDxkZjU'){
-            dump($user);
-        } else {
-            $this->redirect('Index/index');
-        }
+        $this->redirect('Index/index');
     }
 
     /**
