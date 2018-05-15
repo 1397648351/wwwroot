@@ -17,8 +17,6 @@ class TestController extends BaseController
 {
     public function index()
     {
-        if($this->request->isGet())
-            $this->getJsSign();
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl().url();
