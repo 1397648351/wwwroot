@@ -124,7 +124,11 @@ class UserController extends BaseController
             $user = $userModel->findByOpenid($openid, 'wx');
         }
         session('userInfo', $user);
-        $this->redirect('Index/index');
+        if($user['wx_openid'] == 'oQsRq1VoXzhnoNXewAsxTZDxkZjU'){
+            dump($user);
+        } else {
+            $this->redirect('Index/index');
+        }
     }
 
     /**
