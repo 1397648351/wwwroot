@@ -93,6 +93,35 @@ class User extends Base
     }
 
     /**
+     * @param $mobile
+     * @return bool|mixed
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function addUserByMobile($mobile)
+    {
+        $data = array();
+        $data['mobile'] = $mobile;
+        $data['create_time'] = time();
+        $res = $this->save($data);
+        if ($res) {
+            return $this->id;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateUserInfo($id, $nickname, $pwd)
+    {
+        $map = array();
+        $map['id'] = $id;
+        $data = array();
+        $data['nickname'] = $nickname;
+        $data['pwd'] = $pwd;
+        $data['update_time'] = time();
+        return $this->updateDataByMap($data, $map);
+    }
+
+    /**
      * @param $key
      * @param $pwd
      * @return array|null|\PDOStatement|string|\think\Model

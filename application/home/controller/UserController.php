@@ -175,7 +175,13 @@ class UserController extends BaseController
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
-        $userId = $userModel->addInfo($username, md5($password), $mobile);
+        $user = $userModel->findByMobile($mobile);
+        if(empty($user)) {
+            $userId = $userModel->addInfo($username, md5($password), $mobile);
+        } else {
+            $res = $userModel->updateUserInfo($user['id'],$username, md5($password));
+            $userId = $user['id'];
+        }
         if ($res) {
             $user = $userModel->find($userId);
             $this->resJson($user, '200', '注册成功');
@@ -224,13 +230,17 @@ class UserController extends BaseController
     {
         $req = $this->request;
         $mobile = $this->checkMobile($req->param('mobile'));
-        $code = $this->checkEmpty($req->param('code'), 'code不能为空');
+        $code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
         $res = $this->verifyCode($mobile, $code);
         if (empty($res)) {
             $this->resJson(array(), 1003, '验证码错误');
         }
         $userModel = model('user');
         $user = $userModel->findByMobile($mobile);
+        if(empty($user)){
+            $res = $userModel->addUserByMobile($mobile);
+            $user = $userModel->find($res);
+        }
         return $user;
     }
 
