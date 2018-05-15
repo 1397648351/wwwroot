@@ -12,6 +12,7 @@ namespace app\mobile\controller;
 
 
 use app\common\controller\BaseController;
+use org\Wechat;
 
 class TestController extends BaseController
 {
@@ -20,7 +21,7 @@ class TestController extends BaseController
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl().url();
-        if(empty($openid)){
+//        if(empty($openid)){
             $wxOAuthConfig = config('variable.wxMobile');
             $wxAppId = $wxOAuthConfig['app_id'];;
             $wxAppSecret = $wxOAuthConfig['app_secret'];
@@ -31,10 +32,10 @@ class TestController extends BaseController
             }
             $info = $Wechat->getOauthAccessToken();
             if ($info['openid']) {
-                session('openid', $info['openid']);
+//                session('openid', $info['openid']);
                 $this->test($info);
             }
-        }
+//        }
     }
 
     public function test($info)
