@@ -4,8 +4,8 @@
 var login = function () {
     return {
         init: function (loginUrl, successUrl) {
-            localStorage && localStorage.getItem('key') && $('#key').val(localStorage.getItem('key'));
-            localStorage && localStorage.getItem('password') && $('#password').val(localStorage.getItem('password'));
+            //localStorage && localStorage.getItem('key') && $('#key').val(localStorage.getItem('key'));
+            //localStorage && localStorage.getItem('password') && $('#password').val(localStorage.getItem('password'));
             localStorage && localStorage.getItem('mobile') && $('#phone').val(localStorage.getItem('mobile'));
 
             var errMsg = {
@@ -28,13 +28,13 @@ var login = function () {
                         alert("邮箱/用户名不能为空！");
                         return;
                     }
-                    localStorage && localStorage.setItem("key", key);
+                    //localStorage && localStorage.setItem("key", key);
                     password = $("#password").val();
                     if (!password || password == "") {
                         alert("密码不能为空！");
                         return;
                     }
-                    localStorage && localStorage.setItem("password", password);
+                    //localStorage && localStorage.setItem("password", password);
                     remember = $("#remember")[0].checked
                 } else {
                     loginType = 2;

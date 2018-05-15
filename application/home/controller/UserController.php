@@ -41,12 +41,12 @@ class UserController extends BaseController
         }
         session('userInfo', $user);
         if ($loginType == 1) {
-            if($this->request->param('remember')){
+            if ($this->request->param('remember') == 'true') {
                 $usercookie = array();
                 $usercookie['key'] = $this->request->param('key');
                 $usercookie['password'] = $this->request->param('password');
                 cookie('userInfo', $usercookie);
-            }else{
+            } else {
                 cookie('userInfo', null);
             }
         }
