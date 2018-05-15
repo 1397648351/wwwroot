@@ -65,7 +65,7 @@ class PublicController extends BaseController
         $userInfo = $Wechat->getOauthUserinfo($info['access_token'], $info['openid']);
         if($userInfo) {
             $userWxModel = model('home/User');
-            $user = $userWxModel->findByOpenId($userInfo['openid'],'wx');
+            $user = $userWxModel->findByUnionid($userInfo['unionid']);
             if ($user) {
                 $res = $userWxModel->updateInfo($user['id'],$userInfo);
             } else {

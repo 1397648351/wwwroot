@@ -37,14 +37,22 @@ class User extends Base
         }
     }
 
-    public function findByOpenid($openid, $type)
+    public function findByQqOpenid($openid)
     {
         $map = array();
-        if ($type == 'wx') {
-            $map['wx_openid'] = $openid;
-        } else {
-            $map['qq_openid'] = $openid;
-        }
+        $map['qq_openid'] = $openid;
+        return $this->findByWhere($map);
+    }
+
+    /**
+     * @param $unionid
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @author LiuTao liut1@kexinbao100.com
+     */
+    public function findByUnionid($unionid)
+    {
+        $map = array();
+        $map['unionid'] = $unionid;
         return $this->findByWhere($map);
     }
 
@@ -55,6 +63,7 @@ class User extends Base
         $data['avatar'] = $user['headimgurl'];
         $data['nickname'] = $user['nickname'];
         $data['sex'] = $user['sex'];
+        $data['unionid'] = $user['unionid'];
         $data['create_time'] = time();
         $res = $this->save($data);
         if ($res) {
