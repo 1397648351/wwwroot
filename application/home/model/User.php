@@ -116,7 +116,7 @@ class User extends Base
         $map['id'] = $id;
         $data = array();
         $data['nickname'] = $nickname;
-        $data['pwd'] = $pwd;
+        $data['password'] = $pwd;
         $data['update_time'] = time();
         return $this->updateDataByMap($data, $map);
     }
