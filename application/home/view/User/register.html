@@ -135,12 +135,12 @@
                     type: 'register'
                 }, function (res) {
                     if (res.status_code != 200) {
-                        console.log(res.status_code);
-                    } else {
                         alert(res.msg);
                         clearInterval(interval);
                         $("#send_code").prop('disabled', false);
                         $("#send_code").val('获取验证码');
+                    } else {
+                        alert(res.msg);
                     }
                 })
             } else {

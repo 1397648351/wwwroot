@@ -40,6 +40,16 @@ class UserController extends BaseController
             $this->resJson($user, 1000, '用户不存在');
         }
         session('userInfo', $user);
+        if ($loginType == 1) {
+            if($this->request->param('remember')){
+                $usercookie = array();
+                $usercookie['key'] = $this->request->param('key');
+                $usercookie['password'] = $this->request->param('password');
+                cookie('userInfo', $usercookie);
+            }else{
+                cookie('userInfo', null);
+            }
+        }
         $this->resJson($user, 200, '登录成功');
     }
 
@@ -57,14 +67,14 @@ class UserController extends BaseController
         $yunXinConfig = config('variable.yunConfig');
         $appId = $yunXinConfig['app_id'];
         $appKey = $yunXinConfig['app_key'];
-        if($type == 'login'){
+        if ($type == 'login') {
             $templateId = $yunXinConfig['login_template_id'];
         } else {
             $templateId = $yunXinConfig['register_template_id'];
         }
         $sms = new Sms($appId, $appKey);
-        $res = $sms->sendSmsCode($mobile,'', $templateId);
-        if($res['code'] == 200){
+        $res = $sms->sendSmsCode($mobile, '', $templateId);
+        if ($res['code'] == 200) {
             $this->resJson(array(), 200, '发送成功');
         }
         $this->resJson($res, $res['code'], '发送失败');
@@ -77,11 +87,11 @@ class UserController extends BaseController
     public function qrLogin()
     {
         $type = $_GET['type'];
-        if($type == 'wechat'){
+        if ($type == 'wechat') {
             $wxOAuthConfig = config('variable.wxOAuthConfig');
             $baseUrl = urlencode($wxOAuthConfig['back_url']);
             $wxAppId = $wxOAuthConfig['app_id'];
-            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$wxAppId."&redirect_uri=".$baseUrl."&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
+            $url = "https://open.weixin.qq.com/connect/qrconnect?appid=" . $wxAppId . "&redirect_uri=" . $baseUrl . "&response_type=code&scope=snsapi_login&state=picagene#wechat_redirect";
         } else {
             $qqOAuthConfig = config('variable.qqOAuthConfig');
             $qqAppId = $qqOAuthConfig['app_id'];
@@ -108,10 +118,10 @@ class UserController extends BaseController
         $access_token = $res['access_token'];
         $userInfo = $wechat->getOauthUserinfo($access_token, $openid);
         $userModel = model('User');
-        $user = $userModel->findByOpenid($openid,'wx');
-        if(empty($user)) {
+        $user = $userModel->findByOpenid($openid, 'wx');
+        if (empty($user)) {
             $res = $userModel->addInfoByWx($userInfo);
-            $user = $userModel->findByOpenid($openid,'wx');
+            $user = $userModel->findByOpenid($openid, 'wx');
         }
         session('userInfo', $user);
         $this->redirect('Index/index');
@@ -132,10 +142,10 @@ class UserController extends BaseController
         $openid = $qqOAuth->getOpenID($accessToken);
         $userInfo = $qqOAuth->getUserInfo($accessToken);
         $userModel = model('User');
-        $user = $userModel->findByOpenid($openid,'qq');
-        if(empty($user)) {
-            $res = $userModel->addInfoByQq($userInfo,$openid);
-            $user = $userModel->findByOpenid($openid,'qq');
+        $user = $userModel->findByOpenid($openid, 'qq');
+        if (empty($user)) {
+            $res = $userModel->addInfoByQq($userInfo, $openid);
+            $user = $userModel->findByOpenid($openid, 'qq');
         }
         session('userInfo', $user);
         $this->redirect('Index/index');
@@ -176,10 +186,10 @@ class UserController extends BaseController
         }
         $userModel = model('user');
         $user = $userModel->findByMobile($mobile);
-        if(empty($user)) {
+        if (empty($user)) {
             $userId = $userModel->addInfo($username, md5($password), $mobile);
         } else {
-            $res = $userModel->updateUserInfo($user['id'],$username, md5($password));
+            $res = $userModel->updateUserInfo($user['id'], $username, md5($password));
             $userId = $user['id'];
         }
         if ($res) {
@@ -237,7 +247,7 @@ class UserController extends BaseController
         }
         $userModel = model('user');
         $user = $userModel->findByMobile($mobile);
-        if(empty($user)){
+        if (empty($user)) {
             $res = $userModel->addUserByMobile($mobile);
             $user = $userModel->find($res);
         }
@@ -272,7 +282,7 @@ class UserController extends BaseController
         $appKey = $yunXinConfig['app_key'];
         $sms = new Sms($appId, $appKey);
         $res = $sms->verifycode($mobile, $code);
-        if($res['code'] == 200){
+        if ($res['code'] == 200) {
             return true;
         }
         return false;

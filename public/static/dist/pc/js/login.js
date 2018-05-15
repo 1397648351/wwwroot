@@ -20,7 +20,7 @@ var login = function () {
 
             $("#login").click(function () {
                 var type = $(".tab-active").data('for');
-                var loginType, key, password, mobile, code;
+                var loginType, key, password, mobile, code, remember;
                 if (type == '#normal') {
                     loginType = 1;
                     key = $("#key").val();
@@ -35,6 +35,7 @@ var login = function () {
                         return;
                     }
                     localStorage && localStorage.setItem("password", password);
+                    remember = $("#remember")[0].checked
                 } else {
                     loginType = 2;
                     mobile = $("#phone").val();
@@ -58,7 +59,8 @@ var login = function () {
                         key: key,
                         password: password,
                         mobile: mobile,
-                        verification_code: code
+                        verification_code: code,
+                        remember: remember
                     },
                     success: function (res) {
                         console.log(res);
