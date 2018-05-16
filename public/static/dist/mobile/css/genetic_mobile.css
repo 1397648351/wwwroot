@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 .contents .content-0 {
-    background-image: url(../images/genetic_mobile/background_01.jpg);
+    background-image: url(../images/genetic_mobile/background_01.png);
     background-position: center;
     background-repeat: repeat-y;
 }
@@ -28,7 +28,7 @@
 }
 
 .content-0 .violet-a{
-    background-image: url(../images/genetic_mobile/chart__03.jpg);
+    background-image: url(../images/genetic_mobile/button.png);
     color: white;
     padding: 5px;
 }
@@ -40,8 +40,8 @@
 }
 
 .content-0 .content-bottom-img{
-    width: 60%;
-    margin-bottom: -40px;
+    width: 70%;
+    margin-bottom: -10px;
 }
 .content-0 .content-bottom{
     text-align: center;
@@ -50,7 +50,7 @@
 
 
 .contents .content-1 {
-    background-image: url(../images/genetic_mobile/background_011.jpg);
+    background-image: url(../images/genetic_mobile/back01.jpg);
     background-position: center;
     background-repeat: repeat-y;
 }
@@ -67,7 +67,7 @@
 }
 
 .content-1 .violet-a{
-    background-image: url(../images/genetic_mobile/chart__03.jpg);
+    background-image: url(../images/genetic_mobile/button.png);
     color: white;
     padding: 5px;
 }
@@ -78,8 +78,8 @@
     margin-top:20px;
 }
 .content-1 .content-bottom-img{
-    width: 60%;
-    margin-bottom: -40px;
+    width: 80%;
+    margin-bottom: -15px;
 }
 
 .content-1 .content-bottom{

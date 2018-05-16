@@ -61,8 +61,17 @@
     color:white;
 }
 
+.content-2 .content-bottom{
+    text-align: center;
+}
+
+.content-2 .content-bottom-img{
+    width: 80%;
+}
+
+
 .contents .content-3 {
-    background-image: url(../images/medication_mobile/back02.jpg);
+    background-image: url(../images/medication_mobile/back01.jpg);
     background-position: center;
     background-repeat: repeat-y;
 }

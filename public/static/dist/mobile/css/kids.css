@@ -25,7 +25,9 @@
     font-size:14px;
     line-height: 1.5;
 }
-
+.content-0 .content-bottom-img{
+    margin-bottom: -40px;
+}
 .contents .content-1 {
     background-image: url(../images/kids_mobillle/back01.jpg);
     background-position: center;
