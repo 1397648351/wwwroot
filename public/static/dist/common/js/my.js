@@ -25,6 +25,7 @@
                 slide: {
                     ele: ".slide",
                     boxClass: 'slide-box',
+                    animateClass: 'slide-animate',
                     interval: 5000
                 }
             };
@@ -163,7 +164,7 @@
          * option.interval: 轮播时间间隔
          */
         setSlide: function (options) {
-            var cur = 0;
+            var cur = 1, interval;
             var eles = $(options.ele);
             if (eles.length == 0) return;
             for (var i = 0; i < eles.length; i++)
@@ -172,8 +173,11 @@
                 var ele = $(eles[i]);
                 var children = ele.children('.' + options.boxClass);
                 var count = children.length;
-                ele.css('width', count * 100 + "%");
-                ele.children().css('width', 100 / count + '%');
+                ele.css('width', (count + 2) * 100 + "%");
+                ele.prepend($(children[count - 1]).clone(true));
+                ele.append($(children[0]).clone(true));
+                ele.children().css('width', 100 / (count + 2) + '%');
+                ele.css('left', -100 * cur + '%');
                 var imgs = ele.find('.content-box.slide-box>.slide-image-box>img');
                 var height = 0;
                 for (var i = 0; i < imgs.length; i++) {
@@ -181,11 +185,11 @@
                         height = imgs[i].height;
                     }
                 }
-                imgs[0].onload = function(e){
+                imgs[0].onload = function (e) {
                     $(window).trigger("resize");
                 }
                 ele.parent().css('height', height);
-                $(window).bind('resize',function (e) {
+                $(window).bind('resize', function (e) {
                     height = 0;
                     for (var i = 0; i < imgs.length; i++) {
                         if (imgs[i].height > height) {
@@ -213,26 +217,108 @@
                 var slideBtns = ele.parent().children('.slide-btn').children('li');
                 slideBtns.mouseover(function () {
                     hover = true;
+                    window.clearInterval(interval);
                     if ($(this).hasClass('.slide-btn-cur')) return;
-                    cur = slideBtns.index(this);
+                    cur = slideBtns.index(this) + 1;
                     ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
                     $(this).addClass('slide-btn-cur');
                     ele.css('left', -100 * cur + '%');
                 });
                 slideBtns.mouseleave(function () {
                     hover = false;
+                    interval = window.setInterval(function () {
+                        fun_interval();
+                    }, options.interval);
                 });
-                window.setInterval(function () {
+                slideBtns.click(function () {
+                    if ($(this).hasClass('.slide-btn-cur')) return;
+                    window.clearInterval(interval);
+                    cur = slideBtns.index(this) + 1;
+                    ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
+                    $(this).addClass('slide-btn-cur');
+                    ele.css('left', -100 * cur + '%');
+                    interval = window.setInterval(function () {
+                        fun_interval();
+                    }, options.interval);
+                });
+
+                function fun_interval() {
                     if (hover) return;
-                    if (cur == count - 1) {
-                        cur = 0;
+                    if (cur == count) {
+                        cur = 1;
                     } else {
                         cur++;
                     }
                     ele.css('left', -100 * cur + '%');
                     ele.parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
-                    ele.parent().children('.slide-btn').children().eq(cur).addClass('slide-btn-cur');
+                    ele.parent().children('.slide-btn').children().eq(cur - 1).addClass('slide-btn-cur');
+                }
+
+                interval = window.setInterval(function () {
+                    fun_interval();
                 }, options.interval);
+                //阻止事件冒泡
+                //不仅仅要stopPropagation，还要preventDefault
+                function pauseEvent(e) {
+                    if (e.stopPropagation) e.stopPropagation();
+                    if (e.preventDefault) e.preventDefault();
+                    e.cancelBubble = true;
+                    e.returnValue = false;
+                    return false;
+                }
+
+                var move = false, startTime, endTime, startPos, endPos, startLeft;
+                ele.on('touchstart', (function (e) {
+                    $(this).removeClass(options.animateClass);
+                    move = true;
+                    hover = true;
+                    window.clearInterval(interval);
+                    startTime = (new Date()).getTime() / 1000;
+                    startPos = e.touches[0].clientX;
+                    startLeft = $(this).offset().left;
+                }));
+                ele.on('touchmove', (function (e) {
+                    if (!move) return;
+                    var left, move_x;
+                    endPos = e.touches[0].clientX;
+                    move_x = endPos - startPos;
+                    left = startLeft + move_x;
+                    $(this).css('left', left);
+                }));
+                ele.on('touchend', (function (e) {
+                    $(this).addClass(options.animateClass);
+                    endTime = (new Date()).getTime() / 1000;
+                    var move_x;
+                    move_x = endPos - startPos;
+                    if (Math.abs(move_x) < 150) {
+                        $(this).css('left', -100 * cur + '%');
+                        $(this).parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
+                        $(this).parent().children('.slide-btn').children().eq(cur - 1).addClass('slide-btn-cur');
+                    } else {
+                        if (move_x < 0) {
+                            if (cur == count) {
+                                cur = 1;
+                            } else {
+                                cur++
+                            }
+                        } else {
+                            if (cur == 1) {
+                                cur = count;
+                            } else {
+                                cur--
+                            }
+                        }
+                        $(this).css('left', -100 * cur + '%');
+                        $(this).parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
+                        $(this).parent().children('.slide-btn').children().eq(cur - 1).addClass('slide-btn-cur');
+                    }
+                    hover = false;
+                    move = false;
+                    interval = window.setInterval(function () {
+                        fun_interval();
+                    }, options.interval);
+                    return false;
+                }));
             }
         }
     });

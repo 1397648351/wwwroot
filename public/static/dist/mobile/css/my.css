@@ -48,6 +48,68 @@ a {
     padding: 40px 20px;
 }
 
+.slide {
+    position: absolute;
+    height: 100%;
+    left: 0;
+}
+
+.slide-animate{
+    transition: left 1.5s;
+    -moz-transition: left 1.5s;
+    -webkit-transition: left 1.5s;
+    -o-transition: left 1.5s;
+}
+
+.slide > .content-box {
+    float: left;
+}
+
+.slide-image-box {
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.slide-image-box img {
+    width: 100%;
+}
+
+.slide-btn {
+    position: absolute;
+    height: 22px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.slide-btn > li {
+    /*float: left;*/
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.slide-btn > li > span {
+    overflow: hidden;
+    display: block;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999em;
+    background-color: transparent;
+    background-image: url(../images/home/slide-btn.png);
+    background-repeat: no-repeat;
+    background-position: 0 -27px;
+}
+
+.slide-btn > li.slide-btn-cur > span {
+    background-position: 0 0;
+}
+
 .panel-describe {
     text-align: center;
 }

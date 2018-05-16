@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
 
 .contents .content-0 {
-    background-image: url(../images/home/head_bg.png);
-    background-position: center;
-    background-repeat: repeat-y;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
 }
 
 .contents > .content-0 .content-box > .describe-title {

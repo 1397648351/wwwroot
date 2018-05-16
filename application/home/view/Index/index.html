@@ -35,7 +35,7 @@
                 {volist name="sliderList" id="slider"}
                 <div class="content-box slide-box">
                     <a href="{:url('Order/order', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
-                        <img src="__COMMONRESOURCE__/images/slider/{$slider.cover}" title="{$slider.subject}" alt="{$slider.subject}"/>
+                        <img src="__COMMONRESOURCE__/images/slider/{$slider.cover}" ondragstart="return false;" title="{$slider.subject}" alt="{$slider.subject}"/>
                     </a>
                 </div>
                 {/volist}
@@ -286,7 +286,7 @@
 {/block}
 {block name="other_js"}
 <!-- other js -->
-<script src="__PCRESOURCE__/js/my.js" type="text/javascript"></script>
+<script src="__COMMONRESOURCE__/js/my.js" type="text/javascript"></script>
 <script>
     $.my_init();
 </script>
