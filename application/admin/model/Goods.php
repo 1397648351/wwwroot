@@ -14,7 +14,7 @@ class Goods extends Base
 {
     public function findAll($page, $rows)
     {
-        $fields = 'id,subject,price,body,cover,create_time,update_time';
+        $fields = 'id,subject,price,body,cover,cover as cover_mobile,create_time,update_time';
         $offset = ($page - 1) * $rows;
         $total = $this->count();
         $data = $this->field($fields)->order('id')->limit($offset, $rows)->select();

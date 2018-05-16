@@ -76,8 +76,11 @@ class IndexController extends BaseController
                 $this->resJson(null);
             }
 
-            if (isset($_FILES['file'])) {
-                move_uploaded_file($_FILES['file']['tmp_name'], Env::get('root_path') . 'public/static/dist/common/images/slider/' . $_POST['img']);
+            if (isset($_FILES['file_pc'])) {
+                move_uploaded_file($_FILES['file_pc']['tmp_name'], Env::get('root_path') . 'public/static/dist/common/images/slider/' . $_POST['img']);
+            }
+            if (isset($_FILES['file_mobile'])) {
+                move_uploaded_file($_FILES['file_mobile']['tmp_name'], Env::get('root_path') . 'public/static/dist/common/images/slider/mobile_' . $_POST['img']);
             }
             $datas['subject'] = $_POST['name'];
             $datas['price'] = $_POST['price'];

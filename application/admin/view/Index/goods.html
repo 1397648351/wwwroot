@@ -34,7 +34,12 @@
             </div>
             <div class="pd-txt">
                 <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover" id="cover"
-                       data-options="label:'图片：',missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
+                       data-options="label:'PC图片：',missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover"
+                       id="cover_mobile"
+                       data-options="label:'手机图片：',missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
             </div>
             <div class="pd-txt">
                 <input class="easyui-validatebox easyui-textbox" style="width:100%;" type="text" name="body" id="body"
@@ -53,12 +58,13 @@
     $('#orderList').datagrid({
         url: "{:url('Index/goods')}",
         fit: true,
+        cache: false,
         method: "POST",
         pagination: true,
         striped: true,
         singleSelect: true,
         pagePosition: 'bottom',
-        border:false,
+        border: false,
         columns: [[
             {field: 'id', title: 'ID', width: 50, align: 'center'},
             {field: 'subject', title: '商品名称', width: 150, align: 'center', editor: 'text'},
@@ -68,6 +74,13 @@
                 field: 'cover', title: '图片', width: 300, align: 'center', fixed: true,
                 formatter: function (value, row, index) {
                     var img = '<img src="__COMMONRESOURCE__/images/slider/' + value + '" height="100" width="300" title="' + value + '" alt="' + value + '" />'
+                    return img;
+                }
+            },
+            {
+                field: 'cover_mobile', title: '手机图片', width: 300, align: 'center', fixed: true,
+                formatter: function (value, row, index) {
+                    var img = '<img src="__COMMONRESOURCE__/images/slider/mobile_' + value + '" height="100" width="300" title="mobile_' + value + '" alt="mobile_' + value + '" />'
                     return img;
                 }
             },
@@ -161,8 +174,10 @@
             return;
         }
         var formData = new FormData();
-        var selectedFile = $('#cover').parent().find('input[type="file"]')[0].files[0];
-        formData.append("file", selectedFile);
+        var selectedFile_PC = $('#cover').parent().find('input[type="file"]')[0].files[0];
+        var selectedFile_Mobile = $('#cover_mobile').parent().find('input[type="file"]')[0].files[0];
+        formData.append("file_pc", selectedFile_PC);
+        formData.append("file_mobile", selectedFile_Mobile);
         formData.append("name", $('#name').textbox('getValue'));
         formData.append("price", $('#price').numberbox('getValue'));
         formData.append("img", $('#img').textbox('getValue'));
