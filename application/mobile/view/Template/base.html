@@ -41,7 +41,7 @@
     var imgurl = 'https://mmbiz.qlogo.cn/mmbiz_png/Tmk7VvM4TMp7r5xECvdf8Gp8iaFnIj1wbcmYCT9icVhQOAic6ccXA2JduOJFpcf2oEzs2XImibzWvbuyhJBsoRGNnQ/0?wx_fmt=png';
     var title = '基因检测';
     wx.config({
-        debug: true, //true时有弹框提示
+        debug: false, //true时有弹框提示
         appId: '<?php echo $signPackage["appId"];?>',
         timestamp: '<?php echo $signPackage["timestamp"];?>',
         nonceStr: '<?php echo $signPackage["nonceStr"];?>',
@@ -106,6 +106,7 @@
             paySign: paySign, // 支付签名
             success: function (res) {
                 // 支付成功后的回调函数
+                window.location.href = "{:url('Order/')}"
             }
         });
     }
