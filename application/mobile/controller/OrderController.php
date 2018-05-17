@@ -65,8 +65,7 @@ class OrderController extends PublicController
             $data['package'] = $res;
             $this->resJson($data, 200, '下单成功');
         } catch (PayException $e) {
-            echo $e->errorMessage();
-            exit;
+            $this->resJson($e->errorMessage(),1000,'下单异常');
         }
     }
 
