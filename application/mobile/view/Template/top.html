@@ -1,0 +1,38 @@
+<div class="topbar">
+    <div class="content-box">
+        <div class="topbar-btn"></div>
+        <div class="title" id="topbar_title">基因检测-首页</div>
+    </div>
+    <ul class="navbar">
+        <li class="nav">
+            <a class="link-home" href="{:url('Index/index')}">首页</a>
+        </li>
+        <li class="nav">
+            <a class="link-process" href="{:url('Content/process')}">检测流程</a>
+        </li>
+        <!--<li class="nav">-->
+            <!--<a class="link-result" href="javascript:;">检测结果</a>-->
+        <!--</li>-->
+        <li class="nav">
+            <a class="link-order" href="{:url('Order/order')}">购买</a>
+        </li>
+    </ul>
+</div>
+<script>
+    $('#topbar_title').text(document.title);
+    $(window).click(function (e) {
+        if (e.target == $('.topbar-btn').get(0)) return;
+        $('.navbar').css('height', '0');
+        $('.navbar').css('display', 'none');
+    })
+    $('.topbar-btn').click(function (e) {
+        if($('.navbar').css('display')=="block"){
+            $('.navbar').css('display', 'none');
+            $('.navbar').css('height', '0');
+        }
+        else{
+            $('.navbar').css('display', 'block');
+            $('.navbar').css('height', 'auto');
+        }
+    })
+</script>

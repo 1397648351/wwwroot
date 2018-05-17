@@ -184,6 +184,7 @@ a {
 
 /*内容描述中的文字*/
 .panel-describe > .describe-words {
+    font-size:15px;
     display: block;
     width: 472px;
     margin-top: 20px;
