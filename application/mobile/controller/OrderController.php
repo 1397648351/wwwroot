@@ -114,7 +114,7 @@ class OrderController extends PublicController
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';
         $payParam['product_id'] = $goods['id'];
-        $payParam['openid'] = 'oR38K1NwvjzceEjvmPiMvQyPbwno';
+        $payParam['openid'] = session('openid');
         return $payParam;
     }
 }
