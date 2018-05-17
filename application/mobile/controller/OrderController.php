@@ -18,8 +18,15 @@ class OrderController extends PublicController
     public function order()
     {
         $goodsId = $this->request->param('id');
+        if (empty($goodsId)) {
+            $id = 1;
+        }
         $goodsModel = model('home/goods');
         $goods = $goodsModel->findById($goodsId);
+        if (empty($goods)) {
+            $this->redirect(url('Order/index', 'id=1'));
+            exit(1);
+        }
         $this->assign('goods', $goods);
         return $this->fetch();
     }
