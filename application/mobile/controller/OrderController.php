@@ -14,7 +14,7 @@ use Payment\Client\Charge;
 use Payment\Common\PayException;
 class OrderController extends PublicController
 {
-    public function index()
+    public function order()
     {
         $goodsId = $this->request->param('id');
         if (empty($goodsId)) {
