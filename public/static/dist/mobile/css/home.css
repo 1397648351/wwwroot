@@ -328,9 +328,6 @@
     background-position: -202px -87px;
 }
 
-.content-6 .content-bottom {
-    height: 600px;
-}
 
 .contents > .content-7 {
     background-image: url(../images/home/background_02.jpg);
@@ -420,4 +417,8 @@
     .card {
         padding: 20px 30px;
     }
+}
+
+.content-3 .content-bottom-img{
+    margin-bottom: -41px;
 }
