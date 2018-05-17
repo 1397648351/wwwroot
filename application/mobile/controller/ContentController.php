@@ -35,4 +35,9 @@ class ContentController extends PublicController
     {
         return $this->fetch();
     }
+
+    public function seeorder()
+    {
+        return $this->fetch();
+    }
 }

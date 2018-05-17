@@ -36,4 +36,5 @@ class ContentController extends BaseController
     {
         return $this->fetch();
     }
+
 }

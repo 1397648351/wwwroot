@@ -25,7 +25,7 @@
             <div class="slide slide-animate">
                 {volist name="sliderList" id="slider"}
                 <div class="content-box slide-box">
-                    <a href="{:url('Order/index', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
+                    <a href="{:url('Order/order', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
                         <img src="__COMMONRESOURCE__/images/slider/mobile_{$slider.cover}" ondragstart="return false;"
                              title="{$slider.subject}" alt="{$slider.subject}"/>
                     </a>
