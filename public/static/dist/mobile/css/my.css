@@ -24,7 +24,7 @@ a {
 .wrapper {
     width: 100%;
     margin: 0 auto;
-    box-shadow: 0 0 10px #000;
+    /*box-shadow: 0 0 10px #000;*/
 }
 
 .contents {
@@ -33,6 +33,7 @@ a {
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
     line-height: 2.0rem;
+    margin-top: 50px;
 }
 
 .contents > [class^=content-] {
@@ -54,7 +55,7 @@ a {
     left: 0;
 }
 
-.slide-animate{
+.slide-animate {
     transition: left 1.5s;
     -moz-transition: left 1.5s;
     -webkit-transition: left 1.5s;
@@ -165,4 +166,84 @@ a {
 .content-bottom {
     margin-top: 50px;
     position: relative;
+}
+
+.topbar {
+    position: fixed;
+    z-index: 3;
+    background-color: #fff;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    border-bottom: 1px solid #ddd;
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    text-align: center;
+}
+
+.topbar > .content-box {
+    height: 100%;
+    position: relative;
+}
+
+.topbar > .content-box > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.topbar > .content-box:after {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.topbar > .navbar {
+    display: none;
+    position: absolute;
+    top: 50px;
+    z-index: 3;
+    background-image: url(../images/home/head_bg.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    text-align: left;
+    width: 100%;
+    height: 0;
+    transition: height, display 1s;
+    -moz-transition: height, display 1s; /* Firefox 4 */
+    -webkit-transition: height, display 1s; /* Safari 和 Chrome */
+    -o-transition: height, display 1s;
+}
+
+.topbar > .navbar .nav {
+    border-bottom: 1px solid #ddd;
+    height: 35px;
+    line-height: 25px;
+    padding: 5px 20px;
+}
+
+.topbar > .navbar .nav a{
+    width: 100%;
+    display: block;
+}
+
+.topbar .title {
+    font-size: 1.6rem;
+    /*font-weight: bold;*/
+}
+
+img.logo {
+    height: 40px;
+}
+
+.topbar-btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 0;
+    background-image: url(../images/home/menu.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
