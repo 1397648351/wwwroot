@@ -286,7 +286,7 @@
                     var move_x = 0;
                     if(endPos)
                         move_x = endPos - startPos;
-                    if (Math.abs(move_x) < document.body.clientWidth / 4 ) {
+                    if (Math.abs(move_x) < 100 ) {
                         $(this).css('left', -100 * cur + '%');
                         $(this).parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
                         $(this).parent().children('.slide-btn').children().eq(cur - 1).addClass('slide-btn-cur');
