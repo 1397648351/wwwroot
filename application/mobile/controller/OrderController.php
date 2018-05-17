@@ -10,9 +10,6 @@
 
 namespace app\mobile\controller;
 
-use Payment\Client\Charge;
-use Payment\Common\PayException;
-use think\Log;
 
 class OrderController extends PublicController
 {

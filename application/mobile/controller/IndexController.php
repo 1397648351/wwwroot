@@ -2,7 +2,8 @@
 namespace app\mobile\controller;
 
 
-
+use Payment\Client\Charge;
+use Payment\Common\PayException;
 class IndexController extends PublicController
 {
     public function index()
