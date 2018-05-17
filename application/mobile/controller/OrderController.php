@@ -93,7 +93,7 @@ class OrderController extends PublicController
         $payTaxesId = $req->param('pay_taxes_id');
         //留言
         $userMsg = $req->param('user_msg');
-        $addressModel = model('address');
+        $addressModel = model('home/address');
         $addressId = $addressModel->addInfo($username, $mobile, $email, $city, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId, $userMsg);
         return $addressId;
     }
