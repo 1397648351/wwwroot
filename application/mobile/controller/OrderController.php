@@ -12,6 +12,7 @@ namespace app\mobile\controller;
 
 use Payment\Client\Charge;
 use Payment\Common\PayException;
+use think\Log;
 
 class OrderController extends PublicController
 {
@@ -55,17 +56,13 @@ class OrderController extends PublicController
         $payParam = $this->setWxPayParam($outTradeNo,$goods);
         try {
             $res = Charge::run($type, $config, $payParam);
-            if($res['return_msg'] == 'OK') {
-                $goodsOrderModel = model('home/goodsOrder');
-                $openid = session('openid');
-                $userModel = model('home/user');
-                $user = $userModel->findByOpenid($openid);
-                $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
-                $addressId = $this->setAddress($goodsOrderId);
-                $this->resJson($res, 200, '下单成功');
-            } else {
-                $this->resJson($res, 2001, '下单失败');
-            }
+            $goodsOrderModel = model('home/goodsOrder');
+            $openid = session('openid');
+            $userModel = model('home/user');
+            $user = $userModel->findByOpenid($openid);
+            $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
+            $addressId = $this->setAddress($goodsOrderId);
+            $this->resJson($res, 200, '下单成功');
         } catch (PayException $e) {
             echo $e->errorMessage();
             exit;
