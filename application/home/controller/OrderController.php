@@ -241,7 +241,7 @@ class OrderController extends BaseController
         //单位 元
         $payParam['amount'] = $goods['price'] * $num;
         //用户客户端实际IP地址
-        $payParam['client_ip'] = $req = $this->request->ip();//'127.0.0.1';
+        $payParam['client_ip'] = $this->request->ip();//'127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();
         //异步通知原样返回数据
         $payParam['return_param'] = 'pica';

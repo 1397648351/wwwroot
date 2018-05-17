@@ -166,9 +166,17 @@ class User extends Base
         $map = array();
         $map['id'] = $id;
         $data = array();
+        $data['wx_openid'] = $wxUser['openid'];
         $data['nickname'] = $wxUser['nickname'];
         $data['avatar'] = $wxUser['headimgurl'];
         $data['update_time'] = time();
-        $res = $this->updateDataByMap($data, $map);
+        return $this->updateDataByMap($data, $map);
+    }
+
+    public function findByOpenid($openid)
+    {
+        $map = array();
+        $map['wx_openid'] = $openid;
+        return $this->findByWhere($map);
     }
 }
