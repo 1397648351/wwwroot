@@ -156,6 +156,7 @@
                 password: password
             }, function (res) {
                 if(res.status_code ==200){
+                    alert('重置密码成功');
                     window.location.href  = "{:url('User/login')}";
                 } else {
                     alert(res.msg);
