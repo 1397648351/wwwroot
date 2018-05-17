@@ -1,0 +1,245 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-订单{/block}
+{block name="other_css"}
+<!-- other css -->
+<!--<link rel='stylesheet' href='__PCRESOURCE__/css/home.css' type="text/css" />-->
+<link rel='stylesheet' href='__PCRESOURCE__/css/order.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper page-order">
+    {include file="Template:top" /}
+    <div class="contents">
+        <div class="content-1">
+            <div class="content-box">
+                <div class="content-title">购物车</div>
+                <div class="content-details">
+                    <div class="content-details-left">
+                        <img src="__PCRESOURCE__/images/gmym/gm_03.png"/>
+                        <div class="content-details-info">
+                            <div></div>
+                            <input type="hidden" id="goods_id" value="{$goods['id']}">
+                            <div>单价：<span class="price"><span id="price"></span>元</span></div>
+                        </div>
+                    </div>
+                    <div class="content-details-right">
+                        <span>数量：</span>
+                        <div class="item-amount" id="num"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-2">
+            <div class="content-box">
+                <div class="content-title">收货信息</div>
+                <div class="content-details">
+                    <div class="form-group">
+                        <label class="form-group-th">收件人姓名</label>
+                        <input class="form-control" id="name" value="{$username|default=''}" placeholder="输入收件人姓名"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">手机号码</label>
+                        <input class="form-control" id="mobile" value="" placeholder="输入收件人联系方式"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">邮箱</label>
+                        <input class="form-control" id="email" value="" placeholder="输入邮箱号码获取电子版材料"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">所在地区</label>
+                        <div class="group-area">
+                            <select name="P1" id="P1" class="form-control form-select"></select>
+                            <select name="C1" id="C1" class="form-control form-select"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">详细地址</label>
+                        <input class="form-control" id="detail_address" value="" placeholder="输入详细地址"
+                               style="width: 536px;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-3">
+            <div class="content-box">
+                <div class="content-title">支付信息</div>
+                <div class="content-details">
+                    <div class="form-group">
+                        <label class="form-group-th">支付方式</label>
+                        <!--<a href="javascript:;" class="pay-type selected" data-pay="ali"><img-->
+                        <!--src="__PCRESOURCE__/images/gmym/gm_06.png"/></a>-->
+                        <a href="javascript:;" class="pay-type" data-pay="wx"><img
+                                src="__PCRESOURCE__/images/gmym/gm_08.png"/></a>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">需要发票</label>
+                        <input type="radio" checked id="invoice_0" name="invoice_need" value="不需要"/>
+                        <label for="invoice_0" class="radio-text">不需要</label>
+                        <input type="radio" id="invoice_1" name="invoice_need" value="个人"/>
+                        <label for="invoice_1" class="radio-text">个人</label>
+                        <input type="radio" id="invoice_2" name="invoice_need" value="公司"/>
+                        <label for="invoice_2" class="radio-text">公司</label>
+                    </div>
+                    <div class="form-group" name="invoice">
+                        <label class="form-group-th">发票抬头</label>
+                        <input class="form-control" id="invoice_title" value="" placeholder="请输入中文抬头"/>
+                        <div class="form-tip">请妥善保管发票。退货、退款若无法提供发票，需扣除手续费用。发票内容为技术服务费。</div>
+                    </div>
+                    <div class="form-group" name="invoice">
+                        <label class="form-group-th">纳税人识别号</label>
+                        <input class="form-control" id="pay_taxes_id" value="" placeholder="输入18位纳税人识别号"/>
+                        <div class="form-tip">购买方为企业的，索取增值税普通发票时，应向销售方提供纳税人识别号或统一社会信用代码。</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">留言</label>
+                        <input class="form-control" id="user_msg" value="" placeholder="有特殊需求请在此键入，但无法保证实现。详情请来电咨询。选填"
+                               style="width: 536px;"/>
+                        <div class="form-tip">如需发票请认真核对抬头和纳税人识别号，一经开出恕不再次开具。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-4">
+            <div class="content-box">
+                <div class="content-details">
+                    <div class="content-details-left">
+                        <div>
+                            <div>总计：<span id="total_price">499</span>元</div>
+                            <div>优惠：<span id="discount">0</span>元</div>
+                            <div class="final_price">应付：<span id="final_price">499</span>元</div>
+                        </div>
+                    </div>
+                    <div class="content-details-right">
+                        <div>
+                            <div style="text-align: left;margin-bottom: 10px;padding-left: 10px;">
+                                <input type="checkbox" id="agree" onchange="agreement(this);" value="我同意"/>
+                                <label for="agree">我同意《<a href="{:url('Index/agreement1')}" style="color: #0a69d6"
+                                                          target="_blank">知情同意书</a>》</label>
+                            </div>
+                            <input type="button" disabled class="btn-confirm" id="send_order" value="提交订单"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file="Template:footer" /}
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script src="__COMMONRESOURCE__/js/my.js" type="text/javascript"></script>
+<script src="__COMMONRESOURCE__/js/PCASClass.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        var invoice_type = 0;
+        $('[name=invoice]').hide();
+        var payType = $($(".pay-typ")[0]).data('pay');
+        $.my_init({
+            animate: {
+                enable: false
+            },
+            number: {
+                callback: function (num) {
+                    var price = parseFloat($("#price").text());
+                    var discount = parseFloat($("#discount").text());
+                    var totalprice = price * num;
+                    var finalprice = totalprice - discount;
+                    $("#total_price").text(totalprice);
+                    $("#final_price").text(finalprice);
+                }
+            }
+        });
+        agreement($('#agree').get(0));
+        $("[name='invoice_need']").change(function () {
+            if (this.id == 'invoice_0') {
+                invoice_type = 0;
+                $('[name=invoice]').hide()
+            } else {
+                if (this.id == 'invoice_1') {
+                    invoice_type = 1;
+                } else {
+                    invoice_type = 2;
+                }
+                $('[name=invoice]').show()
+            }
+        });
+        new PCAS('P1', 'C1');
+        $(".pay-type").click(function () {
+            if ($(this).hasClass("selected")) return;
+            $(".pay-type.selected").removeClass("selected");
+            $(this).addClass("selected");
+            payType = $(this).data('pay');
+        });
+
+        $("#send_order").click(function () {
+            var goodsId = $("#goods_id").val();
+            var num = $('.item-amount').getNumber();
+            var username = $("#name").val();
+            if (username == '') {
+                alert('请输入收件人姓名');
+                return;
+            }
+            var mobile = $("#mobile").val();
+            if (mobile == '') {
+                alert('请输入联系电话');
+                return;
+            }
+            var email = $("#email").val();
+            if (email == '') {
+                alert('请输入邮箱地址');
+                return;
+            }
+            var city = $("#P1").val() + $("#C1").val();
+            if (city == '') {
+                alert('请选择地址');
+                return;
+            }
+            var detail_address = $("#detail_address").val();
+            if (detail_address == '') {
+                alert('请输入详细地址');
+                return;
+            }
+            var invoice_title = '';
+            var pay_taxes_id = '';
+            if (!$('#invoice_0').get(0).checked) {
+                invoice_title = $("#invoice_title").val();
+                pay_taxes_id = $("#pay_taxes_id").val();
+                if (invoice_title == '' || pay_taxes_id == '') {
+                    alert('请输入发票信息');
+                    return;
+                }
+            }
+            var user_msg = $("#user_msg").val();
+            var url = "{:url('Order/goodsOrder')}";
+            $.post(url, {
+                goods_id: goodsId,
+                num: num,
+                username: username,
+                mobile: mobile,
+                email: email,
+                city: city,
+                detail_address: detail_address,
+                invoice_type: invoice_type,
+                invoice_title: invoice_title,
+                pay_taxes_id: pay_taxes_id,
+                pay_type: 'wx',
+                user_msg: user_msg
+            }, function (res) {
+                if (res.status_code == 200) {
+                    order_id = res.data.order_id;
+                    window.location.href = "{:url('Order/pay')}?order_id=" + order_id;
+                } else {
+                    alert(res.msg);
+                }
+            })
+        })
+    });
+
+    function agreement(ele) {
+        if (ele.checked)
+            $("#send_order").prop('disabled', false);
+        else
+            $("#send_order").prop('disabled', true);
+    }
+</script>
+{/block}

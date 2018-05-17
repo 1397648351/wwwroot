@@ -288,4 +288,14 @@ class UserController extends BaseController
         }
         return false;
     }
+
+    public function forget()
+    {
+        return $this->fetch();
+    }
+
+    public function setlogin()
+    {
+        return $this->fetch();
+    }
 }
