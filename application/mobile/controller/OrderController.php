@@ -15,7 +15,7 @@ use Payment\Common\PayException;
 
 class OrderController extends PublicController
 {
-    public function order()
+    public function index()
     {
         $goodsId = $this->request->param('id');
         if (empty($goodsId)) {
@@ -31,7 +31,7 @@ class OrderController extends PublicController
         return $this->fetch();
     }
 
-    public function postOrder()
+    public function order()
     {
         if(!$this->request->isPost()){
             $this->resJson(array(), 2001,'需要post提交');
