@@ -210,10 +210,9 @@
                 user_msg: user_msg
             }, function (res) {
                 if (res.status_code == 200) {
-                    var order_id = res.data.order_id;
-                    var data = res.data.package;
+                    var data = res.data;
                     alert(data['paySign']);
-                    wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign'], order_id);
+                    wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign']);
                 } else {
                     alert(res.msg);
                 }
