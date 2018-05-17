@@ -44,7 +44,7 @@
 }
 
 .content-2 .content-img{
-    margin-top: 230px;
+    margin-top: 50px;
 }
 
 .content-2 .describe-content1{
@@ -59,10 +59,6 @@
     background-image: url(../images/process/background_05.png);
     height: 710px;
     background-color: #f9f9f9;
-}
-
-.content-3 .content-img{
-    margin-top: 220px;
 }
 
 .content-3 .describe-content1{
