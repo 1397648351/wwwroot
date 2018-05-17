@@ -15,16 +15,16 @@ use Payment\Common\PayException;
 
 class OrderController extends PublicController
 {
-    public function index()
+    public function order()
     {
-        $goodsId = $this->request->param('goods_id');
+        $goodsId = $this->request->param('id');
         $goodsModel = model('home/goods');
         $goods = $goodsModel->findById($goodsId);
         $this->assign('goods', $goods);
         return $this->fetch();
     }
 
-    public function order()
+    public function postOrder()
     {
         if(!$this->request->isPost()){
             $this->resJson(array(), 2001,'需要post提交');

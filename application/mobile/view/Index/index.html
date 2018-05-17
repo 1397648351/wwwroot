@@ -25,7 +25,7 @@
             <div class="slide slide-animate">
                 {volist name="sliderList" id="slider"}
                 <div class="content-box slide-box">
-                    <a href="{:url('Order/order', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
+                    <a href="{:url('Order/index', 'id='.$slider.id)}" class="slide-image-box" title="{$slider.subject}">
                         <img src="__COMMONRESOURCE__/images/slider/mobile_{$slider.cover}" ondragstart="return false;"
                              title="{$slider.subject}" alt="{$slider.subject}"/>
                     </a>
@@ -82,14 +82,14 @@
                         <div class="describe-kinds-piece">血统成分</div>
                         <div class="describe-kinds-piece">基因关系</div>
                     </div>
-                    <a class="btn btn-blue" id="pay" href="javascript:;">了解更多</a>
+                    <a class="btn btn-blue" href="javascript:;">了解更多</a>
                 </div>
                 <div class="content-bottom">
                     <div class="panel">
                         <div class="panel-title">你的祖源分析</div>
                         <div class="panel-body">
                             <div class="persion-icon">
-                                <img src="/static/dist/pc/images/home/yy_0001.png">
+                                <img src="__PCRESOURCE__/images/home/yy_0001.png">
                             </div>
                             <div class="infos">
                                 <div class="info-line">
