@@ -62,6 +62,9 @@ class OrderController extends PublicController
             $user = $userModel->findByOpenid($openid);
             $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
             $addressId = $this->setAddress($goodsOrderId);
+            $data = array();
+            $data['order_id'] = $outTradeNo;
+            $data['package'] = $res;
             $this->resJson($res, 200, '下单成功');
         } catch (PayException $e) {
             echo $e->errorMessage();

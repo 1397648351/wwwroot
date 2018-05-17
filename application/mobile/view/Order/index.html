@@ -211,7 +211,7 @@
             }, function (res) {
                 if (res.status_code == 200) {
                     var order_id = res.data.order_id;
-                    var data = res.data;
+                    var data = res.data.package;
                     wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign'], order_id);
                 } else {
                     alert(res.msg);
