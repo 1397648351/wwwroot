@@ -19,7 +19,7 @@ class OrderController extends PublicController
     {
         $goodsId = $this->request->param('id');
         if (empty($goodsId)) {
-            $id = 1;
+            $goodsId = 1;
         }
         $goodsModel = model('home/goods');
         $goods = $goodsModel->findById($goodsId);
