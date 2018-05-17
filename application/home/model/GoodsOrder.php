@@ -40,6 +40,13 @@ class GoodsOrder extends Base
         return $this->findByWhere($map);
     }
 
+    public function findOrderInfo($orderId)
+    {
+        $sql = "select o.id,o.out_trade_no,g.subject,a.username,a.mobile 
+              from ge_address a,ge_goods g,ge_goods_order o where o.id=a.goods_order_id and o.goods_id=g.id and o.id=".$orderId;
+        return $this->query($sql);
+    }
+
     /**
      * @param $out_trade_no
      * @param $openid

@@ -38,6 +38,10 @@ class ContentController extends PublicController
 
     public function seeorder()
     {
+        $orderId = $this->request->param('order_id');
+        $goodsOrderModel = model('home/goodsOrder');
+        $order = $goodsOrderModel->findOrderInfo($orderId);
+        $this->assign('info', $order[0]);
         return $this->fetch();
     }
 

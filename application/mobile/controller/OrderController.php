@@ -30,14 +30,6 @@ class OrderController extends PublicController
         return $this->fetch();
     }
 
-    public function queryOrder()
-    {
-        $orderId = $this->request->param('order_id');
-        $goodsOrderModel = model('goodsOrder');
-        $order = $goodsOrderModel->find($orderId);
-        dump($order);
-    }
-
     public function order()
     {
         if(!$this->request->isPost()){

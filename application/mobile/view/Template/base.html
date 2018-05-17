@@ -106,7 +106,7 @@
             paySign: paySign, // 支付签名
             success: function (res) {
                 // 支付成功后的回调函数
-                window.location.href = "{:url('Order/')}"
+                window.location.href = "{:url('Content/seeorder')}?order_id="+orderId
             }
         });
     }
