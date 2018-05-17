@@ -22,17 +22,14 @@
     $('#topbar_title').text(document.title);
     $(window).click(function (e) {
         if (e.target == $('.topbar-btn').get(0)) return;
-        $('.navbar').css('height', '0');
-        $('.navbar').css('display', 'none');
+        $('.navbar').removeClass('show');
     })
     $('.topbar-btn').click(function (e) {
         if($('.navbar').css('display')=="block"){
-            $('.navbar').css('display', 'none');
-            $('.navbar').css('height', '0');
+            $('.navbar').removeClass('show');
         }
         else{
-            $('.navbar').css('display', 'block');
-            $('.navbar').css('height', 'auto');
+            $('.navbar').addClass('show');
         }
     })
 </script>
