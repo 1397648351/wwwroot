@@ -210,11 +210,11 @@ class UserController extends BaseController
     {
         $req = $this->request;
         if (!$req->isPost()) {
-            return $this->fetch('reset');
+            return $this->fetch('forget');
         }
         $mobile = $this->checkMobile($req->param('mobile'));
         $password = $this->checkEmpty($req->param('password'), 'password不能为空');
-        $verification_code = $this->checkEmpty($req->param('verification_code'), 'verification_code不能为空');
+        $verification_code = $this->checkEmpty($req->param('code'), 'code不能为空');
         $yunXinConfig = config('variable.yunConfig');
         $appId = $yunXinConfig['app_id'];
         $appKey = $yunXinConfig['app_key'];
@@ -287,15 +287,5 @@ class UserController extends BaseController
             return true;
         }
         return false;
-    }
-
-    public function forget()
-    {
-        return $this->fetch();
-    }
-
-    public function setlogin()
-    {
-        return $this->fetch();
     }
 }

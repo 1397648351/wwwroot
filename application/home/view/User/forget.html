@@ -23,13 +23,146 @@
                         <input type="password" id="code" placeholder="验证码"/>
                         <input type="button" class="def-input-btn" id="send_code" value="获取验证码"/>
                     </div>
+                    <div class="form-input">
+                        <input type="text" class="def-input" id="password"  placeholder="请输入新密码"/>
+                    </div>
                 </div>
                 <div class="form-btn">
-                    <input type="button" value="下一步" id="login" class="def-input">
+                    <input type="button" value="确定" id="reset" class="def-input">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+{/block}
+
+{block name="other_js"}
+
+<script>
+    $(function () {
+
+        $("#send_code").click(function () {
+            var mobile = $("#phone").val();
+            if (mobile == '') {
+                alert('请输入手机号');
+                return;
+            }
+            $("#send_code").prop('disabled', true);
+            var second = 20;
+            $("#send_code").val(second + 's');
+            var interval = setInterval(function () {
+                second -= 1;
+                if (second == 0) {
+                    clearInterval(interval);
+                    $("#send_code").prop('disabled', false);
+                    $("#send_code").val('获取验证码');
+                } else {
+                    $("#send_code").val(second + 's');
+                }
+            }, 1000);
+            var res = checkParam(mobile, 'mobile');
+            if (res) {
+                var sendUrl = "{:url('User/sendSms')}";
+                $.post(sendUrl, {
+                    mobile: mobile,
+                    type: 'login'
+                }, function (res) {
+                    if (res.status_code != 200) {
+                        alert(res.msg);
+                        clearInterval(interval);
+                        $("#send_code").prop('disabled', false);
+                        $("#send_code").val('获取验证码');
+                    } else {
+                        alert(res.msg);
+                    }
+                })
+            } else {
+                alert('请输入正确的手机号');
+                clearInterval(interval);
+                $('#phone').val('');
+                $("#send_code").prop('disabled', false);
+                $("#send_code").val('获取验证码');
+            }
+        })
+
+        /**
+         * 参数验证
+         * @param param
+         * @param describe
+         * @returns {boolean}
+         */
+        function checkParam(param, describe) {
+            var flag = true;
+            var msg = '';
+            switch (describe) {
+                case "mobile":
+                    if (param.length == 0) {
+                        $("#mobile").next(".state").addClass('state-error');
+                        msg = '手机号不能为空';
+                        flag = false;
+                    } else if (!(/^1\d{10}$/.test(param))) {
+                        $("#mobile").next(".state").addClass('state-error');
+                        msg = '手机号格式不正确';
+                        flag = false;
+                    } else {
+                        $("#mobile").next(".state").addClass('state-success');
+                    }
+                    break;
+                case "code":
+                    if (param.length == 0) {
+                        $("#code").next(".state").addClass('state-error');
+                        msg = '验证码不能为空';
+                        flag = false;
+                    } else if (!(/^\d{6}$/.test(param))) {
+                        $("#code").next(".state").addClass('state-error');
+                        msg = '验证码格式不正确';
+                        flag = false;
+                    } else {
+                        $("#code").next(".state").addClass('state-success');
+                    }
+                    break;
+                default :
+                    break;
+            }
+            if (flag) {
+                return true;
+            } else {
+                console.log(msg);
+                return false;
+            }
+        }
+
+        $("#reset").click(function () {
+            var mobile = $("#phone").val();
+//            if (mobile == '') {
+//                alert('手机号不能为空');
+//                return;
+//            }
+            var code = $("#code").val();
+//            if (code == '') {
+//                alert('请输入验证码');
+//                return;
+//            }
+            var password = $("#password").val();
+//            if (password == '') {
+//                alert('请输入密码');
+//                return;
+//            }
+            resetUrl = "{:url('User/resetPwd')}";
+            $.post(resetUrl, {
+                mobile: mobile,
+                code: code,
+                password: password
+            }, function (res) {
+                if(res.status_code ==200){
+                    window.location.href  = "{:url('User/login')}";
+                } else {
+                    alert(res.msg);
+                }
+            })
+        });
+    })
+
+</script>
 {/block}
