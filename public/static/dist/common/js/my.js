@@ -267,18 +267,15 @@
                     return false;
                 }
 
-                var move = false, startTime, endTime, startPos, endPos, startLeft;
+                var startPos, endPos, startLeft;
                 ele.on('touchstart', (function (e) {
                     $(this).removeClass(options.animateClass);
-                    move = true;
                     hover = true;
                     window.clearInterval(interval);
-                    startTime = (new Date()).getTime() / 1000;
                     startPos = e.touches[0].clientX;
                     startLeft = $(this).offset().left;
                 }));
                 ele.on('touchmove', (function (e) {
-                    if (!move) return;
                     var left, move_x;
                     endPos = e.touches[0].clientX;
                     move_x = endPos - startPos;
@@ -287,9 +284,9 @@
                 }));
                 ele.on('touchend', (function (e) {
                     $(this).addClass(options.animateClass);
-                    endTime = (new Date()).getTime() / 1000;
-                    var move_x;
-                    move_x = endPos - startPos;
+                    var move_x = 0;
+                    if(endPos)
+                        move_x = endPos - startPos;
                     if (Math.abs(move_x) < 150) {
                         $(this).css('left', -100 * cur + '%');
                         $(this).parent().children('.slide-btn').children('li.slide-btn-cur').removeClass('slide-btn-cur');
@@ -313,11 +310,9 @@
                         $(this).parent().children('.slide-btn').children().eq(cur - 1).addClass('slide-btn-cur');
                     }
                     hover = false;
-                    move = false;
                     interval = window.setInterval(function () {
                         fun_interval();
                     }, options.interval);
-                    return false;
                 }));
             }
         }
