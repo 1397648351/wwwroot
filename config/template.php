@@ -32,10 +32,10 @@ return [
     'taglib_end' => '}',
     // 视图输出字符串内容替换
     'tpl_replace_string' => [
-        '__QR__' => '/wwwroot/public/qr',
-        '__STATIC__' => '/wwwroot/public/static',
-        '__COMMONRESOURCE__' => '/wwwroot/public/static/dist/common',
-        '__PCRESOURCE__' => '/wwwroot/public/static/dist/pc',
-        '__MOBILERESOURCE__' => '/wwwroot/public/static/dist/mobile'
+        '__QR__' => '/qr',
+        '__STATIC__' => '/static',
+        '__COMMONRESOURCE__' => '/static/dist/common',
+        '__PCRESOURCE__' => '/static/dist/pc',
+        '__MOBILERESOURCE__' => '/static/dist/mobile'
     ]
 ];
