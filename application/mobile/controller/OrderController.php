@@ -51,6 +51,7 @@ class OrderController extends PublicController
         }
         $type = 'wx_pub';
         $config = $this->wxConfigData();
+        $this->resJson(array(),1000,$config['app_id']);
         $payParam = $this->setWxPayParam($outTradeNo,$goods);
         try {
             $res = Charge::run($type, $config, $payParam);
