@@ -177,7 +177,7 @@ class BaseController extends Controller
         $data = array();
         //微信支付验收模式
         $data['use_sendbox'] = true;
-        $data['app_id'] = 'wxbf9c8fbe1173ff7d';
+        $data['app_id'] = config('variable.wxPayConfig.app_id');
         //微信支付商户号
         $data['mch_id'] = config('variable.wxPayConfig.mch_id');
         //商户中心配置

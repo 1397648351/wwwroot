@@ -27,13 +27,16 @@ a {
     /*box-shadow: 0 0 10px #000;*/
 }
 
+.topbar + .contents{
+    margin-top: 50px;
+}
+
 .contents {
     background-color: transparent;
     color: #666;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
     line-height: 2.0rem;
-    margin-top: 50px;
 }
 
 .contents > [class^=content-] {
