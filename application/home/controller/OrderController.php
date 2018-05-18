@@ -90,6 +90,17 @@ class OrderController extends BaseController
         }
     }
 
+    public function orderList()
+    {
+        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
+            $this->error("请先登录！", 'User/login');
+        }
+        $goodsOrderModel = model('goodsOrder');
+        $data = $goodsOrderModel->findOrderByUser(session('userInfo')['id']);
+        $this->assign('list', $data);
+        return $this->fetch();
+    }
+
     public function pay()
     {
         $orderId = $this->request->param('order_id');
@@ -108,7 +119,7 @@ class OrderController extends BaseController
             $config = $this->wxConfigData();
             $ret = Query::run('wx_charge', $config, $data);
             $trade_state = $ret['trade_state'];
-            switch ($trade_state){
+            switch ($trade_state) {
                 case 'SUCCESS':
                     $this->resJson($trade_state, 200, '支付成功');
                     break;
@@ -116,7 +127,7 @@ class OrderController extends BaseController
                     $this->resJson($trade_state, 100, '未支付');
                     break;
                 case 'PAYERROR':
-                    $this->resJson($trade_state, 1001,'支付失败');
+                    $this->resJson($trade_state, 1001, '支付失败');
                     break;
                 case 'CLOSED':
                     $this->resJson($trade_state, 100, '已关闭');
