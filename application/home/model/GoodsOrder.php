@@ -14,7 +14,7 @@ use app\common\model\Base;
 
 class GoodsOrder extends Base
 {
-    public function addInfo($goods, $userId, $outTradeNo, $payType,$num)
+    public function addInfo($goods, $userId, $outTradeNo, $payType, $num)
     {
         $data = array();
         $data['goods_id'] = $goods['id'];
@@ -43,7 +43,7 @@ class GoodsOrder extends Base
     public function findOrderInfo($orderId)
     {
         $sql = "select o.id,o.out_trade_no,g.subject,a.username,a.mobile 
-              from ge_address a,ge_goods g,ge_goods_order o where o.id=a.goods_order_id and o.goods_id=g.id and o.id=".$orderId;
+              from ge_address a,ge_goods g,ge_goods_order o where o.id=a.goods_order_id and o.goods_id=g.id and o.id=" . $orderId;
         return $this->query($sql);
     }
 
@@ -63,5 +63,14 @@ class GoodsOrder extends Base
         $data['openid'] = $openid;
         $data['update_time'] = time();
         return $this->updateDataByMap($data, $map);
+    }
+
+    public function findOrderByUser($userId)
+    {
+        $map = array();
+        $map['a.user_id'] = $userId;
+        $fields = 'a.out_trade_no as no,a.user_id,a.num,a.money,b.subject,a.create_time';
+        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10);
+        return $data;
     }
 }

@@ -412,3 +412,37 @@ a {
 .slide-btn > li.slide-btn-cur > span {
     background-position: 0 0;
 }
+
+.pagination{
+text-align: right;
+    height: 50px;
+    margin-top: 10px;
+    padding: 10px 0;
+}
+
+.pagination li{
+    display: inline-block;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #EFEFEF;
+    margin-left: 5px;
+}
+
+.pagination li *{
+    /*display: block;*/
+    padding: 2px 10px;
+}
+
+.pagination li.disabled{
+    background-color: #EFEFEF;
+}
+
+.pagination li.active{
+    background-color: red;
+    color: #fff;
+    border-color: red;
+}
+
+.pagination li:not(.disabled):hover{
+    border-color: red;
+}

@@ -218,3 +218,42 @@ body {
     background-color: #6f767a;
     border: 1px solid #6f767a;
 }
+
+.contents .content-order .content-box{
+    width: 1196px;
+    padding: 35px 20px 0 20px;
+}
+
+.table-list{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-list tr th{
+    font-weight: normal;
+    font-size: 1.8rem;
+}
+
+.table-list tr td{
+    font-size: 1.6rem;
+}
+
+.table-list thead tr{
+    height: 65px;
+    line-height: 65px;
+}
+
+.table-list tbody tr{
+    height: 50px;
+    line-height: 50px;
+}
+
+
+
+.table-list tr{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d2d2d2;
+    border-left-width: 0;
+    border-right-width: 0;
+}
