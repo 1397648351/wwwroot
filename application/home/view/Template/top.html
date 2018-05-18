@@ -23,7 +23,7 @@
             <li class="nav">
                 <a class="link-login" href="{:url('User/login')}">登录</a>
             </li>
-            {elseif !session('?userInfo') && session('userInfo')['role']==0 /}
+            {elseif session('?userInfo') && session('userInfo')['role']==0 /}
             <li class="nav">
                 <a class="link-login" href="{:url('User/logout')}">退出登录</a>
             </li>
