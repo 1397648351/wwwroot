@@ -65,12 +65,15 @@ class GoodsOrder extends Base
         return $this->updateDataByMap($data, $map);
     }
 
-    public function findOrderByUser($userId)
+    public function findOrderByUser($userId, $page = true)
     {
         $map = array();
         $map['a.user_id'] = $userId;
         $fields = 'a.out_trade_no as no,a.user_id,a.num,a.money,b.subject,a.create_time';
-        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10);
+        if($page)
+            $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10);
+        else
+            $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->select();
         return $data;
     }
 }

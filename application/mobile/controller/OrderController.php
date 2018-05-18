@@ -12,6 +12,7 @@ namespace app\mobile\controller;
 
 use Payment\Client\Charge;
 use Payment\Common\PayException;
+
 class OrderController extends PublicController
 {
     public function index()
@@ -30,13 +31,23 @@ class OrderController extends PublicController
         return $this->fetch();
     }
 
+    public function orderList()
+    {
+        $userModel = model('home/user');
+        $user = $userModel->findByOpenid(session('openid'));
+        $goodsOrderModel = model('home/goodsOrder');
+        $data = $goodsOrderModel->findOrderByUser($user['id'], true);
+        $this->assign('list', $data);
+        return $this->fetch();
+    }
+
     public function order()
     {
-        if(!$this->request->isPost()){
-            $this->resJson(array(), 2001,'需要post提交');
+        if (!$this->request->isPost()) {
+            $this->resJson(array(), 2001, '需要post提交');
         }
         $req = $this->request;
-        $outTradeNo = $this->getMgid().'_wx';
+        $outTradeNo = $this->getMgid() . '_wx';
         $goodsId = $req->param('goods_id');
         $username = $this->checkEmpty($req->param('username'), '收件人姓名不能为空！');
         $mobile = $this->checkEmpty($req->param('mobile'), '手机号不问为空！');
@@ -51,7 +62,7 @@ class OrderController extends PublicController
         }
         $type = 'wx_pub';
         $config = $this->wxConfigData();
-        $payParam = $this->setWxPayParam($outTradeNo,$goods);
+        $payParam = $this->setWxPayParam($outTradeNo, $goods);
         try {
             $res = Charge::run($type, $config, $payParam);
             $goodsOrderModel = model('home/goodsOrder');
@@ -66,7 +77,7 @@ class OrderController extends PublicController
             $this->resJson($data, 200, '下单成功');
         } catch (PayException $e) {
             \think\facade\Log::log($e->errorMessage(), '-----------------');
-            $this->resJson($e->errorMessage(),1000,'下单异常');
+            $this->resJson($e->errorMessage(), 1000, '下单异常');
         }
     }
 
@@ -100,7 +111,7 @@ class OrderController extends PublicController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo,$goods)
+    private function setWxPayParam($outTradeNo, $goods)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
