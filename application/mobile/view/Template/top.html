@@ -17,19 +17,19 @@
             <a class="link-order" href="{:url('Order/index')}">购买</a>
         </li>
     </ul>
-</div>
-<script>
-    $('#topbar_title').text(document.title);
-    $(window).click(function (e) {
-        if (e.target == $('.topbar-btn').get(0)) return;
-        $('.navbar').removeClass('show');
-    })
-    $('.topbar-btn').click(function (e) {
-        if($('.navbar').css('display')=="block"){
+    <script>
+        $('#topbar_title').text(document.title);
+        $(window).click(function (e) {
+            if (e.target == $('.topbar-btn').get(0)) return;
             $('.navbar').removeClass('show');
-        }
-        else{
-            $('.navbar').addClass('show');
-        }
-    })
-</script>
+        })
+        $('.topbar-btn').click(function (e) {
+            if($('.navbar').css('display')=="block"){
+                $('.navbar').removeClass('show');
+            }
+            else{
+                $('.navbar').addClass('show');
+            }
+        })
+    </script>
+</div>
