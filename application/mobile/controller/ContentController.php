@@ -49,4 +49,14 @@ class ContentController extends PublicController
     {
         return $this->fetch();
     }
+    public function binding()
+    {
+        return $this->fetch();
+    }
+
+    public function bindingend()
+    {
+        return $this->fetch();
+    }
+
 }

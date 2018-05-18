@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+body {
+    background-color: #fff;
+}
+
+.wrapper {
+    box-shadow: none;
+    margin-bottom: 50px;
+}
+
+.contents > [class^=content-]{
+    padding: 10px 20px;
+    background-color: #fff;
+}
+.select-order{
+    text-align: left;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.select-order-1{
+    text-align: left;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: gray;
+
+}
+.content-bottom-img{
+    margin-top: 20px;
+    width: 25%;
+}
+.content-bottom{
+    background-image: url(../images/binding/2333.png);
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+}
+
+.form-des{
+    color: white;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.form-des-1{
+    color: white;
+    margin-top: 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
