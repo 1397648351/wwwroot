@@ -24,7 +24,6 @@ class PublicController extends BaseController
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl().url();
-        return;
         if(empty($openid)){
             $wxOAuthConfig = config('variable.wxMobile');
             $wxAppId = $wxOAuthConfig['app_id'];;
