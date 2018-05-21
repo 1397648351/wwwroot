@@ -5,10 +5,12 @@
  * Date: 2018/5/7
  * Time: 16:21
  */
+
 namespace app\mobile\controller;
 
 
 use Payment\Client\Charge;
+
 class ContentController extends PublicController
 {
     public function kids_mobile()
@@ -49,9 +51,21 @@ class ContentController extends PublicController
     {
         return $this->fetch();
     }
+
     public function binding()
     {
-        return $this->fetch();
+        if ($this->request->isGet()) {
+
+            $id = $this->request->param('id');
+            $this->assign("id", $id);
+            return $this->fetch();
+        } else {
+            $id = $this->request->param('id');
+            $num = $this->request->param('num');
+            $goodsOrderModel = model('home/goodsOrder');
+            $result = $goodsOrderModel->insertSerialNum($id, $num);
+            $this->resJson(array(), $result['code'], $result['msg']);
+        }
     }
 
     public function bindingend()

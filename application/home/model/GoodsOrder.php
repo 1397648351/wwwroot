@@ -11,6 +11,7 @@
 namespace app\home\model;
 
 use app\common\model\Base;
+use think\Exception;
 
 class GoodsOrder extends Base
 {
@@ -70,10 +71,36 @@ class GoodsOrder extends Base
         $map = array();
         $map['a.user_id'] = $userId;
         $fields = 'a.out_trade_no as no,a.user_id,a.num,a.money,b.subject,a.create_time';
-        if($page)
-            $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10);
-        else
+        if ($page) $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10); else
             $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->select();
         return $data;
+    }
+
+    public function insertSerialNum($id, $num)
+    {
+        $result = array();
+        $map = array();
+        $map['serial_num'] = $num;
+        $count = $this->where($map)->count();
+        if ($count > 0) {
+            $result['code'] = 1001;
+            $result['msg'] = '该唾液采集编码已被绑定！';
+            return $result;
+        }
+        $map = array();
+        $map['out_trade_no'] = $id;
+        $map['serial_num'] = array('serial_num', '<>', '');
+        $count = $this->where($map)->count();
+        if ($count > 0) {
+            $result['code'] = 1002;
+            $result['msg'] = '该订单已绑定唾液采集编码！';
+            return $result;
+        }
+        $map = array();
+        $map['out_trade_no'] = $id;
+        $this->where($map)->data(['serial_num' => $num])->update();
+        $result['code'] = 200;
+        $result['msg'] = '';
+        return $result;
     }
 }

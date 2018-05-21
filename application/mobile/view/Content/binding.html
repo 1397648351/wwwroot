@@ -12,13 +12,33 @@
             <div class="content-box">
                 <div class="form-detail">
                     <label class="form-label">唾液采集编码：</label>
-                    <input class="form-control" />
+                    <input class="form-control" id="number"/>
                 </div>
             </div>
             <div class="content-bottom">
-                <a class="form-img" href="{:url('Content/bindingend')}">下一步</a>
+                <a class="form-img" onclick="redirect();" href="javascript:;">下一步</a>
             </div>
         </div>
     </div>
 </div>
+{/block}
+
+{block name="other_js"}
+<!-- other js -->
+<script>
+    function redirect() {
+        var number = $("#number").val();
+        if (number == '') {
+            alert('请输入唾液采集编码');
+            return;
+        }
+        $.post("{:url('Content/binding')}", {id: '{$id}', num: number}, function (result) {
+            if(result.status_code=='200'){
+                window.location.href = "{:url('Content/bindingend')}";
+            }else{
+                alert(result.msg);
+            }
+        });
+    }
+</script>
 {/block}

@@ -14,7 +14,9 @@
                     {volist name='list' id='item'}
                     <li>
                         <table class="table-item" width="100%">
-                            <caption>订单编号:{$item.no}</caption>
+                            <caption>
+                                <a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}">订单编号:{$item.no}</a>
+                            </caption>
                             <tbody>
                             <tr>
                                 <td class="item-name">{$item.subject}</td>
