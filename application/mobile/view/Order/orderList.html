@@ -15,7 +15,7 @@
                     <li>
                         <table class="table-item" width="100%">
                             <caption>
-                                <a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}">订单编号:{$item.no}</a>
+                                <!--<a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}"></a>-->订单编号:{$item.no}
                             </caption>
                             <tbody>
                             <tr>
@@ -27,6 +27,11 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="item-detail">共{$item.num}件商品 合计:￥{$item.money}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="item-detail item-btn-group">
+                                    <a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}">绑定编号</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
