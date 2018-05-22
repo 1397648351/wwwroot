@@ -136,3 +136,18 @@
 .content-3 .content-title .title-size{
     width: 30%;
 }
+
+.content-3 .back-buy {
+    color: white;
+    padding: 10px 105px;
+    font-size: 18px;
+    height: 40px;
+    margin-top: -50px;
+    background-image: url(../images/process_mobile/processbuy.png);
+}
+
+.content-3 .content-bottom-2 {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}

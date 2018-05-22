@@ -21,56 +21,60 @@
     width: 100%;
 }
 
-.content-0 .describe-words{
-    font-size:14px;
+.content-0 .describe-words {
+    font-size: 14px;
     line-height: 1.5;
 }
-.content-0 .content-bottom-img{
+
+.content-0 .content-bottom-img {
     margin-bottom: -40px;
 }
+
 .contents .content-1 {
     background-image: url(../images/kids_mobillle/back01.jpg);
     background-position: center;
     background-repeat: repeat-y;
 }
 
-.content-1 .violet-a{
+.content-1 .violet-a {
     background-image: url(../images/kids_mobillle/Button_03.png);
     color: white;
     padding: 5px;
 }
 
-.content-1 .describe-words{
-    font-size:14px;
+.content-1 .describe-words {
+    font-size: 14px;
     line-height: 1.5;
     margin-bottom: 10px;
 }
 
-.content-1 .describe-words-2{
-    font-size:14px;
+.content-1 .describe-words-2 {
+    font-size: 14px;
     line-height: 1.5;
     margin-top: 10px;
 }
-.content-1 .content-bottom-img{
+
+.content-1 .content-bottom-img {
     margin-bottom: -40px;
 }
+
 .contents .content-2 {
     background-image: url(../images/kids_mobillle/background_02.png);
     background-position: center;
     background-repeat: repeat-y;
 }
 
-.content-2 .describe-words{
-    font-size:14px;
+.content-2 .describe-words {
+    font-size: 14px;
     line-height: 1.5;
-    color:white;
+    color: white;
 }
 
-.content-2 .content-bottom-img{
+.content-2 .content-bottom-img {
     width: 60%;
 }
 
-.content-2 .content-bottom{
+.content-2 .content-bottom {
     text-align: center;
 }
 
@@ -80,39 +84,43 @@
     background-repeat: repeat-y;
 }
 
-.content-3 .panel-title{
+.content-3 .panel-title {
     background-image: url(../images/kids_mobillle/Background_09.png);
     color: white;
     text-align: center;
 }
 
-.content-3 .panel-title-img{
+.content-3 .panel-title-img {
     display: inline-block;
     vertical-align: middle;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-.content-3 .panel-title-content{
+.content-3 .panel-title-content {
     display: inline-block;
     vertical-align: middle;
     font-size: 17px;
     font-weight: 600;
 }
-.panel-title-2{
+
+.panel-title-2 {
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
 }
-.content-3 .panel-body{
+
+.content-3 .panel-body {
     background-color: #fff;
     border-radius: 0 0 12px 12px;
     color: #666;
     border: 1px solid #d0d0d3;
     padding: 20px 70px;
 }
+
 .info-line {
     line-height: 2.4rem;
 }
+
 .info-line-1 {
     line-height: 2.4rem;
 }
@@ -130,10 +138,27 @@
     font-size: 20px;
     font-weight: 600;
 }
-.info-detail{
+
+.info-detail {
     font-size: 15px;
     margin-top: 8px;
 }
-.info-line-jian{
+
+.info-line-jian {
     padding-top: 35px;
+}
+
+.content-3 .back-buy {
+    color: white;
+    padding: 10px 105px;
+    font-size: 18px;
+    height: 40px;
+    margin-top: -50px;
+    background-image: url(../images/kids_mobillle/kidsbuy.png);
+}
+
+.content-3 .content-bottom {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
 }
