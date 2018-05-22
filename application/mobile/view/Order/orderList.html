@@ -26,6 +26,10 @@
                                 <td colspan="2" class="item-num">×{$item.num}</td>
                             </tr>
                             <tr>
+                                <td class="item-name">已绑定编号</td>
+                                <td class="item-price">{if !empty($item.serial_num)}{$item.serial_num}{else /}未绑定{/if}</td>
+                            </tr>
+                            <tr>
                                 <td colspan="2" class="item-detail">共{$item.num}件商品 合计:￥{$item.money}</td>
                             </tr>
                             <tr>
