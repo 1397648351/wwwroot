@@ -70,6 +70,7 @@ class GoodsOrder extends Base
     {
         $map = array();
         $map['a.user_id'] = $userId;
+        $map['a.status'] = 1;
         $fields = 'a.out_trade_no as no,a.user_id,a.num,a.money,b.subject,a.create_time';
         if ($page) $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->paginate(10); else
             $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->where($map)->order('a.create_time', 'desc')->select();
