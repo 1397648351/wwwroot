@@ -237,45 +237,33 @@
     background-image: url(../images/home/background_06.png);
 }
 
-.selects-group {
-    margin-top: 40px;
-    text-align: center;
+.selects-group{
+    width: 100%;
 }
 
-.selects-group:first-child {
-    margin-top: 0;
+.selects-group td.white{
+    width: 10px;
+    background-color: transparent;
 }
 
-.selects {
-    display: inline-block;
-    width: 40vw;
+.selects-group td{
+    height: 100%;
+    vertical-align:top;
     border-radius: 2px;
     background-color: #fff;
     background-repeat: repeat-y;
     background-position: center;
-    position: relative;
+    box-shadow: 0 0 1px #fff;
+}
+
+.selects {
+    display: block;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
     line-height: 1.8rem;
     font-size: 1.2rem;
-    text-align: center;
-    box-shadow: 0 0 1px #fff;
     padding: 15px;
-    position: relative;
-    vertical-align: middle;
-    /*height: 260px;*/
-    height: 100%;
-}
-
-.selects:nth-child(even) {
-    margin-left: 2vw;
-}
-
-.selects:nth-child(odd) {
-    margin-right: 2vw;
-}
-
-.selects > * {
-    vertical-align: middle;
-    height: 100%;
 }
 
 .selects:before {
