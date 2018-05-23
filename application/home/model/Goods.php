@@ -25,6 +25,6 @@ class Goods extends Base
     public function fetchAll()
     {
         $fields = 'id,subject,price,body,cover';
-        return $this->field($fields)->select();
+        return $this->field($fields)->order('sequence')->select();
     }
 }

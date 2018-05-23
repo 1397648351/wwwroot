@@ -86,6 +86,7 @@ class IndexController extends BaseController
             $datas['price'] = $_POST['price'];
             $datas['cover'] = $_POST['img'];
             $datas['body'] = $_POST['body'];
+            $datas['sequence'] = $_POST['sequence'];
             $goodModel->editItem($datas, $type);
             $this->resJson($datas);
         } catch (Exception $e) {

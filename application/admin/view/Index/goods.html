@@ -42,6 +42,10 @@
                        data-options="label:'手机图片：',missingMessage:'请选择图片',buttonText:'选择图片', accept:'image/jpeg,image/png'"/>
             </div>
             <div class="pd-txt">
+                <input class="easyui-validatebox easyui-numberbox" style="width:100%;" type="text" name="body" id="sequence"
+                       data-options="label:'显示顺序：',required:false,min:0"/>
+            </div>
+            <div class="pd-txt">
                 <input class="easyui-validatebox easyui-textbox" style="width:100%;" type="text" name="body" id="body"
                        data-options="label:'描述：',required:false,multiline:true,height:60"/>
             </div>
@@ -84,6 +88,7 @@
                     return img;
                 }
             },
+            {field: 'sequence', title: '显示顺序', width: 70, align: 'center'},
             {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
             {field: 'update_time', title: '更新时间', width: 150, align: 'center'},
             {
@@ -182,6 +187,7 @@
         formData.append("price", $('#price').numberbox('getValue'));
         formData.append("img", $('#img').textbox('getValue'));
         formData.append("body", $('#body').textbox('getValue'));
+        formData.append("sequence", $('#sequence').textbox('getValue'));
         formData.append("type", type);
         formData.append("id", id);
         $.messager.progress({
@@ -220,6 +226,7 @@
         $('#price').numberbox("setValue", rowdata.price);
         $('#img').textbox("setValue", rowdata.cover);
         $('#body').textbox("setValue", rowdata.body);
+        $('#sequence').textbox("setValue", rowdata.sequence);
         // $('#cover').filebox({
         //     required: false
         // });
