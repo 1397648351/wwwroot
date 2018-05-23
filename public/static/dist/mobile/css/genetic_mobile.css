@@ -47,6 +47,22 @@
     text-align: center;
 }
 
+.content-3 .back-buy {
+    padding: 10px 105px;
+    color: white;
+    font-size: 18px;
+    height: 40px;
+    margin-top: -50px;
+    background-image: url(../images/genetic_mobile/yichuan.png);
+}
+
+.content-3 .content-bottom {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+
 
 
 .contents .content-1 {
@@ -154,7 +170,7 @@
 }
 
 .info-detail-hr {
-    width: 300px;
+    width: 220px;
     margin-top: 10px;
     height: 1px;
     border: none;

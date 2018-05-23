@@ -14,10 +14,10 @@ class Goods extends Base
 {
     public function findAll($page, $rows)
     {
-        $fields = 'id,subject,price,body,cover,cover as cover_mobile,create_time,update_time';
+        $fields = 'id,subject,price,body,cover,cover as cover_mobile,create_time,update_time,sequence';
         $offset = ($page - 1) * $rows;
         $total = $this->count();
-        $data = $this->field($fields)->order('id')->limit($offset, $rows)->select();
+        $data = $this->field($fields)->order('sequence')->limit($offset, $rows)->select();
         $result['total'] = $total;
         $result['data'] = $data;
         return $result;

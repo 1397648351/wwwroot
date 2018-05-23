@@ -147,3 +147,18 @@
     margin-top: 8px;
 }
 
+.content-3 .back-buy {
+    color: white;
+    padding: 10px 105px;
+    font-size: 18px;
+    height: 40px;
+    margin-top: -50px;
+    background-image: url(../images/skin_mobile/skinbuy.png);
+}
+
+.content-3 .content-bottom {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+

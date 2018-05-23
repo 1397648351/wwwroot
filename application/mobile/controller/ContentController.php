@@ -58,6 +58,9 @@ class ContentController extends PublicController
 
             $id = $this->request->param('id');
             $this->assign("id", $id);
+            $goodsOrderModel = model('home/goodsOrder');
+            $order = $goodsOrderModel->findByOutTradeNo($id);
+            $this->assign('info', $order);
             return $this->fetch();
         } else {
             $id = $this->request->param('id');
