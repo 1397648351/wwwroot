@@ -62,7 +62,7 @@ class OrderController extends PublicController
         }
         $type = 'wx_pub';
         $config = $this->wxConfigData();
-        $payParam = $this->setWxPayParam($outTradeNo, $goods);
+        $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
         try {
             $res = Charge::run($type, $config, $payParam);
             $goodsOrderModel = model('home/goodsOrder');
@@ -111,14 +111,14 @@ class OrderController extends PublicController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo, $goods)
+    private function setWxPayParam($outTradeNo, $goods, $num)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = '0.01';
+        $payParam['amount'] = $goods['price'] * $num;
         //用户客户端实际IP地址
         $payParam['client_ip'] = $this->request->ip();
         $payParam['timeout_express'] = 3600 + time();

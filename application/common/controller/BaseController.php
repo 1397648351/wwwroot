@@ -188,7 +188,7 @@ class BaseController extends Controller
         $data['app_key_pem'] = ''; //../extend/org/Wx/cert/apiclient_cert.pem
         //签名方式 MD5 HMAC-SHA256
         $data['sign_type'] = 'MD5';
-        $data['limit_pay'] = array('no_credit');
+        $data['limit_pay'] = array();
         $data['fee_type'] = 'CNY';
         //异步回调url
         $data['notify_url'] = 'http://www.picagene.com/PayBack/wxBack';
