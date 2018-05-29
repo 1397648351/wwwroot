@@ -2,6 +2,9 @@
 
 namespace app\common\controller;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 use think\Controller;
 
 class BaseController extends Controller
@@ -196,5 +199,59 @@ class BaseController extends Controller
         $data['redirect_url'] = 'http://www.picagene.com';
         $data['return_raw'] = 'true';
         return $data;
+    }
+
+    public function downloadHeaders($contentType, $filename)
+    {
+        header('Content-Type: ' . $contentType);
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+    }
+
+    /**
+     * 生成Excel表格
+     * @param array $filed 键值对
+     * @param string $sheetName
+     * @param array $data
+     * @return Xlsx
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function createExcel($filed, $sheetName = 'sheet1', $data = array())
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle($sheetName);
+        $keys = array_keys($filed);
+        for ($i = 0; $i < sizeof($keys); $i++) {
+            $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]);
+        }
+        for ($i = 0; $i < sizeof($data); $i++) {
+            for ($j = 0; $j < sizeof($keys); $j++) {
+                $sheet->setCellValueByColumnAndRow($j + 1, $i + 2, $data[$i][$keys[$j]]);
+            }
+        }
+        $writer = new Xlsx($spreadsheet);
+        return $writer;
+    }
+
+    /**
+     * 判断是否是键值对数组
+     * @param $array
+     * @return bool
+     */
+    public function is_assoc($array)
+    {
+        if (is_array($array)) {
+            $keys = array_keys($array);
+            return $keys !== array_keys($keys);
+        }
+        return false;
     }
 }
