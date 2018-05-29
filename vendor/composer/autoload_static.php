@@ -34,7 +34,9 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
+            'PhpOffice\\PhpSpreadsheet\\' => 25,
             'Payment\\' => 8,
         ),
         'G' => 
@@ -71,9 +73,17 @@ class ComposerStaticInitb38f841121030e2702c61933267e6e91
         array (
             0 => __DIR__ . '/..' . '/yurunsoft/yurun-oauth-login/src',
         ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'PhpOffice\\PhpSpreadsheet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
         ),
         'Payment\\' => 
         array (

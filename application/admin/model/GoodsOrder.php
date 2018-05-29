@@ -22,4 +22,11 @@ class GoodsOrder extends Base
         $result['data'] = $data;
         return $result;
     }
+
+    public function getOrderList()
+    {
+        $fields = 'a.out_trade_no as no,a.user_id,a.money,b.subject,a.create_time';
+        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->order('a.create_time', 'desc')->select();
+        return $data;
+    }
 }

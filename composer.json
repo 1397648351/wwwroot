@@ -20,7 +20,8 @@
         "topthink/framework": "5.1.*",
         "riverslei/payment": "^4.1",
         "yurunsoft/yurun-oauth-login": "^1.2",
-        "houdunwang/qrcode": "^1.0"
+        "houdunwang/qrcode": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.2"
     },
     "autoload": {
         "psr-4": {

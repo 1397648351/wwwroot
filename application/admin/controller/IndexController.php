@@ -6,6 +6,8 @@ use app\common\controller\BaseController;
 use function PHPSTORM_META\type;
 use think\Exception;
 use think\facade\Env;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class IndexController extends BaseController
 {
@@ -124,5 +126,38 @@ class IndexController extends BaseController
             return true;
         }
         return false;
+    }
+
+    public function downExcel()
+    {
+        // 输出Excel表格到浏览器下载
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="order.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $goodsOrderModel = model('goodsOrder');
+        $list_order = $goodsOrderModel->getOrderList();
+        $sheet->setCellValueByColumnAndRow(1, 1, '订单号');
+        $sheet->setCellValueByColumnAndRow(2, 1, '用户ID');
+        $sheet->setCellValueByColumnAndRow(3, 1, '付款金额');
+        $sheet->setCellValueByColumnAndRow(4, 1, '商品名称');
+        $sheet->setCellValueByColumnAndRow(5, 1, '下单时间');
+        for ($i = 0; $i < sizeof($list_order); $i++) {
+            $sheet->setCellValueByColumnAndRow(1, $i + 2, $list_order[$i]['no']);
+            $sheet->setCellValueByColumnAndRow(2, $i + 2, $list_order[$i]['user_id']);
+            $sheet->setCellValueByColumnAndRow(3, $i + 2, $list_order[$i]['money']);
+            $sheet->setCellValueByColumnAndRow(4, $i + 2, $list_order[$i]['subject']);
+            $sheet->setCellValueByColumnAndRow(5, $i + 2, $list_order[$i]['create_time']);
+        }
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
     }
 }
