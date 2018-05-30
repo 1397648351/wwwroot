@@ -14,7 +14,7 @@ use app\common\model\Base;
 
 class Address extends Base
 {
-    public function addInfo($username, $mobile, $city, $email, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId, $userMsg)
+    public function addInfo($username, $mobile, $email, $city, $detailAdd, $goodsOrderId, $invoiceType, $invoiceTitle, $payTaxesId, $userMsg)
     {
         $data = array();
         $data['username'] = $username;
