@@ -14,10 +14,10 @@ class GoodsOrder extends Base
 {
     public function findAll($page, $rows)
     {
-        $fields = 'a.out_trade_no as no,a.user_id,a.money,b.subject,a.create_time';
+        $fields = 'a.out_trade_no as no,a.user_id,c.username,a.money,a.goods_id,b.subject,a.create_time,c.mobile,c.email,c.city,c.detail_address';
         $offset = ($page - 1) * $rows;
         $total = $this->count();
-        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->order('a.create_time', 'desc')->limit($offset, $rows)->select();
+        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->join('address c', 'a.id=c.goods_order_id', 'LEFT')->field($fields)->order('a.create_time', 'desc')->limit($offset, $rows)->select();
         $result['total'] = $total;
         $result['data'] = $data;
         return $result;
@@ -25,8 +25,8 @@ class GoodsOrder extends Base
 
     public function getOrderList()
     {
-        $fields = 'a.out_trade_no as no,a.user_id,a.money,b.subject,a.create_time';
-        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->field($fields)->order('a.create_time', 'desc')->select();
+        $fields = 'a.out_trade_no as no,a.user_id,c.username,a.money,a.goods_id,b.subject,a.create_time,c.mobile,c.email,c.city,c.detail_address';
+        $data = $this->alias('a')->join('goods b', 'a.goods_id=b.id', 'LEFT')->join('address c', 'a.id=c.goods_order_id', 'LEFT')->field($fields)->order('a.create_time', 'desc')->select();
         return $data;
     }
 }
