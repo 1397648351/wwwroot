@@ -132,7 +132,7 @@ class IndexController extends BaseController
         $this->downloadHeaders('application/vnd.ms-excel', 'order.xlsx');
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
-        $filed = array('no' => '订单号', 'goods_id' => '商品ID', 'subject' => '商品名称', 'money' => '付款金额', 'user_id' => '用户ID', 'username' => '收件人', 'mobile' => '手机号', 'email' => '邮箱', 'city' => '收货城市', 'detail_address' => '收货地址', 'status' => '订单状态', 'create_time' => '下单时间');
+        $filed = array('no' => '订单号', 'goods_id' => '商品ID', 'subject' => '商品名称', 'money' => '付款金额', 'user_id' => '用户ID', 'username' => '收件人', 'mobile' => '手机号', 'email' => '邮箱', 'city' => '收货城市', 'detail_address' => '收货地址', 'status' => '订单状态', 'create_time' => '下单时间', 'serial_num' => '序列号');
         $writer = $this->createExcel($filed, 'orders', $list_order);
         $writer->save('php://output');
     }
