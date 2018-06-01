@@ -1,0 +1,21 @@
+{extend name="Template:base_report" /}
+{block name="title"}基因检测-示例报告{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel="stylesheet" href="__MOBILERESOURCE__/css/report.css">q
+{/block}
+{block name="body"}
+<header id="header" class="mui-bar mui-bar-nav">
+    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <h1 class="mui-title"><img src="__COMMONRESOURCE__/images/logo.png"/></h1>
+</header>
+<div class="mui-content">
+    <div>男性 基因检测报告</div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script>
+    mui.init();
+</script>
+{/block}
