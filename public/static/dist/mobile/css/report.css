@@ -1,4 +1,48 @@
-.mui-bar.mui-bar-nav .mui-title img{
+.mui-bar.mui-bar-nav .mui-title img {
     vertical-align: middle;
     height: 35px;
+}
+
+.head-detail {
+    background-color: #fff;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 0 0 15px;
+}
+
+.head-detail .sex {
+    color: #0a69d6;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.head-detail .change-sex {
+    line-height: 24px;
+    padding: 3px 10px;
+    float: right;
+    position: relative;
+    background-image: url(../images/report/switch_03.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 15px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.head-detail .change-sex > * {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.head-detail .change-sex:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    background-image: url(../images/report/change.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 5px;
 }
