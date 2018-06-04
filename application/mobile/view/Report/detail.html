@@ -1,0 +1,93 @@
+{extend name="Template:base_report" /}
+{block name="title"}基因检测-示例报告{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel="stylesheet" href="__MOBILERESOURCE__/css/report.css">
+<style>
+    .head-detail.head-large {
+        height: 80px;
+    }
+
+    .head-detail .change-sex {
+        margin-top: 26px;
+    }
+
+    .mui-table-view-cell > .table-view-value {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        color: #0a69d6;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .result-icon:after{
+        content: '';
+        margin-left: 10px;
+        width: 8px;
+        height: 8px;
+        display: inline-block;
+        vertical-align: middle;
+        background-color: #4cae4c;
+        border-radius: 8px;
+    }
+
+    .result-icon.icon-alert:after{
+        background-color:#ec971f;
+    }
+
+    .result-icon.icon-error:after{
+        background-color:#c9302c;
+    }
+
+    .mui-card{
+        margin: 10px 0 0 0;
+    }
+
+    .mui-table-view-cell:after{
+        right: 15px;
+    }
+</style>
+{/block}
+{block name="body"}
+<header id="header" class="mui-bar mui-bar-nav">
+    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <h1 class="mui-title"><img src="__COMMONRESOURCE__/images/logo.png"/></h1>
+</header>
+<!--这里放置真实显示的DOM内容-->
+<div class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="head-detail head-large">
+            <div>
+                <span class="sex">男性</span>
+                <span>{$data.title}</span>
+            </div>
+            <div class="change-sex"><span>女</span></div>
+        </div>
+        <div class="mui-card">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    项目
+                    <div class="table-view-value" style="color: #000">结果</div>
+                </li>
+                {foreach $data.list as $value }
+                <li class="mui-table-view-cell">
+                    {$value.name}
+                    <div class="table-view-value result-icon icon-{$value.icon}">{$value.value}</div>
+                </li>
+                {/foreach}
+                <!--<li class="mui-table-view-cell">
+                    家族性地中海热
+                    <div class="table-view-value result-icon">携带一个风险突变</div>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script>
+    mui.init();
+</script>
+{/block}

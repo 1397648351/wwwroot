@@ -10,14 +10,25 @@
     padding: 0 0 0 15px;
 }
 
+.head-detail > *{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.head-detail:after{
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .head-detail .sex {
     color: #0a69d6;
-    margin-right: 5px;
     display: inline-block;
 }
 
 .head-detail .change-sex {
-    line-height: 24px;
+    line-height: 22px;
     padding: 3px 10px;
     float: right;
     position: relative;
