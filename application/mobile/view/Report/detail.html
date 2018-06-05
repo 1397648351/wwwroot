@@ -3,51 +3,6 @@
 {block name="other_css"}
 <!-- other css -->
 <link rel="stylesheet" href="__MOBILERESOURCE__/css/report.css">
-<style>
-    .head-detail.head-large {
-        height: 80px;
-    }
-
-    .head-detail .change-sex {
-        margin-top: 26px;
-    }
-
-    .mui-table-view-cell > .table-view-value {
-        position: absolute;
-        top: 50%;
-        right: 15px;
-        color: #0a69d6;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    .result-icon:after{
-        content: '';
-        margin-left: 10px;
-        width: 8px;
-        height: 8px;
-        display: inline-block;
-        vertical-align: middle;
-        background-color: #4cae4c;
-        border-radius: 8px;
-    }
-
-    .result-icon.icon-alert:after{
-        background-color:#ec971f;
-    }
-
-    .result-icon.icon-error:after{
-        background-color:#c9302c;
-    }
-
-    .mui-card{
-        margin: 10px 0 0 0;
-    }
-
-    .mui-table-view-cell:after{
-        right: 15px;
-    }
-</style>
 {/block}
 {block name="body"}
 <header id="header" class="mui-bar mui-bar-nav">
@@ -58,11 +13,18 @@
 <div class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <div class="head-detail head-large">
-            <div>
-                <span class="sex">男性</span>
-                <span>{$data.title}</span>
+            <div class="head-detail-content">
+                <div class="detail-icon detail-icon-{$data.id}">
+                    <div>
+                        <img src="__MOBILERESOURCE__/images/report/icon2_03.png"/>
+                    </div>
+                </div>
+                <div>
+                    <div>{$data.title}</div>
+                    <div>{$data.total}项</div>
+                </div>
             </div>
-            <div class="change-sex"><span>女</span></div>
+            <div class="change-sex"><span>{$data.sex}</span></div>
         </div>
         <div class="mui-card">
             <ul class="mui-table-view">
@@ -76,10 +38,6 @@
                     <div class="table-view-value result-icon icon-{$value.icon}">{$value.value}</div>
                 </li>
                 {/foreach}
-                <!--<li class="mui-table-view-cell">
-                    家族性地中海热
-                    <div class="table-view-value result-icon">携带一个风险突变</div>
-                </li>-->
             </ul>
         </div>
     </div>
@@ -89,5 +47,8 @@
 <!-- other js -->
 <script>
     mui.init();
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
 </script>
 {/block}

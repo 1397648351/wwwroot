@@ -10,12 +10,12 @@
     padding: 0 0 0 15px;
 }
 
-.head-detail > *{
+.head-detail > * {
     display: inline-block;
     vertical-align: middle;
 }
 
-.head-detail:after{
+.head-detail:after {
     content: '';
     height: 100%;
     display: inline-block;
@@ -56,4 +56,113 @@
     background-repeat: no-repeat;
     background-size: contain;
     margin-left: 5px;
+}
+
+.head-detail.head-large {
+    height: 100px;
+}
+
+.head-detail .change-sex {
+    margin-top: 36px;
+}
+
+.mui-table-view-cell > .table-view-value {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    color: #0a69d6;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.result-icon:after {
+    content: '';
+    margin-left: 10px;
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #4cae4c;
+    border-radius: 8px;
+}
+
+.result-icon.icon-alert:after {
+    background-color: #ec971f;
+}
+
+.result-icon.icon-error:after {
+    background-color: #c9302c;
+}
+
+.result-icon.icon-none:after {
+    display: none;
+}
+
+.mui-card {
+    margin: 10px 0 0 0;
+}
+
+.mui-table-view-cell:after {
+    right: 15px;
+}
+
+.head-detail .head-detail-content > * {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.detail-icon{
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    background-image: url(../images/report/icon2_05.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-size: 0;
+}
+
+.detail-icon:after{
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.detail-icon > div {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    /*border-radius: 50px;*/
+}
+
+.detail-icon.detail-icon-0 img {
+    margin: -8px 0 0 -97px
+}
+
+.detail-icon.detail-icon-1 img {
+    margin: -3px 0 0 -151px;
+}
+
+.detail-icon.detail-icon-2 img {
+    margin: -11px 0 0 -202px;
+}
+
+.detail-icon.detail-icon-3 img {
+    margin: -7px 0 0 -262px;
+}
+
+.detail-icon.detail-icon-4 img {
+    margin: -3px 0 0 -319px;
+}
+
+.detail-icon.detail-icon-5 img {
+    margin: -9px 0 0 -15px;
+}
+
+.detail-icon.detail-icon-6 img {
+    margin: -1px 0 0 -378px
 }
