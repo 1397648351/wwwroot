@@ -59,7 +59,7 @@
 }
 
 .scroll-content{
-    margin-top: 65px;
+    margin-top: 10px;
     background-color: #fff;
     height: 100%;
 }
@@ -116,6 +116,7 @@
 .img-4{
     width:100%;
     margin-top: 20px;
+    margin-bottom: 130px;
 }
 
 .head-detail.head-large {
