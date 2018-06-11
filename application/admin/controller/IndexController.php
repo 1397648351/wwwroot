@@ -144,23 +144,23 @@ class IndexController extends BaseController
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
         $filed = array(
-            'no'             => '订单号',
-            'serial_num'     => '序列号',
-            'goods_id'       => '商品ID',
-            'subject'        => '商品名称',
-            'money'          => '付款金额',
-            'user_id'        => '用户ID',
-            'username'       => '收件人',
-            'mobile'         => '手机号',
-            'email'          => '邮箱',
-            'city'           => '收货城市',
-            'detail_address' => '收货地址',
-            'status'         => '订单状态',
-            'invoice_type'   => '发票',
-            'invoice_title'  => '发票抬头',
-            'pay_taxes_id'   => '纳税识别号',
-            'user_msg'       => '用户留言',
-            'create_time'    => '下单时间');
+            'no'             => ['title' => '订单号', 'width' => 32],
+            'serial_num'     => ['title' => '序列号', 'width' => 25],
+            'goods_id'       => ['title' => '商品ID', 'width' => 10],
+            'subject'        => ['title' => '商品名称', 'width' => 18],
+            'money'          => ['title' => '付款金额', 'width' => 10],
+            'user_id'        => ['title' => '用户ID', 'width' => 10],
+            'username'       => ['title' => '收件人', 'width' => 15],
+            'mobile'         => ['title' => '手机号', 'width' => 15],
+            'email'          => ['title' => '邮箱', 'width' => 20],
+            'city'           => ['title' => '收货城市', 'width' => 15],
+            'detail_address' => ['title' => '收货地址', 'width' => 30],
+            'status'         => ['title' => '订单状态', 'width' => 12],
+            'invoice_type'   => ['title' => '发票', 'width' => 12],
+            'invoice_title'  => ['title' => '发票抬头', 'width' => 15],
+            'pay_taxes_id'   => ['title' => '纳税识别号', 'width' => 20],
+            'user_msg'       => ['title' => '用户留言', 'width' => 30],
+            'create_time'    => ['title' => '下单时间', 'width' => 20]);
         $this->downloadExcel($filed, 'order.xlsx', 'orders', $list_order);
     }
 
@@ -169,12 +169,12 @@ class IndexController extends BaseController
         $userModel = model('user');
         $list_order = $userModel->getUserList();
         $filed = array(
-            'id'          => 'ID',
-            'nickname'    => '用户名',
-            'sex'         => '性别',
-            'mobile'      => '手机号',
-            'email'       => '邮箱',
-            'create_time' => '创建时间');
+            'id'          => ['title' => 'ID', 'width' => 8],
+            'nickname'    => ['title' => '用户名', 'width' => 20],
+            'sex'         => ['title' => '性别', 'width' => 10],
+            'mobile'      => ['title' => '手机号', 'width' => 15],
+            'email'       => ['title' => '邮箱', 'width' => 20],
+            'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
     }
 }

@@ -233,7 +233,12 @@ class BaseController extends Controller
         $sheet->setTitle($sheetName);
         $keys = array_keys($filed);
         for ($i = 0; $i < sizeof($keys); $i++) {
-            $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]);
+            if(!is_array($filed[$keys[$i]]))
+                $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]);
+            else{
+                $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]['title']);
+                $sheet->getColumnDimensionByColumn($i+ 1)->setWidth($filed[$keys[$i]]['width']);
+            }
         }
         for ($i = 0; $i < sizeof($data); $i++) {
             for ($j = 0; $j < sizeof($keys); $j++) {
