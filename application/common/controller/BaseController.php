@@ -218,13 +218,16 @@ class BaseController extends Controller
     /**
      * 生成Excel表格
      * @param array $filed 键值对
+     * @param string $fileName
      * @param string $sheetName
      * @param array $data
      * @return Xlsx
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    public function createExcel($filed, $sheetName = 'sheet1', $data = array())
+    public function downloadExcel($filed, $fileName = 'newExcel', $sheetName = 'sheet1', $data = array())
     {
+        // 输出Excel表格到浏览器下载
+        $this->downloadHeaders('application/vnd.ms-excel', $fileName);
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setTitle($sheetName);
@@ -238,7 +241,8 @@ class BaseController extends Controller
             }
         }
         $writer = new Xlsx($spreadsheet);
-        return $writer;
+        $writer->save('php://output');
+        //return $writer;
     }
 
     /**

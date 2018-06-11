@@ -61,6 +61,19 @@ class IndexController extends BaseController
         }
     }
 
+    public function user()
+    {
+        if ($this->request->isGet()) {
+            return $this->fetch();
+        } elseif ($this->request->isAjax()) {
+            $userModel = model('user');
+            $page = $this->request->param("page");
+            $rows = $this->request->param("rows");
+            $res = $userModel->findAll($page, $rows);
+            $this->resTableJson($res['data'], $res['total']);
+        }
+    }
+
     public function upload()
     {
         $datas = array();
@@ -128,8 +141,6 @@ class IndexController extends BaseController
 
     public function downloadOrderExcel()
     {
-        // 输出Excel表格到浏览器下载
-        $this->downloadHeaders('application/vnd.ms-excel', 'order.xlsx');
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
         $filed = array(
@@ -139,7 +150,8 @@ class IndexController extends BaseController
             'subject'        => '商品名称',
             'money'          => '付款金额',
             'user_id'        => '用户ID',
-            'username'       => '收件人', 'mobile' => '手机号',
+            'username'       => '收件人',
+            'mobile'         => '手机号',
             'email'          => '邮箱',
             'city'           => '收货城市',
             'detail_address' => '收货地址',
@@ -149,7 +161,20 @@ class IndexController extends BaseController
             'pay_taxes_id'   => '纳税识别号',
             'user_msg'       => '用户留言',
             'create_time'    => '下单时间');
-        $writer = $this->createExcel($filed, 'orders', $list_order);
-        $writer->save('php://output');
+        $this->downloadExcel($filed, 'order.xlsx', 'orders', $list_order);
+    }
+
+    public function downloadUserExcel()
+    {
+        $userModel = model('user');
+        $list_order = $userModel->getUserList();
+        $filed = array(
+            'id'          => 'ID',
+            'nickname'    => '用户名',
+            'sex'         => '性别',
+            'mobile'      => '手机号',
+            'email'       => '邮箱',
+            'create_time' => '创建时间');
+        $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
     }
 }

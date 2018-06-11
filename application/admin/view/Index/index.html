@@ -43,6 +43,9 @@
         }, {
             "text": "商品管理",
             "url": "{:url('Index/goods')}"
+        }, {
+            "text": "用户管理",
+            "url": "{:url('Index/user')}"
         }],
         onClick: function (node) {
             if (!$('#menu').tree('isLeaf', node.target)) return;
