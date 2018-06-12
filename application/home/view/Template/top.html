@@ -25,9 +25,35 @@
             </li>
             {elseif session('?userInfo') && session('userInfo')['role']==0 /}
             <li class="nav">
-                <a class="link-login" href="{:url('User/logout')}">退出登录</a>
+                <div class="link-btn">
+                    <div class="link-btn-text">{:session('userInfo')['nickname']}</div>
+                    <ul class="link-group">
+                        <!--<li>
+                            <a class="link-login" href="{:url('User/logout')}">绑定唾液</a>
+                        </li>-->
+                        <li>
+                            <a class="link-login" href="{:url('Order/orderList')}">订单查询</a>
+                        </li>
+                        {if session('?loginType') && session('loginType')==1}
+                        <li>
+                            <a class="link-login" href="javascript:;">修改密码</a>
+                        </li>
+                        {/if}
+                        <li>
+                            <a class="link-login" href="{:url('User/logout')}">退出账号</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             {/if}
         </ul>
     </div>
 </div>
+<script>
+    $('.link-btn').mouseenter(function(){
+        $(this).addClass('link-group-shown');
+    });
+    $('.link-btn').mouseleave(function(){
+        $(this).removeClass('link-group-shown');
+    });
+</script>

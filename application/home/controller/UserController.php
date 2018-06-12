@@ -39,6 +39,7 @@ class UserController extends BaseController
         if (empty($user)) {
             $this->resJson($user, 1000, '用户不存在');
         }
+        session('loginType', $loginType);
         session('userInfo', $user);
         if ($loginType == 1) {
             if ($this->request->param('remember') == 'true') {
