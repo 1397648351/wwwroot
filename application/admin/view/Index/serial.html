@@ -1,0 +1,46 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-套件码查询{/block}
+{block name="other_css"}
+<!-- other css -->
+<style>
+    .datagrid-body {
+        overflow-x: scroll;
+    }
+</style>
+{/block}
+{block name="class"}{/block}
+{block name="body"}
+<table id="serialList"></table>
+{/block}
+{block name="other_js"}
+<script>
+    $('#serialList').datagrid({
+        url: "{:url('Index/serial')}",
+        method: "POST",
+        pagination: true,
+        striped: true,
+        singleSelect: true,
+        pagePosition: 'bottom',
+        pageSize: 50,
+        pageList: [50, 100, 150, 200, 300],
+        fit: true,
+        border: false,
+        columns: [[
+            {field: 'id', title: 'ID', width: 80, align: 'center'},
+            {field: 'username', title: '用户名', width: 100, align: 'center'},
+            {field: 'sex', title: '性别', width: 50, align: 'center'},
+            {field: 'phone', title: '电话号码', width: 150, align: 'center'},
+            {field: 'email', title: '邮箱', width: 150, align: 'center'},
+            {field: 'serial_num', title: '套件码', width: 200, align: 'center'},
+            {field: 'create_time', title: '创建时间', width: 150, align: 'center'}
+        ]],
+        toolbar: [{
+            iconCls: 'icon-print',
+            text: '导出',
+            handler: function () {
+                window.open("{:url('Index/downloadSerialExcel')}");
+            }
+        }]
+    });
+</script>
+{/block}

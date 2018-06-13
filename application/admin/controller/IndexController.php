@@ -75,6 +75,19 @@ class IndexController extends BaseController
         }
     }
 
+    public function serial()
+    {
+        if ($this->request->isGet()) {
+            return $this->fetch();
+        } elseif ($this->request->isAjax()) {
+            $orderModel = model('serial');
+            $page = $this->request->param("page");
+            $rows = $this->request->param("rows");
+            $res = $orderModel->findAll($page, $rows);
+            $this->resTableJson($res['data'], $res['total']);
+        }
+    }
+
     public function upload()
     {
         $datas = array();
@@ -178,5 +191,20 @@ class IndexController extends BaseController
             'email'       => ['title' => '邮箱', 'width' => 20],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
+    }
+
+    public function downloadSerialExcel()
+    {
+        $userModel = model('serial');
+        $list_order = $userModel->getSerialList();
+        $filed = array(
+            'id'          => ['title' => 'ID', 'width' => 8],
+            'username'    => ['title' => '用户名', 'width' => 20],
+            'sex'         => ['title' => '性别', 'width' => 10],
+            'phone'       => ['title' => '手机号', 'width' => 15],
+            'email'       => ['title' => '邮箱', 'width' => 20],
+            'serial_num'  => ['title' => '套件码', 'width' => 25],
+            'create_time' => ['title' => '创建时间', 'width' => 20]);
+        $this->downloadExcel($filed, 'serial.xlsx', 'serial', $list_order);
     }
 }

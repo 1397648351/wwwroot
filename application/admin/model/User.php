@@ -30,7 +30,7 @@ class User extends Base
         $offset = ($page - 1) * $rows;
         $map = array();
         if (isset($value) && strlen($value) > 0) {
-            $map[] = ['nickname|mobile|email', 'like', $value];
+            $map[] = ['nickname|mobile|email', 'like', '%' . $value . '%'];
         }
         $total = $this->where($map)->count();
         $data = $this->field($fields)->where($map)->order('id')->limit($offset, $rows)->select();
@@ -43,7 +43,7 @@ class User extends Base
     {
         $map = array();
         if (isset($value) && strlen($value) > 0) {
-            $map[] = ['nickname|mobile|email', 'like', $value];
+            $map[] = ['nickname|mobile|email', 'like', '%' . $value . '%'];
         }
         $fields = "id,nickname,(case sex when 1 then '男' when 2 then '女' else '未知' end) as sex,mobile,email,create_time";
         $data = $this->field($fields)->where($map)->order('id')->select();
