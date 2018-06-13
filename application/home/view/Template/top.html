@@ -36,7 +36,7 @@
                         </li>
                         {if session('?loginType') && session('loginType')==1}
                         <li>
-                            <a class="link-login" href="javascript:;">修改密码</a>
+                            <a class="link-login" href="{:url('User/resetPwd')}">修改密码</a>
                         </li>
                         {/if}
                         <li>

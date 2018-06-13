@@ -24,21 +24,29 @@ class User extends Base
         return $this->field($fields)->where($map)->find();
     }
 
-    public function findAll($page, $rows)
+    public function findAll($page, $rows, $value)
     {
         $fields = "id,nickname,(case sex when 1 then '男' when 2 then '女' else '未知' end) as sex,mobile,email,create_time";
         $offset = ($page - 1) * $rows;
-        $total = $this->count();
-        $data = $this->field($fields)->order('id')->limit($offset, $rows)->select();
+        $map = array();
+        if (isset($value) && strlen($value) > 0) {
+            $map[] = ['nickname|mobile|email', 'like', $value];
+        }
+        $total = $this->where($map)->count();
+        $data = $this->field($fields)->where($map)->order('id')->limit($offset, $rows)->select();
         $result['total'] = $total;
         $result['data'] = $data;
         return $result;
     }
 
-    public function getUserList()
+    public function getUserList($value)
     {
+        $map = array();
+        if (isset($value) && strlen($value) > 0) {
+            $map[] = ['nickname|mobile|email', 'like', $value];
+        }
         $fields = "id,nickname,(case sex when 1 then '男' when 2 then '女' else '未知' end) as sex,mobile,email,create_time";
-        $data = $this->field($fields)->order('id')->select();
+        $data = $this->field($fields)->where($map)->order('id')->select();
         return $data;
     }
 }

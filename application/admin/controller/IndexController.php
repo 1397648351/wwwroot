@@ -67,9 +67,10 @@ class IndexController extends BaseController
             return $this->fetch();
         } elseif ($this->request->isAjax()) {
             $userModel = model('user');
+            $value = $this->request->param("value");
             $page = $this->request->param("page");
             $rows = $this->request->param("rows");
-            $res = $userModel->findAll($page, $rows);
+            $res = $userModel->findAll($page, $rows, $value);
             $this->resTableJson($res['data'], $res['total']);
         }
     }
@@ -166,8 +167,9 @@ class IndexController extends BaseController
 
     public function downloadUserExcel()
     {
+        $value = $this->request->param("value");
         $userModel = model('user');
-        $list_order = $userModel->getUserList();
+        $list_order = $userModel->getUserList($value);
         $filed = array(
             'id'          => ['title' => 'ID', 'width' => 8],
             'nickname'    => ['title' => '用户名', 'width' => 20],

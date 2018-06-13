@@ -11,10 +11,32 @@
 {block name="class"}{/block}
 {block name="body"}
 <table id="orderList"></table>
-
+<div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+        <a id="btn_export" href="#" plain="true">导出</a>
+        <input id="search_box"></input>
+    </div>
+</div>
 {/block}
 {block name="other_js"}
 <script>
+    var search_value = "";
+    $('#btn_export').linkbutton({
+        iconCls: 'icon-print'
+    });
+    $('#btn_export').bind('click', function () {
+        var url = "{:url('Index/downloadUserExcel')}" + '?value=' + search_value;
+        window.open(url);
+    });
+    $('#search_box').searchbox({
+        searcher: function (value, name) {
+            search_value = value;
+            $('#orderList').datagrid('load', {
+                value: value
+            });
+        },
+        prompt: '姓名/手机号/邮箱'
+    });
     $('#orderList').datagrid({
         url: "{:url('Index/user')}",
         method: "POST",
@@ -34,18 +56,7 @@
             {field: 'email', title: '邮箱', width: 200, align: 'center'},
             {field: 'create_time', title: '创建时间', width: 150, align: 'center'}
         ]],
-        toolbar: [{
-            iconCls: 'icon-print',
-            text: '导出',
-            handler: function () {
-                window.open("{:url('Index/downloadUserExcel')}");
-            }
-        }]
+        toolbar: '#tb'
     });
-    // $('#orderList').datagrid('getPager').pagination({
-    //     beforePageText: '第',
-    //     afterPageText: '页，共 {pages} 页',
-    //     displayMsg: '当前显示 {from} - {to} 条记录，共 {total} 条记录',
-    // });
 </script>
 {/block}
