@@ -17,8 +17,8 @@
                 <div class="form-detail">
                     <label class="form-label">性别：</label>
                     <select class="select-control" id="sex">
-                        <option>男</option>
-                        <option>女</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
                     </select>
                 </div>
                 <div class="form-detail">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-detail">
                     <label class="form-label">快递单号：</label>
-                    <input class="form-control"  id="courier" value=""/>
+                    <input class="form-control" id="express" value=""/>
                 </div>
                 <div class="form-detail">
                     <label class="form-label">唾液采集编码：</label>
@@ -53,8 +53,9 @@
         var name = $("#name").val();
         var phone = $("#phone").val();
         var email = $("#email").val();
-        var courier = $("#courier").val();
+        var express = $("#express").val();
         var number = $("#number").val();
+        var sex = $("#sex").val();
         if (name == '') {
             alert('请输入姓名');
             return;
@@ -67,7 +68,7 @@
             alert('请输入邮箱');
             return;
         }
-        if (courier == '') {
+        if (express == '') {
             alert('请输入快递单号');
             return;
         }
@@ -75,10 +76,19 @@
             alert('请输入唾液采集编码');
             return;
         }
-        $.post("{:url('Content/binding')}", {id: '{$id}', num: number}, function (result) {
-            if(result.status_code=='200'){
+        var args = {
+            //id: '{$id}',
+            name: name,
+            phone: phone,
+            email: email,
+            express: express,
+            number: number,
+            sex: sex
+        }
+        $.post("{:url('Content/binding')}", args, function (result) {
+            if (result.status_code == '200') {
                 window.location.href = "{:url('Content/bindingend')}";
-            }else{
+            } else {
                 alert(result.msg);
             }
         });

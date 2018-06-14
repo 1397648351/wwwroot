@@ -55,18 +55,23 @@ class ContentController extends PublicController
     public function binding()
     {
         if ($this->request->isGet()) {
-
-            $id = $this->request->param('id');
+            /* $id = $this->request->param('id');
             $this->assign("id", $id);
             $goodsOrderModel = model('home/goodsOrder');
             $order = $goodsOrderModel->findByOutTradeNo($id);
-            $this->assign('info', $order);
+            $this->assign('info', $order); */
             return $this->fetch();
         } else {
-            $id = $this->request->param('id');
-            $num = $this->request->param('num');
+            //$id = $this->request->param('id');
+            $args = array();
+            $args['username'] = $this->request->param('name');
+            $args['phone'] = $this->request->param('phone');
+            $args['email'] = $this->request->param('email');
+            $args['express'] = $this->request->param('express');
+            $args['sex'] = $this->request->param('sex');
+            $args['serial_num'] = $this->request->param('number');
             $goodsOrderModel = model('home/goodsOrder');
-            $result = $goodsOrderModel->insertSerialNum($id, $num);
+            $result = $goodsOrderModel->insertSerialNum($args);
             $this->resJson(array(), $result['code'], $result['msg']);
         }
     }

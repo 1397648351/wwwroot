@@ -37,7 +37,7 @@ class UserController extends BaseController
                 $this->resJson(array(), 1004, '登录类型错误');
         }
         if (empty($user)) {
-            $this->resJson($user, 1000, '用户不存在');
+            $this->resJson($user, 1000, '用户名或密码错误');
         }
         session('loginType', $loginType);
         session('userInfo', $user);
