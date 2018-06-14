@@ -1,0 +1,52 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-查看订单{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__MOBILERESOURCE__/css/order.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    <div class="contents">
+        <div class="content-order">
+            <div class="content-box">
+                <div class="content-title">订单列表</div>
+                <ul class="order-list">
+                    {volist name='list' id='item'}
+                    <li>
+                        <table class="table-item" width="100%">
+                            <caption>
+                                <!--<a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}"></a>-->订单编号:{$item.no}
+                            </caption>
+                            <tbody>
+                            <tr>
+                                <td class="item-name">{$item.subject}</td>
+                                <td class="item-price">￥{$item.money/$item.num}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="item-num">×{$item.num}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-name">已绑定编号</td>
+                                <td class="item-price">{if !empty($item.serial_num)}{$item.serial_num}{else /}未绑定{/if}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="item-detail">共{$item.num}件商品 合计:￥{$item.money}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="item-detail item-btn-group">
+                                    <a class="btn-bind" href="{:url('Content/binding','id='.$item.no)}">绑定套件</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+{/block}

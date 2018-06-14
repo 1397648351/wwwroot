@@ -1,0 +1,224 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-购买{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__MOBILERESOURCE__/css/order.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    {include file="Template:top" /}
+    <div class="contents">
+        <div class="content-1">
+            <div class="content-box">
+                <div class="content-details">
+                    <div class="content-details-left">
+                        <img src="__PCRESOURCE__/images/gmym/gm_03.png" width="25%"/>
+                        <div class="content-details-info">
+                            <div>{$goods['subject']}</div>
+                            <input type="hidden" id="goods_id" value="{$goods['id']}">
+                            <div>单价：<span class="price"><span id="price">{$goods['price']}</span>元</span></div>
+                        </div>
+                    </div>
+                    <div class="content-details-right">
+                        <div class="item-amount" id="num"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-2">
+            <div class="content-box">
+                <div class="content-details">
+                    <div class="form-group">
+                        <label class="form-group-th">收件人姓名</label>
+                        <input class="form-control" id="name" value="{$username|default=''}" placeholder="输入收件人姓名"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">手机号码</label>
+                        <input class="form-control" id="mobile" value="" placeholder="输入收件人联系方式"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">邮箱</label>
+                        <input class="form-control" id="email" value="" placeholder="输入邮箱号码获取电子版材料"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">所在地区</label>
+                        <div class="group-area">
+                            <select name="P1" id="P1" class="form-control form-select"></select>
+                            <select name="C1" id="C1" class="form-control form-select"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">详细地址</label>
+                        <input class="form-control" id="detail_address" value="" placeholder="输入详细地址"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-3">
+            <div class="content-box">
+                <div class="content-details">
+                    <div class="form-group">
+                        <label class="form-group-th">支付方式</label>
+                        <!--<a href="javascript:;" class="pay-type selected" data-pay="ali"><img-->
+                        <!--src="__PCRESOURCE__/images/gmym/gm_06.png"/></a>-->
+                        <a href="javascript:;" class="pay-type selected" data-pay="wx"><img
+                                src="__PCRESOURCE__/images/gmym/gm_08.png"/></a>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">需要发票</label>
+                        <select class="form-control form-select" id="invoice_need">
+                            <option value="0">不需要</option>
+                            <option value="1">个人</option>
+                            <option value="2">公司</option>
+                        </select>
+                    </div>
+                    <div class="form-group" name="invoice">
+                        <label class="form-group-th">发票抬头</label>
+                        <input class="form-control" id="invoice_title" value="" placeholder="请输入中文抬头"/>
+                    </div>
+                    <div class="form-group" name="invoice">
+                        <label class="form-group-th">纳税人识别号</label>
+                        <input class="form-control" id="pay_taxes_id" value="" placeholder="输入18位纳税人识别号"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-group-th">留言</label>
+                        <input class="form-control" id="user_msg" value="" placeholder="选填"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-4">
+            <div class="content-box">
+                <div class="content-details">
+                    <div class="div-line">
+                        <div>总计：</div>
+                        <div><span id="total_price">499</span>元</div>
+                    </div>
+                    <div class="div-line">
+                        <div>优惠：</div>
+                        <div><span id="discount">0</span>元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="send-order">
+        <div class="final_price">应付：<span id="final_price">499</span>元</div>
+        <div>
+            <input type="button" class="btn-confirm" id="send_order" value="提交订单"/>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script src="__COMMONRESOURCE__/js/my.js" type="text/javascript"></script>
+<script src="__COMMONRESOURCE__/js/PCASClass.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        var invoice_type = 0;
+        $('[name=invoice]').hide();
+        var payType = $($(".pay-typ")[0]).data('pay');
+        $.my_init({
+            animate: {
+                enable: false
+            },
+            number: {
+                callback: function (num) {
+                    var price = parseFloat($("#price").text());
+                    var discount = parseFloat($("#discount").text());
+                    var totalprice = price * num;
+                    var finalprice = totalprice - discount;
+                    $("#total_price").text(totalprice);
+                    $("#final_price").text(finalprice);
+                }
+            }
+        });
+        $("#invoice_need").change(function () {
+            var val = $(this).val();
+            if(val == '0') {
+                invoice_type = 0;
+                $('[name=invoice]').hide()
+            } else {
+                if (val == '1') {
+                    invoice_type = 1;
+                } else {
+                    invoice_type = 2;
+                }
+                $('[name=invoice]').show()
+            }
+        });
+        new PCAS('P1', 'C1');
+        $(".pay-type").click(function () {
+            if ($(this).hasClass("selected")) return;
+            $(".pay-type.selected").removeClass("selected");
+            $(this).addClass("selected");
+            payType = $(this).data('pay');
+        });
+
+        $("#send_order").click(function () {
+            var goodsId = $("#goods_id").val();
+            var num = $('.item-amount').getNumber();
+            var username = $("#name").val();
+            if (username == '') {
+                alert('请输入收件人姓名');
+                return;
+            }
+            var mobile = $("#mobile").val();
+            if (mobile == '') {
+                alert('请输入联系电话');
+                return;
+            }
+            var email = $("#email").val();
+            if (email == '') {
+                alert('请输入邮箱地址');
+                return;
+            }
+            var city = $("#P1").val() + $("#C1").val();
+            if (city == '') {
+                alert('请选择地址');
+                return;
+            }
+            var detail_address = $("#detail_address").val();
+            if (detail_address == '') {
+                alert('请输入详细地址');
+                return;
+            }
+            var invoice_title = '';
+            var pay_taxes_id = '';
+            if ($('#invoice_need').val() != '0') {
+                invoice_title = $("#invoice_title").val();
+                pay_taxes_id = $("#pay_taxes_id").val();
+                if (invoice_title == '' || pay_taxes_id == '') {
+                    alert('请输入发票信息');
+                    return;
+                }
+            }
+            var user_msg = $("#user_msg").val();
+            var url = "{:url('Order/order')}";
+            $.post(url, {
+                goods_id: goodsId,
+                num: num,
+                username: username,
+                mobile: mobile,
+                email: email,
+                city: city,
+                detail_address: detail_address,
+                invoice_type: invoice_type,
+                invoice_title: invoice_title,
+                pay_taxes_id: pay_taxes_id,
+                pay_type: 'wx',
+                user_msg: user_msg
+            }, function (res) {
+                if (res.status_code == 200) {
+                    var order_id = res.data.order_id;
+                    var data = res.data.package;
+                    wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign'], order_id);
+                } else {
+                    alert(res.msg);
+                }
+            })
+        })
+    });
+</script>
+{/block}

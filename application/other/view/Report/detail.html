@@ -1,0 +1,54 @@
+{extend name="Template:base_report" /}
+{block name="title"}基因检测-示例报告{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel="stylesheet" href="__MOBILERESOURCE__/css/report.css">
+{/block}
+{block name="body"}
+<header id="header" class="mui-bar mui-bar-nav">
+    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <h1 class="mui-title"><img src="__COMMONRESOURCE__/images/logo.png"/></h1>
+</header>
+<!--这里放置真实显示的DOM内容-->
+<div class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="head-detail head-large">
+            <div class="head-detail-content">
+                <div class="detail-icon detail-icon-{$data.id}">
+                    <div>
+                        <img src="__MOBILERESOURCE__/images/report/icon2_03.png"/>
+                    </div>
+                </div>
+                <div>
+                    <div>{$data.title}</div>
+                    <div>{$data.total}项</div>
+                </div>
+            </div>
+            <div class="change-sex"><span>{$data.sex}</span></div>
+        </div>
+        <div class="mui-card">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    项目
+                    <div class="table-view-value" style="color: #000">结果</div>
+                </li>
+                {foreach $data.list as $value }
+                <li class="mui-table-view-cell">
+                    {$value.name}
+                    <div class="table-view-value result-icon icon-{$value.icon}">{$value.value}</div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script>
+    mui.init();
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+{/block}
