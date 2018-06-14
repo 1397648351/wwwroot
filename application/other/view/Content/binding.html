@@ -1,0 +1,44 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-绑定编号{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__MOBILERESOURCE__/css/binding.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    <div class="contents">
+        <div class="content-1">
+            <div class="select-order">手动绑定</div>
+            <div class="content-box">
+                <div class="form-detail">
+                    <label class="form-label">唾液采集编码：</label>
+                    <input class="form-control" id="number" value="{$info['serial_num']}"/>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <a class="form-img" onclick="redirect();" href="javascript:;">下一步</a>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="other_js"}
+<!-- other js -->
+<script>
+    function redirect() {
+        var number = $("#number").val();
+        if (number == '') {
+            alert('请输入唾液采集编码');
+            return;
+        }
+        $.post("{:url('Content/binding')}", {id: '{$id}', num: number}, function (result) {
+            if(result.status_code=='200'){
+                window.location.href = "{:url('Content/bindingend')}";
+            }else{
+                alert(result.msg);
+            }
+        });
+    }
+</script>
+{/block}

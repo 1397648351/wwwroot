@@ -1,0 +1,41 @@
+<div class="topbar">
+    <div class="content-box">
+        <div class="topbar-btn"></div>
+        <div class="title" id="topbar_title">基因检测-首页</div>
+    </div>
+    <ul class="navbar">
+        <li class="nav">
+            <a class="link-home" href="{:url('Index/index')}">首页</a>
+        </li>
+        <li class="nav">
+            <a class="link-process" href="{:url('Content/process_mobile')}">检测流程</a>
+        </li>
+        <!--<li class="nav">-->
+            <!--<a class="link-result" href="javascript:;">检测结果</a>-->
+        <!--</li>-->
+        <li class="nav">
+            <a class="link-order" href="{:url('Order/index')}">购买</a>
+        </li>
+        <li class="nav">
+            <a class="link-order" href="{:url('Order/orderList')}">查看订单</a>
+        </li>
+        <!--<li class="nav">-->
+            <!--<a class="link-order" href="{:url('Content/binding')}">绑定编号</a>-->
+        <!--</li>-->
+    </ul>
+    <script>
+        $('#topbar_title').text(document.title);
+        $(window).click(function (e) {
+            if (e.target == $('.topbar-btn').get(0)) return;
+            $('.navbar').removeClass('show');
+        })
+        $('.topbar-btn').click(function (e) {
+            if($('.navbar').css('display')=="block"){
+                $('.navbar').removeClass('show');
+            }
+            else{
+                $('.navbar').addClass('show');
+            }
+        })
+    </script>
+</div>

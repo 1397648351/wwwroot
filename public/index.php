@@ -19,12 +19,23 @@ require __DIR__ . '/../thinkphp/base.php';
 
 $module = '';
 if (isMobile ()) {
-	$module = 'mobile';
+    if(iseWxiXin()){
+        $module = 'mobile';
+    } else{
+        $module = 'other';
+    }
 } else {
 	$module = 'home';
 }
 // 执行应用并响应
 Container::get ( 'app' )->bind ( $module )->run ()->send ();
+
+function iseWxiXin() {
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+        return true;
+    } return false;
+}
+
 function isMobile() {
 	// 如果有HTTP_X_WAP_PROFILE则一定是移动设备
 	if (isset ( $_SERVER ['HTTP_X_WAP_PROFILE'] ))

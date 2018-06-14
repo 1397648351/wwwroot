@@ -1,0 +1,107 @@
+{extend name="Template:base_report" /}
+{block name="title"}基因检测-示例报告{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel="stylesheet" href="__MOBILERESOURCE__/css/report.css">
+{/block}
+{block name="body"}
+<header id="header" class="mui-bar mui-bar-nav">
+    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <h1 class="mui-title"><img src="__COMMONRESOURCE__/images/logo.png"/></h1>
+</header>
+<!--这里放置真实显示的DOM内容-->
+<div class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="head-detail">
+            <div class="sex">男性</div>
+            基因检测报告
+            <div class="change-sex"><span>女</span></div>
+        </div>
+        <div class="scroll-content">
+            <div class="head-detail">
+                我的基因
+            </div>
+            <div class="img-1">
+                <a class="a-left" href="{:url('report/detail','type=0&sex=0')}">
+                    <div class="detail-icon detail-icon-0 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">祖缘分析</div>
+                    <div class="form-size-2">2大类</div>
+                </a>
+                <a class="a-right" href="{:url('report/detail','type=1&sex=1')}">
+                    <div class="detail-icon detail-icon-1 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">营养补充</div>
+                    <div class="form-size-2">19项</div>
+                </a>
+            </div>
+            <div class="img-2">
+                <a class="a-left" href="{:url('report/detail','type=2&sex=2')}">
+                    <div class="detail-icon detail-icon-2 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">遗传特征</div>
+                    <div class="form-size-2">6大类</div>
+                </a>
+                <a class="a-right" href="{:url('report/detail','type=3&sex=3')}">
+                    <div class="detail-icon detail-icon-3 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">遗传风险</div>
+                    <div class="form-size-2">15大类</div>
+                </a>
+            </div>
+            <div class="img-3">
+                <a class="a-left" href="{:url('report/detail','type=4&sex=4')}">
+                    <div class="detail-icon detail-icon-4 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">用药指南</div>
+                    <div class="form-size-2">19大类</div>
+                </a>
+                <a class="a-right" href="{:url('report/detail','type=5&sex=5')}">
+                    <div class="detail-icon detail-icon-5 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">健康风险</div>
+                    <div class="form-size-2">15大类</div>
+                </a>
+            </div>
+            <div class="img-4">
+                <a class="a-left left-left" href="{:url('report/detail','type=6&sex=6')}">
+                    <div class="detail-icon detail-icon-6 left-img">
+                        <div>
+                            <img src="__MOBILERESOURCE__/images/report/icon2_03.png">
+                        </div>
+                    </div>
+                    <div class="form-size-1">肿瘤检测</div>
+                    <div class="form-size-2">70项</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<!-- other js -->
+<script>
+    mui.init();
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+{/block}
