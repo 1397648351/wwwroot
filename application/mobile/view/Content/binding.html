@@ -11,6 +11,25 @@
             <div class="select-order">手动绑定</div>
             <div class="content-box">
                 <div class="form-detail">
+                    <label class="form-label">姓名：</label>
+                    <input class="form-control" id="name" value=""/>
+                </div>
+                <div class="form-detail">
+                    <label class="form-label">性别：</label>
+                    <select class="select-control" id="sex">
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+                </div>
+                <div class="form-detail">
+                    <label class="form-label">手机号：</label>
+                    <input class="form-control" id="phone" value=""/>
+                </div>
+                <div class="form-detail">
+                    <label class="form-label">邮箱：</label>
+                    <input class="form-control" placeholder="用于接收检测结果" id="email" value=""/>
+                </div>
+                <div class="form-detail">
                     <label class="form-label">唾液采集编码：</label>
                     <input class="form-control" id="number" value="{$info['serial_num']}"/>
                 </div>
