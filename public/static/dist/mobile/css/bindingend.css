@@ -14,31 +14,17 @@ body {
     background-color: #fff;
 }
 .select-order{
-    text-align: left;
-    font-size: 30px;
-    margin-top: 50px;
-    margin-left: 20px;
-}
-
-.select-order-1{
-    text-align: left;
+    text-align: center;
     font-size: 25px;
-    margin-top: 20px;
+    margin-top: 150px;
     margin-left: 20px;
-    color: gray;
-
 }
+
 .content-bottom-img{
     margin-top: 20px;
     width: 25%;
 }
-.content-bottom{
-    background-image: url(../images/binding/2333.png);
-    margin-top: 50px;
-    text-align: center;
-    padding: 20px;
-    background-size: 100% 100%;
-}
+
 
 .form-des{
     color: white;
@@ -52,4 +38,18 @@ body {
     font-size: 16px;
     margin-bottom: 20px;
     line-height: 1.5;
+}
+
+.content-bottom{
+    margin-top: 400px;
+    text-align: center;
+}
+.form-img{
+    background-image: url(../images/binding/2333.png);
+    color: white;
+    padding: 5px;
+    padding: 10px 120px;
+    font-size: 20px;
+    /*background-repeat: repeat-y;*/
+    background-size: 100% 100%;
 }
