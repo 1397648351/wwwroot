@@ -50,7 +50,27 @@
 <!-- other js -->
 <script>
     function redirect() {
+        var name = $("#name").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var courier = $("#courier").val();
         var number = $("#number").val();
+        if (name == '') {
+            alert('请输入姓名');
+            return;
+        }
+        if (phone == '') {
+            alert('请输入手机号');
+            return;
+        }
+        if (email == '') {
+            alert('请输入邮箱');
+            return;
+        }
+        if (courier == '') {
+            alert('请输入快递单号');
+            return;
+        }
         if (number == '') {
             alert('请输入唾液采集编码');
             return;
