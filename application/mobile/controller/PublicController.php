@@ -24,7 +24,7 @@ class PublicController extends BaseController
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl() . url();
-        if (empty($openid)) {
+        if (empty($openid) || !session('?userInfo')) {
             $wxOAuthConfig = config('variable.wxMobile');
             $wxAppId = $wxOAuthConfig['app_id'];;
             $wxAppSecret = $wxOAuthConfig['app_secret'];
@@ -39,7 +39,6 @@ class PublicController extends BaseController
                 $this->saveUserInfo($info);
                 $userWxModel = model('home/User');
                 $user = $userWxModel->findByQqOpenid($info['openid']);
-                dump($user);
                 session('userInfo', $user);
             }
         }
