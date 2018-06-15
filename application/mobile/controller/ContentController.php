@@ -70,7 +70,7 @@ class ContentController extends PublicController
             $args['express'] = $this->request->param('express');
             $args['sex'] = $this->request->param('sex');
             $args['serial_num'] = $this->request->param('number');
-            $goodsOrderModel = model('home/goodsOrder');
+            $goodsOrderModel = model('home/serial');
             $result = $goodsOrderModel->insertSerialNum($args);
             $this->resJson(array(), $result['code'], $result['msg']);
         }
