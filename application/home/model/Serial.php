@@ -24,7 +24,7 @@ class Serial extends Base
             return $result;
         }
         $args['create_time'] = time();
-        $this->data($args)->insert();
+        $this->insert($args);
         $result['code'] = 200;
         $result['msg'] = '';
         return $result;
