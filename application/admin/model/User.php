@@ -29,6 +29,7 @@ class User extends Base
         $fields = "id,nickname,(case sex when 1 then '男' when 2 then '女' else '未知' end) as sex,mobile,email,create_time";
         $offset = ($page - 1) * $rows;
         $map = array();
+        $map['role'] = 0;
         if (isset($value) && strlen($value) > 0) {
             $map[] = ['nickname|mobile|email', 'like', '%' . $value . '%'];
         }
@@ -42,6 +43,7 @@ class User extends Base
     public function getUserList($value)
     {
         $map = array();
+        $map['role'] = 0;
         if (isset($value) && strlen($value) > 0) {
             $map[] = ['nickname|mobile|email', 'like', '%' . $value . '%'];
         }

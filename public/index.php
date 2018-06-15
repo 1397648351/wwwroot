@@ -20,7 +20,6 @@ require __DIR__ . '/../thinkphp/base.php';
 $module = '';
 if (isMobile()) {
     $module = 'mobile';
-
 } else {
     $module = 'home';
 }

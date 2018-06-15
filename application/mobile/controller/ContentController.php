@@ -49,11 +49,13 @@ class ContentController extends PublicController
 
     public function selectorder()
     {
+        $this->isLogin();
         return $this->fetch();
     }
 
     public function binding()
     {
+        $this->isLogin();
         if ($this->request->isGet()) {
             /* $id = $this->request->param('id');
             $this->assign("id", $id);
@@ -78,6 +80,7 @@ class ContentController extends PublicController
 
     public function bindingend()
     {
+        $this->isLogin();
         return $this->fetch();
     }
 

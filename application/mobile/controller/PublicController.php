@@ -19,19 +19,17 @@ class PublicController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        if($this->request->isGet())
-            $this->getJsSign();
-        if(session('iswxin')=='0')
-            return;
+        if ($this->request->isGet()) $this->getJsSign();
+        if (session('iswxin') == '0') return;
         $openid = session('openid');
         $code = $this->request->param('code');
-        $url = $this->getBaseUrl().url();
-        if(empty($openid)){
+        $url = $this->getBaseUrl() . url();
+        if (empty($openid)) {
             $wxOAuthConfig = config('variable.wxMobile');
             $wxAppId = $wxOAuthConfig['app_id'];;
             $wxAppSecret = $wxOAuthConfig['app_secret'];
             $Wechat = new Wechat($wxAppId, $wxAppSecret);
-            if(empty($code)){
+            if (empty($code)) {
                 $res = $Wechat->getOauthRedirect($url, 'picagene', 'snsapi_userinfo');
                 $this->redirect($res);
             }
@@ -39,6 +37,9 @@ class PublicController extends BaseController
             if ($info['openid']) {
                 session('openid', $info['openid']);
                 $this->saveUserInfo($info);
+                $userWxModel = model('home/User');
+                $user = $userWxModel->findByQqOpenid($info['openid']);
+                session('userInfo', $user);
             }
         }
     }
@@ -65,14 +66,25 @@ class PublicController extends BaseController
         $wxAppSecret = $wxOAuthConfig['app_secret'];
         $Wechat = new Wechat($wxAppId, $wxAppSecret);
         $userInfo = $Wechat->getOauthUserinfo($info['access_token'], $info['openid']);
-        if($userInfo) {
+        if ($userInfo) {
             $userWxModel = model('home/User');
             $user = $userWxModel->findByUnionid($userInfo['unionid']);
             if ($user) {
-                $res = $userWxModel->updateInfo($user['id'],$userInfo);
+                $res = $userWxModel->updateInfo($user['id'], $userInfo);
             } else {
                 $res = $userWxModel->addInfoByWx($userInfo);
             }
         }
+    }
+
+    public function isLogin($redirect = true)
+    {
+        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
+            if ($redirect)
+                $this->error("请先登录！", 'Index/index');
+            else
+                return false;
+        }
+        return true;
     }
 }

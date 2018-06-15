@@ -17,6 +17,7 @@ class OrderController extends PublicController
 {
     public function index()
     {
+        $this->isLogin();
         $goodsId = $this->request->param('id');
         if (empty($goodsId)) {
             $goodsId = 1;
@@ -33,6 +34,7 @@ class OrderController extends PublicController
 
     public function orderList()
     {
+        $this->isLogin();
         $userModel = model('home/user');
         $user = $userModel->findByOpenid(session('openid'));
         $goodsOrderModel = model('home/goodsOrder');
@@ -43,6 +45,7 @@ class OrderController extends PublicController
 
     public function order()
     {
+        $this->isLogin();
         if (!$this->request->isPost()) {
             $this->resJson(array(), 2001, '需要post提交');
         }
@@ -66,9 +69,10 @@ class OrderController extends PublicController
         try {
             $res = Charge::run($type, $config, $payParam);
             $goodsOrderModel = model('home/goodsOrder');
-            $openid = session('openid');
-            $userModel = model('home/user');
-            $user = $userModel->findByOpenid($openid);
+            //$openid = session('openid');
+            //$userModel = model('home/user');
+            //$user = $userModel->findByOpenid($openid);
+            $user = session('userInfo');
             $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
             $addressId = $this->setAddress($goodsOrderId);
             $data = array();
