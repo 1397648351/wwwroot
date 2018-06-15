@@ -20,7 +20,6 @@ class PublicController extends BaseController
     {
         parent::__construct();
         if ($this->request->isGet()) $this->getJsSign();
-        echo session('iswxin');
         if (session('iswxin') == '0') return;
         $openid = session('openid');
         $code = $this->request->param('code');
@@ -40,6 +39,7 @@ class PublicController extends BaseController
                 $this->saveUserInfo($info);
                 $userWxModel = model('home/User');
                 $user = $userWxModel->findByQqOpenid($info['openid']);
+                dump($user);
                 session('userInfo', $user);
             }
         }
