@@ -15,7 +15,7 @@ var login = function () {
             };
 
             var showError = function (msg) {
-
+                alert(msg);
             };
 
             $("#login").click(function () {
