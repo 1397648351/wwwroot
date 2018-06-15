@@ -38,7 +38,7 @@ class PublicController extends BaseController
                 session('openid', $info['openid']);
                 $this->saveUserInfo($info);
                 $userWxModel = model('home/User');
-                $user = $userWxModel->findByQqOpenid($info['openid']);
+                $user = $userWxModel->findByOpenid($info['openid']);
                 session('userInfo', $user);
             }
         }
@@ -80,9 +80,7 @@ class PublicController extends BaseController
     public function isLogin($redirect = true)
     {
         if (!session('?userInfo') || session('userInfo')['role'] != 0) {
-            if ($redirect)
-                $this->error("请先登录！", 'Index/index');
-            else
+            if ($redirect) $this->error("请先登录！", 'Index/index'); else
                 return false;
         }
         return true;
