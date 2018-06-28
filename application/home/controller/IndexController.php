@@ -34,4 +34,13 @@ class IndexController extends BaseController
 //        $req = $this->request->ip();
 //        echo $req;
     }
+
+    public function resultfile()
+    {
+        $path = Env::get('root_path') . 'public/result/' . $_GET['id'] . '.pdf';
+        header("Content-type: application/pdf");
+        ob_clean();
+        flush();
+        readfile($path);
+    }
 }
