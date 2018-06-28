@@ -19,7 +19,8 @@ class IndexController extends PublicController
 
     public function resultfile()
     {
-        $path = Env::get('root_path') . 'public/result/' . $_GET['id'] . '.pdf';
+        $this->isLogin();
+        $path = Env::get('root_path') . 'public/result/' . $this->request->param('id') . '.pdf';
         header("Content-type: application/pdf");
         ob_clean();
         flush();

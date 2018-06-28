@@ -76,13 +76,4 @@ class PublicController extends BaseController
             }
         }
     }
-
-    public function isLogin($redirect = true)
-    {
-        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
-            if ($redirect) $this->error("请先登录！", 'Index/index'); else
-                return false;
-        }
-        return true;
-    }
 }
