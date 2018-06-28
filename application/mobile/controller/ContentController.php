@@ -65,7 +65,9 @@ class ContentController extends PublicController
             return $this->fetch();
         } else {
             //$id = $this->request->param('id');
+            $user = session('userInfo');
             $args = array();
+            $args['userid'] = $user['id'];
             $args['username'] = $this->request->param('name');
             $args['phone'] = $this->request->param('phone');
             $args['email'] = $this->request->param('email');

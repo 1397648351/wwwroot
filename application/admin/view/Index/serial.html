@@ -6,11 +6,33 @@
     .datagrid-body {
         overflow-x: scroll;
     }
+
+    .pd-txt {
+        margin-bottom: 10px;
+    }
 </style>
 {/block}
 {block name="class"}{/block}
 {block name="body"}
 <table id="serialList"></table>
+<div id="win" class="easyui-window" title="添加" style="width:350px;height:370px"
+     data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
+        <form id="ff" method="post">
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="img" id="img"
+                       data-options="label:'图片名称：',required:true,missingMessage:'请输入图片名称',validType:'html'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover" id="cover"
+                       data-options="label:'结果文件：',missingMessage:'请选择文件',buttonText:'选择文件', accept:'text/html'"/>
+            </div>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
+            </div>
+        </form>
+    </div>
+</div>
 {/block}
 {block name="other_js"}
 <script>
@@ -27,12 +49,20 @@
         border: false,
         columns: [[
             {field: 'id', title: 'ID', width: 80, align: 'center'},
+            {field: 'userid', title: '用户ID', width: 80, align: 'center'},
             {field: 'username', title: '用户名', width: 100, align: 'center'},
             {field: 'sex', title: '性别', width: 50, align: 'center'},
             {field: 'phone', title: '电话号码', width: 150, align: 'center'},
             {field: 'email', title: '邮箱', width: 150, align: 'center'},
             {field: 'serial_num', title: '套件码', width: 200, align: 'center'},
-            {field: 'create_time', title: '创建时间', width: 150, align: 'center'}
+            {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
+            {field: 'file_path', title: '结果位置', width: 150, align: 'center'},
+            {
+                field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
+                    var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="upload(' + index + ')">上传结果</a>';
+                    return e;
+                }
+            }
         ]],
         toolbar: [{
             iconCls: 'icon-print',
@@ -40,7 +70,31 @@
             handler: function () {
                 window.open("{:url('Index/downloadSerialExcel')}");
             }
-        }]
+        }],
+        onLoadSuccess: function (data) {
+            $('a[name=btn_action]').linkbutton();
+        }
+    });
+    function upload(row) {
+        $('#serialList').datagrid('selectRow', row);
+        var rowdata = $('#serialList').datagrid('getSelected');
+        $('#ff').form('reset');
+        id = rowdata.id;
+        $("#win").window({
+            closed: false,
+            title: "修改"
+        });
+        type = 'edit';
+    }
+
+    $.extend($.fn.validatebox.defaults.rules, {
+        html: {
+            validator: function (value) {
+                var re = /\.html|\.htm/i
+                return value.match(re) != null;
+            },
+            message: '请输入正确的文件名.'
+        }
     });
 </script>
 {/block}

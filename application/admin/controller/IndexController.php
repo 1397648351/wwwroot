@@ -199,6 +199,7 @@ class IndexController extends BaseController
         $list_order = $userModel->getSerialList();
         $filed = array(
             'id'          => ['title' => 'ID', 'width' => 8],
+            'userid'    => ['title' => '录入人ID', 'width' => 10],
             'username'    => ['title' => '用户名', 'width' => 20],
             'sex'         => ['title' => '性别', 'width' => 10],
             'phone'       => ['title' => '手机号', 'width' => 15],
