@@ -121,6 +121,25 @@ class IndexController extends BaseController
         }
     }
 
+    function uploadPdf()
+    {
+        $datas = array();
+        $datas['id'] = $_POST['id'];
+        try {
+            if (isset($_FILES['file'])) {
+                move_uploaded_file($_FILES['file']['tmp_name'], Env::get('root_path') . 'public/result/' . $datas['id'] . '.pdf');
+                $datas['filename'] = $datas['id'] . '.pdf';
+            }else{
+                $this->resJson($datas, '500', '请上传正确的文件！');
+            }
+            $serialModel = model('serial');
+            $serialModel->upload($datas);
+            $this->resJson($datas);
+        } catch (Exception $e) {
+            $this->resJson($datas, '500', $e->getMessage());
+        }
+    }
+
     public function login()
     {
         session(null);
@@ -158,23 +177,23 @@ class IndexController extends BaseController
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
         $filed = array(
-            'no'             => ['title' => '订单号', 'width' => 32],
-            'serial_num'     => ['title' => '序列号', 'width' => 25],
-            'goods_id'       => ['title' => '商品ID', 'width' => 10],
-            'subject'        => ['title' => '商品名称', 'width' => 18],
-            'money'          => ['title' => '付款金额', 'width' => 10],
-            'user_id'        => ['title' => '用户ID', 'width' => 10],
-            'username'       => ['title' => '收件人', 'width' => 15],
-            'mobile'         => ['title' => '手机号', 'width' => 15],
-            'email'          => ['title' => '邮箱', 'width' => 20],
-            'city'           => ['title' => '收货城市', 'width' => 15],
+            'no' => ['title' => '订单号', 'width' => 32],
+            'serial_num' => ['title' => '序列号', 'width' => 25],
+            'goods_id' => ['title' => '商品ID', 'width' => 10],
+            'subject' => ['title' => '商品名称', 'width' => 18],
+            'money' => ['title' => '付款金额', 'width' => 10],
+            'user_id' => ['title' => '用户ID', 'width' => 10],
+            'username' => ['title' => '收件人', 'width' => 15],
+            'mobile' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
+            'city' => ['title' => '收货城市', 'width' => 15],
             'detail_address' => ['title' => '收货地址', 'width' => 30],
-            'status'         => ['title' => '订单状态', 'width' => 12],
-            'invoice_type'   => ['title' => '发票', 'width' => 12],
-            'invoice_title'  => ['title' => '发票抬头', 'width' => 15],
-            'pay_taxes_id'   => ['title' => '纳税识别号', 'width' => 20],
-            'user_msg'       => ['title' => '用户留言', 'width' => 30],
-            'create_time'    => ['title' => '下单时间', 'width' => 20]);
+            'status' => ['title' => '订单状态', 'width' => 12],
+            'invoice_type' => ['title' => '发票', 'width' => 12],
+            'invoice_title' => ['title' => '发票抬头', 'width' => 15],
+            'pay_taxes_id' => ['title' => '纳税识别号', 'width' => 20],
+            'user_msg' => ['title' => '用户留言', 'width' => 30],
+            'create_time' => ['title' => '下单时间', 'width' => 20]);
         $this->downloadExcel($filed, 'order.xlsx', 'orders', $list_order);
     }
 
@@ -184,11 +203,11 @@ class IndexController extends BaseController
         $userModel = model('user');
         $list_order = $userModel->getUserList($value);
         $filed = array(
-            'id'          => ['title' => 'ID', 'width' => 8],
-            'nickname'    => ['title' => '用户名', 'width' => 20],
-            'sex'         => ['title' => '性别', 'width' => 10],
-            'mobile'      => ['title' => '手机号', 'width' => 15],
-            'email'       => ['title' => '邮箱', 'width' => 20],
+            'id' => ['title' => 'ID', 'width' => 8],
+            'nickname' => ['title' => '用户名', 'width' => 20],
+            'sex' => ['title' => '性别', 'width' => 10],
+            'mobile' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
     }
@@ -198,13 +217,13 @@ class IndexController extends BaseController
         $userModel = model('serial');
         $list_order = $userModel->getSerialList();
         $filed = array(
-            'id'          => ['title' => 'ID', 'width' => 8],
-            'userid'    => ['title' => '录入人ID', 'width' => 10],
-            'username'    => ['title' => '用户名', 'width' => 20],
-            'sex'         => ['title' => '性别', 'width' => 10],
-            'phone'       => ['title' => '手机号', 'width' => 15],
-            'email'       => ['title' => '邮箱', 'width' => 20],
-            'serial_num'  => ['title' => '套件码', 'width' => 25],
+            'id' => ['title' => 'ID', 'width' => 8],
+            'userid' => ['title' => '录入人ID', 'width' => 10],
+            'username' => ['title' => '用户名', 'width' => 20],
+            'sex' => ['title' => '性别', 'width' => 10],
+            'phone' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
+            'serial_num' => ['title' => '套件码', 'width' => 25],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'serial.xlsx', 'serial', $list_order);
     }

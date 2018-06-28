@@ -15,17 +15,17 @@
 {block name="class"}{/block}
 {block name="body"}
 <table id="serialList"></table>
-<div id="win" class="easyui-window" title="添加" style="width:350px;height:370px"
+<div id="win" class="easyui-window" title="添加" style="width:350px;height:0px"
      data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
     <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
         <form id="ff" method="post">
-            <div class="pd-txt">
+            <!--<div class="pd-txt">
                 <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" name="img" id="img"
                        data-options="label:'图片名称：',required:true,missingMessage:'请输入图片名称',validType:'html'"/>
-            </div>
+            </div>-->
             <div class="pd-txt">
-                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="cover" id="cover"
-                       data-options="label:'结果文件：',missingMessage:'请选择文件',buttonText:'选择文件', accept:'text/html'"/>
+                <input class="easyui-validatebox easyui-filebox" style="width:100%" type="text" name="file" id="file"
+                       data-options="label:'结果文件：',missingMessage:'请选择文件',buttonText:'选择文件', accept:'application/pdf'"/>
             </div>
             <div style="text-align:center;padding:5px 0">
                 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
@@ -56,7 +56,7 @@
             {field: 'email', title: '邮箱', width: 150, align: 'center'},
             {field: 'serial_num', title: '套件码', width: 200, align: 'center'},
             {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
-            {field: 'file_path', title: '结果位置', width: 150, align: 'center'},
+            {field: 'filename', title: '文件名', width: 150, align: 'center'},
             {
                 field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
                     var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="upload(' + index + ')">上传结果</a>';
@@ -75,6 +75,47 @@
             $('a[name=btn_action]').linkbutton();
         }
     });
+
+    function submitForm() {
+        if (!$('#ff').form('validate')) {
+            $.messager.alert('错误', '请输入正确的信息！', 'error');
+            return;
+        }
+        var formData = new FormData();
+        var selectedFile = $('#file').parent().find('input[type="file"]')[0].files[0];
+        formData.append("file", selectedFile);
+        formData.append("id", id);
+        $.messager.progress({
+            title: '正在保存'
+        });
+        $.ajax({
+            type: 'post',
+            url: "{:url('Index/uploadPdf')}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // 根据返回结果指定界面操作
+                if (response.status_code == "1001") {
+                    $.messager.progress('close');
+                    $.messager.show({
+                        title: '成功',
+                        msg: '保存成功'
+                    });
+                    $("#win").window('close');
+                }else{
+                    $.messager.progress('close');
+                    $.messager.alert('错误', response.msg, 'error');
+                }
+                $('#serialList').datagrid('reload');
+            },
+            error: function () {
+                $.messager.progress('close');
+                $.messager.alert('错误', '上传错误！', 'error');
+            }
+        })
+    }
+
     function upload(row) {
         $('#serialList').datagrid('selectRow', row);
         var rowdata = $('#serialList').datagrid('getSelected');

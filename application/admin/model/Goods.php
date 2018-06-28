@@ -30,7 +30,7 @@ class Goods extends Base
         if ($type == 'add') {
             $this->insert($data, true);
         } else {
-            $this->where('id', $data['id'])->data($data)->update();;
+            $this->where('id', $data['id'])->data($data)->update();
         }
     }
 
