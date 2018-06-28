@@ -1,5 +1,8 @@
 <?php
+
 namespace app\mobile\controller;
+
+use think\facade\Env;
 
 
 class IndexController extends PublicController
