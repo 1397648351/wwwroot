@@ -55,7 +55,7 @@ class ContentController extends PublicController
 
     public function binding()
     {
-        $this->isLogin();
+        //$this->isLogin();
         if ($this->request->isGet()) {
             /* $id = $this->request->param('id');
             $this->assign("id", $id);
@@ -83,6 +83,11 @@ class ContentController extends PublicController
     public function bindingend()
     {
         $this->isLogin();
+        return $this->fetch();
+    }
+
+    public function selreport()
+    {
         return $this->fetch();
     }
 
