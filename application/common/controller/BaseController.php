@@ -233,11 +233,11 @@ class BaseController extends Controller
         $sheet->setTitle($sheetName);
         $keys = array_keys($filed);
         for ($i = 0; $i < sizeof($keys); $i++) {
-            if(!is_array($filed[$keys[$i]]))
+            if (!is_array($filed[$keys[$i]]))
                 $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]);
-            else{
+            else {
                 $sheet->setCellValueByColumnAndRow($i + 1, 1, $filed[$keys[$i]]['title']);
-                $sheet->getColumnDimensionByColumn($i+ 1)->setWidth($filed[$keys[$i]]['width']);
+                $sheet->getColumnDimensionByColumn($i + 1)->setWidth($filed[$keys[$i]]['width']);
             }
         }
         for ($i = 0; $i < sizeof($data); $i++) {
@@ -267,7 +267,11 @@ class BaseController extends Controller
     public function isLogin($redirect = true)
     {
         if (!session('?userInfo') || session('userInfo')['role'] != 0) {
-            if ($redirect) $this->error("请先登录！", 'Index/index'); else
+            if ($redirect) {
+                $this->redirect('User/login');
+                exit('未登录！');
+                //$this->error("请先登录！", 'User/login');
+            } else
                 return false;
         }
         return true;

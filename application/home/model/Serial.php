@@ -30,11 +30,14 @@ class Serial extends Base
         return $result;
     }
 
-    public function findReport($userid)
+    public function findReport($userid, $page = false)
     {
         $map = array();
         $map['userid'] = $userid;
-        $data = $this->where($map)->select();
+        if ($page)
+            $data = $this->where($map)->paginate(10);
+        else
+            $data = $this->where($map)->select();
         return $data;
     }
 }

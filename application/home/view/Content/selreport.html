@@ -1,0 +1,66 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-查看套件码{/block}
+{block name="other_css"}
+<!-- other css -->
+<!--<link rel='stylesheet' href='__PCRESOURCE__/css/home.css' type="text/css" />-->
+<link rel='stylesheet' href='__PCRESOURCE__/css/order.css' type="text/css"/>
+<style>
+    body {
+        background-color: #fff;
+    }
+    .btn-link{
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #2374d8;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="wrapper page-order">
+    {include file="Template:top" /}
+    <div class="contents">
+        <div class="content-order">
+            <div class="content-box">
+                <div class="content-title">套件码列表</div>
+                <table class="table-list" width="100%">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>电话</th>
+                        <th>邮箱</th>
+                        <th>套件码</th>
+                        <th>绑定时间</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name='list' id='item'}
+                    <tr>
+                        <td>{$item.username}</td>
+                        <td>{$item.phone}</td>
+                        <td>{$item.email}</td>
+                        <td>{$item.serial_num}</td>
+                        <td>{$item.create_time}</td>
+                        <td>{if $item.filename}<a class="btn-link" href="{:url('Index/resultfile','id='.$item.id)}" target="_blank">查看报告</a>{/if}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                {$list|raw}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="other_js"}
+<!-- other js -->
+<script src="__COMMONRESOURCE__/js/my.js" type="text/javascript"></script>
+<script>
+    $(function () {
+    });
+
+</script>
+{/block}

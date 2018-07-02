@@ -37,4 +37,14 @@ class ContentController extends BaseController
         return $this->fetch();
     }
 
+    public function selreport()
+    {
+        $this->isLogin();
+        $userinfo = session('userInfo');
+        $serialModel = model('serial');
+        $data = $serialModel->findReport($userinfo['id'], true);
+        $this->assign('list', $data);
+        return $this->fetch();
+    }
+
 }
