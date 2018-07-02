@@ -51,4 +51,9 @@ class User extends Base
         $data = $this->field($fields)->where($map)->order('id')->select();
         return $data;
     }
+
+    public function updatepsw($userid, $psw)
+    {
+        $this->where('id', $userid)->data(['password' => $psw])->update();
+    }
 }

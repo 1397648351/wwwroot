@@ -6,6 +6,10 @@
     #tabs .tabs-panels > .panel > .panel-body {
         overflow: hidden;
     }
+
+    .pd-txt {
+        margin-bottom: 10px;
+    }
 </style>
 {/block}
 {block name="class"}easyui-layout{/block}
@@ -19,6 +23,7 @@
         <div data-options="region:'east',border:false" style="width:120px;padding: 10px;">
             <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-man">{:session('userInfo')['nickname']}</a>
             <div id="mm1">
+                <div iconCls="icon-edit" onclick="updatepsw();">修改密码</div>
                 <div iconCls="icon-remove" onclick="top.location.href='{:url(\'Index/logout\')}'">退出</div>
             </div>
         </div>
@@ -31,6 +36,32 @@
     <div id="tabs" height="100%" class="easyui-tabs"></div>
 </div>
 <div data-options="region:'south'" style="height:50px;">底部</div>
+
+<div id="win" class="easyui-window" title="修改密码" style="width:350px;height:230px"
+     data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
+        <form id="ff" method="post">
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="password" name="o_psw"
+                       id="o_psw"
+                       data-options="label:'旧密码：',required:true,missingMessage:'请输入旧密码'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="password" name="psw" id="psw"
+                       data-options="label:'新密码：',required:true,missingMessage:'请输入密码'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="password" name="_psw"
+                       id="_psw"
+                       data-options="label:'重新输入：',required:true,missingMessage:'请输入密码'"
+                       validType="equalTo['#psw']" invalidMessage="两次输入密码不匹配"/>
+            </div>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 {/block}
 {block name="other_js"}
@@ -86,6 +117,53 @@
     $('#tabs').tabs({
         fit: true,
         border: false,
+    });
+
+    function updatepsw() {
+        $("#win").window({
+            closed: false
+        });
+    };
+
+    function submitForm() {
+        if (!$('#ff').form('validate')) {
+            $.messager.alert('错误', '请输入正确的信息！', 'error');
+            return;
+        }
+        console.log($('#o_psw').textbox('getValue'))
+        console.log($('#psw').textbox('getValue'))
+        $.messager.progress({
+            title: '正在保存'
+        });
+        $.ajax({
+            url: '{:url("Index/updatepsw")}',
+            data: {
+                o_psw: $('#o_psw').textbox('getValue'),
+                n_psw: $('#psw').textbox('getValue')
+            },
+            success(resp) {
+                if (resp.status_code == "1001") {
+                    $.messager.progress('close');
+                    $.messager.show({
+                        title: '成功',
+                        msg: '修改成功'
+                    });
+                    $("#win").window('close');
+                } else {
+                    $.messager.progress('close');
+                    $.messager.alert('错误', resp.msg, 'error');
+                }
+            }
+        })
+    }
+
+    $.extend($.fn.validatebox.defaults.rules, {
+        equalTo: {
+            validator: function (value, param) {
+                return $(param[0]).val() == value;
+            },
+            message: '字段不匹配'
+        }
     });
 </script>
 {/block}

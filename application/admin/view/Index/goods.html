@@ -208,8 +208,11 @@
                         msg: '保存成功'
                     });
                     $("#win").window('close');
+                    $('#orderList').datagrid('reload');
+                }else{
+                    $.messager.progress('close');
+                    $.messager.alert('错误', response.msg, 'error');
                 }
-                $('#orderList').datagrid('reload');
             },
             error: function () {
                 $.messager.progress('close');

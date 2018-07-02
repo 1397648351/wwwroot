@@ -129,7 +129,7 @@ class IndexController extends BaseController
             if (isset($_FILES['file'])) {
                 move_uploaded_file($_FILES['file']['tmp_name'], Env::get('root_path') . 'public/result/' . $datas['id'] . '.pdf');
                 $datas['filename'] = $datas['id'] . '.pdf';
-            }else{
+            } else {
                 $this->resJson($datas, '500', '请上传正确的文件！');
             }
             $serialModel = model('serial');
@@ -161,12 +161,13 @@ class IndexController extends BaseController
         $this->redirect(url('Index/login'));
     }
 
-    public function validateLogin($user = null, $psw = null)
+    public function validateLogin($user = null, $psw = null, $writesession = true)
     {
         $userModel = model('user');
         $user = $userModel->getUser($user, $psw);
         if (isset($user) && $user['role'] == 1) {
-            session('userInfo', $user);
+            if ($writesession)
+                session('userInfo', $user);
             return true;
         }
         return false;
@@ -226,5 +227,22 @@ class IndexController extends BaseController
             'serial_num' => ['title' => '套件码', 'width' => 25],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'serial.xlsx', 'serial', $list_order);
+    }
+
+    public function updatepsw()
+    {
+        $o_psw = $this->request->param('o_psw');
+        $o_psw = md5($o_psw);
+        $n_psw = $this->request->param('n_psw');
+        $n_psw = md5($n_psw);
+        $user = session('userInfo');
+        $pass = $this->validateLogin($user['nickname'], $o_psw, false);
+        if($pass){
+            $userModel = model('user');
+            $userModel->updatepsw($user['id'], $n_psw);
+            $this->resJson(array());
+        }else{
+            $this->resJson(array(), 400, '输入的原密码错误！');
+        }
     }
 }
