@@ -8,7 +8,8 @@
     body {
         background-color: #fff;
     }
-    .btn-link{
+
+    .btn-link {
         padding: 5px 10px;
         border-radius: 5px;
         color: #fff;
@@ -32,7 +33,7 @@
                         <th>邮箱</th>
                         <th>套件码</th>
                         <th>绑定时间</th>
-                        <th></th>
+                        <th>结果</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,7 +44,12 @@
                         <td>{$item.email}</td>
                         <td>{$item.serial_num}</td>
                         <td>{$item.create_time}</td>
-                        <td>{if $item.filename}<a class="btn-link" href="{:url('Index/resultfile','id='.$item.id)}" target="_blank">查看报告</a>{/if}</td>
+                        <td>{if $item.filename}
+                            <a class="btn-link" href="{:url('Index/resultfile','id='.$item.id)}"
+                               target="_blank">查看报告</a>
+                            {else /}未生成报告
+                            {/if}
+                        </td>
                     </tr>
                     {/volist}
                     </tbody>
