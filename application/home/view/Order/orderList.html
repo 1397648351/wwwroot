@@ -5,8 +5,8 @@
 <!--<link rel='stylesheet' href='__PCRESOURCE__/css/home.css' type="text/css" />-->
 <link rel='stylesheet' href='__PCRESOURCE__/css/order.css' type="text/css"/>
 <style>
-    body{
-        background-color:#fff;
+    body {
+        background-color: #fff;
     }
 </style>
 {/block}
@@ -29,7 +29,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {volist name='list' id='item'}
+                    {volist name='list' id='item' empty="
+                    <tr>
+                        <td colspan=5>暂时没有数据</td>
+                    </tr>
+                    "}
                     <tr>
                         <td>{$item.no}</td>
                         <td>{$item.subject}</td>

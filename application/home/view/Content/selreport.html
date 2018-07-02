@@ -37,7 +37,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {volist name='list' id='item'}
+                    {volist name='list' id='item' empty="
+                    <tr>
+                        <td colspan=6>暂时没有数据</td>
+                    </tr>
+                    "}
                     <tr>
                         <td>{$item.username}</td>
                         <td>{$item.phone}</td>
