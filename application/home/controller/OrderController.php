@@ -25,9 +25,7 @@ class OrderController extends BaseController
 {
     public function order()
     {
-        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
-            $this->error("请先登录！", 'User/login');
-        }
+        $this->isLogin();
         $id = $this->request->param('id');
         if (empty($id)) {
             $id = 1;
@@ -92,9 +90,7 @@ class OrderController extends BaseController
 
     public function orderList()
     {
-        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
-            $this->error("请先登录！", 'User/login');
-        }
+        $this->isLogin();
         $goodsOrderModel = model('goodsOrder');
         $data = $goodsOrderModel->findOrderByUser(session('userInfo')['id']);
         $this->assign('list', $data);
