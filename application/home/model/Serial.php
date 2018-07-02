@@ -29,4 +29,12 @@ class Serial extends Base
         $result['msg'] = '';
         return $result;
     }
+
+    public function findReport($userid)
+    {
+        $map = array();
+        $map['userid'] = $userid;
+        $data = $this->where($map)->select();
+        return $data;
+    }
 }

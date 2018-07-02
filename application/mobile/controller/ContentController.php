@@ -88,6 +88,11 @@ class ContentController extends PublicController
 
     public function selreport()
     {
+        $this->isLogin();
+        $goodsOrderModel = model('home/serial');
+        $data = $goodsOrderModel->findReport(session('userInfo')['id']);
+        //$data = $goodsOrderModel->findReport('9');
+        $this->assign('list', $data);
         return $this->fetch();
     }
 

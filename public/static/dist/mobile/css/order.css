@@ -313,3 +313,10 @@ body {
     -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
     transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
 }*/
+
+.select-order{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 20px;
+}

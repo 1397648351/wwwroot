@@ -35,10 +35,10 @@ class OrderController extends PublicController
     public function orderList()
     {
         $this->isLogin();
-        $userModel = model('home/user');
-        $user = $userModel->findByOpenid(session('openid'));
+        //$userModel = model('home/user');
+        //$user = $userModel->findByOpenid(session('openid'));
         $goodsOrderModel = model('home/goodsOrder');
-        $data = $goodsOrderModel->findOrderByUser($user['id'], true);
+        $data = $goodsOrderModel->findOrderByUser(session('userInfo')['id'], true);
         $this->assign('list', $data);
         return $this->fetch();
     }

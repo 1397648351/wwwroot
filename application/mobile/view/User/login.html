@@ -1,0 +1,51 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-查询结果{/block}
+{block name="other_css"}
+<!-- other css -->
+<link rel='stylesheet' href='__MOBILERESOURCE__/css/login.css' type="text/css"/>
+{/block}
+{block name="body"}
+<div class="wrapper">
+    <div class="contents">
+        <div class="content-1">
+            <div class="select-order">请输入手机号</div>
+            <div class="content-box">
+                <div class="form-detail">
+                    <input class="form-control" placeholder="请输入手机号" id="number" value=""/>
+                    <span class="fenge"></span>
+                    <a class="huoqu" href="javascript:;">获取验证码</a>
+                </div>
+                <div class="form-detail">
+                    <input class="form-control-a" placeholder="请输入验证码" id="" value=""/>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <a class="form-img" onclick="redirect();" href="javascript:;">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="other_js"}
+<!-- other js -->
+<script>
+    function redirect() {
+        var number = $("#number").val();
+        if (number == '') {
+            alert('请输入查询编号');
+            return;
+        }
+        var args = {
+            number: number
+        }
+        $.post("{:url('Content/selreport')}", args, function (result) {
+            if (result.status_code == '200') {
+                window.location.href = "{:url('Content/selreportend')}";
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+</script>
+{/block}
