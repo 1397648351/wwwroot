@@ -30,7 +30,7 @@ if ($module == 'mobile' && iseWxiXin()) {
     session('iswxin', '1');
 } else {
     //$module = 'other';
-    session('iswxin', '0');
+    session('iswxin', '2');
     //$module = 'mobile';
 }
 $app->run()->send();

@@ -20,7 +20,7 @@ class PublicController extends BaseController
     {
         parent::__construct();
         if ($this->request->isGet()) $this->getJsSign();
-        if (session('iswxin') == '0') return;
+        if (session('iswxin') == 2) return;
         $openid = session('openid');
         $code = $this->request->param('code');
         $url = $this->getBaseUrl() . url();

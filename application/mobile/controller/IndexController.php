@@ -10,8 +10,7 @@ class IndexController extends PublicController
 {
     public function index()
     {
-        Log::info(session['opneid'],'openid');
-        Log::info(session['iswxin'],'iswxin');
+        dump(session('iswxin'));exit;
         $this->isLogin();
         $this->assign('price', 998);
         $goodsModel = model('home/goods');
