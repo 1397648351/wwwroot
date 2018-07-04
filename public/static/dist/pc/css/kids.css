@@ -109,6 +109,14 @@ margin-top: -50px;
     font-size: 30px;
     color: white;
 }
+
+.content-4 .violet{
+    background-image: url(../images/talent/Button_03.png);
+    color: white;
+    width: 218px;
+    margin-top: 10px;
+}
+
 .panel-title-2{
     font-size: 20px;
     color: white;

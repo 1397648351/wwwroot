@@ -8,13 +8,45 @@
                 <a class="link-home" href="{:url('Index/index')}">首页</a>
             </li>
             <li class="nav">
+                <div class="link-btn">
+                    <div class="link-btn-text">产品列表</div>
+                    <ul class="link-group">
+                        <li>
+                            <a class="link-list" href="{:url('Content/kids')}">儿童基因</a>
+                        </li>
+                        <li>
+                            <a class="link-list" href="{:url('Content/skin')}">肤质基因</a>
+                        </li>
+                        <li>
+                            <a class="link-list" href="{:url('Content/inheritance')}">遗传风险</a>
+                        </li>
+                        <li>
+                            <a class="link-list" href="{:url('Content/medication')}">用药指南</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav">
                 <a class="link-process" href="{:url('Content/process')}">检测流程</a>
             </li>
             <li class="nav">
                 <a class="link-result" href="{:url('Order/orderList')}">订单查询</a>
             </li>
             <li class="nav">
-                <a class="link-order" href="{:url('Order/order')}">购买</a>
+                <div class="link-btn">
+                    <div class="link-btn-text">立即购买</div>
+                    <ul class="link-group">
+                        <li>
+                            <a class="link-list" href="{:url('Content/kids')}">肿瘤三项</a>
+                        </li>
+                        <li>
+                            <a class="link-list" href="{:url('Content/skin')}">肤质检测</a>
+                        </li>
+                        <li>
+                            <a class="link-list" href="{:url('Content/inheritance')}">肿瘤易感</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             {if !session('?userInfo') || session('userInfo')['role']!=0}
             <li class="nav">
