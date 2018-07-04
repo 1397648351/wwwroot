@@ -268,7 +268,7 @@ class BaseController extends Controller
     {
         if (!session('?userInfo') || session('userInfo')['role'] != 0 || session('openid')) {
             if ($redirect) {
-                $this->redirect('User/login');
+                $this->redirect('User/index');
                 exit('未登录！');
                 //$this->error("请先登录！", 'User/login');
             } else
