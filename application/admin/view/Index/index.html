@@ -130,12 +130,11 @@
             $.messager.alert('错误', '请输入正确的信息！', 'error');
             return;
         }
-        console.log($('#o_psw').textbox('getValue'))
-        console.log($('#psw').textbox('getValue'))
         $.messager.progress({
             title: '正在保存'
         });
         $.ajax({
+            type:'post',
             url: '{:url("Index/updatepsw")}',
             data: {
                 o_psw: $('#o_psw').textbox('getValue'),

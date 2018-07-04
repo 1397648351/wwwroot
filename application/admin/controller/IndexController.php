@@ -166,8 +166,7 @@ class IndexController extends BaseController
         $userModel = model('user');
         $user = $userModel->getUser($user, $psw);
         if (isset($user) && $user['role'] == 1) {
-            if ($writesession)
-                session('userInfo', $user);
+            if ($writesession) session('userInfo', $user);
             return true;
         }
         return false;
@@ -178,23 +177,23 @@ class IndexController extends BaseController
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
         $filed = array(
-            'no' => ['title' => '订单号', 'width' => 32],
-            'serial_num' => ['title' => '序列号', 'width' => 25],
-            'goods_id' => ['title' => '商品ID', 'width' => 10],
-            'subject' => ['title' => '商品名称', 'width' => 18],
-            'money' => ['title' => '付款金额', 'width' => 10],
-            'user_id' => ['title' => '用户ID', 'width' => 10],
-            'username' => ['title' => '收件人', 'width' => 15],
-            'mobile' => ['title' => '手机号', 'width' => 15],
-            'email' => ['title' => '邮箱', 'width' => 20],
-            'city' => ['title' => '收货城市', 'width' => 15],
+            'no'             => ['title' => '订单号', 'width' => 32],
+            'serial_num'     => ['title' => '序列号', 'width' => 25],
+            'goods_id'       => ['title' => '商品ID', 'width' => 10],
+            'subject'        => ['title' => '商品名称', 'width' => 18],
+            'money'          => ['title' => '付款金额', 'width' => 10],
+            'user_id'        => ['title' => '用户ID', 'width' => 10],
+            'username'       => ['title' => '收件人', 'width' => 15],
+            'mobile'         => ['title' => '手机号', 'width' => 15],
+            'email'          => ['title' => '邮箱', 'width' => 20],
+            'city'           => ['title' => '收货城市', 'width' => 15],
             'detail_address' => ['title' => '收货地址', 'width' => 30],
-            'status' => ['title' => '订单状态', 'width' => 12],
-            'invoice_type' => ['title' => '发票', 'width' => 12],
-            'invoice_title' => ['title' => '发票抬头', 'width' => 15],
-            'pay_taxes_id' => ['title' => '纳税识别号', 'width' => 20],
-            'user_msg' => ['title' => '用户留言', 'width' => 30],
-            'create_time' => ['title' => '下单时间', 'width' => 20]);
+            'status'         => ['title' => '订单状态', 'width' => 12],
+            'invoice_type'   => ['title' => '发票', 'width' => 12],
+            'invoice_title'  => ['title' => '发票抬头', 'width' => 15],
+            'pay_taxes_id'   => ['title' => '纳税识别号', 'width' => 20],
+            'user_msg'       => ['title' => '用户留言', 'width' => 30],
+            'create_time'    => ['title' => '下单时间', 'width' => 20]);
         $this->downloadExcel($filed, 'order.xlsx', 'orders', $list_order);
     }
 
@@ -204,11 +203,11 @@ class IndexController extends BaseController
         $userModel = model('user');
         $list_order = $userModel->getUserList($value);
         $filed = array(
-            'id' => ['title' => 'ID', 'width' => 8],
-            'nickname' => ['title' => '用户名', 'width' => 20],
-            'sex' => ['title' => '性别', 'width' => 10],
-            'mobile' => ['title' => '手机号', 'width' => 15],
-            'email' => ['title' => '邮箱', 'width' => 20],
+            'id'          => ['title' => 'ID', 'width' => 8],
+            'nickname'    => ['title' => '用户名', 'width' => 20],
+            'sex'         => ['title' => '性别', 'width' => 10],
+            'mobile'      => ['title' => '手机号', 'width' => 15],
+            'email'       => ['title' => '邮箱', 'width' => 20],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
     }
@@ -218,13 +217,13 @@ class IndexController extends BaseController
         $userModel = model('serial');
         $list_order = $userModel->getSerialList();
         $filed = array(
-            'id' => ['title' => 'ID', 'width' => 8],
-            'userid' => ['title' => '录入人ID', 'width' => 10],
-            'username' => ['title' => '用户名', 'width' => 20],
-            'sex' => ['title' => '性别', 'width' => 10],
-            'phone' => ['title' => '手机号', 'width' => 15],
-            'email' => ['title' => '邮箱', 'width' => 20],
-            'serial_num' => ['title' => '套件码', 'width' => 25],
+            'id'          => ['title' => 'ID', 'width' => 8],
+            'userid'      => ['title' => '录入人ID', 'width' => 10],
+            'username'    => ['title' => '用户名', 'width' => 20],
+            'sex'         => ['title' => '性别', 'width' => 10],
+            'phone'       => ['title' => '手机号', 'width' => 15],
+            'email'       => ['title' => '邮箱', 'width' => 20],
+            'serial_num'  => ['title' => '套件码', 'width' => 25],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'serial.xlsx', 'serial', $list_order);
     }
@@ -237,12 +236,29 @@ class IndexController extends BaseController
         $n_psw = md5($n_psw);
         $user = session('userInfo');
         $pass = $this->validateLogin($user['nickname'], $o_psw, false);
-        if($pass){
+        if ($pass) {
             $userModel = model('user');
             $userModel->updatepsw($user['id'], $n_psw);
             $this->resJson(array());
-        }else{
+        } else {
             $this->resJson(array(), 400, '输入的原密码错误！');
         }
+    }
+
+    public function updateOrder()
+    {
+        $request = $this->request;
+        $data = array();
+        $goods_order_id = $request->param('id');
+        $data['username'] = $request->param('username');
+        $data['mobile'] = $request->param('phone');
+        $data['email'] = $request->param('email');
+        $data['city'] = $request->param('city');
+        $data['detail_address'] = $request->param('address');
+        $data['invoice_title'] = $request->param('invoice');
+        $data['pay_taxes_id'] = $request->param('taxes_id');
+        $addressModel = model('address');
+        $addressModel->updateInfo($goods_order_id, $data);
+        $this->resJson(array());
     }
 }

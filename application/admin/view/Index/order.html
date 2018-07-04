@@ -6,12 +6,57 @@
     .datagrid-body {
         overflow-x: scroll;
     }
+
+    .pd-txt {
+        margin-bottom: 10px;
+    }
+
+    .textbox-label {
+        width: 85px;
+    }
 </style>
 {/block}
 {block name="class"}{/block}
 {block name="body"}
 <table id="orderList"></table>
-
+<div id="win" class="easyui-window" title="修改" style="width:370px;height:400px"
+     data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
+        <form id="ff" method="post">
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="username"
+                       data-options="label:'收件人：',required:true,missingMessage:'请输入收件人姓名'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-numberbox" style="width:100%" type="text" id="phone"
+                       data-options="label:'手机号：',required:true,missingMessage:'请输入手机号'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="email"
+                       data-options="label:'邮箱：',required:true,missingMessage:'请输入邮箱',validType:'email'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="city"
+                       data-options="label:'收货城市：',required:true,missingMessage:'请输入收货城市'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="address"
+                       data-options="label:'收货地址：',required:true,missingMessage:'请输入收货地址'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="invoice"
+                       data-options="label:'发票抬头：',required:false,missingMessage:'请输入发票抬头'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-validatebox easyui-textbox" style="width:100%" type="text" id="taxes_id"
+                       data-options="label:'纳税识别号：',required:false"/>
+            </div>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
+            </div>
+        </form>
+    </div>
+</div>
 {/block}
 {block name="other_js"}
 <script>
@@ -28,7 +73,7 @@
         border: false,
         columns: [[
             {field: 'no', title: '订单号', width: 250, align: 'center'},
-            {field: 'serial_num', title: '序列号', width: 150, align: 'center'},
+            // {field: 'serial_num', title: '序列号', width: 150, align: 'center'},
             {field: 'goods_id', title: '商品ID', width: 50, align: 'center'},
             {field: 'subject', title: '商品名称', width: 150, align: 'center'},
             {field: 'money', title: '付款金额', width: 100, align: 'center'},
@@ -43,7 +88,13 @@
             {field: 'invoice_title', title: '发票抬头', width: 150, align: 'center'},
             {field: 'pay_taxes_id', title: '纳税识别号', width: 150, align: 'center'},
             {field: 'user_msg', title: '用户留言', width: 150, align: 'center'},
-            {field: 'create_time', title: '下单时间', width: 150, align: 'center'}
+            {field: 'create_time', title: '下单时间', width: 150, align: 'center'},
+            {
+                field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
+                    var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="editrow(' + index + ')">修改</a>';
+                    return e;
+                }
+            }
         ]],
         toolbar: [{
             iconCls: 'icon-print',
@@ -51,12 +102,64 @@
             handler: function () {
                 window.open("{:url('Index/downloadOrderExcel')}");
             }
-        }]
+        }],
+        onLoadSuccess: function (data) {
+            $('a[name=btn_action]').linkbutton();
+        }
     });
-    // $('#orderList').datagrid('getPager').pagination({
-    //     beforePageText: '第',
-    //     afterPageText: '页，共 {pages} 页',
-    //     displayMsg: '当前显示 {from} - {to} 条记录，共 {total} 条记录',
-    // });
+
+    function editrow(row) {
+        $('#orderList').datagrid('selectRow', row);
+        var rowdata = $('#orderList').datagrid('getSelected');
+        console.log(rowdata);
+        $('#username').textbox("setValue", rowdata.username);
+        $('#phone').numberbox("setValue", rowdata.mobile);
+        $('#email').textbox("setValue", rowdata.email);
+        $('#city').textbox("setValue", rowdata.city);
+        $('#address').textbox("setValue", rowdata.detail_address);
+        $('#invoice').textbox("setValue", rowdata.invoice_title);
+        $('#taxes_id').textbox("setValue", rowdata.pay_taxes_id);
+        $("#win").window({
+            closed: false,
+            title: "修改"
+        });
+    };
+
+    function submitForm() {
+        if (!$('#ff').form('validate')) {
+            $.messager.alert('错误', '请输入正确的信息！', 'error');
+            return;
+        }
+        var rowdata = $('#orderList').datagrid('getSelected');
+        var data = {
+            id: rowdata.id,
+            username: $('#username').textbox("getValue"),
+            phone: $('#phone').numberbox("getValue"),
+            email: $('#email').textbox("getValue"),
+            city: $('#city').textbox("getValue"),
+            address: $('#address').textbox("getValue"),
+            invoice: $('#invoice').textbox("getValue"),
+            taxes_id: $('#taxes_id').textbox("getValue"),
+        };
+        $.ajax({
+            type: 'post',
+            url: "{:url('Index/updateOrder')}",
+            data: data,
+            success: function (resp) {
+                if (resp.status_code == "1001") {
+                    $.messager.progress('close');
+                    $.messager.show({
+                        title: '成功',
+                        msg: '修改成功'
+                    });
+                    $("#win").window('close');
+                    $('#orderList').datagrid('reload');
+                } else {
+                    $.messager.progress('close');
+                    $.messager.alert('错误', resp.msg, 'error');
+                }
+            }
+        })
+    }
 </script>
 {/block}
