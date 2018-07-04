@@ -65,7 +65,7 @@ class OrderController extends PublicController
         }
         $openid = session('openid');
         if(empty($openid)){
-            $type = 'wx_pub';
+            $type = 'wx_wap';
             $user = session('userInfo');
         } else {
             $type = 'wx_pub';
@@ -135,6 +135,11 @@ class OrderController extends PublicController
         $payParam['return_param'] = 'pica';
         $payParam['product_id'] = $goods['id'];
         $payParam['openid'] = session('openid');
+        if(empty(session('openid'))){
+            $payParam['wap'] = 'Wap';
+            $payParam['wap_url'] = 'http://www.picagene.com';
+            $payParam['wap_name'] = '基因检测';
+        }
         return $payParam;
     }
 }
