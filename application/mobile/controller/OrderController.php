@@ -63,16 +63,21 @@ class OrderController extends PublicController
         if (empty($goods)) {
             $this->resJson(array(), 2001, '商品不存在');
         }
-        $type = 'wx_pub';
+        $openid = session('openid');
+        if(empty($openid)){
+            $type = 'wx_wap';
+            $user = session('userInfo');
+        } else {
+            $type = 'wx_pub';
+            $openid = session('openid');
+            $userModel = model('home/user');
+            $user = $userModel->findByOpenid($openid);
+        }
         $config = $this->wxConfigData();
         $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
         try {
             $res = Charge::run($type, $config, $payParam);
             $goodsOrderModel = model('home/goodsOrder');
-            //$openid = session('openid');
-            //$userModel = model('home/user');
-            //$user = $userModel->findByOpenid($openid);
-            $user = session('userInfo');
             $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
             $addressId = $this->setAddress($goodsOrderId);
             $data = array();
