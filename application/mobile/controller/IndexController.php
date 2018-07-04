@@ -10,7 +10,6 @@ class IndexController extends PublicController
 {
     public function index()
     {
-        dump(session('iswxin'));exit;
         $this->isLogin();
         $this->assign('price', 998);
         $goodsModel = model('home/goods');
