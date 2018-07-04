@@ -135,11 +135,9 @@ class OrderController extends PublicController
         $payParam['return_param'] = 'pica';
         $payParam['product_id'] = $goods['id'];
         $payParam['openid'] = session('openid');
-        if(empty(session('openid'))){
-            $payParam['wap'] = 'Wap';
-            $payParam['wap_url'] = 'http://www.picagene.com';
-            $payParam['wap_name'] = '基因检测';
-        }
+        $payParam['wap'] = 'Wap';
+        $payParam['wap_url'] = 'http://www.picagene.com';
+        $payParam['wap_name'] = '基因检测';
         return $payParam;
     }
 }
