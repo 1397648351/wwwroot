@@ -266,7 +266,7 @@ class BaseController extends Controller
 
     public function isLogin($redirect = true)
     {
-        if (!session('?userInfo') || session('userInfo')['role'] != 0 || !session('openid')) {
+        if (!session('?userInfo') || session('userInfo')['role'] != 0) {
             if ($redirect) {
                 $this->redirect('User/index');
                 exit('未登录！');
