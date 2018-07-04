@@ -3,12 +3,15 @@
 namespace app\mobile\controller;
 
 use think\facade\Env;
+use think\facade\Log;
 
 
 class IndexController extends PublicController
 {
     public function index()
     {
+        Log::info(session['opneid'],'openid');
+        Log::info(session['iswxin'],'iswxin');
         $this->isLogin();
         $this->assign('price', 998);
         $goodsModel = model('home/goods');
