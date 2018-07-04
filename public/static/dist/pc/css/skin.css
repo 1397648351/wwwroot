@@ -90,6 +90,14 @@
     color: #666;
     border: 1px solid #d0d0d3;
 }
+
+.content-4 .violet{
+    background-image: url(../images/skin/chart_09.png);
+    color: #f7a297;
+    width: 200px;
+    margin-top: 3px;
+    margin-left: -55px;
+}
 .info-line {
     line-height: 2.4rem;
 }

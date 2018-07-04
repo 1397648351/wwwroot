@@ -82,7 +82,13 @@
     display: inline-block;
     vertical-align: middle;
 }
-
+.content-4 .violet{
+    background-image: url(../images/skin/chart_09.png);
+    color: #F1743B;
+    width: 200px;
+    margin-top: 3px;
+    margin-left: -55px;
+}
 .panel-title-img {
     /*margin-top: 40px;*/
 }

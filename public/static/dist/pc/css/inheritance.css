@@ -96,6 +96,13 @@
     font-size: 30px;
     color: white;
 }
+
+.content-4 .btn-green{
+    background-image: url(../images/inheritance/yc_24.png);
+    color: white;
+    width: 250px;
+    margin-top: 20px;
+}
 .panel-title-2{
     font-size: 20px;
     color: white;
