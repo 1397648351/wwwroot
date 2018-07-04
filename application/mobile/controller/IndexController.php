@@ -9,6 +9,7 @@ class IndexController extends PublicController
 {
     public function index()
     {
+        $this->isLogin();
         $this->assign('price', 998);
         $goodsModel = model('home/goods');
         $goods = $goodsModel->fetchAll();
