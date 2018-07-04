@@ -65,15 +65,13 @@ class OrderController extends PublicController
         }
         $openid = session('openid');
         if(empty($openid)){
-            $type = 'wx_wap';
+            $type = 'wx_pub';
             $user = session('userInfo');
-            \think\facade\Log::log($user,'session_user');
         } else {
             $type = 'wx_pub';
             $openid = session('openid');
             $userModel = model('home/user');
             $user = $userModel->findByOpenid($openid);
-            \think\facade\Log::log($openid,'session_openid');
         }
         $config = $this->wxConfigData();
         $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
