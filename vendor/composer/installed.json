@@ -352,7 +352,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/PHPOffice/PhpSpreadsheet/36acc372875c4d894dc093825ce4f62209db5a76.zip",
+            "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/36acc372875c4d894dc093825ce4f62209db5a76",
             "reference": "36acc372875c4d894dc093825ce4f62209db5a76",
             "shasum": ""
         },
@@ -492,7 +492,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/php-fig/simple-cache/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b.zip",
+            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
             "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
             "shasum": ""
         },
@@ -529,62 +529,6 @@
             "psr",
             "psr-16",
             "simple-cache"
-        ]
-    },
-    {
-        "name": "riverslei/payment",
-        "version": "v4.1.6",
-        "version_normalized": "4.1.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/helei112g/payment.git",
-            "reference": "c7a9b26ebc140e01f1ff23b88a37a300b47ecc3a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/helei112g/payment/zipball/c7a9b26ebc140e01f1ff23b88a37a300b47ecc3a",
-            "reference": "c7a9b26ebc140e01f1ff23b88a37a300b47ecc3a",
-            "shasum": ""
-        },
-        "require": {
-            "ext-bcmath": "*",
-            "ext-mbstring": "*",
-            "guzzlehttp/guzzle": "~6.0",
-            "php": ">=5.6"
-        },
-        "require-dev": {
-            "codeception/codeception": "*",
-            "endroid/qrcode": "~1.9"
-        },
-        "time": "2018-03-25T12:58:28+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Payment\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "helei",
-                "email": "dayugog@gmail.com",
-                "homepage": "https://helei112g.github.io/categories/payment-3/"
-            }
-        ],
-        "description": "支付宝支付、微信支付、招商一网通支付php SDK。方便快速接入，最完整的开源支付 php sdk",
-        "homepage": "https://helei112g.github.io/categories/payment-3/",
-        "keywords": [
-            "alipay",
-            "weixin",
-            "一网通",
-            "微信支付",
-            "招商一网通",
-            "支付宝支付",
-            "集成支付接口SDK"
         ]
     },
     {
@@ -775,5 +719,61 @@
             "MIT"
         ],
         "description": "YurunOAuthLogin是一个PHP 第三方登录授权 SDK，集成了QQ、微信、微博、Github等常用接口。可以轻松嵌入支持 PHP >= 5.4 的任何系统中。"
+    },
+    {
+        "name": "riverslei/payment",
+        "version": "v4.1.7",
+        "version_normalized": "4.1.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/helei112g/payment.git",
+            "reference": "94ecb0306288e3d8f60bbcc1a3a5e045c5bfa588"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/helei112g/payment/zipball/94ecb0306288e3d8f60bbcc1a3a5e045c5bfa588",
+            "reference": "94ecb0306288e3d8f60bbcc1a3a5e045c5bfa588",
+            "shasum": ""
+        },
+        "require": {
+            "ext-bcmath": "*",
+            "ext-mbstring": "*",
+            "guzzlehttp/guzzle": "~6.0",
+            "php": ">=5.6"
+        },
+        "require-dev": {
+            "codeception/codeception": "*",
+            "endroid/qrcode": "~1.9"
+        },
+        "time": "2018-05-23T12:01:20+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Payment\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "helei",
+                "email": "dayugog@gmail.com",
+                "homepage": "https://helei112g.github.io/categories/payment-3/"
+            }
+        ],
+        "description": "支付宝支付、微信支付、招商一网通支付php SDK。方便快速接入，最完整的开源支付 php sdk",
+        "homepage": "https://helei112g.github.io/categories/payment-3/",
+        "keywords": [
+            "alipay",
+            "weixin",
+            "一网通",
+            "微信支付",
+            "招商一网通",
+            "支付宝支付",
+            "集成支付接口SDK"
+        ]
     }
 ]
