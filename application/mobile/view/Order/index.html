@@ -217,7 +217,7 @@
                     if(flag=='pub') {
                         wxPay(data['timeStamp'], data['nonceStr'], data['package'], data['signType'], data['paySign'], order_id);
                     } else {
-                        alert(data);
+                        window.location.href = data['mweb_url'];
                     }
                 } else {
                     alert(res.msg);
