@@ -12,6 +12,7 @@ namespace app\mobile\controller;
 
 use Payment\Client\Charge;
 use Payment\Common\PayException;
+use think\facade\Log;
 
 class OrderController extends PublicController
 {
@@ -77,6 +78,7 @@ class OrderController extends PublicController
         $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
         try {
             $res = Charge::run($type, $config, $payParam);
+            Log::info($res,'------res-----');
             $goodsOrderModel = model('home/goodsOrder');
             $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
             $addressId = $this->setAddress($goodsOrderId);
