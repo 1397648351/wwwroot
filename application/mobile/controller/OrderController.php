@@ -78,7 +78,7 @@ class OrderController extends PublicController
         $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
         try {
             $res = Charge::run($type, $config, $payParam);
-            Log::info($res,'------res-----');
+            Log::info('------res-----',$res);
             $goodsOrderModel = model('home/goodsOrder');
             $goodsOrderId = $goodsOrderModel->addInfo($goods, $user['id'], $outTradeNo, 'wx', $num);
             $addressId = $this->setAddress($goodsOrderId);
@@ -87,7 +87,7 @@ class OrderController extends PublicController
             $data['package'] = $res;
             $this->resJson($data, 200, '下单成功');
         } catch (PayException $e) {
-            \think\facade\Log::log($e->errorMessage(), '-----------------');
+            \think\facade\Log::log('-----------------',$e->errorMessage());
             $this->resJson($e->errorMessage(), 1000, '下单异常');
         }
     }
