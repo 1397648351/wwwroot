@@ -17,6 +17,11 @@ use Yurun\OAuthLogin\QQ\OAuth2;
 
 class UserController extends BaseController
 {
+    public function index()
+    {
+        return $this->fetch('login');
+    }
+
     //loginType 1：账号(或邮箱)密码登录  2、手机登录
     public function login()
     {
