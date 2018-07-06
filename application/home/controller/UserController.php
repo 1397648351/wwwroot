@@ -19,6 +19,7 @@ class UserController extends BaseController
 {
     public function index()
     {
+        $this->getSlider();
         return $this->fetch('login');
     }
 
