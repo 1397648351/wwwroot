@@ -27,6 +27,7 @@ class UserController extends BaseController
     {
         $req = $this->request;
         if (!$req->isPost()) {
+            $this->getSlider();
             return $this->fetch('login');
         }
         $loginType = $this->checkEmpty($req->param('loginType'), 'loginType不能为空');
@@ -177,6 +178,7 @@ class UserController extends BaseController
     {
         $req = $this->request;
         if (!$req->isPost()) {
+            $this->getSlider();
             return $this->fetch('register');
         }
         $username = $this->checkEmpty($req->param('username'), 'username不能为空');
@@ -216,6 +218,7 @@ class UserController extends BaseController
     {
         $req = $this->request;
         if (!$req->isPost()) {
+            $this->getSlider();
             return $this->fetch('forget');
         }
         $mobile = $this->checkMobile($req->param('mobile'));

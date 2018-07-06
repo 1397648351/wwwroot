@@ -35,16 +35,12 @@
             <li class="nav">
                 <div class="link-btn">
                     <div class="link-btn-text">立即购买</div>
-                    <ul class="link-group">
+                    <ul class="link-group" style="width: 130px;">
+                        {volist name="sliderList" id="slider"}
                         <li>
-                            <a class="link-list" href="{:url('Content/kids')}">肿瘤三项</a>
+                            <a href="{:url('Order/order','id='.$slider.id)}">{$slider.subject}</a>
                         </li>
-                        <li>
-                            <a class="link-list" href="{:url('Content/skin')}">肤质检测</a>
-                        </li>
-                        <li>
-                            <a class="link-list" href="{:url('Content/inheritance')}">肿瘤易感</a>
-                        </li>
+                        {/volist}
                     </ul>
                 </div>
             </li>

@@ -10,9 +10,7 @@ class IndexController extends BaseController
     public function index()
     {
         $this->assign('price', 998);
-        $goodsModel = model('goods');
-        $goods = $goodsModel->fetchAll();
-        $this->assign('sliderList', $goods);
+        $this->getSlider();
         return $this->fetch();
     }
 

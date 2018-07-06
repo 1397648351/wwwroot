@@ -276,4 +276,11 @@ class BaseController extends Controller
         }
         return true;
     }
+
+    public function getSlider()
+    {
+        $goodsModel = model('goods');
+        $goods = $goodsModel->fetchAll();
+        $this->assign('sliderList', $goods);
+    }
 }

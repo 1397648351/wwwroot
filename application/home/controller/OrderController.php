@@ -26,6 +26,7 @@ class OrderController extends BaseController
     public function order()
     {
         $this->isLogin();
+        $this->getSlider();
         $id = $this->request->param('id');
         if (empty($id)) {
             $id = 1;
@@ -91,6 +92,7 @@ class OrderController extends BaseController
     public function orderList()
     {
         $this->isLogin();
+        $this->getSlider();
         $goodsOrderModel = model('goodsOrder');
         $data = $goodsOrderModel->findOrderByUser(session('userInfo')['id']);
         $this->assign('list', $data);
