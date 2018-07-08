@@ -16,7 +16,7 @@
 return [
 
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => false,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -115,5 +115,10 @@ return [
     'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
-
+    'http_exception_template'    =>  [
+        // 定义404错误的模板文件地址
+        404 =>  Env::get('app_path') . '404.html',
+        // 还可以定义其它的HTTP status
+        401 =>  Env::get('app_path') . '401.html',
+    ]
 ];
