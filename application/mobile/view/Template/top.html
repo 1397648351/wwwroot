@@ -11,16 +11,16 @@
             <a class="link-process" href="{:url('Content/process_mobile')}">检测流程</a>
         </li>
         <!--<li class="nav">-->
-            <!--<a class="link-result" href="javascript:;">检测结果</a>-->
+        <!--<a class="link-result" href="javascript:;">检测结果</a>-->
         <!--</li>-->
-        <li class="nav">
+        <!--<li class="nav">
             <a class="link-order" href="{:url('Order/index')}">购买</a>
-        </li>
+        </li>-->
         <li class="nav">
             <a class="link-order" href="{:url('Order/orderList')}">查看订单</a>
         </li>
         <!--<li class="nav">-->
-            <!--<a class="link-order" href="{:url('Content/binding')}">绑定编号</a>-->
+        <!--<a class="link-order" href="{:url('Content/binding')}">绑定编号</a>-->
         <!--</li>-->
     </ul>
     <script>
@@ -30,10 +30,10 @@
             $('.navbar').removeClass('show');
         })
         $('.topbar-btn').click(function (e) {
-            if($('.navbar').css('display')=="block"){
+            if ($('.navbar').css('display') == "block") {
                 $('.navbar').removeClass('show');
             }
-            else{
+            else {
                 $('.navbar').addClass('show');
             }
         })
