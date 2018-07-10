@@ -205,14 +205,14 @@ a {
 .topbar > .navbar {
     display: none;
     position: absolute;
-    top: 50px;
+    margin-top: 5px;
     left: 3px;
     z-index: 3;
     background-image: url(../images/home/head_bg.png);
     background-position: center;
     background-repeat: repeat-y;
     text-align: left;
-    width: 30%;
+    width: 35%;
     /*border: 1px solid #ddd;*/
     height: 0;
      box-shadow: 3px 3px 15px rgba(0,0,0,.5);
@@ -231,9 +231,10 @@ a {
 
 .topbar > .navbar .nav {
     border-bottom: 1px solid #ddd;
-    height: 35px;
+    height: 40px;
     line-height: 25px;
-    padding: 5px 20px;
+    padding: 8px 15px;
+    font-size:14px;
 }
 
 .topbar > .navbar .nav a {

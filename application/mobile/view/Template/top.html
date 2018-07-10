@@ -7,6 +7,15 @@
         <li class="nav">
             <a class="link-home" href="{:url('Index/index')}">首页</a>
         </li>
+        {if !session('?userInfo') || session('userInfo')['role']!=0}
+        <li class="nav">
+            <a class="link-order" href="{:url('User/index')}">登录</a>
+        </li>
+        {elseif session('?userInfo') && session('userInfo')['role']==0 /}
+        <li class="nav">
+            <a class="link-order" href="{:url('Order/orderList')}">查看订单</a>
+        </li>
+        {/if}
         <li class="nav">
             <a class="link-process" href="{:url('Content/process_mobile')}">检测流程</a>
         </li>
@@ -17,7 +26,16 @@
             <a class="link-order" href="{:url('Order/index')}">购买</a>
         </li>-->
         <li class="nav">
-            <a class="link-order" href="{:url('Order/orderList')}">查看订单</a>
+            <a class="link-order" href="{:url('Content/medication_mobile')}">用药指南</a>
+        </li>
+        <li class="nav">
+            <a class="link-order" href="{:url('Content/skin_mobile')}">肤质检测</a>
+        </li>
+        <li class="nav">
+            <a class="link-order" href="{:url('Content/kids_mobile')}">儿童基因检测</a>
+        </li>
+        <li class="nav">
+            <a class="link-order" href="{:url('Content/genetic_mobile')}">遗传基因检测</a>
         </li>
         <!--<li class="nav">-->
         <!--<a class="link-order" href="{:url('Content/binding')}">绑定编号</a>-->
