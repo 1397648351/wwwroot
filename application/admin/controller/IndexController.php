@@ -88,6 +88,40 @@ class IndexController extends BaseController
         }
     }
 
+    public function code()
+    {
+        if ($this->request->isGet())
+            return $this->fetch();
+        elseif ($this->request->isAjax()) {
+            $codeModel = model('code');
+            $page = $this->request->param("page");
+            $rows = $this->request->param("rows");
+            $res = $codeModel->findPages($page, $rows);
+            $this->resTableJson($res['data'], $res['total']);
+        }
+    }
+
+    public function SaveCode()
+    {
+        $type = $this->request->param('type');
+        $codeModel = model('code');
+        $data = array();
+        if ($type == "add") {
+            $data['code'] = $this->request->param('code');
+            $data['discount'] = $this->request->param('discount');
+            $codeModel->addRow($data);
+        } elseif ($type == "edit") {
+            $data['id'] = $this->request->param('id');
+            $data['state'] = $this->request->param('state');
+            $data['discount'] = $this->request->param('discount');
+            $codeModel->updateRow($data);
+        } elseif ($type == "del") {
+            $id = $this->request->param('id');
+            $codeModel->delRow($id);
+        }
+        $this->resJson($data);
+    }
+
     public function upload()
     {
         $datas = array();
@@ -177,23 +211,23 @@ class IndexController extends BaseController
         $goodsOrderModel = model('goodsOrder');
         $list_order = $goodsOrderModel->getOrderList();
         $filed = array(
-            'no'             => ['title' => '订单号', 'width' => 32],
-            'serial_num'     => ['title' => '序列号', 'width' => 25],
-            'goods_id'       => ['title' => '商品ID', 'width' => 10],
-            'subject'        => ['title' => '商品名称', 'width' => 18],
-            'money'          => ['title' => '付款金额', 'width' => 10],
-            'user_id'        => ['title' => '用户ID', 'width' => 10],
-            'username'       => ['title' => '收件人', 'width' => 15],
-            'mobile'         => ['title' => '手机号', 'width' => 15],
-            'email'          => ['title' => '邮箱', 'width' => 20],
-            'city'           => ['title' => '收货城市', 'width' => 15],
+            'no' => ['title' => '订单号', 'width' => 32],
+            'serial_num' => ['title' => '序列号', 'width' => 25],
+            'goods_id' => ['title' => '商品ID', 'width' => 10],
+            'subject' => ['title' => '商品名称', 'width' => 18],
+            'money' => ['title' => '付款金额', 'width' => 10],
+            'user_id' => ['title' => '用户ID', 'width' => 10],
+            'username' => ['title' => '收件人', 'width' => 15],
+            'mobile' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
+            'city' => ['title' => '收货城市', 'width' => 15],
             'detail_address' => ['title' => '收货地址', 'width' => 30],
-            'status'         => ['title' => '订单状态', 'width' => 12],
-            'invoice_type'   => ['title' => '发票', 'width' => 12],
-            'invoice_title'  => ['title' => '发票抬头', 'width' => 15],
-            'pay_taxes_id'   => ['title' => '纳税识别号', 'width' => 20],
-            'user_msg'       => ['title' => '用户留言', 'width' => 30],
-            'create_time'    => ['title' => '下单时间', 'width' => 20]);
+            'status' => ['title' => '订单状态', 'width' => 12],
+            'invoice_type' => ['title' => '发票', 'width' => 12],
+            'invoice_title' => ['title' => '发票抬头', 'width' => 15],
+            'pay_taxes_id' => ['title' => '纳税识别号', 'width' => 20],
+            'user_msg' => ['title' => '用户留言', 'width' => 30],
+            'create_time' => ['title' => '下单时间', 'width' => 20]);
         $this->downloadExcel($filed, 'order.xlsx', 'orders', $list_order);
     }
 
@@ -203,11 +237,11 @@ class IndexController extends BaseController
         $userModel = model('user');
         $list_order = $userModel->getUserList($value);
         $filed = array(
-            'id'          => ['title' => 'ID', 'width' => 8],
-            'nickname'    => ['title' => '用户名', 'width' => 20],
-            'sex'         => ['title' => '性别', 'width' => 10],
-            'mobile'      => ['title' => '手机号', 'width' => 15],
-            'email'       => ['title' => '邮箱', 'width' => 20],
+            'id' => ['title' => 'ID', 'width' => 8],
+            'nickname' => ['title' => '用户名', 'width' => 20],
+            'sex' => ['title' => '性别', 'width' => 10],
+            'mobile' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'user.xlsx', 'users', $list_order);
     }
@@ -217,15 +251,29 @@ class IndexController extends BaseController
         $userModel = model('serial');
         $list_order = $userModel->getSerialList();
         $filed = array(
-            'id'          => ['title' => 'ID', 'width' => 8],
-            'userid'      => ['title' => '录入人ID', 'width' => 10],
-            'username'    => ['title' => '用户名', 'width' => 20],
-            'sex'         => ['title' => '性别', 'width' => 10],
-            'phone'       => ['title' => '手机号', 'width' => 15],
-            'email'       => ['title' => '邮箱', 'width' => 20],
-            'serial_num'  => ['title' => '套件码', 'width' => 25],
+            'id' => ['title' => 'ID', 'width' => 8],
+            'userid' => ['title' => '录入人ID', 'width' => 10],
+            'username' => ['title' => '用户名', 'width' => 20],
+            'sex' => ['title' => '性别', 'width' => 10],
+            'phone' => ['title' => '手机号', 'width' => 15],
+            'email' => ['title' => '邮箱', 'width' => 20],
+            'serial_num' => ['title' => '套件码', 'width' => 25],
             'create_time' => ['title' => '创建时间', 'width' => 20]);
         $this->downloadExcel($filed, 'serial.xlsx', 'serial', $list_order);
+    }
+
+    public function downloadCodeExcel()
+    {
+        $codeModel = model('code');
+        $list_order = $codeModel->findAll();
+        $filed = array(
+            'id' => ['title' => 'ID', 'width' => 8],
+            'code' => ['title' => '折扣码', 'width' => 20],
+            'discount' => ['title' => '折扣', 'width' => 8],
+            'state' => ['title' => '状态', 'width' => 10],
+            'create_time' => ['title' => '创建时间', 'width' => 20],
+            'update_time' => ['title' => '修改时间', 'width' => 20]);
+        $this->downloadExcel($filed, 'code.xlsx', 'code', $list_order);
     }
 
     public function updatepsw()

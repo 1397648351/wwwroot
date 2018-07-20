@@ -1,0 +1,206 @@
+{extend name="Template:base" /}
+{block name="title"}基因检测-套件码查询{/block}
+{block name="other_css"}
+<!-- other css -->
+<style>
+    .datagrid-body {
+        overflow-x: scroll;
+    }
+
+    .pd-txt {
+        margin-bottom: 10px;
+    }
+</style>
+{/block}
+{block name="class"}{/block}
+{block name="body"}
+<table id="codeList"></table>
+<div id="win" class="easyui-window" title="添加" style="width:350px;height:0px"
+     data-options="iconCls:'icon-edit',modal:true,closed:true,minimizable:false,resizable:false">
+    <div class="easyui-panel" data-options="ft:true,border:false" style="padding:10px;">
+        <form id="ff" method="post">
+            <div class="pd-txt">
+                <input class="easyui-textbox" style="width:100%" type="text" name="code" id="code"
+                       data-options="label:'折扣码：',required:true,missingMessage:'请输入折扣码'"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-numberbox" style="width:100%" type="text" name="discount"
+                       id="discount"
+                       data-options="label:'折扣：',required:true,missingMessage:'请输入折扣',min:0,max:10,precision:1"/>
+            </div>
+            <div class="pd-txt">
+                <input class="easyui-combobox" style="width:100%" type="text" name="state"
+                       id="state"
+                       data-options="label:'状态：',required:true,missingMessage:'请选择状态',data:[{id:0,text:'未使用'},{id:1,text:'已使用'},{id:2,text:'暂停使用'}],valueField:'id',textField:'text',multiple:false,value:0,panelHeight:100"/>
+            </div>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">保存</a>
+            </div>
+        </form>
+    </div>
+</div>
+{/block}
+{block name="other_js"}
+<script>
+    var type, id;
+    $('#codeList').datagrid({
+        url: "{:url('Index/code')}",
+        method: "POST",
+        pagination: true,
+        striped: true,
+        singleSelect: true,
+        pagePosition: 'bottom',
+        pageSize: 50,
+        pageList: [50, 100, 150, 200, 300],
+        fit: true,
+        border: false,
+        columns: [[
+            {field: 'id', title: 'ID', width: 80, align: 'center'},
+            {field: 'code', title: '折扣码', width: 80, align: 'center'},
+            {field: 'discount', title: '折扣', width: 100, align: 'center'},
+            {
+                field: 'state', title: '状态', width: 70, align: 'center', formatter: function (value, row, index) {
+                    var _val;
+                    switch (value) {
+                        case 0:
+                            _val = '未使用';
+                            break;
+                        case 1:
+                            _val = '已使用';
+                            break;
+                        default:
+                            _val = '暂停使用';
+                            break;
+                    }
+                    return _val;
+                }
+            },
+            {field: 'create_time', title: '创建时间', width: 150, align: 'center'},
+            {field: 'update_time', title: '更新时间', width: 150, align: 'center'},
+            {
+                field: 'action', title: '操作', width: 150, align: 'center', formatter: function (value, row, index) {
+                    var e = '<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="edit(' + index + ')">编辑</a>';
+                    e += '&nbsp;<a name="btn_action" class="easyui-linkbutton" href="javascript:;" onclick="del(' + row.id + ')">删除</a>'
+                    return e;
+                }
+            }
+        ]],
+        toolbar: [{
+            iconCls: 'icon-add',
+            text: '添加',
+            handler: function () {
+                $('#state').combobox('select', '0');
+                $('#state').combobox('options').required = false;
+                $('#state').combobox('disable');
+                $('#code').textbox('options').required = true;
+                $('#code').textbox('enable');
+                $('#discount').numberbox('setValue', 10);
+                $('#code').textbox('setValue', '');
+                $("#win").window({
+                    closed: false,
+                    title: "添加"
+                });
+                type = 'add';
+            }
+        }, {
+            iconCls: 'icon-print',
+            text: '导出',
+            handler: function () {
+                window.open("{:url('Index/downloadCodeExcel')}");
+            }
+        }],
+        onLoadSuccess: function (data) {
+            $('a[name=btn_action]').linkbutton();
+        }
+    });
+
+    function submitForm() {
+        if (!$('#ff').form('validate')) {
+            $.messager.alert('错误', '请输入正确的信息！', 'error');
+            return;
+        }
+        $.messager.progress({
+            title: '正在保存'
+        });
+        var data = {
+            type: type,
+            code: $('#code').textbox('getValue'),
+            discount: $('#discount').numberbox('getValue'),
+        };
+        if (type == 'edit') {
+            data.id = id;
+            data.state = $('#state').combobox('getValue');
+        }
+        update(data);
+    }
+
+    function update(data) {
+        $.ajax({
+            type: 'post',
+            url: "{:url('Index/SaveCode')}",
+            data: data,
+            success: function (response) {
+                // 根据返回结果指定界面操作
+                if (response.status_code == "1001") {
+                    $.messager.progress('close');
+                    $.messager.show({
+                        title: '成功',
+                        msg: '保存成功'
+                    });
+                    $("#win").window('close');
+                } else {
+                    $.messager.progress('close');
+                    $.messager.alert('错误', response.msg, 'error');
+                }
+                $('#codeList').datagrid('reload');
+            },
+            error: function () {
+                $.messager.progress('close');
+                $.messager.alert('错误', '更新错误！', 'error');
+            }
+        })
+    }
+
+    function edit(row) {
+        $('#codeList').datagrid('selectRow', row);
+        var rowdata = $('#codeList').datagrid('getSelected');
+        $('#ff').form('reset');
+        id = rowdata.id;
+        $('#state').combobox('options').required = true;
+        $('#state').combobox('enable');
+        $('#code').textbox('options').required = false;
+        $('#code').textbox('disable');
+        $('#discount').numberbox('setValue', rowdata.discount);
+        $('#code').textbox('setValue', rowdata.code);
+        $('#state').combobox('select', rowdata.state);
+        $("#win").window({
+            closed: false,
+            title: "修改"
+        });
+        type = 'edit';
+    }
+
+    function del(id) {
+        $.messager.confirm('提示', '确认删除？', function (r) {
+            if (r) {
+                type = 'del';
+                var data = {
+                    type: 'del',
+                    id: id
+                };
+                update(data);
+            }
+        });
+    }
+
+    $.extend($.fn.validatebox.defaults.rules, {
+        html: {
+            validator: function (value) {
+                var re = /\.html|\.htm/i
+                return value.match(re) != null;
+            },
+            message: '请输入正确的文件名.'
+        }
+    });
+</script>
+{/block}

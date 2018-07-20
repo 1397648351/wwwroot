@@ -80,6 +80,9 @@
         }, {
             "text": "套件码查询",
             "url": "{:url('Index/serial')}"
+        }, {
+            "text": "折扣码",
+            "url": "{:url('Index/code')}"
         }],
         onClick: function (node) {
             if (!$('#menu').tree('isLeaf', node.target)) return;
