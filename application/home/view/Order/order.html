@@ -234,6 +234,7 @@
                 user_msg: user_msg,
                 code:code
             }, function (res) {
+                console.log(res);
                 if (res.status_code == 200) {
                     order_id = res.data.order_id;
                     window.location.href = "{:url('Order/pay')}?order_id=" + order_id;

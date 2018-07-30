@@ -19,8 +19,7 @@ class Code extends Base
     {
         $map = array();
         $map['code'] = $code;
-        $map['state'] = array('neq',0);
         $fields = 'id,code,discount';
-        return $this->findByWhere($map,$fields);
+        return $this->findByWhere($map, $fields);
     }
 }

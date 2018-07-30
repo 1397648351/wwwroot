@@ -61,10 +61,10 @@ class OrderController extends BaseController
         } else {
             $codeModel = new Code();
             $info = $codeModel->findByCode($code);
-            if(empty($info)){
+            if(empty($info) || $info['code'] == '0'){
                 $this->resJson(array(),2001, '折扣编码不存在');
             }
-            $discount = $info[0]['discount']/10;
+            $discount = $info['discount']/10;
         }
         $num = $req->param('num');
         $goodsModel = model('goods');
