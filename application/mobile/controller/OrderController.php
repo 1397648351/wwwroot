@@ -10,6 +10,7 @@
 
 namespace app\mobile\controller;
 
+use app\home\model\Code;
 use Payment\Client\Charge;
 use Payment\Common\PayException;
 use think\facade\Log;
@@ -58,6 +59,17 @@ class OrderController extends PublicController
         $email = $req->param('email');
         $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
         $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
+        $code = $req->param('code');
+        if(empty($code)){
+            $discount = 1;
+        } else {
+            $codeModel = new Code();
+            $info = $codeModel->findByCode($code);
+            if(empty($info)){
+                $this->resJson(array(),2001, '折扣编码不存在');
+            }
+            $discount = $info['discount']/10;
+        }
         $num = $req->param('num');
         $goodsModel = model('home/goods');
         $goods = $goodsModel->find($goodsId);
@@ -75,7 +87,7 @@ class OrderController extends PublicController
             $user = $userModel->findByOpenid($openid);
         }
         $config = $this->wxConfigData();
-        $payParam = $this->setWxPayParam($outTradeNo, $goods, $num);
+        $payParam = $this->setWxPayParam($outTradeNo, $goods, $num, $discount);
         try {
             $res = Charge::run($type, $config, $payParam);
             Log::info($res);
@@ -123,14 +135,14 @@ class OrderController extends PublicController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo, $goods, $num)
+    private function setWxPayParam($outTradeNo, $goods, $num, $discount)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = $goods['price'] * $num;
+        $payParam['amount'] = $goods['price'] * $num * $discount;
         //用户客户端实际IP地址
         $payParam['client_ip'] = $this->request->ip();
         $payParam['timeout_express'] = 3600 + time();

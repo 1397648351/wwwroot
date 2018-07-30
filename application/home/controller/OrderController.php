@@ -10,6 +10,7 @@
 
 namespace app\home\controller;
 
+use app\home\model\Code;
 use houdunwang\qrcode\QrCode;
 use Payment\Client\Charge;
 use Payment\Client\Query;
@@ -54,13 +55,24 @@ class OrderController extends BaseController
         $email = $req->param('email');
         $city = $this->checkEmpty($req->param('city'), '所在地区不能为空！');
         $detailAdd = $this->checkEmpty($req->param('detail_address'), '详细地址不能为空！');
+        $code = $req->param('code');
+        if(empty($code)){
+            $discount = 1;
+        } else {
+            $codeModel = new Code();
+            $info = $codeModel->findByCode($code);
+            if(empty($info)){
+                $this->resJson(array(),2001, '折扣编码不存在');
+            }
+            $discount = $info['discount']/10;
+        }
         $num = $req->param('num');
         $goodsModel = model('goods');
         $goods = $goodsModel->find($goodsId);
         if (empty($goods)) {
             $this->resJson(array(), 2001, '商品不存在');
         }
-        $payParams = $this->setParam($payType, $goods, $num);
+        $payParams = $this->setParam($payType, $goods, $num, $discount);
         try {
             $res = Charge::run($payParams['type'], $payParams['config'], $payParams['pay_param']);
             if ($res['return_msg'] == 'OK') {
@@ -186,7 +198,7 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setParam($payType, $goods, $num)
+    private function setParam($payType, $goods, $num, $discount)
     {
         $params = array();
         $outTradeNo = $this->getMgid() . '_' . $payType;
@@ -194,12 +206,12 @@ class OrderController extends BaseController
             case 'ali':
                 $params['type'] = 'ali_qr';
                 $params['config'] = $this->aliConfigData();
-                $params['pay_param'] = $this->setAliPayParam($outTradeNo, $goods, $num);
+                $params['pay_param'] = $this->setAliPayParam($outTradeNo, $goods, $num, $discount);
                 break;
             case 'wx':
                 $params['type'] = 'wx_qr';
                 $params['config'] = $this->wxConfigData();
-                $params['pay_param'] = $this->setWxPayParam($outTradeNo, $goods, $num);
+                $params['pay_param'] = $this->setWxPayParam($outTradeNo, $goods, $num, $discount);
                 break;
             default:
                 break;
@@ -216,7 +228,7 @@ class OrderController extends BaseController
      * @param $param
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setAliPayParam($outTradeNo, $goods, $num)
+    private function setAliPayParam($outTradeNo, $goods, $num, $discount)
     {
         $payParam = array();
         //商品具体描述
@@ -226,7 +238,7 @@ class OrderController extends BaseController
         //订单号
         $payParam['order_no'] = $outTradeNo;
         //需要支付金额 元
-        $payParam['amount'] = $goods['price'] * $num;
+        $payParam['amount'] = $goods['price'] * $num * $discount;
         //过期时间（当前时间+过期s数） 时间戳
         $payParam['timeout_express'] = 3600 + time();
         $payParam['return_param'] = 'pica';
@@ -241,14 +253,14 @@ class OrderController extends BaseController
      * @return array
      * @author LiuTao liut1@kexinbao100.com
      */
-    private function setWxPayParam($outTradeNo, $goods, $num)
+    private function setWxPayParam($outTradeNo, $goods, $num, $discount)
     {
         $payParam = array();
         $payParam['body'] = $goods['body'];
         $payParam['subject'] = $goods['subject'];
         $payParam['order_no'] = $outTradeNo;
         //单位 元
-        $payParam['amount'] = $goods['price'] * $num;
+        $payParam['amount'] = $goods['price'] * $num * $discount;
         //用户客户端实际IP地址
         $payParam['client_ip'] = $this->request->ip();//'127.0.0.1';
         $payParam['timeout_express'] = 3600 + time();

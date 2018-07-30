@@ -86,7 +86,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-group-th">折扣码</label>
-                        <input class="form-control" id="" value="" placeholder="选填"/>
+                        <input class="form-control" id="code" value="" placeholder="选填"/>
                     </div>
                 </div>
             </div>
@@ -198,6 +198,7 @@
                     return;
                 }
             }
+            var code = $("#code").val();
             var user_msg = $("#user_msg").val();
             var url = "{:url('Order/order')}";
             $.post(url, {
@@ -212,7 +213,8 @@
                 invoice_title: invoice_title,
                 pay_taxes_id: pay_taxes_id,
                 pay_type: 'wx',
-                user_msg: user_msg
+                user_msg: user_msg,
+                code:code
             }, function (res) {
                 if (res.status_code == 200) {
                     var order_id = res.data.order_id;
