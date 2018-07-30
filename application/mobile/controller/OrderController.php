@@ -68,7 +68,7 @@ class OrderController extends PublicController
             if(empty($info)){
                 $this->resJson(array(),2001, '折扣编码不存在');
             }
-            $discount = $info['discount']/10;
+            $discount = $info[0]['discount']/10;
         }
         $num = $req->param('num');
         $goodsModel = model('home/goods');
